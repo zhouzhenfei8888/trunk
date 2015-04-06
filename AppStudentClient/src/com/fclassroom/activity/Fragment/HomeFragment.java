@@ -23,6 +23,7 @@ import com.fclassroom.appstudentclient.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ * test
  */
 public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFragment {
 
