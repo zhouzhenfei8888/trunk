@@ -13,19 +13,33 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        >
 
-        <SearchView
+      <!--  <SearchView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
+            android:background="@color/white"
             android:iconifiedByDefault="false"
-            android:queryHint="@string/search"></SearchView>
-
+            android:queryHint="@string/search"></SearchView>-->
+      <!--  <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:hint="搜索"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:drawableRight="@drawable/ic_launcher"
+            android:drawablePadding="5dp"
+            android:padding="6dp"
+            />
+-->
+        <include layout="@layout/search_layout"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:text="@string/cancle"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size" />
@@ -34,7 +48,7 @@
     <TextView
         android:id="@+id/tv_timesearch"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="100dp"
         android:layout_below="@id/linear_topbar"
         android:gravity="center"
         android:text="试试看时间搜索"
@@ -65,7 +79,9 @@
     </LinearLayout>
 
     <ListView
+        android:id="@+id/lv_searchrecoder"
         android:layout_below="@id/linear_searchrecord"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent"></ListView>
 </RelativeLayout>
