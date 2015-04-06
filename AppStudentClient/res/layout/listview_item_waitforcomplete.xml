@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_size">
+
+    <TextView
+        android:id="@+id/tv_workname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxEms="14"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:text="梅村中学高一数学期末第三次模拟测试"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_workdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_workname"
+        android:padding="5dp"
+        android:text="2015年3月10日"
+        android:textColor="@color/grey" />
+
+    <TextView
+        android:id="@+id/tv_worktime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_workname"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/tv_workdate"
+        android:padding="5dp"
+        android:text="16:00截止交卷"
+        android:textColor="@color/grey" />
+
+    <ImageView
+        android:id="@+id/iv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_workdate"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/tv_workname"
+        android:src="@drawable/ic_launcher" />
+</RelativeLayout>

@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    tools:context="com.fclassroom.activity.Fragment.WaitforCompleteFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+ <!--   <LinearLayout
+    android:id="@+id/linear_title"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:gravity="center_vertical"
+    android:padding="@dimen/margin_size">
+
+    <TextView
+    android:id="@+id/tv_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="待完成作业(7项)："
+    android:textSize="@dimen/text_size" />
+    </LinearLayout>-->
+
+    <com.fclassroom.app.widget.ScrollShowHeaderListView
+        android:id="@+id/listview_waitforwork"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
+
+</LinearLayout>

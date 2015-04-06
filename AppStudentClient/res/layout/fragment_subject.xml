@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context="com.fclassroom.activity.Fragment.SubjectFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <com.fclassroom.app.widget.ScrollShowHeaderListView
+        android:id="@+id/listview_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:divider="@color/background_color"
+        android:dividerHeight="@dimen/margin_size" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear_top"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_selectall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="全选"
+            android:textSize="@dimen/text_size"
+            android:padding="@dimen/margin_size"/>
+
+        <TextView
+            android:id="@+id/tv_haveselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size"
+            android:padding="@dimen/margin_size"
+            android:layout_alignParentRight="true"
+            android:text="已选择4题"/>
+        </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_collate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/toolbar_color"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:padding="@dimen/margin_size"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="去整理"/>
+        <TextView
+            android:id="@+id/tv_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/toolbar_color"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:padding="@dimen/margin_size"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginLeft="1dp"
+            android:text="加入打印"/>
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/toolbar_color"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:padding="@dimen/margin_size"
+            android:gravity="center"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:text="删除"/>
+        </LinearLayout>
+</RelativeLayout>

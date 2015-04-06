@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fclassroom.activity.SearchActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/search"></SearchView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancle"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_timesearch"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_below="@id/linear_topbar"
+        android:gravity="center"
+        android:text="试试看时间搜索"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/linear_searchrecord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_timesearch"
+        android:background="@color/background_color"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:padding="5dp"
+            android:text="搜索记录2条" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_launcher"/>
+    </LinearLayout>
+
+    <ListView
+        android:layout_below="@id/linear_searchrecord"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+</RelativeLayout>

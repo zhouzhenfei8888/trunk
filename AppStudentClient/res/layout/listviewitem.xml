@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/linear_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tv_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/checkbox_choice"
+            android:maxEms="12"
+            android:padding="@dimen/margin_size"
+            android:singleLine="true"
+            android:text="梅村中学高一数学期末考试"
+            android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:id="@+id/tv_date_listviewitem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_from"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_from"
+            android:gravity="center"
+            android:padding="@dimen/margin_size"
+            android:text="2015年2月13日"
+            android:textColor="@color/grey_white"
+            android:textSize="10sp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_choice"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            style="@style/MyCheckboxStyle"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_from"
+            android:layout_toRightOf="@id/checkbox_choice"
+            android:src="@drawable/subject" />
+
+        <!--        <TextView
+                    android:id="@+id/tv_importance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_subject"
+                    android:padding="@dimen/margin_size"
+                    android:text="重要度:" />-->
+
+        <RatingBar
+            android:id="@+id/ratingbar_listviewitem"
+            style="@style/MyRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_subject"
+            android:layout_marginLeft="@dimen/margin_size"
+            android:layout_toRightOf="@id/checkbox_choice"
+            android:isIndicator="true"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" />
+
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@id/ratingbar_listviewitem"
+            android:layout_alignRight="@id/iv_subject"
+            android:src="@drawable/icon_rightbottom"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <!--<LinearLayout
+        android:id="@+id/Linear_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_main"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_trim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/grey"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="去整理"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="@color/grey"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="加入打印"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="@color/grey"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="删除"
+            android:textColor="@color/white" />
+    </LinearLayout>
+-->
+</RelativeLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/linear_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/checkbox_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/mul_choice_select"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/checkbox_choice"
+            android:padding="@dimen/margin_size"
+            android:text="梅村中学高一数学期末考试"
+            android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:id="@+id/tv_date_listviewitem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_size"
+            android:layout_alignBottom="@id/tv_from"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_from"
+            android:gravity="center_vertical"
+            android:text="2015年2月13日"
+            android:textColor="@color/grey_white"
+            android:textSize="10sp" />
+
+        <ImageView
+            android:id="@+id/iv_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_from"
+            android:layout_toRightOf="@id/checkbox_choice"
+            android:src="@drawable/subject" />
+
+        <RatingBar
+            android:id="@+id/ratingbar_listviewitem"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_subject"
+            android:layout_toRightOf="@id/checkbox_choice"
+            android:paddingBottom="@dimen/margin_size"
+            android:layout_marginLeft="@dimen/margin_size"
+            android:paddingTop="@dimen/margin_size" />
+
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@id/ratingbar_listviewitem"
+            android:layout_alignRight="@id/iv_subject"
+            android:src="@drawable/icon_rightbottom"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <!--    <LinearLayout
+            android:id="@+id/Linear_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_main"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_recover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/grey"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="恢复"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_delete_thorough"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:background="@color/grey"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="彻底删除"
+                android:textColor="@color/white" />
+        </LinearLayout>-->
+
+</RelativeLayout>
+

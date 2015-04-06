@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    tools:context="com.fclassroom.activity.AddwrongtagActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_size"
+            android:background="@drawable/listviewitem_select"
+            android:padding="@dimen/margin_size"
+            android:text="@string/cancle" />
+
+        <TextView
+            android:id="@+id/tv_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_size"
+            android:background="@drawable/listviewitem_select"
+            android:padding="@dimen/margin_size"
+            android:text="@string/sure" />
+    </RelativeLayout>
+
+    <SearchView
+        android:id="@+id/searchview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:iconifiedByDefault="false"
+        android:inputType="textFilter"
+        android:queryHint="输入需要查询的标签"></SearchView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_size"
+        android:text="@string/relate_tag"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/text_size" />
+
+    <ListView
+        android:id="@+id/listview_relate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"></ListView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_size"
+        android:text="@string/recommend_tag"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/text_size" />
+
+    <ListView
+        android:id="@+id/listview_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+</LinearLayout>
