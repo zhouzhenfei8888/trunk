@@ -42,6 +42,7 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //kbv
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initViews(view);
         return view;
