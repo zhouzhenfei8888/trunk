@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.fclassroom.AppManager;
 import com.fclassroom.appstudentclient.R;
 
 /**
@@ -33,13 +34,13 @@ public class RemarkActivity extends BaseActivity {
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                AppManager.getAppManager().finishActivity();
             }
         });
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                AppManager.getAppManager().finishActivity();
             }
         });
     }

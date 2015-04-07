@@ -399,7 +399,17 @@ public class SubjectFragment extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UIHelper.jump2Activity(getActivity(), DetailActivity.class);
+                PageBean.SubjectItemBean subjectItemBean = null;
+                if(view instanceof ImageView){
+                    subjectItemBean = (PageBean.SubjectItemBean) view.getTag();
+                }else{
+                    ImageView imageView = (ImageView)view.findViewById(R.id.iv_subject);
+                    subjectItemBean = (PageBean.SubjectItemBean) imageView.getTag();
+                }
+                if(subjectItemBean == null){
+                    return;
+                }
+                UIHelper.jump2Activity(getActivity(), DetailActivity.class,subjectItemBean);
             }
         });
         //设置不同的adapter，subjectabapter为题目item，workadapter为考试名item

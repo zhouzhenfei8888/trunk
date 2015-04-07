@@ -28,7 +28,7 @@ public class PageBean {
     List<Integer> navigatepageNums;
     List<SubjectItemBean> list;
 
-    public static class SubjectItemBean {
+    public static class SubjectItemBean implements Serializable{
         int id;
         String contentImage;
         String notebookIds;

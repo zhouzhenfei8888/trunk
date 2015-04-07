@@ -3,9 +3,9 @@ package com.fclassroom.app.bean;
 import java.io.Serializable;
 
 public class URLs implements Serializable {
-    public final static String HOST = "http://192.168.0.130/student/";
+    public final static String HOST = "http://192.168.0.77/student/";
     public final static String HOST_YH = "http://120.131.64.134:9080/";
-    public final static String HOST_NOTE = "http://192.168.0.130/notebook/student/";
+    public final static String HOST_NOTE = "http://192.168.0.77/notebook/student/";
     public final static String HTTP = "http://";
     public final static String HTTPS = "https://";
 

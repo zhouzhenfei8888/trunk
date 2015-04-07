@@ -7,8 +7,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_color"
         android:gravity="center_vertical">
 
         <TextView
@@ -18,8 +18,18 @@
             android:layout_marginLeft="@dimen/margin_size"
             android:textSize="@dimen/text_size"
             android:padding="@dimen/margin_size"
+            android:layout_centerVertical="true"
             android:background="@drawable/listviewitem_select"
+            android:textColor="@color/white"
             android:text="@string/cancle" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_size"
+            android:textSize="20sp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:text = "添加备注"/>
 
         <TextView
             android:id="@+id/tv_sure"
@@ -29,6 +39,8 @@
             android:padding="@dimen/margin_size"
             android:layout_marginRight="@dimen/margin_size"
             android:textSize="@dimen/text_size"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
             android:background="@drawable/listviewitem_select"
             android:text="@string/sure" />
     </RelativeLayout>

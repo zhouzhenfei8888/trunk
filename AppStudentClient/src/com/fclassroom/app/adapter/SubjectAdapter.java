@@ -89,6 +89,7 @@ public class SubjectAdapter extends BaseAdapter {
             listItemView = (ListItemView) convertView.getTag();
         }
         PageBean.SubjectItemBean data = list.get(position);
+        listItemView.subject.setTag(data);
         listItemView.DateTime.setText((String) data.getExamTime());
         listItemView.examname.setText((String) data.getExamName());
 //        listItemView.subject.setImageResource((int) data.get("examsrc"));

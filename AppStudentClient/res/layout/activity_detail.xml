@@ -1,16 +1,50 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@color/detail_background"
     android:orientation="vertical"
     tools:context="com.fclassroom.activity.DetailActivity">
 
-    <include layout="@layout/toolbar" />
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_size">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_back" />
+
+        <RatingBar
+            android:id="@+id/ratingbar"
+            style="@style/MyRatingBarBig"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:stepSize="1" />
+
+        <ImageView
+            android:id="@+id/iv_rubbish"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_rubbish" />
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linear_bn"
+        android:layout_below="@id/rl_toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +54,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/toolbar_color"
                 android:padding="@dimen/margin_size">
 
                 <LinearLayout
@@ -30,8 +63,8 @@
 
                     <ImageView
                         android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/book" />
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_book" />
 
                     <TextView
                         android:id="@+id/tv_bookname"
@@ -39,8 +72,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/margin_size"
                         android:text="精题本"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size" />
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <TextView
@@ -48,63 +80,99 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="@string/change"
+                    android:background="@color/toolbar_color"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="加入"
                     android:textColor="@color/white" />
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:padding="@dimen/margin_size">
-
-                <RatingBar
-                    android:id="@+id/ratingbar"
-                    style="@style/MyRatingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:isIndicator="false"
-                    android:numStars="5"
-                    android:stepSize="1" />
-
-                <TextView
-                    android:id="@+id/tv_difficulty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/margin_size"
-                    android:text="难度：高" />
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_size"
                 android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/margin_size"
-                android:paddingRight="@dimen/margin_size">
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_size"
+                    android:layout_marginTop="@dimen/margin_size"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/margin_size"
+                    android:paddingRight="@dimen/margin_size">
+
+                    <TextView
+                        android:id="@+id/tv_knowledgepoint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxEms="15"
+                        android:padding="5dp"
+                        android:singleLine="true"
+                        android:text="知识点：ABAA,BBAA,AAAB,AABB" />
+
+                    <TextView
+                        android:id="@+id/tv_examfrom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxEms="15"
+                        android:padding="5dp"
+                        android:singleLine="true"
+                        android:text="来源：江苏省梅村中学高一数学模拟测试" />
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/tv_knowledgepoint"
+                    android:id="@+id/tv_difficulty"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxEms="20"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_size"
+                    android:gravity="center"
                     android:padding="5dp"
-                    android:singleLine="true"
-                    android:text="知识点：ABAA,BBAA,AAAB,AABB" />
-
-                <TextView
-                    android:id="@+id/tv_examfrom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:singleLine="true"
-                    android:text="来源：江苏省梅村中学高一数学模拟测试" />
+                    android:text="难度：高" />
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/margin_size"
+                android:paddingTop="@dimen/margin_size">
+
+                <ImageView
+                    android:id="@+id/iv_note"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_size"
+                    android:src="@drawable/ic_subject" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_size"
+                    android:layout_toRightOf="@id/iv_note"
+                    android:text="题干及作答"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/iv_checkresult"
+                    android:layout_width="60dp"
+                    android:layout_height="22dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_size"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/button_result_select" />
+
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/iv_subject"
@@ -113,47 +181,16 @@
                 android:background="@color/white"
                 android:src="@drawable/subject" />
 
-            <LinearLayout
-                android:id="@+id/linear_result"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/white"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="解答过程"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/text_size" />
-            </LinearLayout>
-
-            <RelativeLayout
+            <ImageView
+                android:id="@+id/iv_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="@dimen/margin_size">
-
-                <ImageView
-                    android:id="@+id/iv_checkresult"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/check_result" />
-
-                <TextView
-                    android:id="@+id/tv_checkresult"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_size"
-                    android:layout_toRightOf="@id/iv_checkresult"
-                    android:text="@string/check_answer"
-                    android:textColor="#ffff8a24"
-                    android:textSize="20sp" />
-            </RelativeLayout>
+                android:padding="@dimen/margin_size"
+                android:src="@drawable/iv_nodata" />
 
             <LinearLayout
+                android:id="@+id/linear_addwrongtag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_size"
@@ -165,17 +202,36 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/icon_tag" />
+                    android:src="@drawable/ic_tag" />
 
                 <TextView
-                    android:id="@+id/tv_addwrongtag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_size"
+                    android:layout_weight="1"
                     android:background="@color/white"
                     android:text="错因标签"
                     android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:src="@drawable/icon_add" />
             </LinearLayout>
+
+            <com.fclassroom.app.widget.TagView.TagView
+                android:id="@+id/tagview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:padding="@dimen/margin_size"
+                app:lineMargin="5dp"
+                app:tagMargin="3dp"
+                app:textPaddingBottom="5dp"
+                app:textPaddingLeft="8dp"
+                app:textPaddingRight="8dp"
+                app:textPaddingTop="5dp"></com.fclassroom.app.widget.TagView.TagView>
 
             <LinearLayout
                 android:id="@+id/linear_remark"
@@ -190,15 +246,21 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/remark" />
+                    android:src="@drawable/ic_remark" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_size"
-                    android:text="@string/remark"
-                    android:textColor="@color/toolbar_color"
+                    android:layout_weight="1"
+                    android:text="备注"
                     android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:src="@drawable/icon_remark" />
 
             </LinearLayout>
 
@@ -208,46 +270,37 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:padding="@dimen/margin_size"
-                android:text="看错了小数点..." />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_size"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/bn_previous"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:background="@drawable/button_select"
-                    android:text="@string/back_subject" />
-
-                <TextView
-                    android:id="@+id/tv_titlebottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toRightOf="@id/bn_previous"
-                    android:layout_toLeftOf="@+id/bn_next"
-                    android:layout_alignTop="@+id/bn_next"
-                    android:layout_alignBottom="@+id/bn_next"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5" />
-
-                <Button
-                    android:id="@+id/bn_next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_select"
-                    android:text="@string/next_subject" />
-            </RelativeLayout>
+                android:text="看错了小数点..."
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_bn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="5dp">
+
+        <ImageView
+            android:id="@+id/bn_previous"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/button_pre_select"
+            android:gravity="center" />
+
+        <ImageView
+            android:id="@+id/bn_next"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/button_next_select"
+            android:gravity="center" />
+    </LinearLayout>
+</RelativeLayout>

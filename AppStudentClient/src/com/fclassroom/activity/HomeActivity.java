@@ -71,8 +71,8 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
     private String SUBJECTLISTNAME = "SubjectList.list";
     private TextView studentName;
     private TextView jikeNum;
-    String arr[] = {"首页", "整理本", "错因标签", "错题小黑屋", "打印车", "我的作业"};
-    int image[] = {R.drawable.icon_home, R.drawable.icon_collatebook, R.drawable.icon_tag, R.drawable.icon_wrong_home, R.drawable.icon_print, R.drawable.icon_work};
+    String arr[] = {"首页", "整理本", "错因标签", "错题小黑屋", "打印车"};
+    int image[] = {R.drawable.icon_home, R.drawable.icon_collatebook, R.drawable.icon_tag, R.drawable.icon_wrong_home, R.drawable.icon_print};
     private List<GradeBean> gradeBeanList;
     private List<SubjectBean> subjectBeanList;
     public interface HideTopHomeFragment {
@@ -102,8 +102,9 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
                         UIHelper.jump2Activity(HomeActivity.this, SearchActivity.class);
                         break;
                     case R.id.action_print:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.linear_home, new PrintFragment()).commit();
-                        mToolbar.setTitle(arr[4]);
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.linear_home, new PrintFragment()).commit();
+//                        mToolbar.setTitle(arr[4]);
+                        UIHelper.jump2Activity(HomeActivity.this,DetailActivity.class);
                         break;
                     default:
                         break;
