@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
+        android:background="@color/toolbar_color"
         android:gravity="center_vertical">
 
         <TextView
@@ -18,8 +18,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_size"
             android:background="@drawable/listviewitem_select"
-            android:padding="@dimen/margin_size"
-            android:text="@string/cancle" />
+            android:paddingBottom="@dimen/margin_size"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="@dimen/margin_size"
+            android:text="@string/cancle"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size" />
 
         <TextView
             android:id="@+id/tv_sure"
@@ -28,34 +33,46 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/margin_size"
             android:background="@drawable/listviewitem_select"
-            android:padding="@dimen/margin_size"
-            android:text="@string/sure" />
+            android:paddingBottom="@dimen/margin_size"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="@dimen/margin_size"
+            android:text="@string/sure"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size" />
     </RelativeLayout>
 
-    <SearchView
+    <EditText
         android:id="@+id/searchview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_size"
+        android:layout_marginRight="@dimen/margin_size"
+        android:layout_marginTop="5dp"
         android:focusable="false"
-        android:layout_marginTop="1dp"
-        android:background="@color/white"
-        android:iconifiedByDefault="false"
-        android:inputType="textFilter"
-        android:queryHint="输入需要查询的标签"></SearchView>
+        android:hint="输入您想要的标签"
+        android:inputType="textFilter"></EditText>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_size"
-        android:text="@string/relate_tag"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/text_size" />
+        android:layout_marginRight="@dimen/margin_size"
+        android:layout_marginLeft="@dimen/margin_size"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="添加知识点错因"
+        android:background="@drawable/textview_select"
+        android:textColor="@color/toolbar_color"
+        android:textSize="18sp" />
 
-    <ListView
-        android:id="@+id/listview_relate"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"></ListView>
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/margin_size"
+        android:textSize="@dimen/text_size"
+        android:text="(^-^)您错的可能在这里哦～"/>
 
     <TextView
         android:layout_width="match_parent"

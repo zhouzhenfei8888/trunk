@@ -224,7 +224,7 @@ public class DetailActivity extends BaseActivity {
 
     private void showDialogChange(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("新建")
+        builder.setTitle("")
                 .setItems(arr, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

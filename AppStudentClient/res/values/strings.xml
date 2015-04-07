@@ -70,7 +70,7 @@
     <string name="title_activity_addwrongtag">AddwrongtagActivity</string>
     <string name="title_activity_dialog">DialogActivity</string>
     <string name="relate_tag">相关标签</string>
-    <string name="recommend_tag">推荐标签</string>
+    <string name="recommend_tag">推荐</string>
     <string name="title_activity_remark">RemarkActivity</string>
     <string name="wrong">看错了小数点位数...</string>
     <string name="title_activity_dialognewbook">DialognewbookActivity</string>
