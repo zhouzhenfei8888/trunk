@@ -23,6 +23,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.fclassroom.app.common.UIHelper;
+import com.fclassroom.app.widget.TagView.Tag;
 import com.fclassroom.app.widget.TagView.TagView;
 import com.fclassroom.appstudentclient.R;
 
@@ -43,6 +44,7 @@ public class AddwrongtagActivity extends BaseActivity {
     static final String[] arr = {
             "abc", "good", "baidu", "ni ku", "mitu", "sldf", "android", "apk"
     };
+    List<String> stringList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,11 @@ public class AddwrongtagActivity extends BaseActivity {
         sure = (TextView) findViewById(R.id.tv_sure);
         searchView = (RelativeLayout) findViewById(R.id.searchview);
         recommendListview = (ListView) findViewById(R.id.listview_recommend);
-        editTextTag = (EditText)findViewById(R.id.edit_tag);
-        tagView = (TagView)findViewById(R.id.tagview);
+        editTextTag = (EditText) findViewById(R.id.edit_tag);
+        tagView = (TagView) findViewById(R.id.tagview);
+        tagView.add(new Tag("xxx"));
+        tagView.add(new Tag("xdd"));
+        tagView.add(new Tag("xxdx"));
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,15 +72,16 @@ public class AddwrongtagActivity extends BaseActivity {
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
             }
         });
         editTextTag.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_DONE){
-//                    UIHelper.ToastMessage(AddwrongtagActivity.this,"kkkkkkkkkkkkkkkkkkkkkkk");
-                    System.out.println("kkkkkkk");
+                if (actionId == EditorInfo.IME_ACTION_SEND
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
+                    UIHelper.ToastMessage(AddwrongtagActivity.this, v.getText().toString());
                     return true;
                 }
                 return false;

@@ -171,7 +171,7 @@ public class SubjectFragment extends Fragment {
      * @param orderUpOrDown 升序或降序
      */
     private void getSubjectList(final String accessToken, final int gradeId, final int subjectId, final int pageSize, final int pageNo, final int unOrganize, final String orderBy, final String orderUpOrDown) {
-        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
+//        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -188,7 +188,7 @@ public class SubjectFragment extends Fragment {
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 }
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
             }
         };
         new Thread() {
