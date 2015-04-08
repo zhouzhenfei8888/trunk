@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.fclassroom.AppManager;
+import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.appstudentclient.R;
 
@@ -39,14 +41,15 @@ public class CheckinforActivity extends BaseActivity {
                     UIHelper.jump2Activity(CheckinforActivity.this,BindtelephoneActivity.class);
                 } else {
                     UIHelper.jump2Activity(CheckinforActivity.this, HomeActivity.class);
-                    finish();
+                    AppManager.getAppManager().finishActivity();
                 }
             }
         });
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                PreferenceUtils.putString(CheckinforActivity.this,PreferenceUtils.ACCESSTOKEN,"");
+                AppManager.getAppManager().finishActivity();
             }
         });
     }

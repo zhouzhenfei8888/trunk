@@ -86,7 +86,8 @@ public class SubjectFragment extends Fragment {
     private final static String orderUp = "ASC";
     private final static String orderDown = "DESC";
     private static String orderUpOrDown = orderUp;
-    private int pageNo;
+    private int pageNo1;
+    private int pageNo2;
     private static int pageSize = 20;
     //按时间排序，按难度排序，按重要度排序
     private boolean timeOrder = true;
@@ -118,23 +119,23 @@ public class SubjectFragment extends Fragment {
         position = getArguments().getInt(ARG_POSITION);
         listSubject = new ArrayList<PageBean.SubjectItemBean>();
         listExam = new ArrayList<ExamBean>();
-        list = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
-            HashMap<String, Object> data = new HashMap<>();
-            data.put("examdate", "2015年3月3日");
-            data.put("examname", "梅村中学第二次模拟考试");
-            data.put("rating", (float) 3.0);
-            data.put("examsrc", R.drawable.subject);
-            list.add(data);
-        }
-        list2 = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            HashMap<String, Object> data = new HashMap<>();
-            data.put("workname", "梅村中学高一数学期末第三次模拟测试");
-            data.put("workdate", "2015年3月10日");
-            data.put("worktime", "共38题");
-            list2.add(data);
-        }
+//        list = new ArrayList<>();
+//        for (int i = 0; i < 15; i++) {
+//            HashMap<String, Object> data = new HashMap<>();
+//            data.put("examdate", "2015年3月3日");
+//            data.put("examname", "梅村中学第二次模拟考试");
+//            data.put("rating", (float) 3.0);
+//            data.put("examsrc", R.drawable.subject);
+//            list.add(data);
+//        }
+//        list2 = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            HashMap<String, Object> data = new HashMap<>();
+//            data.put("workname", "梅村中学高一数学期末第三次模拟测试");
+//            data.put("workdate", "2015年3月10日");
+//            data.put("worktime", "共38题");
+//            list2.add(data);
+//        }
         appContext = (AppContext) getActivity().getApplication();
         accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
@@ -144,17 +145,14 @@ public class SubjectFragment extends Fragment {
     private void initData() {
         if (position == 0) {
             //获取全部错题数据，unOrganize为0，查询全部数据
-//            getAllSubject(accessToken, gradeId, subjectId, pageSize);
-            pageSize = 20;
-            pageNo = 1;
+            pageNo1 = 1;
             unOrganize = 0;
-            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
+            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
         } else if (position == 1) {
             //当unorganize为1时为未整理
-            pageSize = 20;
-            pageNo = 1;
+            pageNo2 = 1;
             unOrganize = 1;
-            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
+            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
         }
     }
 
@@ -176,8 +174,10 @@ public class SubjectFragment extends Fragment {
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
                     BaseResponseBean<PageBean> response = (BaseResponseBean<PageBean>) msg.obj;
-                    listSubject = response.getData().getList();
+                    List<PageBean.SubjectItemBean> list = response.getData().getList();
+                    listSubject.clear();
 //                    subjectAdapter.notifyDataSetChanged();
+                    listSubject.addAll(list);
                     subjectAdapter = new SubjectAdapter(getActivity(), listSubject);
                     listview.setAdapter(subjectAdapter);
                 } else if (msg.what == 0) {
@@ -210,15 +210,15 @@ public class SubjectFragment extends Fragment {
         }.start();
     }
 
-    private void getAllSubject(final String accessToken, final int gradeId, final int subjectId, final int pageSize) {
+    private void getMoreSubjectList(final String accessToken, final int gradeId, final int subjectId, final int pageSize, final int pageNo, final int unOrganize, final String orderBy, final String orderUpOrDown) {
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
                     BaseResponseBean<PageBean> response = (BaseResponseBean<PageBean>) msg.obj;
-                    listSubject.addAll(response.getData().getList());
-                    subjectAdapter = new SubjectAdapter(getActivity(), listSubject);
-                    listview.setAdapter(subjectAdapter);
+                    List<PageBean.SubjectItemBean> list = response.getData().getList();
+                    listSubject.addAll(list);
+                    subjectAdapter.notifyDataSetChanged();
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
                 } else if (msg.what == -1) {
@@ -278,18 +278,18 @@ public class SubjectFragment extends Fragment {
             public void onClick(View v) {
                 if (position == 0) {
                     if (squareChecked == true) {
-                        pageNo = 1;
+                        pageNo1 = 1;
                         pageSize = 20;
                         unOrganize = 0;
                         orderBy = orderTime;
                         if (timeOrder == true) {
                             orderUpOrDown = orderDown;
                             timeOrder = false;
-                            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
+                            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
                         } else if (timeOrder == false) {
                             orderUpOrDown = orderUp;
                             timeOrder = true;
-                            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
+                            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
                         }
                     } else if (squareChecked == false) {
                         unOrganize = 0;
@@ -301,23 +301,22 @@ public class SubjectFragment extends Fragment {
                             timeOrder = true;
                             orderUpOrDown = orderUp;
                             getAllExamPaper(accessToken, gradeId, subjectId, unOrganize, orderUpOrDown);
-                            System.out.println(orderUpOrDown+"1:"+listExam.get(0).getExamName());
                         }
                     }
                 } else if (position == 1) {
                     if (squareChecked == true) {
-                        pageNo = 1;
+                        pageNo2 = 1;
                         pageSize = 20;
                         unOrganize = 1;
                         orderBy = orderTime;
                         if (timeOrder == true) {
                             orderUpOrDown = orderDown;
                             timeOrder = false;
-                            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
+                            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
                         } else if (timeOrder == false) {
                             orderUpOrDown = orderUp;
                             timeOrder = true;
-                            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
+                            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
                         }
                     } else if (squareChecked == false) {
                         unOrganize = 1;
@@ -337,32 +336,64 @@ public class SubjectFragment extends Fragment {
         difficulty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (difficultOrder == true) {
-                    difficultOrder = false;
-                    orderBy = orderRate;
-                    orderUpOrDown = orderDown;
-                    getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
-                } else if (difficultOrder == false) {
-                    difficultOrder = true;
-                    orderBy = orderRate;
-                    orderUpOrDown = orderUp;
-                    getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
+                if (position == 0) {
+                    unOrganize = 0;
+                    if (difficultOrder == true) {
+                        difficultOrder = false;
+                        orderBy = orderRate;
+                        orderUpOrDown = orderDown;
+                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
+                    } else if (difficultOrder == false) {
+                        difficultOrder = true;
+                        orderBy = orderRate;
+                        orderUpOrDown = orderUp;
+                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
+                    }
+                } else if (position == 1) {
+                    unOrganize = 1;
+                    if (difficultOrder == true) {
+                        difficultOrder = false;
+                        orderBy = orderRate;
+                        orderUpOrDown = orderDown;
+                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
+                    } else if (difficultOrder == false) {
+                        difficultOrder = true;
+                        orderBy = orderRate;
+                        orderUpOrDown = orderUp;
+                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
+                    }
                 }
             }
         });
         importance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (importantOrder == true) {
-                    importantOrder = false;
-                    orderUpOrDown = orderDown;
-                    orderBy = orderLevel;
-                    getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
-                } else if (importantOrder == false) {
-                    importantOrder = true;
-                    orderUpOrDown = orderUp;
-                    orderBy = orderLevel;
-                    getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
+                if (position == 0) {
+                    unOrganize = 0;
+                    if (importantOrder == true) {
+                        importantOrder = false;
+                        orderUpOrDown = orderDown;
+                        orderBy = orderLevel;
+                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
+                    } else if (importantOrder == false) {
+                        importantOrder = true;
+                        orderUpOrDown = orderUp;
+                        orderBy = orderLevel;
+                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
+                    }
+                } else if (position == 1) {
+                    unOrganize = 1;
+                    if (importantOrder == true) {
+                        importantOrder = false;
+                        orderUpOrDown = orderDown;
+                        orderBy = orderLevel;
+                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
+                    } else if (importantOrder == false) {
+                        importantOrder = true;
+                        orderUpOrDown = orderUp;
+                        orderBy = orderLevel;
+                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
+                    }
                 }
             }
         });
@@ -380,8 +411,27 @@ public class SubjectFragment extends Fragment {
             @Override
             public void onScrollUp(AbsListView view) {
                 if (isHeaderShow) {
-                    ((HomeActivity) getParentFragment().getActivity()).DoHideTop();
-                    isHeaderShow = false;
+                    if (view.getFirstVisiblePosition() > 0) {
+                        ((HomeActivity) getParentFragment().getActivity()).DoHideTop();
+                        isHeaderShow = false;
+                    }
+                }
+                // 判断滚动到底部
+                if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
+                    // 然后 经行一些业务操作
+                    if (squareChecked == true) {
+                        if (position == 0) {
+                            //获取全部错题数据，unOrganize为0，查询全部数据
+                            pageNo1++;
+                            unOrganize = 0;
+                            getMoreSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
+                        } else if (position == 1) {
+                            //当unorganize为1时为未整理
+                            pageNo2++;
+                            unOrganize = 1;
+                            getMoreSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
+                        }
+                    }
                 }
             }
         });
@@ -400,16 +450,16 @@ public class SubjectFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PageBean.SubjectItemBean subjectItemBean = null;
-                if(view instanceof ImageView){
+                if (view instanceof ImageView) {
                     subjectItemBean = (PageBean.SubjectItemBean) view.getTag();
-                }else{
-                    ImageView imageView = (ImageView)view.findViewById(R.id.iv_subject);
+                } else {
+                    ImageView imageView = (ImageView) view.findViewById(R.id.iv_subject);
                     subjectItemBean = (PageBean.SubjectItemBean) imageView.getTag();
                 }
-                if(subjectItemBean == null){
+                if (subjectItemBean == null) {
                     return;
                 }
-                UIHelper.jump2Activity(getActivity(), DetailActivity.class,subjectItemBean);
+                UIHelper.jump2Activity(getActivity(), DetailActivity.class, subjectItemBean);
             }
         });
         //设置不同的adapter，subjectabapter为题目item，workadapter为考试名item
@@ -443,16 +493,16 @@ public class SubjectFragment extends Fragment {
                         //所有题目，按题目分类,unOranize为0时为所有
                         unOrganize = 0;
                         orderUpOrDown = orderUp;
-                        pageNo = 1;
+                        pageNo1 = 1;
                         pageSize = 20;
-                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
+                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
                     } else if (position == 1) {
                         //未整理题目，按题目分类,unOranize为1时为未整理
                         unOrganize = 1;
                         orderUpOrDown = orderUp;
-                        pageNo = 1;
+                        pageNo2 = 1;
                         pageSize = 20;
-                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo, unOrganize, orderBy, orderUpOrDown);
+                        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
                     }
                 }
             }

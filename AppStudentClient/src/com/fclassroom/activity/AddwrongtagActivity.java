@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ public class AddwrongtagActivity extends BaseActivity {
 
     private TextView cancle;
     private TextView sure;
-    private SearchView searchView;
+    private EditText searchView;
     private ListView relateListview;
     private ListView recommendListview;
     static final String[] arr = {
@@ -48,7 +49,7 @@ public class AddwrongtagActivity extends BaseActivity {
     private void initView() {
         cancle = (TextView) findViewById(R.id.tv_cancle);
         sure = (TextView) findViewById(R.id.tv_sure);
-        searchView = (SearchView) findViewById(R.id.searchview);
+        searchView = (EditText) findViewById(R.id.searchview);
         relateListview = (ListView) findViewById(R.id.listview_relate);
         recommendListview = (ListView) findViewById(R.id.listview_recommend);
         cancle.setOnClickListener(new View.OnClickListener() {
@@ -69,30 +70,30 @@ public class AddwrongtagActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = (String) ((TextView)view).getText();
-                searchView.setQuery(item,false);
+//                searchView.setQuery(item,false);
             }
         });
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                UIHelper.ToastMessage(AddwrongtagActivity.this,"你选的是"+query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)) {
-                    //清楚ListView的过滤
-                    relateListview.clearTextFilter();
-                    relateListview.setVisibility(View.GONE);
-                } else {
-                    //使用用户输入的内容对ListView的列表项进行过滤
-                    relateListview.setFilterText(newText);
-                    relateListview.setVisibility(View.VISIBLE);
-                }
-                return true;
-            }
-        });
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                UIHelper.ToastMessage(AddwrongtagActivity.this,"你选的是"+query);
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                if (TextUtils.isEmpty(newText)) {
+//                    //清楚ListView的过滤
+//                    relateListview.clearTextFilter();
+//                    relateListview.setVisibility(View.GONE);
+//                } else {
+//                    //使用用户输入的内容对ListView的列表项进行过滤
+//                    relateListview.setFilterText(newText);
+//                    relateListview.setVisibility(View.VISIBLE);
+//                }
+//                return true;
+//            }
+//        });
     }
 
 

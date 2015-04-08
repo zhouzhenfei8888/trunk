@@ -187,9 +187,9 @@ public class PrintplanFragment extends Fragment {
                     PrintRecordList.addAll(list);
                     printRecordAdapter.notifyDataSetChanged();
                 } else if (msg.what == 0) {
-
+                    UIHelper.ToastMessage(getActivity(),msg.obj.toString());
                 } else if (msg.what == -1) {
-
+                    ((AppException)msg.obj).makeToast(getActivity());
                 }
             }
         };

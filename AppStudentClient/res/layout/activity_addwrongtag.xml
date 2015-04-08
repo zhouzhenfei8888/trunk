@@ -19,8 +19,7 @@
             android:layout_marginLeft="@dimen/margin_size"
             android:background="@drawable/listviewitem_select"
             android:padding="@dimen/margin_size"
-            android:text="@string/cancle"
-            android:textColor="@color/white" />
+            android:text="@string/cancle" />
 
         <TextView
             android:id="@+id/tv_sure"
@@ -30,21 +29,19 @@
             android:layout_marginRight="@dimen/margin_size"
             android:background="@drawable/listviewitem_select"
             android:padding="@dimen/margin_size"
-            android:text="@string/sure"
-            android:textColor="@color/white" />
+            android:text="@string/sure" />
     </RelativeLayout>
 
-    <EditText
+    <SearchView
         android:id="@+id/searchview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:hint="输入需要查询的标签"
-        android:layout_marginLeft="@dimen/margin_size"
-        android:layout_marginRight="@dimen/margin_size"
         android:focusable="false"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
         android:iconifiedByDefault="false"
-        android:inputType="textFilter"></EditText>
+        android:inputType="textFilter"
+        android:queryHint="输入需要查询的标签"></SearchView>
 
     <TextView
         android:layout_width="match_parent"
