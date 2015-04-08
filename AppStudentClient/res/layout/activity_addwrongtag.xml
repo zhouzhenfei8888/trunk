@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
@@ -42,15 +43,40 @@
             android:textSize="@dimen/text_size" />
     </RelativeLayout>
 
-    <EditText
+    <RelativeLayout
         android:id="@+id/searchview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:paddingTop="@dimen/margin_size"
         android:layout_marginLeft="@dimen/margin_size"
         android:layout_marginRight="@dimen/margin_size"
         android:layout_marginTop="5dp"
-        android:hint="输入您想要的标签"
-        android:inputType="textFilter"></EditText>
+        android:inputType="textFilter">
+        <com.fclassroom.app.widget.TagView.TagView
+            android:id="@+id/tagview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="@dimen/margin_size"
+            app:lineMargin="5dp"
+            app:tagMargin="3dp"
+            app:textPaddingBottom="5dp"
+            app:textPaddingLeft="8dp"
+            app:textPaddingRight="8dp"
+            app:textPaddingTop="5dp"></com.fclassroom.app.widget.TagView.TagView>
+        <EditText
+            android:id="@+id/edit_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tagview"
+            android:background="@null"
+            android:hint="输入您想要的标签"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/edittext_background"/>
+        </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"

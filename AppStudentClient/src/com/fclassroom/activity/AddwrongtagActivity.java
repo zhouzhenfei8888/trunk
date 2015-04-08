@@ -6,20 +6,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.fclassroom.app.common.UIHelper;
+import com.fclassroom.app.widget.TagView.TagView;
 import com.fclassroom.appstudentclient.R;
 
 import java.util.ArrayList;
@@ -32,8 +36,10 @@ public class AddwrongtagActivity extends BaseActivity {
 
     private TextView cancle;
     private TextView sure;
-    private EditText searchView;
+    private RelativeLayout searchView;
     private ListView recommendListview;
+    private EditText editTextTag;
+    private TagView tagView;
     static final String[] arr = {
             "abc", "good", "baidu", "ni ku", "mitu", "sldf", "android", "apk"
     };
@@ -48,8 +54,10 @@ public class AddwrongtagActivity extends BaseActivity {
     private void initView() {
         cancle = (TextView) findViewById(R.id.tv_cancle);
         sure = (TextView) findViewById(R.id.tv_sure);
-        searchView = (EditText) findViewById(R.id.searchview);
+        searchView = (RelativeLayout) findViewById(R.id.searchview);
         recommendListview = (ListView) findViewById(R.id.listview_recommend);
+        editTextTag = (EditText)findViewById(R.id.edit_tag);
+        tagView = (TagView)findViewById(R.id.tagview);
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,29 +70,16 @@ public class AddwrongtagActivity extends BaseActivity {
                 finish();
             }
         });
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                UIHelper.ToastMessage(AddwrongtagActivity.this,"你选的是"+query);
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                if (TextUtils.isEmpty(newText)) {
-//                    //清楚ListView的过滤
-//                    relateListview.clearTextFilter();
-//                    relateListview.setVisibility(View.GONE);
-//                } else {
-//                    //使用用户输入的内容对ListView的列表项进行过滤
-//                    relateListview.setFilterText(newText);
-//                    relateListview.setVisibility(View.VISIBLE);
-//                }
-//                return true;
-//            }
-//        });
+        editTextTag.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+                    UIHelper.ToastMessage(AddwrongtagActivity.this,"ok");
+                }
+                return true;
+            }
+        });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
