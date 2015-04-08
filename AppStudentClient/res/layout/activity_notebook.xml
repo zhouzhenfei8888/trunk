@@ -2,40 +2,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background_color"
+    android:orientation="vertical"
     tools:context="com.fclassroom.activity.NotebookActivity">
 
     <include layout="@layout/toolbar" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey"
+        android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:padding="@dimen/margin_size">
-
-        <CheckBox
-            android:id="@+id/checkbox_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_size"
+            android:textSize="@dimen/text_size"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="共计20题" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_size"
             android:text="@string/print_all"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_size"
-            android:text="(共20题)"
-            android:textColor="@color/white" />
-    </LinearLayout>
+
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/listview_notebook"

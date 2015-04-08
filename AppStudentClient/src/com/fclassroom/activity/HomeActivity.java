@@ -102,9 +102,9 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
                         UIHelper.jump2Activity(HomeActivity.this, SearchActivity.class);
                         break;
                     case R.id.action_print:
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.linear_home, new PrintFragment()).commit();
-//                        mToolbar.setTitle(arr[4]);
-                        UIHelper.jump2Activity(HomeActivity.this,DetailActivity.class);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.linear_home, new PrintFragment()).commit();
+                        mToolbar.setTitle(arr[4]);
+//                        UIHelper.jump2Activity(HomeActivity.this,DetailActivity.class);
                         break;
                     default:
                         break;

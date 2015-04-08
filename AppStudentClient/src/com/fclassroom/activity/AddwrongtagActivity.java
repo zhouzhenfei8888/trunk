@@ -33,7 +33,6 @@ public class AddwrongtagActivity extends BaseActivity {
     private TextView cancle;
     private TextView sure;
     private EditText searchView;
-    private ListView relateListview;
     private ListView recommendListview;
     static final String[] arr = {
             "abc", "good", "baidu", "ni ku", "mitu", "sldf", "android", "apk"
@@ -50,7 +49,6 @@ public class AddwrongtagActivity extends BaseActivity {
         cancle = (TextView) findViewById(R.id.tv_cancle);
         sure = (TextView) findViewById(R.id.tv_sure);
         searchView = (EditText) findViewById(R.id.searchview);
-        relateListview = (ListView) findViewById(R.id.listview_relate);
         recommendListview = (ListView) findViewById(R.id.listview_recommend);
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,15 +60,6 @@ public class AddwrongtagActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-        relateListview.setAdapter(new ArrayAdapter<String>(AddwrongtagActivity.this, android.R.layout.simple_list_item_1, arr));
-        relateListview.setTextFilterEnabled(true);
-        relateListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String) ((TextView)view).getText();
-//                searchView.setQuery(item,false);
             }
         });
 //        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

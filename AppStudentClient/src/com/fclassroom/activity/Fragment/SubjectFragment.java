@@ -1,6 +1,7 @@
 package com.fclassroom.activity.Fragment;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import com.fclassroom.AppContext;
 import com.fclassroom.AppException;
 import com.fclassroom.activity.DetailActivity;
 import com.fclassroom.activity.HomeActivity;
+import com.fclassroom.activity.NotebookActivity;
 import com.fclassroom.app.adapter.SubjectAdapter;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.ExamBean;
@@ -169,6 +171,7 @@ public class SubjectFragment extends Fragment {
      * @param orderUpOrDown 升序或降序
      */
     private void getSubjectList(final String accessToken, final int gradeId, final int subjectId, final int pageSize, final int pageNo, final int unOrganize, final String orderBy, final String orderUpOrDown) {
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -176,8 +179,8 @@ public class SubjectFragment extends Fragment {
                     BaseResponseBean<PageBean> response = (BaseResponseBean<PageBean>) msg.obj;
                     List<PageBean.SubjectItemBean> list = response.getData().getList();
                     listSubject.clear();
-//                    subjectAdapter.notifyDataSetChanged();
                     listSubject.addAll(list);
+//                    subjectAdapter.notifyDataSetChanged();
                     subjectAdapter = new SubjectAdapter(getActivity(), listSubject);
                     listview.setAdapter(subjectAdapter);
                 } else if (msg.what == 0) {
@@ -185,6 +188,7 @@ public class SubjectFragment extends Fragment {
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 }
+                progressDialog.dismiss();
             }
         };
         new Thread() {
@@ -211,6 +215,7 @@ public class SubjectFragment extends Fragment {
     }
 
     private void getMoreSubjectList(final String accessToken, final int gradeId, final int subjectId, final int pageSize, final int pageNo, final int unOrganize, final String orderBy, final String orderUpOrDown) {
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -224,6 +229,7 @@ public class SubjectFragment extends Fragment {
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 }
+                progressDialog.dismiss();
             }
         };
         new Thread() {
@@ -424,12 +430,12 @@ public class SubjectFragment extends Fragment {
                             //获取全部错题数据，unOrganize为0，查询全部数据
                             pageNo1++;
                             unOrganize = 0;
-                            getMoreSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
+//                            getMoreSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
                         } else if (position == 1) {
                             //当unorganize为1时为未整理
                             pageNo2++;
                             unOrganize = 1;
-                            getMoreSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
+//                            getMoreSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
                         }
                     }
                 }
@@ -449,17 +455,31 @@ public class SubjectFragment extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PageBean.SubjectItemBean subjectItemBean = null;
-                if (view instanceof ImageView) {
-                    subjectItemBean = (PageBean.SubjectItemBean) view.getTag();
+                if (squareChecked == true) {
+                    PageBean.SubjectItemBean subjectItemBean = null;
+                    if (view instanceof ImageView) {
+                        subjectItemBean = (PageBean.SubjectItemBean) view.getTag();
+                    } else {
+                        ImageView imageView = (ImageView) view.findViewById(R.id.iv_subject);
+                        subjectItemBean = (PageBean.SubjectItemBean) imageView.getTag();
+                    }
+                    if (subjectItemBean == null) {
+                        return;
+                    }
+                    UIHelper.jump2Activity(getActivity(), DetailActivity.class, subjectItemBean);
                 } else {
-                    ImageView imageView = (ImageView) view.findViewById(R.id.iv_subject);
-                    subjectItemBean = (PageBean.SubjectItemBean) imageView.getTag();
+                    int examBeanId = 0;
+                    if (view instanceof TextView) {
+                        examBeanId = (int) view.getTag();
+                    } else {
+                        TextView textView = (TextView) view.findViewById(R.id.tv_workname);
+                        examBeanId = (int) textView.getTag();
+                    }
+                    if (examBeanId == 0) {
+                        return;
+                    }
+                    UIHelper.jump2Activity(getActivity(), NotebookActivity.class, examBeanId);
                 }
-                if (subjectItemBean == null) {
-                    return;
-                }
-                UIHelper.jump2Activity(getActivity(), DetailActivity.class, subjectItemBean);
             }
         });
         //设置不同的adapter，subjectabapter为题目item，workadapter为考试名item
@@ -519,6 +539,7 @@ public class SubjectFragment extends Fragment {
      * @param orderUpOrDown 升序或降序
      */
     private void getAllExamPaper(final String accessToken, final int gradeId, final int subjectId, final int unOrganize, final String orderUpOrDown) {
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -533,6 +554,7 @@ public class SubjectFragment extends Fragment {
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 }
+                progressDialog.dismiss();
             }
         };
         new Thread() {
@@ -603,6 +625,8 @@ public class SubjectFragment extends Fragment {
             ExamBean data = list.get(position);
             holder.workname.setText(data.getExamName());
             holder.workdate.setText(data.getExamTime());
+            holder.workname.setTag(data.getExamId());
+            holder.workdate.setTag(data.getExamId());
 //            holder.worktime.setText(data.get("worktime").toString());
             holder.icon.setImageResource(R.drawable.right_gray_arrow);
             return convertView;

@@ -50,6 +50,24 @@ public class LoginResponseBean implements Serializable {
     String precision;
     String scale;
     String label;
+    String deviceToken;
+    int pushFlag;
+
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
+
+    public int getPushFlag() {
+        return pushFlag;
+    }
+
+    public void setPushFlag(int pushFlag) {
+        this.pushFlag = pushFlag;
+    }
 
     public int getId() {
         return id;

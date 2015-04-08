@@ -857,4 +857,24 @@ public class AppContext extends Application {
     public BaseResponseBean sendFeedBack(String accessToken, String msg) throws AppException {
         return ApiClient.sendFeedBack(this,accessToken,msg);
     }
+
+    public BaseResponseBean<String> addNoteBookToPrintPlan(String accessToken, int gradeId, int subjectId, int id) throws AppException {
+        return ApiClient.addNoteBookToPrintPlan(this,accessToken,gradeId,subjectId,id);
+    }
+
+    public BaseResponseBean<PageBean> getExamQuestionsByExam(String accessToken, int gradeId, int subjectId, int examId) throws AppException {
+        return ApiClient.getExamQuestionsByExam(this,accessToken,gradeId,subjectId,examId);
+    }
+
+    public BaseResponseBean<String> setQuestionSignLevel(String accessToken, int examQuestionId, int signLevel) throws AppException {
+        return ApiClient.setQuestionSignLevel(this,accessToken,examQuestionId,signLevel);
+    }
+
+    public BaseResponseBean<String> deleteErrorQuestion(String accessToken, int examQuestionId, int delFlag) throws AppException {
+        return ApiClient.deleteErrorQuestion(this,accessToken,examQuestionId,delFlag);
+    }
+
+    public String AddErrorQuestionToNoteBook(String accessToken, int examQuestionId, int id) throws AppException {
+        return ApiClient.AddErrorQuestionToNoteBook(this,accessToken,examQuestionId,id);
+    }
 }

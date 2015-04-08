@@ -2,8 +2,11 @@ package com.fclassroom.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,8 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+import com.fclassroom.AppContext;
+import com.fclassroom.AppException;
 import com.fclassroom.app.adapter.RubbishAdapter;
 import com.fclassroom.app.adapter.SubjectAdapter;
+import com.fclassroom.app.bean.BaseResponseBean;
+import com.fclassroom.app.bean.PageBean;
+import com.fclassroom.app.common.PreferenceUtils;
+import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.appstudentclient.R;
 
 import java.util.ArrayList;
@@ -23,27 +32,80 @@ public class NotebookActivity extends BaseActivity {
 
     private Toolbar mtoolBar;
     private ListView mlistView;
-    private List list;
+    private List<PageBean.SubjectItemBean> list;
+    private int examId;
+    private SubjectAdapter subjectAdapter;
+    private AppContext appContext;
+    private String accessToken;
+    private int gradeId;
+    private int subjectId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notebook);
-        initData();
+        appContext = (AppContext) getApplication();
+        accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
+        gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
+        subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
+        examId = (int) getIntent().getSerializableExtra("value");
         initToolbar();
         initViews();
+        initData();
     }
 
     private void initData() {
-        list = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            HashMap<String, Object> data = new HashMap<String, Object>();
-            data.put("examdate", "2015年3月3日");
-            data.put("examname", "梅村中学第三次模拟考试");
-            data.put("examsrc", R.drawable.subject);
-            data.put("rating", (float) 3.0);
-            list.add(data);
-        }
+//        for (int i = 0; i < 20; i++) {
+//            HashMap<String, Object> data = new HashMap<String, Object>();
+//            data.put("examdate", "2015年3月3日");
+//            data.put("examname", "梅村中学第三次模拟考试");
+//            data.put("examsrc", R.drawable.subject);
+//            data.put("rating", (float) 3.0);
+//            list.add(data);
+//        }
+        getExamQuestionsByExam(accessToken, gradeId, subjectId, examId);
+    }
+
+    private void getExamQuestionsByExam(final String accessToken, final int gradeId, final int subjectId, final int examId) {
+        final ProgressDialog progressDialog = ProgressDialog.show(this, "", "正在加载。。。");
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 1){
+                    BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
+                    List<PageBean.SubjectItemBean> newlist = responseBean.getData().getList();
+                    list.addAll(newlist);
+                    subjectAdapter = new SubjectAdapter(NotebookActivity.this, list);
+                    mlistView.setAdapter(subjectAdapter);
+                }else if(msg.what == 0){
+                    UIHelper.ToastMessage(NotebookActivity.this,msg.obj.toString());
+                }else if(msg.what == -1){
+                    ((AppException)msg.obj).makeToast(NotebookActivity.this);
+                }
+                progressDialog.dismiss();
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<PageBean> responseBean = appContext.getExamQuestionsByExam(accessToken, gradeId, subjectId, examId);
+                    if (msg.what == 0) {
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    } else {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     private void initToolbar() {
@@ -61,8 +123,10 @@ public class NotebookActivity extends BaseActivity {
     }
 
     private void initViews() {
+        list = new ArrayList<PageBean.SubjectItemBean>();
         mlistView = (ListView) findViewById(R.id.listview_notebook);
-        mlistView.setAdapter(new SubjectAdapter(NotebookActivity.this, list));
+        subjectAdapter = new SubjectAdapter(NotebookActivity.this, list);
+        mlistView.setAdapter(subjectAdapter);
     }
 
     @Override

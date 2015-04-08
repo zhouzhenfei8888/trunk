@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class PrintNumBean implements Serializable {
     int printCartQuestionCount;
-    String downloadCount;
+    int downloadCount;
 
     public int getPrintCartQuestionCount() {
         return printCartQuestionCount;
@@ -17,11 +17,11 @@ public class PrintNumBean implements Serializable {
         this.printCartQuestionCount = printCartQuestionCount;
     }
 
-    public String getDownloadCount() {
+    public int getDownloadCount() {
         return downloadCount;
     }
 
-    public void setDownloadCount(String downloadCount) {
+    public void setDownloadCount(int downloadCount) {
         this.downloadCount = downloadCount;
     }
 }

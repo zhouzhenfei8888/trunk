@@ -296,4 +296,17 @@ public class JsonUtils {
         }
         return baseResponseBean;
     }
+
+    public static BaseResponseBean<String> praseString(String jsonString) {
+        BaseResponseBean<String> pojo = null;
+        try {
+            JavaType type = mapper.getTypeFactory().constructParametricType(BaseResponseBean.class, String.class);
+            pojo = mapper.readValue(jsonString, type);
+        } catch (Exception e) {
+            pojo = new BaseResponseBean<String>();
+            pojo.setError_code(-1);
+            e.printStackTrace();
+        }
+        return pojo;
+    }
 }

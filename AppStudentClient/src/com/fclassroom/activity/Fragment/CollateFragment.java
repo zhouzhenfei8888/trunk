@@ -2,6 +2,7 @@ package com.fclassroom.activity.Fragment;
 
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -90,6 +91,7 @@ public class CollateFragment extends Fragment {
 
     //获取错题本名字列表
     private void getErrorBookList(final String accessToken, final int gradeId, final int subjectId) {
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(),"","正在加载。。。");
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -104,6 +106,7 @@ public class CollateFragment extends Fragment {
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 }
+                progressDialog.dismiss();
             }
         };
         new Thread() {
@@ -147,7 +150,7 @@ public class CollateFragment extends Fragment {
         mlvbook.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UIHelper.jump2Activity(getActivity(), NotebookActivity.class);
+//                UIHelper.jump2Activity(getActivity(), NotebookActivity.class);
             }
         });
     }
@@ -175,6 +178,7 @@ public class CollateFragment extends Fragment {
     }
 
     private void addNoteBook(final String accessToken, final int gradeId, final int subjectId, final String bookname) {
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(),"","正在加载。。。");
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -187,6 +191,7 @@ public class CollateFragment extends Fragment {
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 }
+                progressDialog.dismiss();
             }
         };
         new Thread() {
@@ -285,13 +290,51 @@ public class CollateFragment extends Fragment {
                 if (which == 0) {
                     editBookNameDialog(accessToken, bookBean.getId());
                 } else if (which == 1) {
-
+                    addNoteBookToPrintPlan(accessToken,gradeId,subjectId,bookBean.getId());
                 } else if (which == 2) {
                     deleteNoteBookDialog(accessToken, bookBean.getId());
                 }
             }
         });
         builder.create().show();
+    }
+
+    private void addNoteBookToPrintPlan(final String accessToken, final int gradeId, final int subjectId, final int id) {
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(),"","正在加载。。。");
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 1){
+                    BaseResponseBean<String> responseBean = (BaseResponseBean<String>) msg.obj;
+                }else if(msg.what == 0){
+                    UIHelper.ToastMessage(getActivity(),msg.obj.toString());
+                }else if(msg.what == -1){
+                    ((AppException)msg.obj).makeToast(getActivity());
+                }
+                progressDialog.dismiss();
+            }
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.addNoteBookToPrintPlan(accessToken,gradeId,subjectId,id);
+                    if(responseBean.getError_code() == 0){
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    }else if(responseBean.getError_code()!=0){
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what =-1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     private void deleteNoteBookDialog(final String accessToken, final int id) {
@@ -313,6 +356,7 @@ public class CollateFragment extends Fragment {
     }
 
     private void deleteNoteBook(final String accessToken, final int id) {
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(),"","正在加载。。。");
         final Handler handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
@@ -322,6 +366,7 @@ public class CollateFragment extends Fragment {
                 }else if(msg.what == -1){
                     ((AppException)msg.obj).makeToast(getActivity());
                 }
+                progressDialog.dismiss();
             }
         };
         new Thread(){
@@ -365,6 +410,7 @@ public class CollateFragment extends Fragment {
     }
 
     private void changeNoteName(final String accessToken, final int id, final String name) {
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(),"","正在加载。。。");
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -374,6 +420,7 @@ public class CollateFragment extends Fragment {
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 }
+                progressDialog.dismiss();
             }
         };
         new Thread() {

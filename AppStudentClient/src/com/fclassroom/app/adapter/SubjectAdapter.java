@@ -96,7 +96,7 @@ public class SubjectAdapter extends BaseAdapter {
         //图片处理
         imageLoader = new ImageLoader(mQueue,new BitmapCache());
         ImageLoader.ImageListener imageListener = imageLoader.getImageListener(listItemView.subject,R.drawable.default_jpeg,R.drawable.default_jpeg);
-        imageLoader.get(URLs.HOST_NOTE+data.getContentImage(),imageListener);
+        imageLoader.get(URLs.HOST_IMG+data.getContentImage(),imageListener);
         listItemView.ratingBar.setRating((float) data.getSignLevel());
         listItemView.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

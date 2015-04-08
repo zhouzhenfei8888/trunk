@@ -1,12 +1,15 @@
 package com.fclassroom.activity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -23,14 +26,23 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.fclassroom.AppContext;
+import com.fclassroom.AppException;
 import com.fclassroom.AppManager;
+import com.fclassroom.activity.Fragment.CollateFragment;
+import com.fclassroom.app.bean.BaseResponseBean;
+import com.fclassroom.app.bean.ErrorBookBean;
 import com.fclassroom.app.bean.PageBean;
 import com.fclassroom.app.bean.URLs;
 import com.fclassroom.app.common.BitmapCache;
+import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.app.widget.TagView.Tag;
 import com.fclassroom.app.widget.TagView.TagView;
 import com.fclassroom.appstudentclient.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 题目详细页
@@ -62,15 +74,76 @@ public class DetailActivity extends BaseActivity {
     private String diffStr;
     private RequestQueue mQueue;
     private ImageLoader imageLoader;
+    private AppContext appContext;
+    private String accessToken;
+    private int gradeId;
+    private int subjectId;
+    private CollateFragment.BookAdapter bookAdapter;
+    private List<ErrorBookBean> ErrorBookList;
+    private List<String> stringList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         subjectItemBean = (PageBean.SubjectItemBean) getIntent().getSerializableExtra("value");
-        System.out.println(subjectItemBean.getExamName() + subjectItemBean.getId());
+        appContext = (AppContext) getApplication();
+        accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
+        gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
+        subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
+        initData();
         initToolbar();
         initViews();
+    }
+
+    private void initData() {
+        ErrorBookList = new ArrayList<ErrorBookBean>();
+        stringList = new ArrayList<String>();
+        getErrorBookList(accessToken,gradeId,subjectId);
+    }
+
+    //获取错题本名字列表
+    private void getErrorBookList(final String accessToken, final int gradeId, final int subjectId) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<ArrayList<ErrorBookBean>> responseBean = (BaseResponseBean<ArrayList<ErrorBookBean>>) msg.obj;
+                    ErrorBookList.clear();
+                    ErrorBookList.addAll(responseBean.getData());
+                    for(ErrorBookBean errorBookBean:ErrorBookList){
+                        stringList.add(errorBookBean.getName());
+                    }
+                    arr = (String[])stringList.toArray(new String[stringList.size()]);
+//                    bookAdapter.notifyDataSetChanged();
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(DetailActivity.this, msg.obj.toString());
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(DetailActivity.this);
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<ArrayList<ErrorBookBean>> responseBean = appContext.getNoteBookList(accessToken, gradeId, subjectId);
+                    if (responseBean.getError_code() == 0) {
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    } else if (responseBean.getError_code() != 0) {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     private void initToolbar() {
@@ -122,22 +195,25 @@ public class DetailActivity extends BaseActivity {
             diffStr = "难";
         }
         difficult.setText("难度：" + diffStr);
+        ratingBar.setRating((float) (subjectItemBean.getSignLevel()));
         //图片处理
-        imageLoader = new ImageLoader(mQueue,new BitmapCache());
-        ImageLoader.ImageListener imageListener = imageLoader.getImageListener(subject,R.drawable.default_jpeg,R.drawable.iv_nodata);
-        imageLoader.get(URLs.HOST_NOTE+subjectItemBean.getContentImage(),imageListener);
+        imageLoader = new ImageLoader(mQueue, new BitmapCache());
+        ImageLoader.ImageListener imageListener = imageLoader.getImageListener(subject, R.drawable.default_jpeg, R.drawable.iv_nodata);
+        imageLoader.get(URLs.HOST_IMG + subjectItemBean.getContentImage(), imageListener);
 
-        ImageLoader.ImageListener imageListenerAnswer = imageLoader.getImageListener(answer,R.drawable.default_jpeg,R.drawable.iv_nodata);
-        imageLoader.get(URLs.HOST_NOTE + subjectItemBean.getAnswerImg(), imageListenerAnswer);
+        ImageLoader.ImageListener imageListenerAnswer = imageLoader.getImageListener(answer, R.drawable.default_jpeg, R.drawable.iv_nodata);
+        imageLoader.get(URLs.HOST_IMG + subjectItemBean.getAnswerImg(), imageListenerAnswer);
         //错因标签
         String tagnames = subjectItemBean.getTagNames();
-        String [] tags = null;
-        if(tagnames.contains(",")){
-            tags = tagnames.split(",");
-        }
-        for(String name:tags){
-            Tag tag = new Tag(name);
-            tagView.add(tag);
+        if (!"".equals(tagnames)) {
+            String[] tags = null;
+            if (tagnames.contains(",")) {
+                tags = tagnames.split(",");
+            }
+            for (String name : tags) {
+                Tag tag = new Tag(name);
+                tagView.add(tag);
+            }
         }
         //remark
         remarkInfo.setText(subjectItemBean.getRemark());
@@ -170,6 +246,8 @@ public class DetailActivity extends BaseActivity {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 ratingBar.setRating(rating);
+                int signLevel = (int) rating;
+                SetQuestionSignLevel(accessToken, subjectItemBean.getExamQuestionId(), signLevel);
             }
         });
         addWrongTag.setOnClickListener(new View.OnClickListener() {
@@ -185,6 +263,42 @@ public class DetailActivity extends BaseActivity {
 //                overridePendingTransition(R.anim.openfrombottom,R.anim.nomove);
             }
         });
+    }
+
+    private void SetQuestionSignLevel(final String accessToken, final int examQuestionId, final int signLevel) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<String> responseBean = (BaseResponseBean<String>) msg.obj;
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(DetailActivity.this, msg.obj.toString());
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(DetailActivity.this);
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.setQuestionSignLevel(accessToken, examQuestionId, signLevel);
+                    if (responseBean.getError_code() == 0) {
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    } else {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     private void showActivityFromBottom() {
@@ -210,7 +324,8 @@ public class DetailActivity extends BaseActivity {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                int delFlag = 0;
+                deleteErrorQuestion(accessToken, subjectItemBean.getExamQuestionId(), delFlag);
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -222,16 +337,83 @@ public class DetailActivity extends BaseActivity {
         builder.create().show();
     }
 
+    private void deleteErrorQuestion(final String accessToken, final int examQuestionId, final int delFlag) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<String> responseBean = (BaseResponseBean<String>) msg.obj;
+                    UIHelper.ToastMessage(DetailActivity.this, responseBean.getData().toString());
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(DetailActivity.this, msg.obj.toString());
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(DetailActivity.this);
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.deleteErrorQuestion(accessToken, examQuestionId, delFlag);
+                    if (responseBean.getError_code() == 0) {
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    } else {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
     private void showDialogChange(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("")
                 .setItems(arr, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                        AddErrorQuestionToNoteBook(accessToken,subjectItemBean.getExamQuestionId(),ErrorBookList.get(which).getId());
+                        bookname.setText(ErrorBookList.get(which).getName().toString());
                     }
                 });
         builder.create().show();
+    }
+
+    private void AddErrorQuestionToNoteBook(final String accessToken, final int examQuestionId, final int id) {
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 1){
+
+                }else if(msg.what ==-1){
+                    ((AppException)msg.obj).makeToast(DetailActivity.this);
+                }
+            }
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    String str = appContext.AddErrorQuestionToNoteBook(accessToken,examQuestionId,id);
+                    msg.what = 1;
+                    msg.obj = str;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     @Override

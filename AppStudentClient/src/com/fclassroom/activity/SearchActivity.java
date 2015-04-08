@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.fclassroom.appstudentclient.R;
@@ -20,6 +21,7 @@ public class SearchActivity extends BaseActivity {
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
     private EditText editText;
+    private ImageView delete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,7 @@ public class SearchActivity extends BaseActivity {
     private void initViews() {
         editText = (EditText)findViewById(R.id.et_search);
         listView = (ListView)findViewById(R.id.lv_searchrecoder);
+        delete = (ImageView)findViewById(R.id.iv_delete);
         arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,data);
         listView.setAdapter(arrayAdapter);
         editText.addTextChangedListener(new TextWatcher() {
@@ -48,6 +51,12 @@ public class SearchActivity extends BaseActivity {
                 if(s.length() == 0){
                     listView.setVisibility(View.GONE);
                 }
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setText("");
             }
         });
     }

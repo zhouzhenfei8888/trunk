@@ -178,6 +178,8 @@
                 android:id="@+id/iv_subject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:paddingLeft="@dimen/margin_size"
                 android:background="@color/white"
                 android:src="@drawable/subject" />
 

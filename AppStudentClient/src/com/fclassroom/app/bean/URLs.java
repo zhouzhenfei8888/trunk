@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class URLs implements Serializable {
     public final static String HOST = "http://192.168.0.77/student/";
+    public final static String HOST_IMG ="http://img.fclassroom.com";
     public final static String HOST_YH = "http://120.131.64.134:9080/";
     public final static String HOST_NOTE = "http://192.168.0.77/notebook/student/";
     public final static String HTTP = "http://";
@@ -32,4 +33,9 @@ public class URLs implements Serializable {
     public final static String GetPrintplanList = HOST_NOTE + "getPrintCartErrorQuestions.json";
     public final static String GetPrintRecoderList = HOST_NOTE + "getPrintHistoryList.json";
     public final static String GetPrintNum = HOST_NOTE + "getPrintCatelog.json";
+    public final static String AddNoteBookToPrintPlan = HOST_NOTE +"addNoteBookToPrintCart.json";
+    public final static String GetExamQuestionsByExam = HOST_NOTE +"getExamQuestionsByExam.json";
+    public final static String AddQuestionSignLevel = HOST_NOTE +"addQuestionSignLevel.json";
+    public final static String DelErrorQuestion = HOST_NOTE +"delErrorQuestion.json";
+    public final static String AddErrorQuestionToNoteBook = HOST_NOTE +"addErrorQuestionToNoteBook.json";
 }

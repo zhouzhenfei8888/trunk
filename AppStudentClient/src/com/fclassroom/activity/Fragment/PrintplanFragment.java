@@ -82,27 +82,25 @@ public class PrintplanFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
-        }
-        listPrintPlan = new ArrayList<>();
+        mParam1 = getArguments().getInt(ARG_PARAM1);
+//        listPrintPlan = new ArrayList<>();
         PrintPlanList = new ArrayList<PageBean.SubjectItemBean>();
         PrintRecordList = new ArrayList<PrintRecoderBean>();
-        for (int i = 0; i < 15; i++) {
-            HashMap<String, Object> data = new HashMap<>();
-            data.put("examdate", "2015年3月3日");
-            data.put("examname", "梅村中学第二次模拟考试");
-            data.put("rating", (float) 3.0);
-            data.put("examsrc", R.drawable.subject);
-            listPrintPlan.add(data);
-        }
-        listPrintRecord = new ArrayList();
-        for (int i = 0; i < 15; i++) {
-            HashMap<String, Object> data = new HashMap<String, Object>();
-            data.put("printdate", "2015年3月3日");
-            data.put("printnumber", 80);
-            listPrintRecord.add(data);
-        }
+//        for (int i = 0; i < 15; i++) {
+//            HashMap<String, Object> data = new HashMap<>();
+//            data.put("examdate", "2015年3月3日");
+//            data.put("examname", "梅村中学第二次模拟考试");
+//            data.put("rating", (float) 3.0);
+//            data.put("examsrc", R.drawable.subject);
+//            listPrintPlan.add(data);
+//        }
+//        listPrintRecord = new ArrayList();
+//        for (int i = 0; i < 15; i++) {
+//            HashMap<String, Object> data = new HashMap<String, Object>();
+//            data.put("printdate", "2015年3月3日");
+//            data.put("printnumber", 80);
+//            listPrintRecord.add(data);
+//        }
         appContext = (AppContext) getActivity().getApplication();
         accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
@@ -129,8 +127,11 @@ public class PrintplanFragment extends Fragment {
     private void initData() {
         pageNo = 1;
         orderTime = "ASC";
-        getPrintplanList(accessToken, gradeId, subjectId, pageSize, pageNo);
-        getPrintRecoderList(accessToken, gradeId, subjectId, orderTime);
+        if (mParam1 == 0) {
+            getPrintplanList(accessToken, gradeId, subjectId, pageSize, pageNo);
+        } else if (mParam1 == 1) {
+            getPrintRecoderList(accessToken, gradeId, subjectId, orderTime);
+        }
         getPrintNum(accessToken, gradeId, subjectId);
     }
 
@@ -141,7 +142,7 @@ public class PrintplanFragment extends Fragment {
                 if (msg.what == 1) {
                     BaseResponseBean<PrintNumBean> responseBean = (BaseResponseBean<PrintNumBean>) msg.obj;
                     int printCartQuestionCount = responseBean.getData().getPrintCartQuestionCount();
-                    String downloadCount = responseBean.getData().getDownloadCount();
+                    int downloadCount = responseBean.getData().getDownloadCount();
                     if (mParam1 == 0) {
                         tv.setText("待打印" + printCartQuestionCount + "题");
                     } else if (mParam1 == 1) {
@@ -185,11 +186,12 @@ public class PrintplanFragment extends Fragment {
                     BaseResponseBean<List<PrintRecoderBean>> responseBean = (BaseResponseBean<List<PrintRecoderBean>>) msg.obj;
                     List<PrintRecoderBean> list = responseBean.getData();
                     PrintRecordList.addAll(list);
-                    printRecordAdapter.notifyDataSetChanged();
+                    printRecordAdapter = new PrintRecordAdapter(getActivity(), R.layout.listview_itemprintrecord, PrintRecordList);
+                    lv.setAdapter(printRecordAdapter);
                 } else if (msg.what == 0) {
-                    UIHelper.ToastMessage(getActivity(),msg.obj.toString());
+                    UIHelper.ToastMessage(getActivity(), msg.obj.toString());
                 } else if (msg.what == -1) {
-                    ((AppException)msg.obj).makeToast(getActivity());
+                    ((AppException) msg.obj).makeToast(getActivity());
                 }
             }
         };
@@ -224,7 +226,8 @@ public class PrintplanFragment extends Fragment {
                     BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
                     List<PageBean.SubjectItemBean> list = responseBean.getData().getList();
                     PrintPlanList.addAll(list);
-                    printplanAdapter.notifyDataSetChanged();
+                    printplanAdapter = new SubjectAdapter(getActivity(), PrintPlanList);
+                    lv.setAdapter(printplanAdapter);
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
                 } else if (msg.what == -1) {
