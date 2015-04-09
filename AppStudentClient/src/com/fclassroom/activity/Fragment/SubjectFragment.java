@@ -171,7 +171,7 @@ public class SubjectFragment extends Fragment {
      * @param orderUpOrDown 升序或降序
      */
     private void getSubjectList(final String accessToken, final int gradeId, final int subjectId, final int pageSize, final int pageNo, final int unOrganize, final String orderBy, final String orderUpOrDown) {
-//        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -181,14 +181,14 @@ public class SubjectFragment extends Fragment {
                     listSubject.clear();
                     listSubject.addAll(list);
 //                    subjectAdapter.notifyDataSetChanged();
-                    subjectAdapter = new SubjectAdapter(getActivity(), listSubject);
+                    subjectAdapter = new SubjectAdapter(getActivity(), listSubject, listview);
                     listview.setAdapter(subjectAdapter);
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 }
-//                progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         };
         new Thread() {
@@ -277,7 +277,7 @@ public class SubjectFragment extends Fragment {
         final TextView importance = (TextView) headview.findViewById(R.id.tv_importance);
         scrollShowHeaderListView.setUpHeaderViews(headview);
         listview = scrollShowHeaderListView.getListView();
-        subjectAdapter = new SubjectAdapter(getActivity(), listSubject);
+        subjectAdapter = new SubjectAdapter(getActivity(), listSubject, listview);
         listview.setAdapter(subjectAdapter);
         time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -412,6 +412,7 @@ public class SubjectFragment extends Fragment {
         delete = (TextView) view.findViewById(R.id.tv_delete);
         print = (TextView) view.findViewById(R.id.tv_print);
         collate.setOnClickListener(new chickListener());
+        selectAll.setOnClickListener(new chickListener());
 
         scrollShowHeaderListView.setScrollUpListener(new ScrollShowHeaderListView.OnScrollUpListener() {
             @Override
@@ -430,12 +431,12 @@ public class SubjectFragment extends Fragment {
                             //获取全部错题数据，unOrganize为0，查询全部数据
                             pageNo1++;
                             unOrganize = 0;
-//                            getMoreSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
+                            getMoreSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
                         } else if (position == 1) {
                             //当unorganize为1时为未整理
                             pageNo2++;
                             unOrganize = 1;
-//                            getMoreSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
+                            getMoreSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
                         }
                     }
                 }
@@ -446,42 +447,53 @@ public class SubjectFragment extends Fragment {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 bottomView.setVisibility(View.VISIBLE);
                 topView.setVisibility(View.VISIBLE);
-                selectIdSet.clear();
+//                selectIdSet.clear();
                 subjectAdapter.setMulMode(true);
                 subjectAdapter.notifyDataSetChanged();
+                listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                 return true;
             }
         });
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (squareChecked == true) {
-                    PageBean.SubjectItemBean subjectItemBean = null;
-                    if (view instanceof ImageView) {
-                        subjectItemBean = (PageBean.SubjectItemBean) view.getTag();
-                    } else {
-                        ImageView imageView = (ImageView) view.findViewById(R.id.iv_subject);
-                        subjectItemBean = (PageBean.SubjectItemBean) imageView.getTag();
-                    }
-                    if (subjectItemBean == null) {
-                        return;
-                    }
-                    UIHelper.jump2Activity(getActivity(), DetailActivity.class, subjectItemBean);
+                if (listview.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
+                    subjectAdapter.notifyDataSetChanged();
+//                    updateSingleRow(listview,id);
+//                    subjectAdapter.getView(position-1, (View) (listview.getItemAtPosition(position-1)),listview);
+                    updateSeletedCount();
                 } else {
-                    int examBeanId = 0;
-                    if (view instanceof TextView) {
-                        examBeanId = (int) view.getTag();
+                    if (squareChecked == true) {
+                        PageBean.SubjectItemBean subjectItemBean = null;
+                        if (view instanceof ImageView) {
+                            subjectItemBean = (PageBean.SubjectItemBean) view.getTag();
+                        } else {
+                            ImageView imageView = (ImageView) view.findViewById(R.id.iv_subject);
+                            subjectItemBean = (PageBean.SubjectItemBean) imageView.getTag();
+                        }
+                        if (subjectItemBean == null) {
+                            return;
+                        }
+                        UIHelper.jump2Activity(getActivity(), DetailActivity.class, subjectItemBean);
                     } else {
-                        TextView textView = (TextView) view.findViewById(R.id.tv_workname);
-                        examBeanId = (int) textView.getTag();
+                        int examBeanId = 0;
+                        String workname = null;
+                        if (view instanceof TextView) {
+                            examBeanId = (int) view.getTag();
+                        } else {
+                            TextView textView = (TextView) view.findViewById(R.id.tv_workname);
+                            workname = textView.getText().toString();
+                            examBeanId = (int) textView.getTag();
+                        }
+                        if (examBeanId == 0) {
+                            return;
+                        }
+                        UIHelper.jump2Activity(getActivity(), NotebookActivity.class, examBeanId, workname, "subject");
                     }
-                    if (examBeanId == 0) {
-                        return;
-                    }
-                    UIHelper.jump2Activity(getActivity(), NotebookActivity.class, examBeanId);
                 }
             }
         });
+
         //设置不同的adapter，subjectabapter为题目item，workadapter为考试名item
         square.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -527,6 +539,36 @@ public class SubjectFragment extends Fragment {
                 }
             }
         });
+    }
+
+    protected void updateSeletedCount() {
+        // TODO Auto-generated method stub
+        haveSelected.setText("已选择" + Integer.toString(listview.getCheckedItemCount()) + "题");
+    }
+
+    public void selectedAll() {
+        for (int i = 0; i < subjectAdapter.getCount(); i++) {
+            listview.setItemChecked(i, true);
+        }
+        updateSeletedCount();
+    }
+
+    public void unSelectedAll() {
+        listview.clearChoices();
+        updateSeletedCount();
+    }
+
+    private void updateSingleRow(ListView listView, long id) {
+
+        if (listView != null) {
+            int start = listView.getFirstVisiblePosition();
+            for (int i = start, j = listView.getLastVisiblePosition(); i <= j; i++)
+                if (id == ( (View)listView.getItemAtPosition(i)).getId()) {
+                    View view = listView.getChildAt(i - start);
+                    subjectAdapter.getView(i, view, listView);
+                    break;
+                }
+        }
     }
 
     /**
@@ -658,12 +700,19 @@ public class SubjectFragment extends Fragment {
         public void onClick(View v) {
             topView.setVisibility(View.GONE);
             bottomView.setVisibility(View.GONE);
-            for (int i = 0; i < list.size(); i++) {
-                subjectAdapter.setMulMode(false);
-                subjectAdapter.notifyDataSetChanged();
-            }
+            subjectAdapter.setMulMode(false);
+            subjectAdapter.notifyDataSetChanged();
+            listview.setChoiceMode(ListView.CHOICE_MODE_NONE);
             switch (v.getId()) {
                 case R.id.tv_collate:
+                    UIHelper.jump2Activity(getActivity(),DetailActivity.class);
+                    break;
+                case R.id.tv_selectall:
+                    selectedAll();
+                    break;
+                case R.id.tv_print:
+                    break;
+                case R.id.tv_delete:
                     break;
             }
         }

@@ -153,6 +153,7 @@ public class DetailActivity extends BaseActivity {
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UIHelper.jump2Activity(DetailActivity.this,HomeActivity.class);
                 AppManager.getAppManager().finishActivity();
             }
         });
@@ -381,7 +382,7 @@ public class DetailActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         AddErrorQuestionToNoteBook(accessToken,subjectItemBean.getExamQuestionId(),ErrorBookList.get(which).getId());
-                        bookname.setText(ErrorBookList.get(which).getName().toString());
+                        bookname.setText(subjectItemBean.getNotebookNames()+","+ErrorBookList.get(which).getName().toString());
                     }
                 });
         builder.create().show();

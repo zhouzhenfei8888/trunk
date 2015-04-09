@@ -116,9 +116,19 @@ public class UIHelper {
         activity.startActivity(intent);
     }
 
+    public static <T> void jump2Activity(Activity activity, Class<T> cls, Object obj, Object obj2, Object obj3) {
+        Intent intent = new Intent(activity, cls);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("value", (java.io.Serializable) obj);
+        bundle.putSerializable("value2", (java.io.Serializable) obj2);
+        bundle.putSerializable("from", (java.io.Serializable) obj3);
+        intent.putExtras(bundle);
+        activity.startActivity(intent);
+    }
+
     /**
      * dip转换为px
-     * */
+     */
     public static int dipToPxInt(Context context, float dipValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
@@ -126,11 +136,12 @@ public class UIHelper {
 
     /**
      * dip转换为px
-     * */
+     */
     public static float dipToPxFloat(Context context, float dipValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return dipValue * scale + 0.5f;
     }
+
     /**
      * 打开浏览器
      *

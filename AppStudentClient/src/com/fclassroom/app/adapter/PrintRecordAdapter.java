@@ -61,6 +61,7 @@ public class PrintRecordAdapter extends BaseAdapter {
         }
         PrintRecoderBean data = list.get(position);
         holder.totalNum.setText("共"+data.getExamQuestionCount()+"题");
+        holder.printDate.setTag(data.getId());
         holder.printDate.setText(data.getCreateTime());
         return convertView;
     }

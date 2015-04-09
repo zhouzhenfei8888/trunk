@@ -510,7 +510,7 @@ public class ApiClient {
         params.put("gradeId", gradeId);
         params.put("subjectId", subjectId);
         params.put("unOrganize", unOrganize);
-        params.put("orderUpOrDown", orderUpOrDown);
+        params.put("orderTime", orderUpOrDown);
         String url = _MakeURL(URLs.GetExamQuestionList, params);
         String response = http_get(appContext, url);
         System.out.println(orderUpOrDown);
@@ -525,6 +525,7 @@ public class ApiClient {
         params.put("subjectId", subjectId);
         String url = _MakeURL(URLs.GetErrorTagList, params);
         String response = http_get(appContext, url);
+        System.out.println(response);
         BaseResponseBean<List<ErrorTagBean>> responseBean = JsonUtils.getErrorTagList(response);
         return responseBean;
     }
@@ -656,5 +657,18 @@ public class ApiClient {
         String url = _MakeURL(URLs.AddErrorQuestionToNoteBook,params);
         String response = http_get(appContext,url);
         return response;
+    }
+
+    public static BaseResponseBean<PageBean> getPrintHistoryErrorQuestions(AppContext appContext, String accessToken, int gradeId, int subjectId, int printHistoryId) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId",gradeId);
+        params.put("subjectId",subjectId);
+        params.put("printHistoryId",printHistoryId);
+        String url = _MakeURL(URLs.GetPrintHistoryErrorQuestions,params);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+        BaseResponseBean<PageBean> responseBean = JsonUtils.getPrintplanList(response);
+        return responseBean;
     }
 }

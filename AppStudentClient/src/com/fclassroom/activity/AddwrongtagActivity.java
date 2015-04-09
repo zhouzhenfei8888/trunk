@@ -60,9 +60,6 @@ public class AddwrongtagActivity extends BaseActivity {
         recommendListview = (ListView) findViewById(R.id.listview_recommend);
         editTextTag = (EditText) findViewById(R.id.edit_tag);
         tagView = (TagView) findViewById(R.id.tagview);
-        tagView.add(new Tag("xxx"));
-        tagView.add(new Tag("xdd"));
-        tagView.add(new Tag("xxdx"));
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

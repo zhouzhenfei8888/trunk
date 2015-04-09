@@ -1,22 +1,19 @@
 package com.fclassroom.activity;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fclassroom.AppContext;
 import com.fclassroom.AppException;
-import com.fclassroom.app.adapter.RubbishAdapter;
 import com.fclassroom.app.adapter.SubjectAdapter;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.PageBean;
@@ -25,15 +22,17 @@ import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.appstudentclient.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class NotebookActivity extends BaseActivity {
 
     private Toolbar mtoolBar;
     private ListView mlistView;
+    private TextView total, printall;
     private List<PageBean.SubjectItemBean> list;
-    private int examId;
+    private int id;
+    private String name;
+    private String from;
     private SubjectAdapter subjectAdapter;
     private AppContext appContext;
     private String accessToken;
@@ -48,7 +47,9 @@ public class NotebookActivity extends BaseActivity {
         accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
         subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
-        examId = (int) getIntent().getSerializableExtra("value");
+        id = (int) getIntent().getSerializableExtra("value");
+        name = (String) getIntent().getSerializableExtra("value2");
+        from = (String) getIntent().getSerializableExtra("from");
         initToolbar();
         initViews();
         initData();
@@ -63,7 +64,55 @@ public class NotebookActivity extends BaseActivity {
 //            data.put("rating", (float) 3.0);
 //            list.add(data);
 //        }
-        getExamQuestionsByExam(accessToken, gradeId, subjectId, examId);
+        if ("subject".equals(from)) {
+            getExamQuestionsByExam(accessToken, gradeId, subjectId, id);
+            printall.setVisibility(View.GONE);
+            printall.setClickable(false);
+        } else if ("print".equals(from)) {
+            getPrintHistoryErrorQuestions(accessToken, gradeId, subjectId, id);
+        }
+    }
+
+    private void getPrintHistoryErrorQuestions(final String accessToken, final int gradeId, final int subjectId, final int printHistoryId) {
+        final ProgressDialog progressDialog = ProgressDialog.show(this, "", "正在加载。。。");
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
+                    List<PageBean.SubjectItemBean> newlist = responseBean.getData().getList();
+                    list.addAll(newlist);
+                    subjectAdapter = new SubjectAdapter(NotebookActivity.this, list, mlistView);
+                    mlistView.setAdapter(subjectAdapter);
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(NotebookActivity.this, msg.obj.toString());
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(NotebookActivity.this);
+                }
+                progressDialog.dismiss();
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<PageBean> responseBean = appContext.getPrintHistoryErrorQuestions(accessToken, gradeId, subjectId, printHistoryId);
+                    if (msg.what == 0) {
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    } else {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     private void getExamQuestionsByExam(final String accessToken, final int gradeId, final int subjectId, final int examId) {
@@ -71,16 +120,16 @@ public class NotebookActivity extends BaseActivity {
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                if(msg.what == 1){
+                if (msg.what == 1) {
                     BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
                     List<PageBean.SubjectItemBean> newlist = responseBean.getData().getList();
                     list.addAll(newlist);
-                    subjectAdapter = new SubjectAdapter(NotebookActivity.this, list);
+                    subjectAdapter = new SubjectAdapter(NotebookActivity.this, list, mlistView);
                     mlistView.setAdapter(subjectAdapter);
-                }else if(msg.what == 0){
-                    UIHelper.ToastMessage(NotebookActivity.this,msg.obj.toString());
-                }else if(msg.what == -1){
-                    ((AppException)msg.obj).makeToast(NotebookActivity.this);
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(NotebookActivity.this, msg.obj.toString());
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(NotebookActivity.this);
                 }
                 progressDialog.dismiss();
             }
@@ -111,7 +160,7 @@ public class NotebookActivity extends BaseActivity {
     private void initToolbar() {
         mtoolBar = (Toolbar) findViewById(R.id.toolbar);
         mtoolBar.setNavigationIcon(R.drawable.ic_launcher);
-        mtoolBar.setTitle("精题本");
+        mtoolBar.setTitle(name);
         mtoolBar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(mtoolBar);
         mtoolBar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -125,7 +174,9 @@ public class NotebookActivity extends BaseActivity {
     private void initViews() {
         list = new ArrayList<PageBean.SubjectItemBean>();
         mlistView = (ListView) findViewById(R.id.listview_notebook);
-        subjectAdapter = new SubjectAdapter(NotebookActivity.this, list);
+        total = (TextView) findViewById(R.id.tv_total);
+        printall = (TextView) findViewById(R.id.tv_printall);
+        subjectAdapter = new SubjectAdapter(NotebookActivity.this, list, mlistView);
         mlistView.setAdapter(subjectAdapter);
     }
 

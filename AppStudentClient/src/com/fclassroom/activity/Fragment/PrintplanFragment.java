@@ -8,11 +8,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fclassroom.AppContext;
 import com.fclassroom.AppException;
+import com.fclassroom.activity.NotebookActivity;
 import com.fclassroom.app.adapter.PrintRecordAdapter;
 import com.fclassroom.app.adapter.PrintplanAdapter;
 import com.fclassroom.app.adapter.SubjectAdapter;
@@ -114,7 +116,7 @@ public class PrintplanFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_printplan, container, false);
         initViews(view);
         if (mParam1 == 0) {
-            printplanAdapter = new SubjectAdapter(getActivity(), PrintPlanList);
+            printplanAdapter = new SubjectAdapter(getActivity(), PrintPlanList,lv);
             lv.setAdapter(printplanAdapter);
         } else if (mParam1 == 1) {
             printRecordAdapter = new PrintRecordAdapter(getActivity(), R.layout.listview_itemprintrecord, PrintRecordList);
@@ -226,7 +228,7 @@ public class PrintplanFragment extends Fragment {
                     BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
                     List<PageBean.SubjectItemBean> list = responseBean.getData().getList();
                     PrintPlanList.addAll(list);
-                    printplanAdapter = new SubjectAdapter(getActivity(), PrintPlanList);
+                    printplanAdapter = new SubjectAdapter(getActivity(), PrintPlanList,lv);
                     lv.setAdapter(printplanAdapter);
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
@@ -270,7 +272,18 @@ public class PrintplanFragment extends Fragment {
 //        }
         scrollShowHeaderListView.setUpHeaderViews(headView);
         lv = scrollShowHeaderListView.getListView();
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (mParam1 == 0) {
+
+                } else if (mParam1 == 1) {
+                    TextView textView = (TextView) view.findViewById(R.id.tv_itemdate);
+                    int printHistoryId = (int) textView.getTag();
+                    String name = textView.getText().toString();
+                    UIHelper.jump2Activity(getActivity(), NotebookActivity.class, printHistoryId, name, "print");
+                }
+            }
+        });
     }
-
-
 }

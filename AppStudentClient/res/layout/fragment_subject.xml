@@ -39,7 +39,7 @@
             android:textSize="@dimen/text_size"
             android:padding="@dimen/margin_size"
             android:layout_alignParentRight="true"
-            android:text="已选择4题"/>
+            android:text="已选择0题"/>
         </RelativeLayout>
 
     <LinearLayout

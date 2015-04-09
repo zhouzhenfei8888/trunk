@@ -877,4 +877,8 @@ public class AppContext extends Application {
     public String AddErrorQuestionToNoteBook(String accessToken, int examQuestionId, int id) throws AppException {
         return ApiClient.AddErrorQuestionToNoteBook(this,accessToken,examQuestionId,id);
     }
+
+    public BaseResponseBean<PageBean> getPrintHistoryErrorQuestions(String accessToken, int gradeId, int subjectId, int printHistoryId) throws AppException {
+        return ApiClient.getPrintHistoryErrorQuestions(this,accessToken,gradeId,subjectId,printHistoryId);
+    }
 }

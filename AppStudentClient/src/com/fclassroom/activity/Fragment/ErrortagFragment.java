@@ -96,6 +96,7 @@ public class ErrortagFragment extends Fragment {
 
     private void initData() {
         TagNameList = new ArrayList<String>();
+        mItems = new ArrayList<String>();
         getTags();
     }
 
@@ -109,6 +110,8 @@ public class ErrortagFragment extends Fragment {
                     for(ErrorTagBean errorTagBean:list){
                         TagNameList.add(errorTagBean.getName());
                     }
+                    mItems.addAll(TagNameList);
+                    setListAdaptor();
                 }else if(msg.what == 0){
                     UIHelper.ToastMessage(getActivity(),msg.obj.toString());
                 }else if(msg.what == -1){
@@ -147,7 +150,6 @@ public class ErrortagFragment extends Fragment {
         initViews(view);
         // Array to ArrayList
 //        mItems = new ArrayList<String>(Arrays.asList(UIHelper.ITEMS));
-        mItems = new ArrayList<String>();
         mItems.addAll(TagNameList);
         mListSectionPos = new ArrayList<Integer>();
         mListItems = new ArrayList<String>();

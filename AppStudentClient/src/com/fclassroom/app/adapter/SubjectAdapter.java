@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,12 +41,14 @@ public class SubjectAdapter extends BaseAdapter {
     Context context;
     RequestQueue mQueue;
     ImageLoader imageLoader;
+    ListView listView;
     private boolean MulMode = false;
     public static HashMap<Integer, Boolean> isSelected;
 
-    public SubjectAdapter(Context context, List<PageBean.SubjectItemBean> stringList) {
+    public SubjectAdapter(Context context, List<PageBean.SubjectItemBean> stringList, ListView listView) {
         this.list = (ArrayList) stringList;
         this.context = context;
+        this.listView = listView;
         inflater = LayoutInflater.from(context);
         isSelected = new HashMap<>();
         mQueue = Volley.newRequestQueue(context.getApplicationContext());
@@ -94,31 +97,36 @@ public class SubjectAdapter extends BaseAdapter {
         listItemView.examname.setText((String) data.getExamName());
 //        listItemView.subject.setImageResource((int) data.get("examsrc"));
         //图片处理
-        imageLoader = new ImageLoader(mQueue,new BitmapCache());
-        ImageLoader.ImageListener imageListener = imageLoader.getImageListener(listItemView.subject,R.drawable.default_jpeg,R.drawable.default_jpeg);
-        imageLoader.get(URLs.HOST_IMG+data.getContentImage(),imageListener);
+        imageLoader = new ImageLoader(mQueue, new BitmapCache());
+        ImageLoader.ImageListener imageListener = imageLoader.getImageListener(listItemView.subject, R.drawable.default_jpeg, R.drawable.default_jpeg);
+        imageLoader.get(URLs.HOST_IMG + data.getContentImage(), imageListener);
         listItemView.ratingBar.setRating((float) data.getSignLevel());
-        listItemView.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    isSelected.put(position, true);
-                } else {
-                    isSelected.put(position, false);
-                }
-            }
-        });
         if (MulMode) {
             listItemView.checkBox.setVisibility(VISIBLE);
+            listItemView.checkBox.setFocusable(false);
+            if (listView.isItemChecked(position+1)) {
+                listItemView.checkBox.setChecked(true);
+            }else {
+                listItemView.checkBox.setChecked(false);
+            }
         } else {
             listItemView.checkBox.setVisibility(GONE);
+            listItemView.checkBox.setFocusable(false);
+            listItemView.checkBox.setClickable(false);
         }
-        listItemView.checkBox.setChecked(isSelected.get(position));
         return convertView;
     }
 
     public void setMulMode(boolean mulMode) {
         this.MulMode = mulMode;
+    }
+
+    public static HashMap<Integer, Boolean> getIsSelected() {
+        return isSelected;
+    }
+
+    public static void setIsSelected(HashMap<Integer, Boolean> isSelected) {
+        SubjectAdapter.isSelected = isSelected;
     }
 
     public class ListItemView {

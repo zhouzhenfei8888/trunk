@@ -168,7 +168,7 @@ public class RubbishFragment extends Fragment {
         listViewRubbish.setUpHeaderViews(headview);
         listView = listViewRubbish.getListView();
         list = new ArrayList<PageBean.SubjectItemBean>();
-        subjectAdapter = new SubjectAdapter(getActivity(), list);
+        subjectAdapter = new SubjectAdapter(getActivity(), list,listView);
         listView.setAdapter(subjectAdapter);
         initData();
         return view;
