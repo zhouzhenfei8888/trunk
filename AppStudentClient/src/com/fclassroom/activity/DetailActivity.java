@@ -81,6 +81,7 @@ public class DetailActivity extends BaseActivity {
     private CollateFragment.BookAdapter bookAdapter;
     private List<ErrorBookBean> ErrorBookList;
     private List<String> stringList;
+    private int postionInList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,7 @@ public class DetailActivity extends BaseActivity {
         accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
         subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
+        postionInList = appContext.mylist.indexOf(subjectItemBean);
         initData();
         initToolbar();
         initViews();
@@ -99,7 +101,7 @@ public class DetailActivity extends BaseActivity {
     private void initData() {
         ErrorBookList = new ArrayList<ErrorBookBean>();
         stringList = new ArrayList<String>();
-        getErrorBookList(accessToken,gradeId,subjectId);
+        getErrorBookList(accessToken, gradeId, subjectId);
     }
 
     //获取错题本名字列表
@@ -111,10 +113,10 @@ public class DetailActivity extends BaseActivity {
                     BaseResponseBean<ArrayList<ErrorBookBean>> responseBean = (BaseResponseBean<ArrayList<ErrorBookBean>>) msg.obj;
                     ErrorBookList.clear();
                     ErrorBookList.addAll(responseBean.getData());
-                    for(ErrorBookBean errorBookBean:ErrorBookList){
+                    for (ErrorBookBean errorBookBean : ErrorBookList) {
                         stringList.add(errorBookBean.getName());
                     }
-                    arr = (String[])stringList.toArray(new String[stringList.size()]);
+                    arr = (String[]) stringList.toArray(new String[stringList.size()]);
 //                    bookAdapter.notifyDataSetChanged();
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(DetailActivity.this, msg.obj.toString());
@@ -153,7 +155,7 @@ public class DetailActivity extends BaseActivity {
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIHelper.jump2Activity(DetailActivity.this,HomeActivity.class);
+                UIHelper.jump2Activity(DetailActivity.this, HomeActivity.class);
                 AppManager.getAppManager().finishActivity();
             }
         });
@@ -221,13 +223,23 @@ public class DetailActivity extends BaseActivity {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (postionInList == 0) {
+                    UIHelper.ToastMessage(DetailActivity.this, "这是第一题");
+                } else {
+                    PageBean.SubjectItemBean subjectItemBeanNew = appContext.mylist.get(postionInList - 1);
+                    UIHelper.jump2Activity(DetailActivity.this, DetailActivity.class, subjectItemBeanNew);
+                }
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (postionInList == appContext.mylist.size() - 1) {
+                    UIHelper.ToastMessage(DetailActivity.this, "这是最后一题");
+                } else {
+                    PageBean.SubjectItemBean subjectItemBeanNew = appContext.mylist.get(postionInList + 1);
+                    UIHelper.jump2Activity(DetailActivity.this, DetailActivity.class, subjectItemBeanNew);
+                }
             }
         });
         checkResult.setOnClickListener(new View.OnClickListener() {
@@ -381,30 +393,30 @@ public class DetailActivity extends BaseActivity {
                 .setItems(arr, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        AddErrorQuestionToNoteBook(accessToken,subjectItemBean.getExamQuestionId(),ErrorBookList.get(which).getId());
-                        bookname.setText(subjectItemBean.getNotebookNames()+","+ErrorBookList.get(which).getName().toString());
+                        AddErrorQuestionToNoteBook(accessToken, subjectItemBean.getExamQuestionId(), ErrorBookList.get(which).getId());
+                        bookname.setText(subjectItemBean.getNotebookNames() + "," + ErrorBookList.get(which).getName().toString());
                     }
                 });
         builder.create().show();
     }
 
     private void AddErrorQuestionToNoteBook(final String accessToken, final int examQuestionId, final int id) {
-        final Handler handler = new Handler(){
+        final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                if(msg.what == 1){
+                if (msg.what == 1) {
 
-                }else if(msg.what ==-1){
-                    ((AppException)msg.obj).makeToast(DetailActivity.this);
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(DetailActivity.this);
                 }
             }
         };
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 Message msg = new Message();
                 try {
-                    String str = appContext.AddErrorQuestionToNoteBook(accessToken,examQuestionId,id);
+                    String str = appContext.AddErrorQuestionToNoteBook(accessToken, examQuestionId, id);
                     msg.what = 1;
                     msg.obj = str;
                 } catch (AppException e) {

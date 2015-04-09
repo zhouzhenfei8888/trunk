@@ -78,7 +78,10 @@ public class AppContext extends Application {
     private int loginUid = 0; // 登录用户的id
     private Hashtable<String, Object> memCacheRegion = new Hashtable<String, Object>();
     private String saveImagePath;// 保存图片路径
-
+    //多选时的数据列表
+    public List<PageBean.SubjectItemBean> myselectlist;
+    //全部的数据
+    public List<PageBean.SubjectItemBean> mylist;
     private Handler unLoginHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
@@ -106,6 +109,8 @@ public class AppContext extends Application {
             setProperty(AppConfig.SAVE_IMAGE_PATH, AppConfig.DEFAULT_SAVE_IMAGE_PATH);
             saveImagePath = AppConfig.DEFAULT_SAVE_IMAGE_PATH;
         }
+        mylist = new ArrayList<PageBean.SubjectItemBean>();
+        myselectlist = new ArrayList<PageBean.SubjectItemBean>();
     }
 
     /**
@@ -826,7 +831,7 @@ public class AppContext extends Application {
         return ApiClient.getSubjectDetail(this, accessToken, gradeId, subjectId, noteBookId, unOrganize, orderBy, orderUpOrDown, pageNo, pageSize);
     }
 
-    public BaseResponseBean<ArrayList<ExamBean>> getAllExamPager(String accessToken, int gradeId, int subjectId,int unOrganize,String orderUpOrDown) throws AppException {
+    public BaseResponseBean<ArrayList<ExamBean>> getAllExamPager(String accessToken, int gradeId, int subjectId, int unOrganize, String orderUpOrDown) throws AppException {
         return ApiClient.getAllExamPager(this, accessToken, gradeId, subjectId, unOrganize, orderUpOrDown);
     }
 
@@ -839,46 +844,46 @@ public class AppContext extends Application {
     }
 
     public BaseResponseBean<List<ErrorSubjectNumBean>> getRubbishSubjectNum(String accessToken, int gradeId, int subjectId) throws AppException {
-        return ApiClient.getRubbishSubjectNum(this,accessToken,gradeId,subjectId);
+        return ApiClient.getRubbishSubjectNum(this, accessToken, gradeId, subjectId);
     }
 
     public BaseResponseBean<PageBean> getPrintplanList(String accessToken, int gradeId, int subjectId, int pageSize, int pageNo) throws AppException {
-        return ApiClient.getPrintplanList(this,accessToken,gradeId,subjectId,pageSize,pageNo);
+        return ApiClient.getPrintplanList(this, accessToken, gradeId, subjectId, pageSize, pageNo);
     }
 
     public BaseResponseBean<List<PrintRecoderBean>> getPrintRecoderList(String accessToken, int gradeId, int subjectId, String orderTime) throws AppException {
-        return ApiClient.getPrintRecoderList(this,accessToken,gradeId,subjectId,orderTime);
+        return ApiClient.getPrintRecoderList(this, accessToken, gradeId, subjectId, orderTime);
     }
 
     public BaseResponseBean<PrintNumBean> getPrintNum(String accessToken, int gradeId, int subjectId) throws AppException {
-        return ApiClient.getPrintNum(this,accessToken,gradeId,subjectId);
+        return ApiClient.getPrintNum(this, accessToken, gradeId, subjectId);
     }
 
     public BaseResponseBean sendFeedBack(String accessToken, String msg) throws AppException {
-        return ApiClient.sendFeedBack(this,accessToken,msg);
+        return ApiClient.sendFeedBack(this, accessToken, msg);
     }
 
     public BaseResponseBean<String> addNoteBookToPrintPlan(String accessToken, int gradeId, int subjectId, int id) throws AppException {
-        return ApiClient.addNoteBookToPrintPlan(this,accessToken,gradeId,subjectId,id);
+        return ApiClient.addNoteBookToPrintPlan(this, accessToken, gradeId, subjectId, id);
     }
 
     public BaseResponseBean<PageBean> getExamQuestionsByExam(String accessToken, int gradeId, int subjectId, int examId) throws AppException {
-        return ApiClient.getExamQuestionsByExam(this,accessToken,gradeId,subjectId,examId);
+        return ApiClient.getExamQuestionsByExam(this, accessToken, gradeId, subjectId, examId);
     }
 
     public BaseResponseBean<String> setQuestionSignLevel(String accessToken, int examQuestionId, int signLevel) throws AppException {
-        return ApiClient.setQuestionSignLevel(this,accessToken,examQuestionId,signLevel);
+        return ApiClient.setQuestionSignLevel(this, accessToken, examQuestionId, signLevel);
     }
 
     public BaseResponseBean<String> deleteErrorQuestion(String accessToken, int examQuestionId, int delFlag) throws AppException {
-        return ApiClient.deleteErrorQuestion(this,accessToken,examQuestionId,delFlag);
+        return ApiClient.deleteErrorQuestion(this, accessToken, examQuestionId, delFlag);
     }
 
     public String AddErrorQuestionToNoteBook(String accessToken, int examQuestionId, int id) throws AppException {
-        return ApiClient.AddErrorQuestionToNoteBook(this,accessToken,examQuestionId,id);
+        return ApiClient.AddErrorQuestionToNoteBook(this, accessToken, examQuestionId, id);
     }
 
     public BaseResponseBean<PageBean> getPrintHistoryErrorQuestions(String accessToken, int gradeId, int subjectId, int printHistoryId) throws AppException {
-        return ApiClient.getPrintHistoryErrorQuestions(this,accessToken,gradeId,subjectId,printHistoryId);
+        return ApiClient.getPrintHistoryErrorQuestions(this, accessToken, gradeId, subjectId, printHistoryId);
     }
 }

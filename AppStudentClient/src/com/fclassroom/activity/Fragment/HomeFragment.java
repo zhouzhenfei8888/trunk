@@ -3,6 +3,8 @@ package com.fclassroom.activity.Fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -15,6 +17,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.fclassroom.activity.HomeActivity;
 import com.fclassroom.app.widget.PagerSlidingTabStrip;
@@ -32,6 +35,10 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
     public RelativeLayout mRelativeLayoutHead;
     private LinearLayout mLinearHome;
     private RoundProgressBar roundProgressBar;
+    private TextView havecollect;
+    private TextView lead;
+    private int progress = 0;
+    private int progress2 = 0;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -49,6 +56,8 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
     }
 
     private void initViews(View view) {
+        havecollect = (TextView)view.findViewById(R.id.tv_have_collated);
+        lead = (TextView)view.findViewById(R.id.tv_lead);
         mRelativeLayoutHead = (RelativeLayout) view.findViewById(R.id.relativelayout_head);
         mLinearHome = (LinearLayout) view.findViewById(R.id.linear_home);
         mTabs = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
@@ -77,6 +86,35 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
         roundProgressBar.setProgress(60);
         roundProgressBar.setProgress2(40);
         roundProgressBar.setText("456");
+        new Thread() {
+            @Override
+            public void run() {
+                while (progress <= 60) {
+                    progress += 2;
+                    roundProgressBar.setProgress(progress);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.start();
+
+        new Thread() {
+            @Override
+            public void run() {
+                while (progress2 <= 40) {
+                    progress2 += 2;
+                    roundProgressBar.setProgress2(progress2);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.start();
     }
 
     /**

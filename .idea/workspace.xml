@@ -5,7 +5,7 @@
       <filter>
         <option name="logLevel" value="verbose" />
         <option name="logMessagePattern" value="" />
-        <option name="logTagPattern" value="System.out" />
+        <option name="logTagPattern" value="" />
         <option name="name" value="app: com.fclassroom.appstudentclient" />
         <option name="packageNamePattern" value="com.fclassroom.appstudentclient" />
         <option name="pid" value="" />
@@ -34,25 +34,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="944a4e64-5715-4376-84bf-9dcf08e5bb13" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/icon_enter.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/AddwrongtagActivity.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/AddwrongtagActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/api/ApiClient.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/api/ApiClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AppStudentClient/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/ErrortagFragment.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/ErrortagFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/NotebookActivity.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/NotebookActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/PrintRecordAdapter.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/PrintRecordAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/RubbishFragment.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/RubbishFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/SubjectAdapter.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/SubjectAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/FileUtils.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/FileUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/HomeFragment.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/HomeFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/SearchActivity.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/SearchActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/UIHelper.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/UIHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/URLs.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/URLs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_enter.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_enter.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_notebook.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_notebook.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable/button_select_enter.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable/button_select_enter.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/values/colors.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_subject.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_subject.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_search.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_search.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/search_layout.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/search_layout.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="trunk.iws" />
@@ -81,11 +73,107 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RubbishFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/RubbishFragment.java">
+      <file leaf-file-name="DetailActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2758" max-vertical-offset="3404">
-              <caret line="170" column="72" selection-start-line="170" selection-start-column="72" selection-end-line="170" selection-end-column="72" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="412" max-vertical-offset="6440">
+              <caret line="238" column="24" selection-start-line="238" selection-start-column="24" selection-end-line="238" selection-end-column="24" />
+              <folding>
+                <element signature="method#getErrorBookList#0;class#DetailActivity#0" expanded="false" />
+                <element signature="e#9152#9641#0" expanded="true" />
+                <element signature="e#9630#9631#0" expanded="true" />
+                <element signature="e#9676#10193#0" expanded="true" />
+                <element signature="e#10182#10183#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SearchActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/SearchActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="1800">
+              <caret line="46" column="60" selection-start-line="46" selection-start-column="60" selection-end-line="46" selection-end-column="60" />
+              <folding>
+                <element signature="e#1616#1793#0" expanded="true" />
+                <element signature="e#1782#1783#0" expanded="true" />
+                <element signature="e#2685#2928#0" expanded="true" />
+                <element signature="e#2917#2918#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/HomeActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3751" max-vertical-offset="7320">
+              <caret line="411" column="35" selection-start-line="411" selection-start-column="35" selection-end-line="411" selection-end-column="35" />
+              <folding>
+                <element signature="method#initViews#0;class#HomeActivity#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/HomeFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1500" max-vertical-offset="3540">
+              <caret line="104" column="21" selection-start-line="104" selection-start-column="21" selection-end-line="104" selection-end-column="21" />
+              <folding>
+                <element signature="e#2965#3402#0" expanded="true" />
+                <element signature="e#3391#3392#0" expanded="true" />
+                <element signature="e#3851#3852#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ErrortagFragment.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/ErrortagFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5625" vertical-offset="1170" max-vertical-offset="7500">
+              <caret line="112" column="26" selection-start-line="112" selection-start-column="20" selection-end-line="112" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_home.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_home.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.071429" vertical-offset="1230" max-vertical-offset="2840">
+              <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_search.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/activity_search.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.785714" vertical-offset="590" max-vertical-offset="1920">
+              <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_detail.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/activity_detail.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.035714" vertical-offset="5379" max-vertical-offset="6280">
+              <caret line="290" column="8" selection-start-line="230" selection-start-column="16" selection-end-line="235" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -94,48 +182,17 @@
       <file leaf-file-name="SubjectFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.354839" vertical-offset="10186" max-vertical-offset="11983">
-              <caret line="606" column="90" selection-start-line="606" selection-start-column="90" selection-end-line="606" selection-end-column="90" />
+            <state vertical-scroll-proportion="-4.586207" vertical-offset="3394" max-vertical-offset="12260">
+              <caret line="185" column="37" selection-start-line="185" selection-start-column="31" selection-end-line="185" selection-end-column="37" />
               <folding>
-                <element signature="method#getSubjectList#0;class#SubjectFragment#0" expanded="false" />
-                <element signature="method#getMoreSubjectList#0;class#SubjectFragment#0" expanded="false" />
-                <element signature="e#20643#22733#0" expanded="true" />
-                <element signature="e#22722#22723#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#20878#23425#0" expanded="true" />
+                <element signature="e#23414#23415#0" expanded="true" />
+                <element signature="e#23528#25809#0" expanded="true" />
+                <element signature="e#25798#25799#0" expanded="true" />
+                <element signature="method#getAllExamPaper#0;class#SubjectFragment#0" expanded="false" />
                 <element signature="class#WorkAdapter#0;class#SubjectFragment#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_subject.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_subject.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.333333" vertical-offset="0" max-vertical-offset="2185">
-              <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SubjectAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/SubjectAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1507" max-vertical-offset="2415">
-              <caret line="112" column="54" selection-start-line="112" selection-start-column="54" selection-end-line="112" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DetailActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="7.790323" vertical-offset="1794" max-vertical-offset="7935">
-              <caret line="99" column="55" selection-start-line="99" selection-start-column="55" selection-end-line="99" selection-end-column="55" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -143,39 +200,13 @@
       <file leaf-file-name="AppContext.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="16714" max-vertical-offset="18423">
-              <caret line="829" column="31" selection-start-line="829" selection-start-column="31" selection-end-line="829" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PrintplanFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4796" max-vertical-offset="5658">
-              <caret line="283" column="62" selection-start-line="283" selection-start-column="62" selection-end-line="283" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ApiClient.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/api/ApiClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.20224719" vertical-offset="10596" max-vertical-offset="14536">
-              <caret line="504" column="5" selection-start-line="504" selection-start-column="5" selection-end-line="504" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ErrorTagBean.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/ErrorTagBean.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="736">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="16160">
+              <caret line="81" column="42" selection-start-line="81" selection-start-column="42" selection-end-line="81" selection-end-column="42" />
+              <folding>
+                <element signature="e#2722#2738#0" expanded="true" />
+                <element signature="e#16272#16273#0" expanded="true" />
+                <element signature="e#16318#16319#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1499,11 +1530,11 @@
     <option name="modificationStamps">
       <map>
         <entry key="F:/appObject" value="5700586621811" />
-        <entry key="$PROJECT_DIR$" value="5713477967041" />
         <entry key="H:/../EduDiagnosis" value="1422415679261" />
         <entry key="H:/../StudentAppClient" value="5699547499073" />
         <entry key="H:/../android-layout-samples-master" value="1400277248000" />
         <entry key="H:/../appObject" value="2850041109191" />
+        <entry key="$PROJECT_DIR$" value="5713322962379" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1518,11 +1549,11 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                           </list>
                         </option>
@@ -1535,11 +1566,11 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                           </list>
                         </option>
@@ -1552,11 +1583,11 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                           </list>
                         </option>
@@ -1635,57 +1666,57 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/dialog_checkresult.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/AnimDialog.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/anim/outfromtop.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/anim/nomove.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/search_view_data_item.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_collate.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_dialognewbook.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/RemarkActivity.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_remark.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/values/attrs.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/RoundProgressBar.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_home.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/toolbar.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DialogcheckanswerActivity.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_dialog.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/anim/openfrombottom.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DialognewbookActivity.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/dialog_notebook.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/PageBean.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/CollateFragment.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/PopupListAdapter.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/ErrorTagBean.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/JsonUtils.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/api/ApiClient.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/RubbishFragment.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/EnterActivity.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/CheckinforActivity.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/layout/listview_head_rubbish.xml" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_user_info.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/drawable/ratingbarbig_select.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/Tag.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/drawable/button_style.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/values/attrs.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/OnTagClickListener.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/TagView.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/Utils.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/Constants.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/drawable/button_pre_select.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/drawable/button_next_select.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/drawable/button_result_select.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/drawable/listviewitem_select.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_remark.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/RemarkActivity.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/PageBean.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/CheckinforActivity.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/drawable/textview_select.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/HomeActivity.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_detail.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/listview_item_waitforcomplete.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/CollateFragment.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/PrintNumBean.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/listview_itemprintrecord.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/AddwrongtagActivity.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/TagView.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_addwrongtag.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/TagViewEditText.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/URLs.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/FileUtils.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/layout/search_layout.xml" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_search.xml" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/SearchActivity.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/HomeActivity.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/JsonUtils.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_addwrongtag.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/AddwrongtagActivity.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/PrintRecordAdapter.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/UIHelper.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/URLs.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_enter.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/drawable/button_select_enter.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_subject.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/HomeFragment.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/ErrortagFragment.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/RubbishFragment.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/SubjectAdapter.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_notebook.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/NotebookActivity.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/api/ApiClient.java" />
       </list>
     </option>
   </component>
@@ -1721,7 +1752,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
@@ -1740,11 +1771,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="AndroidView">
-        <subPane />
-      </pane>
-      <pane id="PackagesPane">
         <subPane />
       </pane>
       <pane id="ProjectPane">
@@ -1891,40 +1918,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="widget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PinnedHeaderListView" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="trunk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="trunk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppStudentClient" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fclassroom" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1982,10 +1975,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2158,53 +2147,13 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="trunk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="trunk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppStudentClient" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="trunk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="trunk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppStudentClient" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2238,9 +2187,6 @@
       <recent name="com.fclassroom.activity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\git_fclassroom_student\trunk\AppStudentClient\res\drawable-hdpi" />
-      <recent name="F:\git_fclassroom_student\trunk\AppStudentClient\res\layout" />
-      <recent name="F:\git_fclassroom_student\trunk\AppStudentClient\src\com\fclassroom\app\widget\TagView" />
       <recent name="F:\Fclassroom-student\trunk\AppStudentClient\res\drawable-hdpi" />
       <recent name="F:\Fclassroom-student\trunk\AppStudentClient\src\com\fclassroom\app\widget" />
     </key>
@@ -2422,12 +2368,12 @@
       <updated>1428285803578</updated>
     </task>
     <task id="LOCAL-00002" summary="student">
-      <created>1428487646621</created>
-      <updated>1428487646621</updated>
+      <created>1428337152566</created>
+      <updated>1428337152566</updated>
     </task>
     <task id="LOCAL-00003" summary="student">
-      <created>1428490629815</created>
-      <updated>1428490629815</updated>
+      <created>1428422661644</created>
+      <updated>1428422661644</updated>
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
@@ -2439,29 +2385,29 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2418813" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32739422" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270869" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27938035" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29787233" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942432" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20155902" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35274357" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36859688" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18002136" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18017058" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18550107" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45016798" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26837417" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2490,162 +2436,230 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/HomeActivity.java</url>
-          <line>228</line>
+          <line>227</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="22" />
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_home.xml">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/XEditText.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.04" vertical-offset="594" max-vertical-offset="1460">
+          <caret line="60" column="21" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_errortag.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33293268" vertical-offset="1839" max-vertical-offset="3266">
-          <caret line="92" column="12" selection-start-line="92" selection-start-column="12" selection-end-line="92" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.548157" vertical-offset="479" max-vertical-offset="1320">
+          <caret line="47" column="16" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/ExamBean.java">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21345708" vertical-offset="0" max-vertical-offset="989">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="1640">
+          <caret line="34" column="38" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/listview_item_notcomplete.xml">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_printplan.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33293268" vertical-offset="137" max-vertical-offset="1679">
-          <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.59453034" vertical-offset="0" max-vertical-offset="841">
+          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/android-sdk/sources/android-21/android/app/ActivityThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="52455" max-vertical-offset="116242">
-          <caret line="2457" column="0" selection-start-line="2457" selection-start-column="0" selection-end-line="2457" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/PrintNumBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="621">
-          <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/AppStudentClient/libs/android-support-v4.jar!/android/support/v4/app/FragmentManagerImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.4" vertical-offset="3315" max-vertical-offset="4968">
-          <caret line="151" column="9" selection-start-line="151" selection-start-column="9" selection-end-line="151" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/AppStudentClient/libs/android-support-v4.jar!/android/support/v4/app/FragmentPagerAdapter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.92" vertical-offset="358" max-vertical-offset="943">
-          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/AppStudentClient/libs/android-support-v4.jar!/android/support/v4/view/ViewPager.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.76" vertical-offset="3375" max-vertical-offset="8165">
-          <caret line="154" column="9" selection-start-line="154" selection-start-column="9" selection-end-line="154" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/activity_search.xml">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/listview_head_rubbish.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.233334" vertical-offset="574" max-vertical-offset="2162">
-          <caret line="37" column="38" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.30915576" vertical-offset="0" max-vertical-offset="841">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
           <folding>
-            <element signature="e#2929#2949#0" expanded="false" />
+            <element signature="e#465#485#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/search_layout.xml">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/activity_bindtelephone.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.466666" vertical-offset="42" max-vertical-offset="874">
-          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.33293697" vertical-offset="0" max-vertical-offset="2060">
+          <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/SearchActivity.java">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/BindtelephoneActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9071926" vertical-offset="276" max-vertical-offset="1840">
-          <caret line="58" column="36" selection-start-line="58" selection-start-column="36" selection-end-line="58" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1580">
+          <caret line="24" column="43" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/JsonUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5831" max-vertical-offset="6693">
-          <caret line="299" column="54" selection-start-line="299" selection-start-column="54" selection-end-line="299" selection-end-column="54" />
-        </state>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/activity_user_info.xml">
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/HomeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73144877" vertical-offset="0" max-vertical-offset="3266">
-          <caret line="45" column="51" selection-start-line="45" selection-start-column="51" selection-end-line="45" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.40428063" vertical-offset="2000" max-vertical-offset="3340">
+          <caret line="117" column="28" selection-start-line="117" selection-start-column="28" selection-end-line="117" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/GradeBean.java">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/UserInfoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18677494" vertical-offset="0" max-vertical-offset="862">
+        <state vertical-scroll-proportion="0.25316456" vertical-offset="0" max-vertical-offset="1040">
+          <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/drawable/search.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/BaseResponseBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41426927" vertical-offset="0" max-vertical-offset="869">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/LoginResponseBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="3400">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/EnterActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="11" max-vertical-offset="4300">
+          <caret line="45" column="36" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/PreferenceUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="691" max-vertical-offset="4860">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.19677791" vertical-offset="3291" max-vertical-offset="4700">
+          <caret line="190" column="44" selection-start-line="190" selection-start-column="44" selection-end-line="190" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/CheckinforActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1440">
+          <caret line="33" column="26" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4609005" vertical-offset="1031" max-vertical-offset="1900">
+          <caret line="71" column="18" selection-start-line="71" selection-start-column="18" selection-end-line="71" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/drawable/button_select_enter.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="869">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/OnTagDeleteListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1150748" vertical-offset="0" max-vertical-offset="869">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/OnTagClickListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1150748" vertical-offset="0" max-vertical-offset="869">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/drawable/textview_select.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25039124" vertical-offset="0" max-vertical-offset="639">
+          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/Tag.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.063897766" vertical-offset="180" max-vertical-offset="1540">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/HomeActivity.java">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/values/attrs.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17285383" vertical-offset="8085" max-vertical-offset="10350">
-          <caret line="445" column="80" selection-start-line="445" selection-start-column="80" selection-end-line="445" selection-end-column="80" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1160">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/ErrorBookBean.java">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1403">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.03345725" vertical-offset="62" max-vertical-offset="720">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/CollateFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1047" max-vertical-offset="7981">
-          <caret line="92" column="17" selection-start-line="92" selection-start-column="17" selection-end-line="92" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/activity_detail.xml">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/item_tagview.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.609375" vertical-offset="4645" max-vertical-offset="7222">
-          <caret line="224" column="12" selection-start-line="224" selection-start-column="12" selection-end-line="235" selection-end-column="85" />
+        <state vertical-scroll-proportion="0.4509804" vertical-offset="250" max-vertical-offset="880">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22304833" vertical-offset="0" max-vertical-offset="538">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/AddwrongtagActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1028" max-vertical-offset="2280">
+          <caret line="64" column="32" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -2655,291 +2669,233 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1265" max-vertical-offset="2852">
-          <caret line="55" column="24" selection-start-line="55" selection-start-column="24" selection-end-line="55" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1090" max-vertical-offset="2480">
+          <caret line="66" column="8" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/AddwrongtagActivity.java">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/TagView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2935035" vertical-offset="529" max-vertical-offset="1909">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/PrintRecoderBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33294663" vertical-offset="35" max-vertical-offset="1012">
-          <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/PageBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21345708" vertical-offset="0" max-vertical-offset="5014">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="6282" max-vertical-offset="6820">
+          <caret line="377" column="1" selection-start-line="25" selection-start-column="44" selection-end-line="377" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/listview_item_waitforcomplete.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
+    <entry file="file://E:/Android/android-sdk/sources/android-21/android/view/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19350961" vertical-offset="0" max-vertical-offset="1196">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.33271375" vertical-offset="325461" max-vertical-offset="409280">
+          <caret line="16699" column="28" selection-start-line="16699" selection-start-column="28" selection-end-line="16699" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/android-sdk/sources/android-21/android/os/Looper.java">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/widget/TagView/TagViewEditText.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33258426" vertical-offset="3141" max-vertical-offset="6371">
-          <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/listview_itemprintrecord.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6358173" vertical-offset="0" max-vertical-offset="832">
-          <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/UIHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4687868" vertical-offset="1948" max-vertical-offset="7498">
-          <caret line="123" column="36" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/android-sdk/sources/android-21/android/app/Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33258426" vertical-offset="113748" max-vertical-offset="137724">
-          <caret line="5165" column="0" selection-start-line="5165" selection-start-column="0" selection-end-line="5165" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/PrintRecordAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6798144" vertical-offset="403" max-vertical-offset="1380">
-          <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/android-sdk/sources/android-21/android/view/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3321918" vertical-offset="351660" max-vertical-offset="470672">
-          <caret line="15697" column="0" selection-start-line="15697" selection-start-column="0" selection-end-line="15697" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/AppStudentClient/libs/android-support-v4.jar!/android/support/v4/app/Fragment.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34798536" vertical-offset="5859" max-vertical-offset="7337">
-          <caret line="264" column="22" selection-start-line="264" selection-start-column="22" selection-end-line="264" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/activity_enter.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66466343" vertical-offset="1517" max-vertical-offset="3312">
-          <caret line="90" column="51" selection-start-line="90" selection-start-column="51" selection-end-line="90" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/EnterActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.66705334" vertical-offset="1104" max-vertical-offset="4945">
-          <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3201856" vertical-offset="0" max-vertical-offset="862">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/drawable/button_select_enter.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05336427" vertical-offset="0" max-vertical-offset="862">
-          <caret line="2" column="40" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/AboutActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6937355" vertical-offset="690" max-vertical-offset="1587">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/listviewitem.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="249" max-vertical-offset="3151">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/ErrorTagBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="736">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/android-sdk/sources/android-21/android/os/Handler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6326087" vertical-offset="1572" max-vertical-offset="17181">
-          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/ErrortagFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.1290324" vertical-offset="3272" max-vertical-offset="9637">
-          <caret line="151" column="31" selection-start-line="151" selection-start-column="31" selection-end-line="151" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3072#3888#0" expanded="true" />
-            <element signature="e#3877#3878#0" expanded="true" />
-            <element signature="e#6399#6658#0" expanded="true" />
-            <element signature="e#6647#6648#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/RubbishFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2758" max-vertical-offset="3404">
-          <caret line="170" column="72" selection-start-line="170" selection-start-column="72" selection-end-line="170" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4796" max-vertical-offset="5658">
-          <caret line="283" column="62" selection-start-line="283" selection-start-column="62" selection-end-line="283" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/activity_notebook.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.7" vertical-offset="0" max-vertical-offset="1196">
-          <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/NotebookActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5475638" vertical-offset="609" max-vertical-offset="2369">
-          <caret line="69" column="39" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="39" />
-          <folding>
-            <element signature="method#getPrintHistoryErrorQuestions#0;class#NotebookActivity#0" expanded="false" />
-            <element signature="method#getExamQuestionsByExam#0;class#NotebookActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/SubjectAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1507" max-vertical-offset="2415">
-          <caret line="112" column="54" selection-start-line="112" selection-start-column="54" selection-end-line="112" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="7.790323" vertical-offset="1794" max-vertical-offset="7935">
-          <caret line="99" column="55" selection-start-line="99" selection-start-column="55" selection-end-line="99" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/BitmapCache.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18677494" vertical-offset="0" max-vertical-offset="862">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_subject.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.333333" vertical-offset="0" max-vertical-offset="2185">
-          <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.354839" vertical-offset="10186" max-vertical-offset="11983">
-          <caret line="606" column="90" selection-start-line="606" selection-start-column="90" selection-end-line="606" selection-end-column="90" />
-          <folding>
-            <element signature="method#getSubjectList#0;class#SubjectFragment#0" expanded="false" />
-            <element signature="method#getMoreSubjectList#0;class#SubjectFragment#0" expanded="false" />
-            <element signature="e#20643#22733#0" expanded="true" />
-            <element signature="e#22722#22723#0" expanded="true" />
-            <element signature="class#WorkAdapter#0;class#SubjectFragment#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="16714" max-vertical-offset="18423">
-          <caret line="829" column="31" selection-start-line="829" selection-start-column="31" selection-end-line="829" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3160" max-vertical-offset="7100">
+          <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/URLs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46635732" vertical-offset="242" max-vertical-offset="1104">
-          <caret line="28" column="85" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="85" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="980">
+          <caret line="9" column="64" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/api/ApiClient.java">
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/ImageUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.20224719" vertical-offset="10596" max-vertical-offset="14536">
-          <caret line="504" column="5" selection-start-line="504" selection-start-column="5" selection-end-line="504" selection-end-column="5" />
+        <state vertical-scroll-proportion="-1.3578826" vertical-offset="1380" max-vertical-offset="13500">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/StringUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.017261" vertical-offset="3691" max-vertical-offset="5040">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/Result.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20713463" vertical-offset="0" max-vertical-offset="900">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/FileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1671" max-vertical-offset="13660">
+          <caret line="125" column="19" selection-start-line="125" selection-start-column="19" selection-end-line="125" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/PageBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="4360">
+          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/SubjectAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="2100">
+          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="16160">
+          <caret line="81" column="42" selection-start-line="81" selection-start-column="42" selection-end-line="81" selection-end-column="42" />
+          <folding>
+            <element signature="e#2722#2738#0" expanded="true" />
+            <element signature="e#16272#16273#0" expanded="true" />
+            <element signature="e#16318#16319#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.586207" vertical-offset="3394" max-vertical-offset="12260">
+          <caret line="185" column="37" selection-start-line="185" selection-start-column="31" selection-end-line="185" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#20878#23425#0" expanded="true" />
+            <element signature="e#23414#23415#0" expanded="true" />
+            <element signature="e#23528#25809#0" expanded="true" />
+            <element signature="e#25798#25799#0" expanded="true" />
+            <element signature="method#getAllExamPaper#0;class#SubjectFragment#0" expanded="false" />
+            <element signature="class#WorkAdapter#0;class#SubjectFragment#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/activity_detail.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.035714" vertical-offset="5379" max-vertical-offset="6280">
+          <caret line="290" column="8" selection-start-line="230" selection-start-column="16" selection-end-line="235" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51668584" vertical-offset="991" max-vertical-offset="2420">
+          <caret line="72" column="41" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="412" max-vertical-offset="6440">
+          <caret line="238" column="24" selection-start-line="238" selection-start-column="24" selection-end-line="238" selection-end-column="24" />
+          <folding>
+            <element signature="method#getErrorBookList#0;class#DetailActivity#0" expanded="false" />
+            <element signature="e#9152#9641#0" expanded="true" />
+            <element signature="e#9630#9631#0" expanded="true" />
+            <element signature="e#9676#10193#0" expanded="true" />
+            <element signature="e#10182#10183#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Android/android-sdk/sources/android-21/android/widget/ArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33256617" vertical-offset="7651" max-vertical-offset="9680">
+          <caret line="436" column="18" selection-start-line="436" selection-start-column="18" selection-end-line="436" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/search_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4509804" vertical-offset="410" max-vertical-offset="920">
+          <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/activity_search.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.785714" vertical-offset="590" max-vertical-offset="1920">
+          <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/SearchActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="1800">
+          <caret line="46" column="60" selection-start-line="46" selection-start-column="60" selection-end-line="46" selection-end-column="60" />
+          <folding>
+            <element signature="e#1616#1793#0" expanded="true" />
+            <element signature="e#1782#1783#0" expanded="true" />
+            <element signature="e#2685#2928#0" expanded="true" />
+            <element signature="e#2917#2918#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.071429" vertical-offset="1230" max-vertical-offset="2840">
+          <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4651" max-vertical-offset="7320">
+          <caret line="411" column="35" selection-start-line="411" selection-start-column="35" selection-end-line="411" selection-end-column="35" />
+          <folding>
+            <element signature="method#initViews#0;class#HomeActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1500" max-vertical-offset="3540">
+          <caret line="104" column="21" selection-start-line="104" selection-start-column="21" selection-end-line="104" selection-end-column="21" />
+          <folding>
+            <element signature="e#2965#3402#0" expanded="true" />
+            <element signature="e#3391#3392#0" expanded="true" />
+            <element signature="e#3851#3852#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/ErrortagFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5625" vertical-offset="1170" max-vertical-offset="7500">
+          <caret line="112" column="26" selection-start-line="112" selection-start-column="20" selection-end-line="112" selection-end-column="26" />
           <folding />
         </state>
       </provider>

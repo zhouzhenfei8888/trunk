@@ -149,8 +149,8 @@ public class ErrortagFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_errortag, container, false);
         initViews(view);
         // Array to ArrayList
-//        mItems = new ArrayList<String>(Arrays.asList(UIHelper.ITEMS));
-        mItems.addAll(TagNameList);
+        mItems = new ArrayList<String>(Arrays.asList(UIHelper.ITEMS));
+//        mItems.addAll(TagNameList);
         mListSectionPos = new ArrayList<Integer>();
         mListItems = new ArrayList<String>();
         // for handling configuration change

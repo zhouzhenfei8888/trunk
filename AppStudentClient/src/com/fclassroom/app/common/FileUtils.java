@@ -3,9 +3,13 @@ package com.fclassroom.app.common;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +18,10 @@ import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
 import android.util.Log;
+
+import com.fclassroom.app.bean.GradeBean;
+import com.fclassroom.app.bean.PageBean;
+import com.fclassroom.app.bean.SubjectBean;
 
 /**
  * 文件操作工具包
@@ -85,6 +93,64 @@ public class FileUtils {
 		}
 		return new File(folderPath, fileName + fileName);
 	}
+
+    /**
+     * 保存一个链表对象
+     * @param context
+     * @param list
+     * @param fileName
+     */
+    public static void saveList(Context context,List<PageBean.SubjectItemBean> list,String fileName){
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+        try {
+            fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(list);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (oos != null)
+                    oos.close();
+                if (fos != null)
+                    fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static List<PageBean.SubjectItemBean> getListfromlocal(Context context,String listName) {
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        ArrayList<PageBean.SubjectItemBean> list = null;
+        try {
+            fis = context.openFileInput(listName);
+            ois = new ObjectInputStream(fis);
+            list = (ArrayList<PageBean.SubjectItemBean>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ois != null)
+                    ois.close();
+                if (fis != null)
+                    fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
 
 	/**
 	 * 向手机写图片

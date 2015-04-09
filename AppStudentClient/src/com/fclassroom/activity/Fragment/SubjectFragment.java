@@ -32,6 +32,7 @@ import com.fclassroom.app.adapter.SubjectAdapter;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.ExamBean;
 import com.fclassroom.app.bean.PageBean;
+import com.fclassroom.app.common.FileUtils;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.app.widget.PullToRefreshListView;
@@ -75,6 +76,7 @@ public class SubjectFragment extends Fragment {
     private AppContext appContext;
     private List<PageBean.SubjectItemBean> listSubject;
     private List<ExamBean> listExam;
+
     //错题列表需要做的请求参数
     private String accessToken;
     private int gradeId;
@@ -180,9 +182,10 @@ public class SubjectFragment extends Fragment {
                     List<PageBean.SubjectItemBean> list = response.getData().getList();
                     listSubject.clear();
                     listSubject.addAll(list);
-//                    subjectAdapter.notifyDataSetChanged();
-                    subjectAdapter = new SubjectAdapter(getActivity(), listSubject, listview);
-                    listview.setAdapter(subjectAdapter);
+                    subjectAdapter.notifyDataSetChanged();
+                    appContext.mylist = listSubject;
+//                    subjectAdapter = new SubjectAdapter(getActivity(), listSubject, listview);
+//                    listview.setAdapter(subjectAdapter);
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
                 } else if (msg.what == -1) {
@@ -224,6 +227,8 @@ public class SubjectFragment extends Fragment {
                     List<PageBean.SubjectItemBean> list = response.getData().getList();
                     listSubject.addAll(list);
                     subjectAdapter.notifyDataSetChanged();
+//                    FileUtils.saveList(appContext, listSubject, "mylist.list");
+                    appContext.mylist = listSubject;
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
                 } else if (msg.what == -1) {
@@ -461,6 +466,13 @@ public class SubjectFragment extends Fragment {
                     subjectAdapter.notifyDataSetChanged();
 //                    updateSingleRow(listview,id);
 //                    subjectAdapter.getView(position-1, (View) (listview.getItemAtPosition(position-1)),listview);
+                    ImageView iv = (ImageView) view.findViewById(R.id.iv_subject);
+                    PageBean.SubjectItemBean subjectItemBean = (PageBean.SubjectItemBean) iv.getTag();
+                    if (appContext.myselectlist.contains(subjectItemBean)) {
+                        appContext.myselectlist.remove(subjectItemBean);
+                    } else {
+                        appContext.myselectlist.add(subjectItemBean);
+                    }
                     updateSeletedCount();
                 } else {
                     if (squareChecked == true) {
@@ -563,7 +575,7 @@ public class SubjectFragment extends Fragment {
         if (listView != null) {
             int start = listView.getFirstVisiblePosition();
             for (int i = start, j = listView.getLastVisiblePosition(); i <= j; i++)
-                if (id == ( (View)listView.getItemAtPosition(i)).getId()) {
+                if (id == ((View) listView.getItemAtPosition(i)).getId()) {
                     View view = listView.getChildAt(i - start);
                     subjectAdapter.getView(i, view, listView);
                     break;
@@ -705,7 +717,7 @@ public class SubjectFragment extends Fragment {
             listview.setChoiceMode(ListView.CHOICE_MODE_NONE);
             switch (v.getId()) {
                 case R.id.tv_collate:
-                    UIHelper.jump2Activity(getActivity(),DetailActivity.class);
+                    UIHelper.jump2Activity(getActivity(), DetailActivity.class);
                     break;
                 case R.id.tv_selectall:
                     selectedAll();

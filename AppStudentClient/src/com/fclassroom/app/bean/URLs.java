@@ -4,16 +4,17 @@ import java.io.Serializable;
 
 public class URLs implements Serializable {
     public final static String HOST = "http://192.168.0.77/student/";
-    public final static String HOST_IMG ="";
+    public final static String HOST_IMG = "";
     public final static String HOST_YH = "http://120.131.64.134:9080/";
-    public final static String HOST_NOTE = "http://192.168.0.77/notebook/student/";
+    //    public final static String HOST_NOTE = "http://192.168.0.77/notebook/student/";
+    public final static String HOST_NOTE = "http://192.168.1.102/notebook/student/";
     public final static String HTTP = "http://";
     public final static String HTTPS = "https://";
 
     public final static String URL_SPLITTER = "/";
     public final static String URL_UNDERLINE = "_";
     public final static String CheckAppVision = HOST_YH + "version/ckeckAppVersionState.json";
-    public final static String SendFeedBack = HOST_YH+"message/feedback.json";
+    public final static String SendFeedBack = HOST_YH + "message/feedback.json";
     public final static String Login = HOST_YH + "login.json";
     public final static String LoginByToken = HOST_YH + "loginByToken.json";
     public final static String LoginByqq = HOST_YH + "checkQQ.json";
@@ -33,10 +34,10 @@ public class URLs implements Serializable {
     public final static String GetPrintplanList = HOST_NOTE + "getPrintCartErrorQuestions.json";
     public final static String GetPrintRecoderList = HOST_NOTE + "getPrintHistoryList.json";
     public final static String GetPrintNum = HOST_NOTE + "getPrintCatelog.json";
-    public final static String AddNoteBookToPrintPlan = HOST_NOTE +"addNoteBookToPrintCart.json";
-    public final static String GetExamQuestionsByExam = HOST_NOTE +"getExamQuestionsByExam.json";
-    public final static String AddQuestionSignLevel = HOST_NOTE +"addQuestionSignLevel.json";
-    public final static String DelErrorQuestion = HOST_NOTE +"delErrorQuestion.json";
-    public final static String AddErrorQuestionToNoteBook = HOST_NOTE +"addErrorQuestionToNoteBook.json";
-    public final static String GetPrintHistoryErrorQuestions = HOST_NOTE +"getPrintHistoryErrorQuestions.json";
+    public final static String AddNoteBookToPrintPlan = HOST_NOTE + "addNoteBookToPrintCart.json";
+    public final static String GetExamQuestionsByExam = HOST_NOTE + "getExamQuestionsByExam.json";
+    public final static String AddQuestionSignLevel = HOST_NOTE + "addQuestionSignLevel.json";
+    public final static String DelErrorQuestion = HOST_NOTE + "delErrorQuestion.json";
+    public final static String AddErrorQuestionToNoteBook = HOST_NOTE + "addErrorQuestionToNoteBook.json";
+    public final static String GetPrintHistoryErrorQuestions = HOST_NOTE + "getPrintHistoryErrorQuestions.json";
 }
