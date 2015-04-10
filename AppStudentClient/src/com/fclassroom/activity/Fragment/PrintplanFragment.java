@@ -9,7 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fclassroom.AppContext;
@@ -60,6 +64,9 @@ public class PrintplanFragment extends Fragment {
     SubjectAdapter printplanAdapter;
     PrintRecordAdapter printRecordAdapter;
     private TextView tv;
+    private RelativeLayout topView;
+    private LinearLayout bottomView;
+    private TextView selectAll,downLoad,haveSelected,printNow,delete;
 
     /**
      * Use this factory method to create a new instance of
@@ -265,17 +272,46 @@ public class PrintplanFragment extends Fragment {
         inflater = LayoutInflater.from(getParentFragment().getActivity());
         headView = inflater.inflate(R.layout.listview_head_rubbish, null, false);
         tv = (TextView) headView.findViewById(R.id.tv_head);
+        topView = (RelativeLayout)view.findViewById(R.id.linear_top);
+        bottomView = (LinearLayout)view.findViewById(R.id.linear_bottom);
 //        if (mParam1 == 0) {
 //            tv.setText("待打印100题");
 //        } else if (mParam1 == 1) {
 //            tv.setText("打印记录20条");
 //        }
+        selectAll = (TextView)view.findViewById(R.id.tv_selectall);
+        haveSelected = (TextView)view.findViewById(R.id.tv_haveselected);
+        downLoad = (TextView)view.findViewById(R.id.tv_download);
+        delete = (TextView)view.findViewById(R.id.tv_delete);
+        printNow = (TextView)view.findViewById(R.id.tv_printnow);
+        selectAll.setOnClickListener(new clickListener());
         scrollShowHeaderListView.setUpHeaderViews(headView);
         lv = scrollShowHeaderListView.getListView();
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Mulmode();
+                return true;
+            }
+        });
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mParam1 == 0) {
+                    if (lv.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
+                        ImageView iv = (ImageView) view.findViewById(R.id.iv_subject);
+                        PageBean.SubjectItemBean subjectItemBean = (PageBean.SubjectItemBean) iv.getTag();
+                        if (!lv.isItemChecked(position)) {
+                            ((CheckBox) view.findViewById(R.id.checkbox_choice)).setChecked(false);
+                            appContext.printlist.remove(subjectItemBean);
+                        } else {
+                            ((CheckBox) view.findViewById(R.id.checkbox_choice)).setChecked(true);
+                            appContext.printlist.add(subjectItemBean);
+                        }
+                        updateSeletedCount();
+                    }else{
+
+                    }
 
                 } else if (mParam1 == 1) {
                     TextView textView = (TextView) view.findViewById(R.id.tv_itemdate);
@@ -285,5 +321,64 @@ public class PrintplanFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void updateSeletedCount() {
+        haveSelected.setText("已选择" + Integer.toString(lv.getCheckedItemCount()) + "题");
+    }
+
+    private void Mulmode() {
+        appContext.printlist.clear();
+        unSelectedAll();
+        bottomView.setVisibility(View.VISIBLE);
+        topView.setVisibility(View.VISIBLE);
+        topView.setFocusable(true);
+        bottomView.setFocusable(true);
+        printplanAdapter.setMulMode(true);
+        printplanAdapter.notifyDataSetChanged();
+        lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+    }
+
+    private void singleMode() {
+        lv.clearChoices();
+        topView.setVisibility(View.GONE);
+        bottomView.setVisibility(View.GONE);
+        topView.setFocusable(false);
+        bottomView.setFocusable(false);
+        printplanAdapter.setMulMode(false);
+        printplanAdapter.notifyDataSetChanged();
+        lv.setChoiceMode(ListView.CHOICE_MODE_NONE);
+    }
+
+    public void selectedAll() {
+        for (int i = 0; i < printplanAdapter.getCount(); i++) {
+            lv.setItemChecked(i, true);
+        }
+        appContext.printlist.clear();
+        appContext.printlist = PrintPlanList;
+        updateSeletedCount();
+    }
+
+    public void unSelectedAll() {
+        lv.clearChoices();
+        updateSeletedCount();
+    }
+
+    class clickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.tv_selectall:
+                    selectedAll();
+                    break;
+                case R.id.tv_download:
+                    break;
+                case R.id.tv_printnow:
+                    break;
+                case R.id.tv_delete:
+                    break;
+
+            }
+        }
     }
 }

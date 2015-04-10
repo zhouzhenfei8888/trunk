@@ -101,6 +101,7 @@ public class SubjectAdapter extends BaseAdapter {
         ImageLoader.ImageListener imageListener = imageLoader.getImageListener(listItemView.subject, R.drawable.default_jpeg, R.drawable.default_jpeg);
         imageLoader.get(URLs.HOST_IMG + data.getContentImage(), imageListener);
         listItemView.ratingBar.setRating((float) data.getSignLevel());
+        System.out.println("position"+position);
         if (MulMode) {
             listItemView.checkBox.setVisibility(VISIBLE);
             listItemView.checkBox.setFocusable(false);

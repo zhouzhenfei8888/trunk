@@ -94,8 +94,8 @@ public class DetailActivity extends BaseActivity {
         gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
         subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
         for (int i = 0; i < appContext.mylist.size(); i++) {
-            if (subjectItemBean.equals(appContext.mylist.get(i))) {
-                postionInList = i;
+            if (subjectItemBean.getId()==appContext.mylist.get(i).getId()) {
+                postionInList = i+1;
                 break;
             }
         }
@@ -230,10 +230,10 @@ public class DetailActivity extends BaseActivity {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (postionInList == 0) {
+                if (postionInList == 1) {
                     UIHelper.ToastMessage(DetailActivity.this, "这是第一题");
                 } else {
-                    PageBean.SubjectItemBean subjectItemBeanNew = appContext.mylist.get(postionInList - 1);
+                    PageBean.SubjectItemBean subjectItemBeanNew = appContext.mylist.get(postionInList - 2);
                     UIHelper.jump2Activity(DetailActivity.this, DetailActivity.class, subjectItemBeanNew);
                 }
             }
@@ -241,10 +241,10 @@ public class DetailActivity extends BaseActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (postionInList == appContext.mylist.size() - 1) {
+                if (postionInList == appContext.mylist.size()) {
                     UIHelper.ToastMessage(DetailActivity.this, "这是最后一题");
                 } else {
-                    PageBean.SubjectItemBean subjectItemBeanNew = appContext.mylist.get(postionInList+1);
+                    PageBean.SubjectItemBean subjectItemBeanNew = appContext.mylist.get(postionInList);
                     UIHelper.jump2Activity(DetailActivity.this, DetailActivity.class, subjectItemBeanNew);
                     AppManager.getAppManager().finishActivity();
                 }

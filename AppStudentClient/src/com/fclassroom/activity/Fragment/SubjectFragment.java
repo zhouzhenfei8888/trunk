@@ -180,7 +180,7 @@ public class SubjectFragment extends Fragment {
      */
     private void getSubjectList(final String accessToken, final int gradeId, final int subjectId, final int pageSize, final int pageNo, final int unOrganize, final String orderBy, final String orderUpOrDown) {
 //        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
-        showLoading(scrollShowHeaderListView,mLoadingView,mEmptyView);
+        showLoading(scrollShowHeaderListView, mLoadingView, mEmptyView);
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -198,7 +198,7 @@ public class SubjectFragment extends Fragment {
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 }
-                showContent(scrollShowHeaderListView,mLoadingView,mEmptyView);
+                showContent(scrollShowHeaderListView, mLoadingView, mEmptyView);
             }
         };
         new Thread() {
@@ -461,12 +461,8 @@ public class SubjectFragment extends Fragment {
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                bottomView.setVisibility(View.VISIBLE);
-                topView.setVisibility(View.VISIBLE);
+                mulMode();
 //                selectIdSet.clear();
-                subjectAdapter.setMulMode(true);
-                subjectAdapter.notifyDataSetChanged();
-                listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                 return true;
             }
         });
@@ -474,14 +470,13 @@ public class SubjectFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (listview.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
-                    subjectAdapter.notifyDataSetChanged();
-//                    updateSingleRow(listview,id);
-//                    subjectAdapter.getView(position-1, (View) (listview.getItemAtPosition(position-1)),listview);
                     ImageView iv = (ImageView) view.findViewById(R.id.iv_subject);
                     PageBean.SubjectItemBean subjectItemBean = (PageBean.SubjectItemBean) iv.getTag();
-                    if (appContext.myselectlist.contains(subjectItemBean)) {
+                    if (!listview.isItemChecked(position)) {
+                        ((CheckBox) view.findViewById(R.id.checkbox_choice)).setChecked(false);
                         appContext.myselectlist.remove(subjectItemBean);
                     } else {
+                        ((CheckBox) view.findViewById(R.id.checkbox_choice)).setChecked(true);
                         appContext.myselectlist.add(subjectItemBean);
                     }
                     updateSeletedCount();
@@ -564,6 +559,29 @@ public class SubjectFragment extends Fragment {
         });
     }
 
+    private void mulMode() {
+        appContext.myselectlist.clear();
+        unSelectedAll();
+        bottomView.setVisibility(View.VISIBLE);
+        topView.setVisibility(View.VISIBLE);
+        topView.setFocusable(true);
+        bottomView.setFocusable(true);
+        subjectAdapter.setMulMode(true);
+        subjectAdapter.notifyDataSetChanged();
+        listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+    }
+
+    private void singleMode() {
+        listview.clearChoices();
+        topView.setVisibility(View.GONE);
+        bottomView.setVisibility(View.GONE);
+        topView.setFocusable(false);
+        bottomView.setFocusable(false);
+        subjectAdapter.setMulMode(false);
+        subjectAdapter.notifyDataSetChanged();
+        listview.setChoiceMode(ListView.CHOICE_MODE_NONE);
+    }
+
     protected void updateSeletedCount() {
         // TODO Auto-generated method stub
         haveSelected.setText("已选择" + Integer.toString(listview.getCheckedItemCount()) + "题");
@@ -573,6 +591,8 @@ public class SubjectFragment extends Fragment {
         for (int i = 0; i < subjectAdapter.getCount(); i++) {
             listview.setItemChecked(i, true);
         }
+        appContext.myselectlist.clear();
+        appContext.myselectlist = listSubject;
         updateSeletedCount();
     }
 
@@ -735,12 +755,10 @@ public class SubjectFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.tv_collate:
-//                    UIHelper.jump2Activity(getActivity(), DetailActivity.class);
-                    topView.setVisibility(View.GONE);
-                    bottomView.setVisibility(View.GONE);
-                    subjectAdapter.setMulMode(false);
-                    subjectAdapter.notifyDataSetChanged();
-                    listview.setChoiceMode(ListView.CHOICE_MODE_NONE);
+                    if (appContext.myselectlist != null) {
+                        UIHelper.jump2Activity(getActivity(), DetailActivity.class, appContext.myselectlist.get(0));
+                    }
+                    singleMode();
                     break;
                 case R.id.tv_selectall:
                     selectedAll();

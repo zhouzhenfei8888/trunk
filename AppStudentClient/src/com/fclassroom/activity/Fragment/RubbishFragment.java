@@ -8,7 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fclassroom.AppContext;
@@ -45,6 +48,9 @@ public class RubbishFragment extends Fragment {
     private int subjectId;
     private int pageNo;
     private static int pageSize = 20;
+    private RelativeLayout topView;
+    private LinearLayout bottomView;
+    private TextView selectAll,haveSelected,delete,recover;
 
     public RubbishFragment() {
         // Required empty public constructor
@@ -170,9 +176,63 @@ public class RubbishFragment extends Fragment {
         list = new ArrayList<PageBean.SubjectItemBean>();
         subjectAdapter = new SubjectAdapter(getActivity(), list,listView);
         listView.setAdapter(subjectAdapter);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                return false;
+            }
+        });
+        //底部、顶部栏初始化
+        topView = (RelativeLayout) view.findViewById(R.id.linear_top);
+        bottomView = (LinearLayout) view.findViewById(R.id.linear_bottom);
+        selectAll = (TextView) view.findViewById(R.id.tv_selectall);
+        haveSelected = (TextView) view.findViewById(R.id.tv_haveselected);
+        delete = (TextView) view.findViewById(R.id.tv_delete);
+        recover = (TextView) view.findViewById(R.id.tv_recover);
         initData();
         return view;
     }
 
+    private void mulMode() {
+        appContext.myselectlist.clear();
+        unSelectedAll();
+        bottomView.setVisibility(View.VISIBLE);
+        topView.setVisibility(View.VISIBLE);
+        topView.setFocusable(true);
+        bottomView.setFocusable(true);
+        subjectAdapter.setMulMode(true);
+        subjectAdapter.notifyDataSetChanged();
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+    }
+
+    private void singleMode() {
+        listView.clearChoices();
+        topView.setVisibility(View.GONE);
+        bottomView.setVisibility(View.GONE);
+        topView.setFocusable(false);
+        bottomView.setFocusable(false);
+        subjectAdapter.setMulMode(false);
+        subjectAdapter.notifyDataSetChanged();
+        listView.setChoiceMode(ListView.CHOICE_MODE_NONE);
+    }
+
+    protected void updateSeletedCount() {
+        // TODO Auto-generated method stub
+        haveSelected.setText("已选择" + Integer.toString(listView.getCheckedItemCount()) + "题");
+    }
+
+    public void selectedAll() {
+        for (int i = 0; i < subjectAdapter.getCount(); i++) {
+            listView.setItemChecked(i, true);
+        }
+        appContext.myselectlist.clear();
+        appContext.myselectlist = list;
+        updateSeletedCount();
+    }
+
+    public void unSelectedAll() {
+        listView.clearChoices();
+        updateSeletedCount();
+    }
 
 }
