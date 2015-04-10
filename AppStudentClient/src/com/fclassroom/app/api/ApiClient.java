@@ -494,7 +494,7 @@ public class ApiClient {
         params.put("subjectId", subjectId);
         params.put("noteBookId", noteBookId);
         params.put("unOrganize", unOrganize);
-        params.put("orderBy", orderUpOrDown);
+        params.put(orderBy, orderUpOrDown);
         params.put("pageSize", pageSize);
         params.put("pageNo", pageNo);
         String url = _MakeURL(URLs.GetSubjectDetail, params);

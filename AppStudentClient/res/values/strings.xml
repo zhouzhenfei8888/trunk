@@ -85,5 +85,6 @@
     <string name="title_activity_achievement">AchievementActivity</string>
     <string name="title_activity_about">AboutActivity</string>
     <string name="title_activity_feedback">FeedbackActivity</string>
+    <string name="title_activity_check_result">CheckResultActivity</string>
 
 </resources>

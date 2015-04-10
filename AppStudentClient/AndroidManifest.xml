@@ -77,8 +77,7 @@
             android:label="@string/title_activity_addwrongtag" />
         <activity
             android:name="com.fclassroom.activity.DialogcheckanswerActivity"
-            android:label="@string/title_activity_dialog"
-            android:theme="@style/Theme.AppCompat.Dialog" />
+            android:label="@string/title_activity_dialog" />
         <activity
             android:name="com.fclassroom.activity.RemarkActivity"
             android:label="@string/title_activity_remark" />
@@ -109,7 +108,10 @@
             android:label="@string/title_activity_about" />
         <activity
             android:name="com.fclassroom.activity.FeedbackActivity"
-            android:label="@string/title_activity_feedback" >
+            android:label="@string/title_activity_feedback" />
+        <activity
+            android:name="com.fclassroom.activity.CheckResultActivity"
+            android:label="@string/title_activity_check_result" >
         </activity>
     </application>
 

@@ -1,21 +1,16 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/white"
-    android:gravity="center"
     tools:context="com.fclassroom.activity.DialogcheckanswerActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_size"
-        android:layout_centerVertical="true"
-        android:textColor="@color/toolbar_color"
+        android:textColor="@color/black"
         android:gravity="center_vertical"
-        android:drawablePadding="@dimen/margin_size"
-        android:drawableLeft="@drawable/mul_choice"
-        android:layout_marginLeft="@dimen/margin_size"
-        android:text="正确答案：A" />
+        android:text="参考答案：A" />
 
-</RelativeLayout>
+</LinearLayout>
