@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +7,16 @@
     tools:context="com.fclassroom.activity.Fragment.RubbishFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+
+    <com.fclassroom.app.widget.ScrollShowHeaderListView
+        android:id="@+id/listview_rubbish"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:divider="@color/background_color"
+        android:dividerHeight="@dimen/margin_size"></com.fclassroom.app.widget.ScrollShowHeaderListView>
 
     <RelativeLayout
         android:id="@+id/linear_top"
@@ -34,15 +44,6 @@
             android:text="已选择0题"
             android:textSize="@dimen/text_size" />
     </RelativeLayout>
-
-    <com.fclassroom.app.widget.ScrollShowHeaderListView
-        android:id="@+id/listview_rubbish"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:layout_weight="1"
-        android:divider="@color/background_color"
-        android:dividerHeight="@dimen/margin_size"></com.fclassroom.app.widget.ScrollShowHeaderListView>
 
     <LinearLayout
         android:id="@+id/linear_bottom"
@@ -78,4 +79,4 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

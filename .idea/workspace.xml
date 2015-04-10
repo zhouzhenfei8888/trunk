@@ -34,16 +34,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="944a4e64-5715-4376-84bf-9dcf08e5bb13" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AppStudentClient/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/RubbishFragment.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/RubbishFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/SubjectAdapter.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/SubjectAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_printplan.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_printplan.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_rubbish.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_rubbish.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_subject.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_subject.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="trunk.iws" />
@@ -98,8 +92,8 @@
       <file leaf-file-name="SubjectFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6999" max-vertical-offset="12640">
-              <caret line="421" column="8" selection-start-line="421" selection-start-column="8" selection-end-line="425" selection-end-column="74" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="7839" max-vertical-offset="12640">
+              <caret line="471" column="16" selection-start-line="471" selection-start-column="16" selection-end-line="482" selection-end-column="24" />
               <folding>
                 <element signature="e#6692#7717#0" expanded="true" />
                 <element signature="e#7706#7707#0" expanded="true" />
@@ -115,42 +109,44 @@
       <file leaf-file-name="RubbishFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/RubbishFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3231" max-vertical-offset="4100">
-              <caret line="228" column="39" selection-start-line="228" selection-start-column="39" selection-end-line="228" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2711" max-vertical-offset="4560">
+              <caret line="206" column="10" selection-start-line="206" selection-start-column="10" selection-end-line="206" selection-end-column="10" />
               <folding>
-                <element signature="e#7407#7628#0" expanded="true" />
-                <element signature="e#7617#7618#0" expanded="true" />
+                <element signature="e#7476#7723#0" expanded="true" />
+                <element signature="e#7712#7713#0" expanded="true" />
+                <element signature="e#7766#9288#0" expanded="true" />
+                <element signature="e#9245#9246#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PrintplanFragment.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PrintplanFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23977695" vertical-offset="1671" max-vertical-offset="6680">
-              <caret line="122" column="58" selection-start-line="122" selection-start-column="58" selection-end-line="122" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1671" max-vertical-offset="6680">
+              <caret line="122" column="54" selection-start-line="122" selection-start-column="54" selection-end-line="122" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_rubbish.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_rubbish.xml">
+      <file leaf-file-name="fragment_printplan.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_printplan.xml">
           <provider editor-type-id="android-designer">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.75" vertical-offset="899" max-vertical-offset="1740">
-              <caret line="74" column="36" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.8810939" vertical-offset="99" max-vertical-offset="1940">
+              <caret line="42" column="21" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
               <folding>
-                <element signature="e#910#930#0" expanded="true" />
-                <element signature="e#990#1008#0" expanded="true" />
-                <element signature="e#1253#1273#0" expanded="true" />
-                <element signature="e#1336#1354#0" expanded="true" />
-                <element signature="e#1725#1745#0" expanded="true" />
-                <element signature="e#2428#2448#0" expanded="true" />
-                <element signature="e#2920#2940#0" expanded="true" />
+                <element signature="e#1183#1203#0" expanded="true" />
+                <element signature="e#1263#1281#0" expanded="true" />
+                <element signature="e#1526#1546#0" expanded="true" />
+                <element signature="e#1609#1627#0" expanded="true" />
+                <element signature="e#2282#2302#0" expanded="true" />
+                <element signature="e#2776#2796#0" expanded="true" />
+                <element signature="e#3270#3290#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -169,21 +165,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SubjectAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/adapter/SubjectAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="840" max-vertical-offset="2120">
-              <caret line="106" column="31" selection-start-line="106" selection-start-column="31" selection-end-line="106" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AppContext.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="640" max-vertical-offset="16360">
-              <caret line="115" column="62" selection-start-line="115" selection-start-column="62" selection-end-line="115" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="880" max-vertical-offset="16400">
+              <caret line="117" column="19" selection-start-line="117" selection-start-column="19" selection-end-line="117" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -1689,11 +1675,11 @@
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/PageBean.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_subject.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_rubbish.xml" />
+        <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/RubbishFragment.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_rubbish.xml" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_printplan.xml" />
       </list>
     </option>
@@ -2357,7 +2343,11 @@
       <created>1428422661644</created>
       <updated>1428422661644</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="student">
+      <created>1428681463935</created>
+      <updated>1428681463935</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2374,11 +2364,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270869" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942432" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942432" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20155902" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36859688" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36859688" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18017058" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -2761,14 +2751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="640" max-vertical-offset="16360">
-          <caret line="115" column="62" selection-start-line="115" selection-start-column="62" selection-end-line="115" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/URLs.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20713463" vertical-offset="0" max-vertical-offset="1020">
@@ -2817,8 +2799,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6999" max-vertical-offset="12640">
-          <caret line="421" column="8" selection-start-line="421" selection-start-column="8" selection-end-line="425" selection-end-column="74" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="7839" max-vertical-offset="12640">
+          <caret line="471" column="16" selection-start-line="471" selection-start-column="16" selection-end-line="482" selection-end-column="24" />
           <folding>
             <element signature="e#6692#7717#0" expanded="true" />
             <element signature="e#7706#7707#0" expanded="true" />
@@ -2830,32 +2812,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_rubbish.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.75" vertical-offset="899" max-vertical-offset="1740">
-          <caret line="74" column="36" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
-          <folding>
-            <element signature="e#910#930#0" expanded="true" />
-            <element signature="e#990#1008#0" expanded="true" />
-            <element signature="e#1253#1273#0" expanded="true" />
-            <element signature="e#1336#1354#0" expanded="true" />
-            <element signature="e#1725#1745#0" expanded="true" />
-            <element signature="e#2428#2448#0" expanded="true" />
-            <element signature="e#2920#2940#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="880" max-vertical-offset="16400">
+          <caret line="117" column="19" selection-start-line="117" selection-start-column="19" selection-end-line="117" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/RubbishFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3231" max-vertical-offset="4100">
-          <caret line="228" column="39" selection-start-line="228" selection-start-column="39" selection-end-line="228" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2711" max-vertical-offset="4560">
+          <caret line="206" column="10" selection-start-line="206" selection-start-column="10" selection-end-line="206" selection-end-column="10" />
           <folding>
-            <element signature="e#7407#7628#0" expanded="true" />
-            <element signature="e#7617#7618#0" expanded="true" />
+            <element signature="e#7476#7723#0" expanded="true" />
+            <element signature="e#7712#7713#0" expanded="true" />
+            <element signature="e#7766#9288#0" expanded="true" />
+            <element signature="e#9245#9246#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1671" max-vertical-offset="6680">
+          <caret line="122" column="54" selection-start-line="122" selection-start-column="54" selection-end-line="122" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_rubbish.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46859902" vertical-offset="132" max-vertical-offset="1760">
+          <caret line="26" column="32" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
+          <folding>
+            <element signature="e#756#776#0" expanded="true" />
+            <element signature="e#1333#1353#0" expanded="true" />
+            <element signature="e#1413#1431#0" expanded="true" />
+            <element signature="e#1676#1696#0" expanded="true" />
+            <element signature="e#1759#1777#0" expanded="true" />
+            <element signature="e#2431#2451#0" expanded="true" />
+            <element signature="e#2923#2943#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2865,25 +2865,17 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28537455" vertical-offset="780" max-vertical-offset="1940">
-          <caret line="51" column="32" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.8810939" vertical-offset="99" max-vertical-offset="1940">
+          <caret line="42" column="21" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
           <folding>
-            <element signature="e#912#932#0" expanded="true" />
-            <element signature="e#992#1010#0" expanded="true" />
-            <element signature="e#1255#1275#0" expanded="true" />
-            <element signature="e#1338#1356#0" expanded="true" />
-            <element signature="e#2280#2300#0" expanded="true" />
-            <element signature="e#2774#2794#0" expanded="true" />
-            <element signature="e#3268#3288#0" expanded="true" />
+            <element signature="e#1183#1203#0" expanded="true" />
+            <element signature="e#1263#1281#0" expanded="true" />
+            <element signature="e#1526#1546#0" expanded="true" />
+            <element signature="e#1609#1627#0" expanded="true" />
+            <element signature="e#2282#2302#0" expanded="true" />
+            <element signature="e#2776#2796#0" expanded="true" />
+            <element signature="e#3270#3290#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23977695" vertical-offset="1671" max-vertical-offset="6680">
-          <caret line="122" column="58" selection-start-line="122" selection-start-column="58" selection-end-line="122" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>

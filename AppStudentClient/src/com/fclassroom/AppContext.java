@@ -84,6 +84,7 @@ public class AppContext extends Application {
     public List<PageBean.SubjectItemBean> mylist;
     //打印时数据
     public List<PageBean.SubjectItemBean> printlist;
+    public List<PageBean.SubjectItemBean> rubbishlist;
     private Handler unLoginHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
@@ -114,6 +115,7 @@ public class AppContext extends Application {
         mylist = new ArrayList<PageBean.SubjectItemBean>();
         myselectlist = new ArrayList<PageBean.SubjectItemBean>();
         printlist = new ArrayList<PageBean.SubjectItemBean>();
+        rubbishlist = new ArrayList<PageBean.SubjectItemBean>();
     }
 
     /**

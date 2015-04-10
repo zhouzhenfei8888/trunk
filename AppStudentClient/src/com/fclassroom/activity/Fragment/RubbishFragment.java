@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -50,7 +52,7 @@ public class RubbishFragment extends Fragment {
     private static int pageSize = 20;
     private RelativeLayout topView;
     private LinearLayout bottomView;
-    private TextView selectAll,haveSelected,delete,recover;
+    private TextView selectAll, haveSelected, delete, recover;
 
     public RubbishFragment() {
         // Required empty public constructor
@@ -174,14 +176,35 @@ public class RubbishFragment extends Fragment {
         listViewRubbish.setUpHeaderViews(headview);
         listView = listViewRubbish.getListView();
         list = new ArrayList<PageBean.SubjectItemBean>();
-        subjectAdapter = new SubjectAdapter(getActivity(), list,listView);
+        subjectAdapter = new SubjectAdapter(getActivity(), list, listView);
         listView.setAdapter(subjectAdapter);
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                return false;
+                mulMode();
+                return true;
             }
         });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                if (listView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
+                                                    ImageView iv = (ImageView) view.findViewById(R.id.iv_subject);
+                                                    PageBean.SubjectItemBean subjectItemBean = (PageBean.SubjectItemBean) iv.getTag();
+                                                    if (!listView.isItemChecked(position)) {
+                                                        ((CheckBox) view.findViewById(R.id.checkbox_choice)).setChecked(false);
+                                                        appContext.myselectlist.remove(subjectItemBean);
+                                                    } else {
+                                                        ((CheckBox) view.findViewById(R.id.checkbox_choice)).setChecked(true);
+                                                        appContext.myselectlist.add(subjectItemBean);
+                                                    }
+                                                    updateSeletedCount();
+                                                } else {
+                                                }
+                                            }
+                                        }
+
+        );
         //底部、顶部栏初始化
         topView = (RelativeLayout) view.findViewById(R.id.linear_top);
         bottomView = (LinearLayout) view.findViewById(R.id.linear_bottom);
@@ -189,7 +212,9 @@ public class RubbishFragment extends Fragment {
         haveSelected = (TextView) view.findViewById(R.id.tv_haveselected);
         delete = (TextView) view.findViewById(R.id.tv_delete);
         recover = (TextView) view.findViewById(R.id.tv_recover);
+
         initData();
+
         return view;
     }
 
