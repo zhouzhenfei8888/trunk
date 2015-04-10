@@ -755,7 +755,7 @@ public class SubjectFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.tv_collate:
-                    if (appContext.myselectlist != null) {
+                    if (appContext.myselectlist.size() != 0) {
                         UIHelper.jump2Activity(getActivity(), DetailActivity.class, appContext.myselectlist.get(0));
                     }
                     singleMode();
