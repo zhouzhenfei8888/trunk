@@ -693,4 +693,17 @@ public class ApiClient {
         System.out.println(response);
         return;
     }
+
+    public static BaseResponseBean<PageBean> getNoteBookQuestions(AppContext appContext, String accessToken, int gradeId, int subjectId, int noteBookId) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId",gradeId);
+        params.put("subjectId",subjectId);
+        params.put("noteBookId",noteBookId);
+        String url = _MakeURL(URLs.GetNoteBookQuestions,params);
+        String response = http_get(appContext,url);
+        System.out.println("..."+response);
+        BaseResponseBean<PageBean> responseBean = JsonUtils.getPrintplanList(response);
+        return responseBean;
+    }
 }

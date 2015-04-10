@@ -71,8 +71,51 @@ public class NotebookActivity extends BaseActivity {
         } else if ("print".equals(from)) {
             getPrintHistoryErrorQuestions(accessToken, gradeId, subjectId, id);
         }else if("collate".equals(from)){
-
+            getNoteBookQuestions(accessToken,gradeId,subjectId,id);
         }
+    }
+
+    private void getNoteBookQuestions(final String accessToken, final int gradeId, final int subjectId, final int NoteBookId) {
+        final ProgressDialog progressDialog = ProgressDialog.show(this, "", "正在加载。。。");
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
+                    List<PageBean.SubjectItemBean> newlist = responseBean.getData().getList();
+                    list.addAll(newlist);
+                    total.setText("共计"+responseBean.getData().getPageSize()+"题");
+                    subjectAdapter = new SubjectAdapter(NotebookActivity.this, list, mlistView);
+                    mlistView.setAdapter(subjectAdapter);
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(NotebookActivity.this, msg.obj.toString());
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(NotebookActivity.this);
+                }
+                progressDialog.dismiss();
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<PageBean> responseBean = appContext.getNoteBookQuestions(accessToken, gradeId, subjectId, NoteBookId);
+                    if (msg.what == 0) {
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    } else {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     private void getPrintHistoryErrorQuestions(final String accessToken, final int gradeId, final int subjectId, final int printHistoryId) {
@@ -84,6 +127,7 @@ public class NotebookActivity extends BaseActivity {
                     BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
                     List<PageBean.SubjectItemBean> newlist = responseBean.getData().getList();
                     list.addAll(newlist);
+                    total.setText("共计"+responseBean.getData().getPageSize()+"题");
                     subjectAdapter = new SubjectAdapter(NotebookActivity.this, list, mlistView);
                     mlistView.setAdapter(subjectAdapter);
                 } else if (msg.what == 0) {
@@ -126,6 +170,7 @@ public class NotebookActivity extends BaseActivity {
                     BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
                     List<PageBean.SubjectItemBean> newlist = responseBean.getData().getList();
                     list.addAll(newlist);
+                    total.setText("共计"+responseBean.getData().getPageSize()+"题");
                     subjectAdapter = new SubjectAdapter(NotebookActivity.this, list, mlistView);
                     mlistView.setAdapter(subjectAdapter);
                 } else if (msg.what == 0) {

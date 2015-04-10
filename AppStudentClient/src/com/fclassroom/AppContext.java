@@ -900,4 +900,8 @@ public class AppContext extends Application {
     public void bindphone(String accessToken, String authCode,String telephone) throws AppException {
         ApiClient.bindphone(this,accessToken,authCode,telephone);
     }
+
+    public BaseResponseBean<PageBean> getNoteBookQuestions(String accessToken, int gradeId, int subjectId, int noteBookId) throws AppException {
+        return ApiClient.getNoteBookQuestions(this,accessToken,gradeId,subjectId,noteBookId);
+    }
 }

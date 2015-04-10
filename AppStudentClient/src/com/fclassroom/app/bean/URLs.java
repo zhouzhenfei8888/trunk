@@ -42,4 +42,5 @@ public class URLs implements Serializable {
     public final static String GetPrintHistoryErrorQuestions = HOST_NOTE + "getPrintHistoryErrorQuestions.json";
     public final static String SendAuthCode = HOST_YH+"sendCode.json";
     public final static String BindPhone = HOST_YH+"bindPhone.json";
+    public final static String GetNoteBookQuestions = HOST_NOTE+"getErrorQuestionsByNoteBook.json";
 }
