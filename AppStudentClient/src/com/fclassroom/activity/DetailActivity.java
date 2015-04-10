@@ -88,11 +88,18 @@ public class DetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         subjectItemBean = (PageBean.SubjectItemBean) getIntent().getSerializableExtra("value");
+        System.out.println(subjectItemBean.getContentImage());
         appContext = (AppContext) getApplication();
         accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
         subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
-        postionInList = appContext.mylist.indexOf(subjectItemBean);
+        for (int i = 0; i < appContext.mylist.size(); i++) {
+            if (subjectItemBean.equals(appContext.mylist.get(i))) {
+                postionInList = i;
+                break;
+            }
+        }
+        System.out.println(postionInList);
         initData();
         initToolbar();
         initViews();
@@ -237,8 +244,9 @@ public class DetailActivity extends BaseActivity {
                 if (postionInList == appContext.mylist.size() - 1) {
                     UIHelper.ToastMessage(DetailActivity.this, "这是最后一题");
                 } else {
-                    PageBean.SubjectItemBean subjectItemBeanNew = appContext.mylist.get(postionInList + 1);
+                    PageBean.SubjectItemBean subjectItemBeanNew = appContext.mylist.get(postionInList+1);
                     UIHelper.jump2Activity(DetailActivity.this, DetailActivity.class, subjectItemBeanNew);
+                    AppManager.getAppManager().finishActivity();
                 }
             }
         });
@@ -323,7 +331,7 @@ public class DetailActivity extends BaseActivity {
      * 实际用activity处理，dialog动画调用好像有些问题
      */
     private void showDialogFromBottom() {
-        UIHelper.jump2Activity(this, DialogcheckanswerActivity.class);
+        UIHelper.jump2Activity(this, CheckResultActivity.class);
 //        overridePendingTransition(R.anim.openfrombottom, R.anim.nomove);
     }
 
@@ -339,6 +347,7 @@ public class DetailActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 int delFlag = 0;
                 deleteErrorQuestion(accessToken, subjectItemBean.getExamQuestionId(), delFlag);
+                AppManager.getAppManager().finishActivity(DetailActivity.this);
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -394,7 +403,11 @@ public class DetailActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         AddErrorQuestionToNoteBook(accessToken, subjectItemBean.getExamQuestionId(), ErrorBookList.get(which).getId());
-                        bookname.setText(subjectItemBean.getNotebookNames() + "," + ErrorBookList.get(which).getName().toString());
+                        if ("".equals(subjectItemBean.getNotebookNames())) {
+                            bookname.setText(ErrorBookList.get(which).getName().toString());
+                        }else{
+                            bookname.setText(subjectItemBean.getNotebookNames() + "," + ErrorBookList.get(which).getName().toString());
+                        }
                     }
                 });
         builder.create().show();

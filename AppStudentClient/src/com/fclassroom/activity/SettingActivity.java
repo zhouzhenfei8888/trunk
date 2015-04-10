@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.fclassroom.AppContext;
 import com.fclassroom.AppManager;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
@@ -23,11 +24,13 @@ public class SettingActivity extends BaseActivity {
     private LinearLayout linear_find;
     private LinearLayout linear_about;
     private LinearLayout linear_exit;
+    AppContext appContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        appContext = (AppContext) getApplication();
         initToolbar();
         initViews();
     }
@@ -58,6 +61,7 @@ public class SettingActivity extends BaseActivity {
         linear_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PreferenceUtils.putString(appContext,PreferenceUtils.ACCESSTOKEN,"");
                 AppManager.getAppManager().finishAllActivity();
             }
         });

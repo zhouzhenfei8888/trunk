@@ -294,6 +294,7 @@ public class AppContext extends Application {
     public void saveLoginInfo(final LoginResponseBean loginResponseBean) {
         String accesstoken = loginResponseBean.getAccessToken();
         PreferenceUtils.putString(this, PreferenceUtils.ACCESSTOKEN, accesstoken);
+        PreferenceUtils.putString(this, PreferenceUtils.ACCOUNT_LOGINPHONE, loginResponseBean.getLoginPhone());
     }
 
     public String getToken() {
@@ -885,5 +886,13 @@ public class AppContext extends Application {
 
     public BaseResponseBean<PageBean> getPrintHistoryErrorQuestions(String accessToken, int gradeId, int subjectId, int printHistoryId) throws AppException {
         return ApiClient.getPrintHistoryErrorQuestions(this, accessToken, gradeId, subjectId, printHistoryId);
+    }
+
+    public BaseResponseBean<Boolean> SendAuthCode(String accessToken, String telephoneNum) throws AppException {
+        return ApiClient.SendAuthCode(this, accessToken, telephoneNum);
+    }
+
+    public void bindphone(String accessToken, String authCode,String telephone) throws AppException {
+        ApiClient.bindphone(this,accessToken,authCode,telephone);
     }
 }

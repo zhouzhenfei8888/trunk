@@ -671,4 +671,26 @@ public class ApiClient {
         BaseResponseBean<PageBean> responseBean = JsonUtils.getPrintplanList(response);
         return responseBean;
     }
+
+    public static BaseResponseBean<Boolean> SendAuthCode(AppContext appContext, String accessToken, String telephoneNum) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("phone",telephoneNum);
+        String url = _MakeURL(URLs.SendAuthCode,params);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+        BaseResponseBean<Boolean> responseBean = JsonUtils.praseBoolean(response);
+        return responseBean;
+    }
+
+    public static void bindphone(AppContext appContext, String accessToken, String authCode,String telephone) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("phone",telephone);
+        params.put("code",authCode);
+        String url = _MakeURL(URLs.BindPhone,params);
+        String response  = http_get(appContext,url);
+        System.out.println(response);
+        return;
+    }
 }

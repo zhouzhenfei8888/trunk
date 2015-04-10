@@ -91,12 +91,10 @@ public class ErrortagFragment extends Fragment {
         accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
         subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
-        initData();
     }
 
     private void initData() {
         TagNameList = new ArrayList<String>();
-        mItems = new ArrayList<String>();
         getTags();
     }
 
@@ -111,7 +109,7 @@ public class ErrortagFragment extends Fragment {
                         TagNameList.add(errorTagBean.getName());
                     }
                     mItems.addAll(TagNameList);
-                    setListAdaptor();
+                    new Poplulate().execute(mItems);
                 }else if(msg.what == 0){
                     UIHelper.ToastMessage(getActivity(),msg.obj.toString());
                 }else if(msg.what == -1){
@@ -149,8 +147,9 @@ public class ErrortagFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_errortag, container, false);
         initViews(view);
         // Array to ArrayList
-        mItems = new ArrayList<String>(Arrays.asList(UIHelper.ITEMS));
+//        mItems = new ArrayList<String>(Arrays.asList(UIHelper.ITEMS));
 //        mItems.addAll(TagNameList);
+        mItems = new ArrayList<String>();
         mListSectionPos = new ArrayList<Integer>();
         mListItems = new ArrayList<String>();
         // for handling configuration change
@@ -170,6 +169,7 @@ public class ErrortagFragment extends Fragment {
         } else {
             new Poplulate().execute(mItems);
         }
+        initData();
         return view;
     }
 

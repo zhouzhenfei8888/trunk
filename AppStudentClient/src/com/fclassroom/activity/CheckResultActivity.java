@@ -1,18 +1,37 @@
 package com.fclassroom.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.fclassroom.appstudentclient.R;
 
-public class CheckResultActivity extends Activity {
-
+public class CheckResultActivity extends ActionBarActivity {
+    Toolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_result);
+        initToolbar();
+    }
+    private void initToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("查看解析");
+        mToolbar.setTitleTextColor(Color.WHITE);
+        mToolbar.setNavigationIcon(R.drawable.ic_launcher);
+        setSupportActionBar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

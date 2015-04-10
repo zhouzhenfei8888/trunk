@@ -20,6 +20,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ import com.fclassroom.app.bean.PageBean;
 import com.fclassroom.app.common.FileUtils;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
+import com.fclassroom.app.widget.PinnedHeaderListView.PinnedHeaderListView;
 import com.fclassroom.app.widget.PullToRefreshListView;
 import com.fclassroom.app.widget.ScrollShowHeaderListView;
 import com.fclassroom.appstudentclient.R;
@@ -63,6 +65,10 @@ public class SubjectFragment extends Fragment {
     private LayoutInflater inflater;
     private ListView listview;
     private ScrollShowHeaderListView scrollShowHeaderListView;
+    // loading view
+    private ProgressBar mLoadingView;
+    private TextView mEmptyView;
+
     private View headview;
     private LinearLayout bottomView;
     private RelativeLayout topView;
@@ -173,7 +179,8 @@ public class SubjectFragment extends Fragment {
      * @param orderUpOrDown 升序或降序
      */
     private void getSubjectList(final String accessToken, final int gradeId, final int subjectId, final int pageSize, final int pageNo, final int unOrganize, final String orderBy, final String orderUpOrDown) {
-        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
+//        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
+        showLoading(scrollShowHeaderListView,mLoadingView,mEmptyView);
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -182,16 +189,16 @@ public class SubjectFragment extends Fragment {
                     List<PageBean.SubjectItemBean> list = response.getData().getList();
                     listSubject.clear();
                     listSubject.addAll(list);
-                    subjectAdapter.notifyDataSetChanged();
+//                    subjectAdapter.notifyDataSetChanged();
                     appContext.mylist = listSubject;
-//                    subjectAdapter = new SubjectAdapter(getActivity(), listSubject, listview);
-//                    listview.setAdapter(subjectAdapter);
+                    subjectAdapter = new SubjectAdapter(getActivity(), listSubject, listview);
+                    listview.setAdapter(subjectAdapter);
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 }
-                progressDialog.dismiss();
+                showContent(scrollShowHeaderListView,mLoadingView,mEmptyView);
             }
         };
         new Thread() {
@@ -280,6 +287,10 @@ public class SubjectFragment extends Fragment {
         TextView time = (TextView) headview.findViewById(R.id.tv_fragment_time);
         final TextView difficulty = (TextView) headview.findViewById(R.id.tv_difficulty);
         final TextView importance = (TextView) headview.findViewById(R.id.tv_importance);
+        //dialog显示或隐藏
+        mLoadingView = (ProgressBar) view.findViewById(R.id.loading_view);
+        mEmptyView = (TextView) view.findViewById(R.id.empty_view);
+
         scrollShowHeaderListView.setUpHeaderViews(headview);
         listview = scrollShowHeaderListView.getListView();
         subjectAdapter = new SubjectAdapter(getActivity(), listSubject, listview);
@@ -707,17 +718,29 @@ public class SubjectFragment extends Fragment {
         mHideAnimation.setFillAfter(true);
     }
 
+    private void showLoading(View contentView, View loadingView, View emptyView) {
+        contentView.setVisibility(View.GONE);
+        loadingView.setVisibility(View.VISIBLE);
+        emptyView.setVisibility(View.GONE);
+    }
+
+    private void showContent(View contentView, View loadingView, View emptyView) {
+        contentView.setVisibility(View.VISIBLE);
+        loadingView.setVisibility(View.GONE);
+        emptyView.setVisibility(View.GONE);
+    }
+
     class chickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            topView.setVisibility(View.GONE);
-            bottomView.setVisibility(View.GONE);
-            subjectAdapter.setMulMode(false);
-            subjectAdapter.notifyDataSetChanged();
-            listview.setChoiceMode(ListView.CHOICE_MODE_NONE);
             switch (v.getId()) {
                 case R.id.tv_collate:
-                    UIHelper.jump2Activity(getActivity(), DetailActivity.class);
+//                    UIHelper.jump2Activity(getActivity(), DetailActivity.class);
+                    topView.setVisibility(View.GONE);
+                    bottomView.setVisibility(View.GONE);
+                    subjectAdapter.setMulMode(false);
+                    subjectAdapter.notifyDataSetChanged();
+                    listview.setChoiceMode(ListView.CHOICE_MODE_NONE);
                     break;
                 case R.id.tv_selectall:
                     selectedAll();

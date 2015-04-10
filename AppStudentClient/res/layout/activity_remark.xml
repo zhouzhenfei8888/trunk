@@ -19,7 +19,7 @@
             android:textSize="@dimen/text_size"
             android:padding="@dimen/margin_size"
             android:layout_centerVertical="true"
-            android:background="@drawable/listviewitem_select"
+            android:background="@drawable/button_select"
             android:textColor="@color/white"
             android:text="@string/cancle" />
         <TextView
@@ -41,7 +41,7 @@
             android:textSize="@dimen/text_size"
             android:layout_centerVertical="true"
             android:textColor="@color/white"
-            android:background="@drawable/listviewitem_select"
+            android:background="@drawable/button_select"
             android:text="@string/sure" />
     </RelativeLayout>
 

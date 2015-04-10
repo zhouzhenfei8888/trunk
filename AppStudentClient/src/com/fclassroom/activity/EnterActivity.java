@@ -106,8 +106,12 @@ public class EnterActivity extends BaseActivity {
                 if (msg.what == 1) {
                     user = (BaseResponseBean<LoginResponseBean>) msg.obj;
                     appContext.saveLoginInfo(user.getData());
-                    UIHelper.ToastMessage(EnterActivity.this, "登入成功");
-                    UIHelper.jump2Activity(EnterActivity.this, CheckinforActivity.class);
+                    System.out.println("telephone:" + user.getData().getLoginPhone());
+                    if (user.getData().getLoginPhone() == null) {
+                        UIHelper.jump2Activity(EnterActivity.this, CheckinforActivity.class);
+                    } else {
+                        UIHelper.jump2Activity(EnterActivity.this, HomeActivity.class);
+                    }
                     appManager.finishActivity(EnterActivity.this);
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(EnterActivity.this);

@@ -309,4 +309,17 @@ public class JsonUtils {
         }
         return pojo;
     }
+
+    public static BaseResponseBean<Boolean> praseBoolean(String jsonString) {
+        BaseResponseBean<Boolean> pojo = null;
+        try {
+            JavaType type = mapper.getTypeFactory().constructParametricType(BaseResponseBean.class, Boolean.class);
+            pojo = mapper.readValue(jsonString, type);
+        } catch (Exception e) {
+            pojo = new BaseResponseBean<Boolean>();
+            pojo.setError_code(-1);
+            e.printStackTrace();
+        }
+        return pojo;
+    }
 }

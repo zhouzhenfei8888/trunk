@@ -70,6 +70,8 @@ public class NotebookActivity extends BaseActivity {
             printall.setClickable(false);
         } else if ("print".equals(from)) {
             getPrintHistoryErrorQuestions(accessToken, gradeId, subjectId, id);
+        }else if("collate".equals(from)){
+
         }
     }
 

@@ -151,6 +151,9 @@ public class CollateFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                UIHelper.jump2Activity(getActivity(), NotebookActivity.class);
+                TextView tv = (TextView) view.findViewById(R.id.tv_bookname);
+                ErrorBookBean data = (ErrorBookBean) tv.getTag();
+                UIHelper.jump2Activity(getActivity(), NotebookActivity.class,data.getId(),data.getName(),"collate");
             }
         });
     }
@@ -262,6 +265,7 @@ public class CollateFragment extends Fragment {
             }
             if (list != null) {
                 final ErrorBookBean bookBean = list.get(position);
+                holder.bookname.setTag(bookBean);
                 holder.bookname.setText(bookBean.getName().toString().trim());
                 holder.subjectnumber.setText("共" + bookBean.getQuestionCount() + "题");
                 holder.setting.setOnClickListener(new View.OnClickListener() {
@@ -391,7 +395,7 @@ public class CollateFragment extends Fragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_notebook, null, false);
         final EditText etName = (EditText) view.findViewById(R.id.et_notebookname);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("重命名");
+        builder.setTitle("");
         builder.setView(view);
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override

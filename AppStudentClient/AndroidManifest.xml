@@ -70,7 +70,6 @@
             android:label="@string/title_activity_setting" />
         <activity
             android:name="com.fclassroom.activity.DetailActivity"
-            android:launchMode="singleTop"
             android:label="@string/title_activity_detail" />
         <activity
             android:name="com.fclassroom.activity.AddwrongtagActivity"
