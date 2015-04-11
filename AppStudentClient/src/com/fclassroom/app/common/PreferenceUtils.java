@@ -31,6 +31,7 @@ public class PreferenceUtils {
     public static String SUBJECT_NAME="subject_name";
     public static String JIKE_NUM="jike_num";
     public static String STUDENT_NO="student_no";
+    public static String HISTORY="history";
     /**
      * put string preferences
      *

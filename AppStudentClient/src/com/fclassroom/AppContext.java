@@ -897,11 +897,31 @@ public class AppContext extends Application {
         return ApiClient.SendAuthCode(this, accessToken, telephoneNum);
     }
 
-    public void bindphone(String accessToken, String authCode,String telephone) throws AppException {
-        ApiClient.bindphone(this,accessToken,authCode,telephone);
+    public void bindphone(String accessToken, String authCode, String telephone) throws AppException {
+        ApiClient.bindphone(this, accessToken, authCode, telephone);
     }
 
     public BaseResponseBean<PageBean> getNoteBookQuestions(String accessToken, int gradeId, int subjectId, int noteBookId) throws AppException {
-        return ApiClient.getNoteBookQuestions(this,accessToken,gradeId,subjectId,noteBookId);
+        return ApiClient.getNoteBookQuestions(this, accessToken, gradeId, subjectId, noteBookId);
+    }
+
+    public BaseResponseBean<Integer> printSelected(String accessToken, int gradeId, int subjectId, String examQuestionIds) throws AppException {
+        return ApiClient.printSelected(this, accessToken,gradeId,subjectId,examQuestionIds);
+    }
+
+    public BaseResponseBean<String> deleteSelected(String accessToken, String examQuestionIds, int delFlag) throws AppException {
+        return ApiClient.deleteSelected(this,accessToken,examQuestionIds,delFlag);
+    }
+
+    public BaseResponseBean<String> recoverErrorQuestions(String accessToken, String examQuestionIds) throws AppException {
+        return ApiClient.recoverErrorQuestions(this,accessToken,examQuestionIds);
+    }
+
+    public BaseResponseBean<PageBean> getErrorTagQuestions(String accessToken, int gradeId, int subjectId, int tagId) throws AppException {
+        return ApiClient.getErrorTagQuestions(this,accessToken,gradeId,subjectId,tagId);
+    }
+
+    public BaseResponseBean<PageBean> searchQuestions(String accessToken, int gradeId, int subjectId, String keyword) throws AppException, UnsupportedEncodingException {
+        return ApiClient.searchQuestions(this,accessToken,gradeId,subjectId,keyword);
     }
 }

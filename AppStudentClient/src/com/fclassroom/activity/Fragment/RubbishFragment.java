@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.fclassroom.AppContext;
@@ -165,6 +166,66 @@ public class RubbishFragment extends Fragment {
         }.start();
     }
 
+    private void deleteSelected(final String accessToken, final String examQuestionIds, final int delFlag) {
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 1){
+                    UIHelper.ToastMessage(getActivity(),"删除成功！");
+                    singleMode();
+                }else {
+                    ((AppException)msg.obj).makeToast(getActivity());
+                }
+            }
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.deleteSelected(accessToken,examQuestionIds,delFlag);
+                    msg.what = 1;
+                    msg.obj = responseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    private void recoverErrorQuestions(final String accessToken, final String examQuestionIds) {
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 1){
+                    UIHelper.ToastMessage(getActivity(),"已恢复！");
+                    singleMode();
+                }else {
+                    ((AppException)msg.obj).makeToast(getActivity());
+                }
+            }
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.recoverErrorQuestions(accessToken, examQuestionIds);
+                    msg.what = 1;
+                    msg.obj = responseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -193,10 +254,10 @@ public class RubbishFragment extends Fragment {
                                                     PageBean.SubjectItemBean subjectItemBean = (PageBean.SubjectItemBean) iv.getTag();
                                                     if (!listView.isItemChecked(position)) {
                                                         ((CheckBox) view.findViewById(R.id.checkbox_choice)).setChecked(false);
-                                                        appContext.myselectlist.remove(subjectItemBean);
+                                                        appContext.rubbishlist.remove(subjectItemBean);
                                                     } else {
                                                         ((CheckBox) view.findViewById(R.id.checkbox_choice)).setChecked(true);
-                                                        appContext.myselectlist.add(subjectItemBean);
+                                                        appContext.rubbishlist.add(subjectItemBean);
                                                     }
                                                     updateSeletedCount();
                                                 } else {
@@ -212,14 +273,16 @@ public class RubbishFragment extends Fragment {
         haveSelected = (TextView) view.findViewById(R.id.tv_haveselected);
         delete = (TextView) view.findViewById(R.id.tv_delete);
         recover = (TextView) view.findViewById(R.id.tv_recover);
-
+        delete.setOnClickListener(new clickListener());
+        recover.setOnClickListener(new clickListener());
+        selectAll.setOnClickListener(new clickListener());
         initData();
 
         return view;
     }
 
     private void mulMode() {
-        appContext.myselectlist.clear();
+        appContext.rubbishlist.clear();
         unSelectedAll();
         bottomView.setVisibility(View.VISIBLE);
         topView.setVisibility(View.VISIBLE);
@@ -250,8 +313,8 @@ public class RubbishFragment extends Fragment {
         for (int i = 0; i < subjectAdapter.getCount(); i++) {
             listView.setItemChecked(i, true);
         }
-        appContext.myselectlist.clear();
-        appContext.myselectlist = list;
+        appContext.rubbishlist.clear();
+        appContext.rubbishlist = list;
         updateSeletedCount();
     }
 
@@ -260,4 +323,35 @@ public class RubbishFragment extends Fragment {
         updateSeletedCount();
     }
 
+    class clickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.tv_delete:
+                    int delFlag = 1;
+                    StringBuffer stringBuffer2 = new StringBuffer("");
+                    for (PageBean.SubjectItemBean subjectItemBean : appContext.rubbishlist) {
+                        String examQuestionId = Integer.toString(subjectItemBean.getExamQuestionId());
+                        stringBuffer2.append(examQuestionId).append(",");
+                    }
+                    stringBuffer2.deleteCharAt(stringBuffer2.length()-1);
+                    String examQuestionIds2 = stringBuffer2.toString();
+                    deleteSelected(accessToken,examQuestionIds2,delFlag);
+                    break;
+                case R.id.tv_recover:
+                    StringBuffer stringBuffer = new StringBuffer("");
+                    for (PageBean.SubjectItemBean subjectItemBean : appContext.rubbishlist) {
+                        String examQuestionId = Integer.toString(subjectItemBean.getExamQuestionId());
+                        stringBuffer.append(examQuestionId).append(",");
+                    }
+                    stringBuffer.deleteCharAt(stringBuffer.length()-1);
+                    String examQuestionIds = stringBuffer.toString();
+                    recoverErrorQuestions(accessToken, examQuestionIds);
+                    break;
+                case R.id.tv_selectall:
+                    selectedAll();
+                    break;
+            }
+        }
+    }
 }

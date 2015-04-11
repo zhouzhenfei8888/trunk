@@ -427,6 +427,8 @@ public class SubjectFragment extends Fragment {
         collate = (TextView) view.findViewById(R.id.tv_collate);
         delete = (TextView) view.findViewById(R.id.tv_delete);
         print = (TextView) view.findViewById(R.id.tv_print);
+        print.setOnClickListener(new chickListener());
+        delete.setOnClickListener(new chickListener());
         collate.setOnClickListener(new chickListener());
         selectAll.setOnClickListener(new chickListener());
 
@@ -764,10 +766,87 @@ public class SubjectFragment extends Fragment {
                     selectedAll();
                     break;
                 case R.id.tv_print:
+                    StringBuffer stringBuffer = new StringBuffer("");
+                    for (PageBean.SubjectItemBean subjectItemBean : appContext.myselectlist) {
+                        String examQuestionId = Integer.toString(subjectItemBean.getExamQuestionId());
+                        stringBuffer.append(examQuestionId).append(",");
+                    }
+                    stringBuffer.deleteCharAt(stringBuffer.length()-1);
+                    String examQuestionIds = stringBuffer.toString();
+                    printSelected(accessToken, gradeId, subjectId, examQuestionIds);
                     break;
                 case R.id.tv_delete:
+                    int delFlag = 0;
+                    StringBuffer stringBuffer2 = new StringBuffer("");
+                    for (PageBean.SubjectItemBean subjectItemBean : appContext.myselectlist) {
+                        String examQuestionId = Integer.toString(subjectItemBean.getExamQuestionId());
+                        stringBuffer2.append(examQuestionId).append(",");
+                    }
+                    stringBuffer2.deleteCharAt(stringBuffer2.length()-1);
+                    String examQuestionIds2 = stringBuffer2.toString();
+                    deleteSelected(accessToken,examQuestionIds2,delFlag);
                     break;
             }
         }
+    }
+
+    private void deleteSelected(final String accessToken, final String examQuestionIds, final int delFlag) {
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 1){
+                    UIHelper.ToastMessage(getActivity(),"删除成功！");
+                    singleMode();
+                }else {
+                    ((AppException)msg.obj).makeToast(getActivity());
+                }
+            }
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.deleteSelected(accessToken,examQuestionIds,delFlag);
+                    msg.what = 1;
+                    msg.obj = responseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    private void printSelected(final String accessToken, final int gradeId, final int subjectId, final String examQuestionIds) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    UIHelper.ToastMessage(getActivity(), "打印成功！");
+                    singleMode();
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(getActivity());
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<Integer> responseBean = appContext.printSelected(accessToken,gradeId,subjectId,examQuestionIds);
+                    msg.what = 1;
+                    msg.obj = responseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 }

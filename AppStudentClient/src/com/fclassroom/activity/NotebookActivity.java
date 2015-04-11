@@ -21,6 +21,7 @@ import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.appstudentclient.R;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +73,99 @@ public class NotebookActivity extends BaseActivity {
             getPrintHistoryErrorQuestions(accessToken, gradeId, subjectId, id);
         }else if("collate".equals(from)){
             getNoteBookQuestions(accessToken,gradeId,subjectId,id);
+        }else if("Errortag".equals(from)){
+            getErrorTagQuestions(accessToken,gradeId,subjectId,id);
+        }else if("search".equals(from)){
+            searchQuestions(accessToken,gradeId,subjectId,name);
         }
+    }
+
+    private void searchQuestions(final String accessToken, final int gradeId, final int subjectId, final String keyword) {
+        final ProgressDialog progressDialog = ProgressDialog.show(this, "", "正在加载。。。");
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
+                    List<PageBean.SubjectItemBean> newlist = responseBean.getData().getList();
+                    list.addAll(newlist);
+                    total.setText("共计"+responseBean.getData().getPageSize()+"题");
+                    subjectAdapter = new SubjectAdapter(NotebookActivity.this, list, mlistView);
+                    mlistView.setAdapter(subjectAdapter);
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(NotebookActivity.this, msg.obj.toString());
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(NotebookActivity.this);
+                }
+                progressDialog.dismiss();
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<PageBean> responseBean = appContext.searchQuestions(accessToken, gradeId, subjectId, keyword);
+                    if (msg.what == 0) {
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    } else {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    private void getErrorTagQuestions(final String accessToken, final int gradeId, final int subjectId, final int tagId) {
+        final ProgressDialog progressDialog = ProgressDialog.show(this, "", "正在加载。。。");
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
+                    List<PageBean.SubjectItemBean> newlist = responseBean.getData().getList();
+                    list.addAll(newlist);
+                    total.setText("共计"+responseBean.getData().getPageSize()+"题");
+                    subjectAdapter = new SubjectAdapter(NotebookActivity.this, list, mlistView);
+                    mlistView.setAdapter(subjectAdapter);
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(NotebookActivity.this, msg.obj.toString());
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(NotebookActivity.this);
+                }
+                progressDialog.dismiss();
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<PageBean> responseBean = appContext.getErrorTagQuestions(accessToken, gradeId, subjectId, tagId);
+                    if (msg.what == 0) {
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    } else {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     private void getNoteBookQuestions(final String accessToken, final int gradeId, final int subjectId, final int NoteBookId) {

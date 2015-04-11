@@ -563,7 +563,7 @@ public class ApiClient {
         params.put("pageSize", pageSize);
         String url = _MakeURL(URLs.GetPrintplanList, params);
         String response = http_get(appContext, url);
-        System.out.println("aaa"+response);
+        System.out.println("aaa" + response);
         BaseResponseBean<PageBean> responseBean = JsonUtils.getPrintplanList(response);
         return responseBean;
     }
@@ -576,7 +576,7 @@ public class ApiClient {
         params.put("orderTime", orderTime);
         String url = _MakeURL(URLs.GetPrintRecoderList, params);
         String response = http_get(appContext, url);
-        System.out.println("bbb"+response);
+        System.out.println("bbb" + response);
         BaseResponseBean<List<PrintRecoderBean>> responseBean = JsonUtils.getPrintRecoderList(response);
         return responseBean;
     }
@@ -588,7 +588,7 @@ public class ApiClient {
         params.put("subjectId", subjectId);
         String url = _MakeURL(URLs.GetPrintNum, params);
         String response = http_get(appContext, url);
-        System.out.println("ccc"+response);
+        System.out.println("ccc" + response);
         BaseResponseBean<PrintNumBean> responseBean = JsonUtils.getPrintNum(response);
         return responseBean;
     }
@@ -606,11 +606,11 @@ public class ApiClient {
     public static BaseResponseBean<String> addNoteBookToPrintPlan(AppContext appContext, String accessToken, int gradeId, int subjectId, int id) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("gradeId",gradeId);
-        params.put("subjectId",subjectId);
-        params.put("noteBookId",id);
-        String url = _MakeURL(URLs.AddNoteBookToPrintPlan,params);
-        String response = http_get(appContext,url);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("noteBookId", id);
+        String url = _MakeURL(URLs.AddNoteBookToPrintPlan, params);
+        String response = http_get(appContext, url);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
     }
@@ -618,11 +618,11 @@ public class ApiClient {
     public static BaseResponseBean<PageBean> getExamQuestionsByExam(AppContext appContext, String accessToken, int gradeId, int subjectId, int examId) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("gradeId",gradeId);
-        params.put("subjectId",subjectId);
-        params.put("examId",examId);
-        String url = _MakeURL(URLs.GetExamQuestionsByExam,params);
-        String response = http_get(appContext,url);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("examId", examId);
+        String url = _MakeURL(URLs.GetExamQuestionsByExam, params);
+        String response = http_get(appContext, url);
         BaseResponseBean<PageBean> responseBean = JsonUtils.getPrintplanList(response);
         return responseBean;
     }
@@ -630,10 +630,10 @@ public class ApiClient {
     public static BaseResponseBean<String> setQuestionSignLevel(AppContext appContext, String accessToken, int examQuestionId, int signLevel) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("examQuestionId",examQuestionId);
-        params.put("signLevel",signLevel);
-        String url = _MakeURL(URLs.AddQuestionSignLevel,params);
-        String response = http_get(appContext,url);
+        params.put("examQuestionId", examQuestionId);
+        params.put("signLevel", signLevel);
+        String url = _MakeURL(URLs.AddQuestionSignLevel, params);
+        String response = http_get(appContext, url);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
     }
@@ -641,10 +641,10 @@ public class ApiClient {
     public static BaseResponseBean<String> deleteErrorQuestion(AppContext appContext, String accessToken, int examQuestionId, int delFlag) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("examQuestionId",examQuestionId);
-        params.put("delFlag",delFlag);
-        String url = _MakeURL(URLs.DelErrorQuestion,params);
-        String response = http_get(appContext,url);
+        params.put("examQuestionId", examQuestionId);
+        params.put("delFlag", delFlag);
+        String url = _MakeURL(URLs.DelErrorQuestion, params);
+        String response = http_get(appContext, url);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
     }
@@ -652,21 +652,21 @@ public class ApiClient {
     public static String AddErrorQuestionToNoteBook(AppContext appContext, String accessToken, int examQuestionId, int id) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("examQuestionId",examQuestionId);
-        params.put("noteBookId",id);
-        String url = _MakeURL(URLs.AddErrorQuestionToNoteBook,params);
-        String response = http_get(appContext,url);
+        params.put("examQuestionId", examQuestionId);
+        params.put("noteBookId", id);
+        String url = _MakeURL(URLs.AddErrorQuestionToNoteBook, params);
+        String response = http_get(appContext, url);
         return response;
     }
 
     public static BaseResponseBean<PageBean> getPrintHistoryErrorQuestions(AppContext appContext, String accessToken, int gradeId, int subjectId, int printHistoryId) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("gradeId",gradeId);
-        params.put("subjectId",subjectId);
-        params.put("printHistoryId",printHistoryId);
-        String url = _MakeURL(URLs.GetPrintHistoryErrorQuestions,params);
-        String response = http_get(appContext,url);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("printHistoryId", printHistoryId);
+        String url = _MakeURL(URLs.GetPrintHistoryErrorQuestions, params);
+        String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<PageBean> responseBean = JsonUtils.getPrintplanList(response);
         return responseBean;
@@ -675,21 +675,21 @@ public class ApiClient {
     public static BaseResponseBean<Boolean> SendAuthCode(AppContext appContext, String accessToken, String telephoneNum) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("phone",telephoneNum);
-        String url = _MakeURL(URLs.SendAuthCode,params);
-        String response = http_get(appContext,url);
+        params.put("phone", telephoneNum);
+        String url = _MakeURL(URLs.SendAuthCode, params);
+        String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<Boolean> responseBean = JsonUtils.praseBoolean(response);
         return responseBean;
     }
 
-    public static void bindphone(AppContext appContext, String accessToken, String authCode,String telephone) throws AppException {
+    public static void bindphone(AppContext appContext, String accessToken, String authCode, String telephone) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("phone",telephone);
-        params.put("code",authCode);
-        String url = _MakeURL(URLs.BindPhone,params);
-        String response  = http_get(appContext,url);
+        params.put("phone", telephone);
+        params.put("code", authCode);
+        String url = _MakeURL(URLs.BindPhone, params);
+        String response = http_get(appContext, url);
         System.out.println(response);
         return;
     }
@@ -697,12 +697,73 @@ public class ApiClient {
     public static BaseResponseBean<PageBean> getNoteBookQuestions(AppContext appContext, String accessToken, int gradeId, int subjectId, int noteBookId) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("gradeId",gradeId);
-        params.put("subjectId",subjectId);
-        params.put("noteBookId",noteBookId);
-        String url = _MakeURL(URLs.GetNoteBookQuestions,params);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("noteBookId", noteBookId);
+        String url = _MakeURL(URLs.GetNoteBookQuestions, params);
+        String response = http_get(appContext, url);
+        BaseResponseBean<PageBean> responseBean = JsonUtils.getPrintplanList(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<Integer> printSelected(AppContext appContext, String accessToken, int gradeId, int subjectId, String examQuestionIds) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("examQuestionIds", examQuestionIds);
+        String url = _MakeURL(URLs.PrintSelected, params);
+        String response = http_get(appContext, url);
+        System.out.println(response);
+        BaseResponseBean<Integer> responseBean = JsonUtils.praseInt(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<String> deleteSelected(AppContext appContext, String accessToken, String examQuestionIds, int delFlag) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("examQuestionIds", examQuestionIds);
+        params.put("delFlag",delFlag);
+        String url = _MakeURL(URLs.DeleteSelected,params);
         String response = http_get(appContext,url);
-        System.out.println("..."+response);
+        System.out.println(response);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<String> recoverErrorQuestions(AppContext appContext, String accessToken, String examQuestionIds) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("examQuestionIds", examQuestionIds);
+        String url = _MakeURL(URLs.RecoverErrorQuestions,params);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<PageBean> getErrorTagQuestions(AppContext appContext, String accessToken, int gradeId, int subjectId, int tagId) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("tagIds", tagId);
+        String url = _MakeURL(URLs.GetSubjectDetail, params);
+        String response = http_get(appContext, url);
+        System.out.println(response);
+        BaseResponseBean<PageBean> responseBean = JsonUtils.getPrintplanList(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<PageBean> searchQuestions(AppContext appContext, String accessToken, int gradeId, int subjectId, String keyword) throws AppException, UnsupportedEncodingException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("keyword", URLEncoder.encode(keyword, "utf-8"));
+        String url = _MakeURL(URLs.GetSubjectDetail, params);
+        String response = http_get(appContext, url);
+        System.out.println(response);
         BaseResponseBean<PageBean> responseBean = JsonUtils.getPrintplanList(response);
         return responseBean;
     }

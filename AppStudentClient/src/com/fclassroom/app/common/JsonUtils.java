@@ -322,4 +322,17 @@ public class JsonUtils {
         }
         return pojo;
     }
+
+    public static BaseResponseBean<Integer> praseInt(String jsonString) {
+        BaseResponseBean<Integer> pojo = null;
+        try {
+            JavaType type = mapper.getTypeFactory().constructParametricType(BaseResponseBean.class, Integer.class);
+            pojo = mapper.readValue(jsonString, type);
+        } catch (Exception e) {
+            pojo = new BaseResponseBean<Integer>();
+            pojo.setError_code(-1);
+            e.printStackTrace();
+        }
+        return pojo;
+    }
 }

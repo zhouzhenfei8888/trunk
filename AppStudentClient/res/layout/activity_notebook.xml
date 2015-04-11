@@ -22,7 +22,7 @@
             android:textSize="@dimen/text_size"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="共计20题" />
+            android:text="共计0题" />
 
         <TextView
             android:id="@+id/tv_printall"

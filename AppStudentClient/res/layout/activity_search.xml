@@ -12,30 +12,10 @@
         android:background="@color/toolbar_color"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        >
+        android:paddingLeft="20dp">
 
-      <!--  <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:iconifiedByDefault="false"
-            android:queryHint="@string/search"></SearchView>-->
-      <!--  <EditText
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:hint="搜索"
-            android:drawableLeft="@drawable/ic_launcher"
-            android:drawableRight="@drawable/ic_launcher"
-            android:drawablePadding="5dp"
-            android:padding="6dp"
-            />
--->
-        <include layout="@layout/search_layout"/>
+        <include layout="@layout/search_layout" />
+
         <TextView
             android:id="@+id/cancle"
             android:layout_width="wrap_content"
@@ -46,45 +26,116 @@
             android:textSize="@dimen/text_size" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_timesearch"
+    <LinearLayout
+        android:id="@+id/linear_timesearch"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_below="@id/linear_topbar"
         android:gravity="center"
-        android:text="试试看时间搜索"
-        android:textSize="20sp" />
+        android:visibility="visible"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_green_clock" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="试试看时间搜索"
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linear_searchrecord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_timesearch"
+        android:layout_below="@id/linear_timesearch"
+        android:background="@color/background_color"
+        android:visibility="visible"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_clock"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:text="搜索记录0条" />
+
+        <ImageView
+            android:id="@+id/iv_cleanrecord"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/margin_size"
+            android:src="@drawable/ic_delete2" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_searchrecoder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linear_searchrecord"
+        android:visibility="visible"></ListView>
+
+<!--第二个页面-->
+    <LinearLayout
+        android:id="@+id/linear_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_topbar"
+        android:background="@color/background_color"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/icon_searchtag"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:text="标签"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/linear_tags"></ListView>
+
+    <LinearLayout
+        android:id="@+id/linear_notebooks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lv_tags"
+        android:visibility="gone"
         android:background="@color/background_color"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/ic_clock"
+            android:drawableLeft="@drawable/icon_notebooks"
             android:drawablePadding="5dp"
-            android:padding="5dp"
-            android:text="搜索记录2条" />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/margin_size"
-            android:src="@drawable/ic_delete2"/>
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:text="整理本"
+            android:visibility="visible" />
     </LinearLayout>
-
     <ListView
-        android:id="@+id/lv_searchrecoder"
-        android:layout_below="@id/linear_searchrecord"
-        android:layout_width="match_parent"
+        android:id="@+id/lv_notebooks"
+        android:layout_below="@id/linear_notebooks"
         android:visibility="gone"
-        android:layout_height="match_parent"></ListView>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
 </RelativeLayout>

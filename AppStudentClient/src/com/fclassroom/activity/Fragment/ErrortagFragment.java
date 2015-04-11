@@ -49,7 +49,7 @@ public class ErrortagFragment extends Fragment {
 
     private ListView mlistView;
     private AppContext appContext;
-    private int gradeId,subjectId;
+    private int gradeId, subjectId;
     private String accessToken;
     private List<HashMap<String, Object>> list;
     private List<String> TagNameList;
@@ -79,6 +79,8 @@ public class ErrortagFragment extends Fragment {
 
     Bundle savedInstanceState;
 
+    List<ErrorTagBean> errorTagBeanlist;
+
     public ErrortagFragment() {
         // Required empty public constructor
     }
@@ -99,34 +101,34 @@ public class ErrortagFragment extends Fragment {
     }
 
     private void getTags() {
-        final Handler handler = new Handler(){
+        final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                if(msg.what == 1){
+                if (msg.what == 1) {
                     BaseResponseBean<List<ErrorTagBean>> responseBean = (BaseResponseBean<List<ErrorTagBean>>) msg.obj;
-                    List<ErrorTagBean> list = responseBean.getData();
-                    for(ErrorTagBean errorTagBean:list){
+                    errorTagBeanlist = responseBean.getData();
+                    for (ErrorTagBean errorTagBean : errorTagBeanlist) {
                         TagNameList.add(errorTagBean.getName());
                     }
                     mItems.addAll(TagNameList);
                     new Poplulate().execute(mItems);
-                }else if(msg.what == 0){
-                    UIHelper.ToastMessage(getActivity(),msg.obj.toString());
-                }else if(msg.what == -1){
-                    ((AppException)msg.obj).makeToast(getActivity());
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(getActivity(), msg.obj.toString());
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(getActivity());
                 }
             }
         };
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 Message msg = new Message();
                 try {
-                    BaseResponseBean<List<ErrorTagBean>> responseBean = appContext.getErrorTagList(accessToken,subjectId);
-                    if(responseBean.getError_code() == 0){
+                    BaseResponseBean<List<ErrorTagBean>> responseBean = appContext.getErrorTagList(accessToken, subjectId);
+                    if (responseBean.getError_code() == 0) {
                         msg.what = 1;
                         msg.obj = responseBean;
-                    }else {
+                    } else {
                         msg.what = 0;
                         msg.obj = responseBean.getError_msg();
                     }
@@ -135,7 +137,7 @@ public class ErrortagFragment extends Fragment {
                     msg.what = -1;
                     msg.obj = e;
                 }
-               handler.sendMessage(msg);
+                handler.sendMessage(msg);
             }
         }.start();
     }
@@ -181,11 +183,17 @@ public class ErrortagFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UIHelper.ToastMessage(getActivity(),mListItems.get(position));
+                int tagId = 0;
+                for (ErrorTagBean errorTagBean :errorTagBeanlist) {
+                   if(errorTagBean.getName() == mListItems.get(position)){
+                        tagId = errorTagBean.getId();
+                       break;
+                   }
+                }
+                UIHelper.jump2Activity(getActivity(),NotebookActivity.class,tagId,mListItems.get(position),"Errortag");
             }
         });
     }
-
 
 
     private void setListAdaptor() {
@@ -300,7 +308,7 @@ public class ErrortagFragment extends Fragment {
 
                 String prev_section = "";
                 for (String current_item : items) {
-                    String item2PinYin = Trans2PinYin.getInstance().convert(current_item.substring(0,1));
+                    String item2PinYin = Trans2PinYin.getInstance().convert(current_item.substring(0, 1));
                     String current_section = item2PinYin.substring(0, 1).toUpperCase(Locale.getDefault());
 
                     if (!prev_section.equals(current_section)) {
