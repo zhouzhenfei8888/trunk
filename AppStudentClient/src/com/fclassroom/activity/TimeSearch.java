@@ -156,6 +156,7 @@ public class TimeSearch extends ActionBarActivity {
     private void initToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("自然月搜索");
+        mToolbar.setNavigationIcon(R.drawable.ic_launcher);
         mToolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
