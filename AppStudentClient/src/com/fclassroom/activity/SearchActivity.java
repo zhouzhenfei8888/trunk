@@ -38,7 +38,7 @@ public class SearchActivity extends BaseActivity {
     private ListView lvSearchRecord;
     private ArrayAdapter<String> arrayAdapterRecord, arrayAdapterTags, arrayAdapterNoteBooks;
     private EditText editText;
-    private ImageView delete,cleanRecord;
+    private ImageView delete, cleanRecord;
     private TextView cancle;
     private LinearLayout linearTimeSearch, linearSearchRecord, linearTags, linearNoteBooks;
     private ListView lvTags, lvNoteBooks;
@@ -49,6 +49,7 @@ public class SearchActivity extends BaseActivity {
     private List<String> ErrorBookNameList;
     List<ErrorTagBean> ErrorTagBeanlist;
     List<ErrorBookBean> ErrorBookBeanList;
+    List<String> historylist;
 
     private void getTags() {
         final Handler handler = new Handler() {
@@ -159,12 +160,21 @@ public class SearchActivity extends BaseActivity {
         lvNoteBooks = (ListView) findViewById(R.id.lv_notebooks);
         cleanRecord = (ImageView) findViewById(R.id.iv_cleanrecord);
         String history = PreferenceUtils.getString(appContext, PreferenceUtils.HISTORY);
-        arrayAdapterRecord = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,Arrays.asList(history.split(" ")));
+        if(!"".equals(history)){
+            history = history.substring(1,history.length());
+        }
+        arrayAdapterRecord = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Arrays.asList(history.split(" ")));
         arrayAdapterTags = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, TagNameList);
         arrayAdapterNoteBooks = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ErrorBookNameList);
         lvSearchRecord.setAdapter(arrayAdapterRecord);
         lvTags.setAdapter(arrayAdapterTags);
         lvNoteBooks.setAdapter(arrayAdapterNoteBooks);
+        linearTimeSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UIHelper.jump2Activity(SearchActivity.this,TimeSearch.class);
+            }
+        });
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,14 +238,20 @@ public class SearchActivity extends BaseActivity {
                             history);
                 }
                 arrayAdapterTags.notifyDataSetChanged();
+                history = history.substring(1,history.length());
+                arrayAdapterRecord = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, Arrays.asList(history.split(" ")));
+                lvSearchRecord.setAdapter(arrayAdapterRecord);
                 UIHelper.jump2Activity(SearchActivity.this, NotebookActivity.class, tagId, etName, "search");
+                editText.setText("");
             }
         });
         cleanRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PreferenceUtils.putString(appContext,PreferenceUtils.HISTORY,"");
-                arrayAdapterRecord.notifyDataSetChanged();
+                PreferenceUtils.putString(appContext, PreferenceUtils.HISTORY, "");
+                String history = "";
+                arrayAdapterRecord = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, Arrays.asList(history.split(" ")));
+                lvSearchRecord.setAdapter(arrayAdapterRecord);
             }
         });
         lvNoteBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -257,7 +273,11 @@ public class SearchActivity extends BaseActivity {
                             history);
                 }
                 arrayAdapterNoteBooks.notifyDataSetChanged();
+                history = history.substring(1,history.length());
+                arrayAdapterRecord = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, Arrays.asList(history.split(" ")));
+                lvSearchRecord.setAdapter(arrayAdapterRecord);
                 UIHelper.jump2Activity(SearchActivity.this, NotebookActivity.class, bookId, etName, "search");
+                editText.setText("");
             }
         });
     }

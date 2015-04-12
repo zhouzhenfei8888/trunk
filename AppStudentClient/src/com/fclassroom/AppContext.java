@@ -906,22 +906,26 @@ public class AppContext extends Application {
     }
 
     public BaseResponseBean<Integer> printSelected(String accessToken, int gradeId, int subjectId, String examQuestionIds) throws AppException {
-        return ApiClient.printSelected(this, accessToken,gradeId,subjectId,examQuestionIds);
+        return ApiClient.printSelected(this, accessToken, gradeId, subjectId, examQuestionIds);
     }
 
     public BaseResponseBean<String> deleteSelected(String accessToken, String examQuestionIds, int delFlag) throws AppException {
-        return ApiClient.deleteSelected(this,accessToken,examQuestionIds,delFlag);
+        return ApiClient.deleteSelected(this, accessToken, examQuestionIds, delFlag);
     }
 
     public BaseResponseBean<String> recoverErrorQuestions(String accessToken, String examQuestionIds) throws AppException {
-        return ApiClient.recoverErrorQuestions(this,accessToken,examQuestionIds);
+        return ApiClient.recoverErrorQuestions(this, accessToken, examQuestionIds);
     }
 
     public BaseResponseBean<PageBean> getErrorTagQuestions(String accessToken, int gradeId, int subjectId, int tagId) throws AppException {
-        return ApiClient.getErrorTagQuestions(this,accessToken,gradeId,subjectId,tagId);
+        return ApiClient.getErrorTagQuestions(this, accessToken, gradeId, subjectId, tagId);
     }
 
     public BaseResponseBean<PageBean> searchQuestions(String accessToken, int gradeId, int subjectId, String keyword) throws AppException, UnsupportedEncodingException {
-        return ApiClient.searchQuestions(this,accessToken,gradeId,subjectId,keyword);
+        return ApiClient.searchQuestions(this, accessToken, gradeId, subjectId, keyword);
+    }
+
+    public BaseResponseBean<PageBean> getTimeSearchSubjectDetail(String accessToken, int gradeId, int subjectId, int noteBookId, int unOrganize, String orderBy, String orderUpOrDown, int pageNo, int pageSize, int startTime, int endTime) throws AppException {
+        return ApiClient.getTimeSearchSubjectDetail(this, accessToken, gradeId, subjectId, noteBookId, unOrganize, orderBy, orderUpOrDown, pageNo, pageSize, startTime, endTime);
     }
 }

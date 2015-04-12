@@ -495,6 +495,7 @@ public class ApiClient {
         params.put("noteBookId", noteBookId);
         params.put("unOrganize", unOrganize);
         params.put(orderBy, orderUpOrDown);
+        System.out.println(orderBy+" "+orderUpOrDown);
         params.put("pageSize", pageSize);
         params.put("pageNo", pageNo);
         String url = _MakeURL(URLs.GetSubjectDetail, params);
@@ -765,6 +766,26 @@ public class ApiClient {
         String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<PageBean> responseBean = JsonUtils.getPrintplanList(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<PageBean> getTimeSearchSubjectDetail(AppContext appContext,String accessToken, int gradeId, int subjectId, int noteBookId, int unOrganize, String orderBy, String orderUpOrDown, int pageNo, int pageSize, int startTime, int endTime) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("noteBookId", noteBookId);
+        params.put("unOrganize", unOrganize);
+        params.put(orderBy, orderUpOrDown);
+        System.out.println(orderBy + " " + orderUpOrDown);
+        params.put("pageSize", pageSize);
+        params.put("pageNo", pageNo);
+        params.put("startTime",startTime);
+        params.put("endTime",endTime);
+        String url = _MakeURL(URLs.GetSubjectDetail, params);
+        String response = http_get(appContext, url);
+        System.out.println(response);
+        BaseResponseBean<PageBean> responseBean = JsonUtils.getSubjectDetail(response);
         return responseBean;
     }
 }

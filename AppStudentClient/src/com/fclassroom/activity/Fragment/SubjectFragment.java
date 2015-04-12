@@ -89,9 +89,9 @@ public class SubjectFragment extends Fragment {
     private int subjectId;
     private int noteBookId;
     private int unOrganize;
-    private String orderTime;
-    private String orderRate;
-    private String orderLevel;
+    private String orderTime = "orderTime";
+    private String orderRate = "orderRate";
+    private String orderLevel = "orderLevel";
     private String orderBy = orderTime;
     private final static String orderUp = "ASC";
     private final static String orderDown = "DESC";

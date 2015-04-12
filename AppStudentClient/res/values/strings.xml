@@ -86,5 +86,6 @@
     <string name="title_activity_about">AboutActivity</string>
     <string name="title_activity_feedback">FeedbackActivity</string>
     <string name="title_activity_check_result">CheckResultActivity</string>
+    <string name="title_activity_time_search">TimeSearch</string>
 
 </resources>

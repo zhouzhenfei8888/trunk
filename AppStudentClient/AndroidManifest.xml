@@ -31,8 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.fclassroom.activity.HomeActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name="com.fclassroom.activity.HomeActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -112,6 +113,10 @@
         <activity
             android:name="com.fclassroom.activity.CheckResultActivity"
             android:label="@string/title_activity_check_result" >
+        </activity>
+        <activity
+            android:name="com.fclassroom.activity.TimeSearch"
+            android:label="@string/title_activity_time_search" >
         </activity>
     </application>
 
