@@ -42,6 +42,7 @@ import com.fclassroom.app.widget.TagView.TagView;
 import com.fclassroom.appstudentclient.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -78,6 +79,7 @@ public class DetailActivity extends BaseActivity {
     private String accessToken;
     private int gradeId;
     private int subjectId;
+    private int requestCode = 1;
     private CollateFragment.BookAdapter bookAdapter;
     private List<ErrorBookBean> ErrorBookList;
     private List<String> stringList;
@@ -323,8 +325,23 @@ public class DetailActivity extends BaseActivity {
     }
 
     private void showActivityFromBottom() {
-        UIHelper.jump2Activity(this, AddwrongtagActivity.class);
+        Intent intent = new Intent(this,AddwrongtagActivity.class);
+        intent.putExtra("examQuestionId",subjectItemBean.getExamQuestionId());
+        startActivityForResult(intent, requestCode);
 //        overridePendingTransition(R.anim.openfrombottom, R.anim.nomove);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(1 == resultCode){
+            String tagNames = data.getExtras().getString("tags");
+            List<String> listtags = Arrays.asList(tagNames.split(" "));
+            System.out.println(tagNames + "................");
+            for(String tagname:listtags){
+                tagView.add(new Tag(tagname));
+                tagView.drawTags();
+            }
+        }
     }
 
     /**

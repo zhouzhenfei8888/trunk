@@ -928,4 +928,24 @@ public class AppContext extends Application {
     public BaseResponseBean<PageBean> getTimeSearchSubjectDetail(String accessToken, int gradeId, int subjectId, int noteBookId, int unOrganize, String orderBy, String orderUpOrDown, int pageNo, int pageSize, int startTime, int endTime) throws AppException {
         return ApiClient.getTimeSearchSubjectDetail(this, accessToken, gradeId, subjectId, noteBookId, unOrganize, orderBy, orderUpOrDown, pageNo, pageSize, startTime, endTime);
     }
+
+    public void getKnowledgePoint(String accessToken, int gradeId, int subjectId) throws AppException {
+         ApiClient.getKnowledgePoint(this,accessToken,gradeId,subjectId);
+    }
+
+    public void addErrorQuestionTag(String accessToken, int subjectId, int examQuestionId, String tagname) throws AppException, UnsupportedEncodingException {
+        ApiClient.addErrorQuestionTag(this,accessToken,subjectId,examQuestionId,tagname);
+    }
+
+    public void delPrintCartErrorQuestions(String accessToken, int gradeId, int subjectId, String examQuestionIds) throws AppException {
+        ApiClient.delPrintCartErrorQuestions(this,accessToken,gradeId,subjectId,examQuestionIds);
+    }
+
+    public BaseResponseBean<String> downloadErrorQuestions(String accessToken, int gradeId, int subjectId, int downloadType, int printHistoryId, String examQuestionIds) throws AppException {
+        return ApiClient.downloadErrorQuestions(this,accessToken,gradeId,subjectId,downloadType,printHistoryId,examQuestionIds);
+    }
+
+    public void downloadfile(String filename) throws AppException, IOException {
+        ApiClient.downloadfile(this,filename);
+    }
 }

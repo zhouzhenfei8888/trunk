@@ -188,8 +188,8 @@ public class TimeSearch extends ActionBarActivity {
 //        new BigDecimal(sinceTime.getTimeInMillis() + "").divide(new BigDecimal("1000")).longValue();
         Date starttime = sinceTime.getTime();
         Date endtime = maxTime.getTime();
-        int start = (int) starttime.getTime();
-        int end = (int) endtime.getTime();
+        int start = (int) starttime.getTime()/1000;
+        int end = (int) endtime.getTime()/1000;
         getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown,start,end);
     }
 

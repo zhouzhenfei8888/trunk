@@ -20,7 +20,6 @@ import com.fclassroom.AppContext;
 import com.fclassroom.AppException;
 import com.fclassroom.activity.NotebookActivity;
 import com.fclassroom.app.adapter.PrintRecordAdapter;
-import com.fclassroom.app.adapter.PrintplanAdapter;
 import com.fclassroom.app.adapter.SubjectAdapter;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.PageBean;
@@ -31,8 +30,8 @@ import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.app.widget.ScrollShowHeaderListView;
 import com.fclassroom.appstudentclient.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -66,7 +65,9 @@ public class PrintplanFragment extends Fragment {
     private TextView tv;
     private RelativeLayout topView;
     private LinearLayout bottomView;
-    private TextView selectAll,downLoad,haveSelected,printNow,delete;
+    private TextView selectAll, print, haveSelected, share, delete;
+    int downloadType = 0;
+    int printHistoryId = 0;
 
     /**
      * Use this factory method to create a new instance of
@@ -123,7 +124,7 @@ public class PrintplanFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_printplan, container, false);
         initViews(view);
         if (mParam1 == 0) {
-            printplanAdapter = new SubjectAdapter(getActivity(), PrintPlanList,lv);
+            printplanAdapter = new SubjectAdapter(getActivity(), PrintPlanList, lv);
             lv.setAdapter(printplanAdapter);
         } else if (mParam1 == 1) {
             printRecordAdapter = new PrintRecordAdapter(getActivity(), R.layout.listview_itemprintrecord, PrintRecordList);
@@ -235,7 +236,7 @@ public class PrintplanFragment extends Fragment {
                     BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
                     List<PageBean.SubjectItemBean> list = responseBean.getData().getList();
                     PrintPlanList.addAll(list);
-                    printplanAdapter = new SubjectAdapter(getActivity(), PrintPlanList,lv);
+                    printplanAdapter = new SubjectAdapter(getActivity(), PrintPlanList, lv);
                     lv.setAdapter(printplanAdapter);
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
@@ -272,18 +273,21 @@ public class PrintplanFragment extends Fragment {
         inflater = LayoutInflater.from(getParentFragment().getActivity());
         headView = inflater.inflate(R.layout.listview_head_rubbish, null, false);
         tv = (TextView) headView.findViewById(R.id.tv_head);
-        topView = (RelativeLayout)view.findViewById(R.id.linear_top);
-        bottomView = (LinearLayout)view.findViewById(R.id.linear_bottom);
+        topView = (RelativeLayout) view.findViewById(R.id.linear_top);
+        bottomView = (LinearLayout) view.findViewById(R.id.linear_bottom);
 //        if (mParam1 == 0) {
 //            tv.setText("待打印100题");
 //        } else if (mParam1 == 1) {
 //            tv.setText("打印记录20条");
 //        }
-        selectAll = (TextView)view.findViewById(R.id.tv_selectall);
-        haveSelected = (TextView)view.findViewById(R.id.tv_haveselected);
-        downLoad = (TextView)view.findViewById(R.id.tv_download);
-        delete = (TextView)view.findViewById(R.id.tv_delete);
-        printNow = (TextView)view.findViewById(R.id.tv_printnow);
+        selectAll = (TextView) view.findViewById(R.id.tv_selectall);
+        haveSelected = (TextView) view.findViewById(R.id.tv_haveselected);
+        print = (TextView) view.findViewById(R.id.tv_print);
+        delete = (TextView) view.findViewById(R.id.tv_delete);
+        share = (TextView) view.findViewById(R.id.tv_share);
+        share.setOnClickListener(new clickListener());
+        delete.setOnClickListener(new clickListener());
+        print.setOnClickListener(new clickListener());
         selectAll.setOnClickListener(new clickListener());
         scrollShowHeaderListView.setUpHeaderViews(headView);
         lv = scrollShowHeaderListView.getListView();
@@ -309,7 +313,7 @@ public class PrintplanFragment extends Fragment {
                             appContext.printlist.add(subjectItemBean);
                         }
                         updateSeletedCount();
-                    }else{
+                    } else {
 
                     }
 
@@ -364,21 +368,121 @@ public class PrintplanFragment extends Fragment {
         updateSeletedCount();
     }
 
-    class clickListener implements View.OnClickListener{
+    class clickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.tv_selectall:
                     selectedAll();
                     break;
-                case R.id.tv_download:
+                case R.id.tv_print:
+                    StringBuilder examQuestionIdsBuilder2 = new StringBuilder("");
+                    for (PageBean.SubjectItemBean subjectItemBean : appContext.printlist) {
+                        examQuestionIdsBuilder2.append(subjectItemBean.getExamQuestionId()).append(",");
+                    }
+                    examQuestionIdsBuilder2.deleteCharAt(examQuestionIdsBuilder2.length() - 1);
+                    String examQuestionIds2 = examQuestionIdsBuilder2.toString();
+                    downloadErrorQuestions(accessToken, gradeId, subjectId, downloadType, printHistoryId, examQuestionIds2);
                     break;
-                case R.id.tv_printnow:
+                case R.id.tv_share:
                     break;
                 case R.id.tv_delete:
+                    StringBuilder examQuestionIdsBuilder = new StringBuilder("");
+                    for (PageBean.SubjectItemBean subjectItemBean : appContext.printlist) {
+                        examQuestionIdsBuilder.append(subjectItemBean.getExamQuestionId()).append(",");
+                    }
+                    examQuestionIdsBuilder.deleteCharAt(examQuestionIdsBuilder.length() - 1);
+                    String examQuestionIds = examQuestionIdsBuilder.toString();
+                    delPrintCartErrorQuestions(accessToken, gradeId, subjectId, examQuestionIds);
                     break;
 
             }
         }
+    }
+
+    private void downloadErrorQuestions(final String accessToken, final int gradeId, final int subjectId, final int downloadType, final int printHistoryId, final String examQuestionIds) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(getActivity());
+                } else if(msg.what == 1){
+                    String str = ((BaseResponseBean<String>)msg.obj).getData();
+                    downloadfile(str);
+                    singleMode();
+                }else if(msg.what == 0){
+                    UIHelper.ToastMessage(getActivity(),msg.obj.toString());
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.downloadErrorQuestions(accessToken, gradeId, subjectId, downloadType, printHistoryId, examQuestionIds);
+                    if(responseBean.getError_code() == 0){
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    }else {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    private void downloadfile(final String filename) {
+        Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+            }
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    appContext.downloadfile(filename);
+                } catch (AppException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    private void delPrintCartErrorQuestions(final String accessToken, final int gradeId, final int subjectId, final String examQuestionIds) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(getActivity());
+                } else {
+                    singleMode();
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    appContext.delPrintCartErrorQuestions(accessToken, gradeId, subjectId, examQuestionIds);
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 }

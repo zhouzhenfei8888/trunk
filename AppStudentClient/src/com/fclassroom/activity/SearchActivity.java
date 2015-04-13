@@ -160,10 +160,10 @@ public class SearchActivity extends BaseActivity {
         lvNoteBooks = (ListView) findViewById(R.id.lv_notebooks);
         cleanRecord = (ImageView) findViewById(R.id.iv_cleanrecord);
         String history = PreferenceUtils.getString(appContext, PreferenceUtils.HISTORY);
-        if(!"".equals(history)){
-            history = history.substring(1,history.length());
+        if (!"".equals(history) && history != null) {
+            history = history.substring(1, history.length());
+            arrayAdapterRecord = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Arrays.asList(history.split(" ")));
         }
-        arrayAdapterRecord = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Arrays.asList(history.split(" ")));
         arrayAdapterTags = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, TagNameList);
         arrayAdapterNoteBooks = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ErrorBookNameList);
         lvSearchRecord.setAdapter(arrayAdapterRecord);
@@ -172,7 +172,7 @@ public class SearchActivity extends BaseActivity {
         linearTimeSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIHelper.jump2Activity(SearchActivity.this,TimeSearch.class);
+                UIHelper.jump2Activity(SearchActivity.this, TimeSearch.class);
             }
         });
         cancle.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +238,7 @@ public class SearchActivity extends BaseActivity {
                             history);
                 }
                 arrayAdapterTags.notifyDataSetChanged();
-                history = history.substring(1,history.length());
+                history = history.substring(1, history.length());
                 arrayAdapterRecord = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, Arrays.asList(history.split(" ")));
                 lvSearchRecord.setAdapter(arrayAdapterRecord);
                 UIHelper.jump2Activity(SearchActivity.this, NotebookActivity.class, tagId, etName, "search");
@@ -273,7 +273,7 @@ public class SearchActivity extends BaseActivity {
                             history);
                 }
                 arrayAdapterNoteBooks.notifyDataSetChanged();
-                history = history.substring(1,history.length());
+                history = history.substring(1, history.length());
                 arrayAdapterRecord = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, Arrays.asList(history.split(" ")));
                 lvSearchRecord.setAdapter(arrayAdapterRecord);
                 UIHelper.jump2Activity(SearchActivity.this, NotebookActivity.class, bookId, etName, "search");

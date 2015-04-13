@@ -46,4 +46,8 @@ public class URLs implements Serializable {
     public final static String PrintSelected = HOST_NOTE+"addMultiErrorQuestionToPrintCart.json";
     public final static String DeleteSelected = HOST_NOTE+"delErrorQuestions.json";
     public final static String RecoverErrorQuestions = HOST_NOTE+"recoverErrorQuestions.json";
+    public final static String GetKnowledgePoint = HOST+"getTopLevelKnos.json";
+    public final static String AddErrorQuestionTag = HOST_NOTE+"addErrorQuestionTag.json";
+    public final static String DelPrintCartErrorQuestions = HOST_NOTE+"delPrintCartErrorQuestions.json";
+    public final static String DownloadErrorQuestions = HOST_NOTE+"downloadErrorQuestions.json";
 }

@@ -100,7 +100,7 @@ public class TagView extends RelativeLayout {
 	 * @param attrs
 	 * @param defStyle
 	 */
-	private void initialize(Context ctx, AttributeSet attrs, int defStyle) {
+	public void initialize(Context ctx, AttributeSet attrs, int defStyle) {
 		mInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mViewTreeObserber = getViewTreeObserver();
 		mViewTreeObserber.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -147,7 +147,7 @@ public class TagView extends RelativeLayout {
 	 */
 	@SuppressLint("InflateParams")
 	@SuppressWarnings("deprecation")
-	private void drawTags() {
+	public void drawTags() {
 
 		if (!mInitialized) {
 			return;

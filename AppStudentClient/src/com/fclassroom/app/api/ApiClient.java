@@ -1,11 +1,18 @@
 package com.fclassroom.app.api;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +34,7 @@ import org.apache.commons.httpclient.params.HttpMethodParams;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 
 import com.fclassroom.AppContext;
 import com.fclassroom.AppException;
@@ -45,6 +53,7 @@ import com.fclassroom.app.bean.StudentInfoBean;
 import com.fclassroom.app.bean.SubjectBean;
 import com.fclassroom.app.bean.URLs;
 import com.fclassroom.app.bean.Update;
+import com.fclassroom.app.common.FileUtils;
 import com.fclassroom.app.common.JsonUtils;
 import com.fclassroom.app.common.PreferenceUtils;
 
@@ -355,6 +364,121 @@ public class ApiClient {
         } while (time < RETRY_TIME);
         return bitmap;
     }
+
+    /**
+     * 获取网络文件
+     *
+     * @param url
+     * @return
+     */
+    public static void getNetFile(String url) throws AppException {
+        HttpClient httpClient = null;
+        GetMethod httpGet = null;
+        Bitmap bitmap = null;
+        int time = 0;
+        do {
+            try {
+                httpClient = getHttpClient();
+                httpGet = getHttpGet(url, null, null);
+                int statusCode = httpClient.executeMethod(httpGet);
+                if (statusCode != HttpStatus.SC_OK) {
+                    throw AppException.http(statusCode);
+                }
+                InputStream inStream = httpGet.getResponseBodyAsStream();
+                FileUtils.write2SDFromInput("JK", "a.doc", inStream);
+                inStream.close();
+                break;
+            } catch (HttpException e) {
+                time++;
+                if (time < RETRY_TIME) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e1) {
+                    }
+                    continue;
+                }
+                // 发生致命的异常，可能是协议不对或者返回的内容有问题
+                e.printStackTrace();
+                throw AppException.http(e);
+            } catch (IOException e) {
+                time++;
+                if (time < RETRY_TIME) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e1) {
+                    }
+                    continue;
+                }
+                // 发生网络异常
+                e.printStackTrace();
+                throw AppException.network(e);
+            } finally {
+                // 释放连接
+                httpGet.releaseConnection();
+                httpClient = null;
+            }
+        } while (time < RETRY_TIME);
+    }
+
+    /**
+     * 从网络Url中下载文件
+     * @param urlStr
+     * @param fileName
+     * @param savePath
+     * @throws IOException
+     */
+    public static void  downLoadFromUrl(String urlStr,String fileName,String savePath) throws IOException{
+        URL url = new URL(urlStr);
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        //设置超时间为3秒
+        conn.setConnectTimeout(3*1000);
+        //防止屏蔽程序抓取而返回403错误
+//        conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+
+        //得到输入流
+        InputStream inputStream = conn.getInputStream();
+        //获取自己数组
+        byte[] getData = readInputStream(inputStream);
+
+        //文件保存位置
+        File saveDir = new File(savePath);
+        if(!saveDir.exists()){
+            saveDir.mkdir();
+        }
+        File file = new File(saveDir+File.separator+fileName);
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.write(getData);
+        if(fos!=null){
+            fos.close();
+        }
+        if(inputStream!=null){
+            inputStream.close();
+        }
+
+
+        System.out.println("info:"+url+" download success");
+
+    }
+
+
+
+    /**
+     * 从输入流中获取字节数组
+     * @param inputStream
+     * @return
+     * @throws IOException
+     */
+    public static  byte[] readInputStream(InputStream inputStream) throws IOException {
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        while((len = inputStream.read(buffer)) != -1) {
+            bos.write(buffer, 0, len);
+        }
+        bos.close();
+        return bos.toByteArray();
+    }
+
 
     public static BaseResponseBean<LoginResponseBean> login(AppContext appContext, String account, String pwd) throws AppException {
         // TODO Auto-generated method stub
@@ -782,10 +906,89 @@ public class ApiClient {
         params.put("pageNo", pageNo);
         params.put("startTime",startTime);
         params.put("endTime",endTime);
+        System.out.println(startTime+"::"+endTime);
         String url = _MakeURL(URLs.GetSubjectDetail, params);
         String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<PageBean> responseBean = JsonUtils.getSubjectDetail(response);
         return responseBean;
+    }
+
+    public static void getKnowledgePoint(AppContext appContext, String accessToken, int gradeId, int subjectId) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        String url = _MakeURL(URLs.GetKnowledgePoint,params);
+        System.out.println(url);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+    }
+
+    public static void addErrorQuestionTag(AppContext appContext, String accessToken, int subjectId, int examQuestionId, String tagname) throws AppException, UnsupportedEncodingException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("subjectId", subjectId);
+        params.put("examQuestionId",examQuestionId);
+        params.put("tagname", URLEncoder.encode(tagname, "utf-8"));
+        String url = _MakeURL(URLs.AddErrorQuestionTag,params);
+        System.out.println(url);
+        String response = http_get(appContext,url);
+        System.out.println("response:"+response);
+    }
+
+    public static void delPrintCartErrorQuestions(AppContext appContext, String accessToken, int gradeId, int subjectId, String examQuestionIds) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("examQuestionIds",examQuestionIds);
+        String url = _MakeURL(URLs.DelPrintCartErrorQuestions,params);
+        System.out.println(url);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+    }
+
+    public static BaseResponseBean<String> downloadErrorQuestions(AppContext appContext, String accessToken, int gradeId, int subjectId, int downloadType, int printHistoryId, String examQuestionIds) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("downloadType",downloadType);
+        params.put("printHistoryId",printHistoryId);
+        params.put("examQuestionIds",examQuestionIds);
+        String url = _MakeURL(URLs.DownloadErrorQuestions,params);
+        System.out.println(url);
+        String response = http_get(appContext,url);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
+    }
+
+    public static void downloadfile(AppContext appContext,String fileurl) throws AppException, IOException {
+//        getNetFile(url);
+//        downLoadFromUrl(url,"aa.doc", Environment.getExternalStorageDirectory().getAbsolutePath()+"/JK");
+        URL url = null;
+        String savePath;
+        String FilePath = null;
+        InputStream inputStream = null;
+        try {
+            url = new URL(fileurl);
+            URLConnection connection = url.openConnection();
+            connection.setDoOutput(true);
+            inputStream = connection.getInputStream();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //判断是否挂载了SD卡
+        String storageState = Environment.getExternalStorageState();
+        if (storageState.equals(Environment.MEDIA_MOUNTED)) {
+            savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/JK/Update/";
+            File file = new File(savePath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            FilePath = savePath + "a.doc";
+        }
+        File file = new File(FilePath);
     }
 }
