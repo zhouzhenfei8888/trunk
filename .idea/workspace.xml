@@ -34,45 +34,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="944a4e64-5715-4376-84bf-9dcf08e5bb13" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/ic_notebook.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/ic_photo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading10.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading11.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading12.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading13.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading14.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading15.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading6.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading8.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/round.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/TreeBean.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/AddwrongtagActivity.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/AddwrongtagActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AppStudentClient/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/api/ApiClient.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/api/ApiClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/AppContext.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/FileUtils.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/FileUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/HomeActivity.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/HomeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/JsonUtils.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/common/JsonUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/PrintplanFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/RemarkActivity.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/RemarkActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/TimeSearch.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/TimeSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/URLs.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/URLs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_addwrongtag.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_addwrongtag.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_notebook.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_notebook.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_remark.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/activity_remark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_home.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_home.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/listview_itemprintrecord.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/listview_itemprintrecord.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/anim/loading.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/anim/loading.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading1.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading10.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading10.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading11.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading11.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading12.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading12.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading13.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading13.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading14.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading14.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading15.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading15.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading2.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading3.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading4.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading5.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading5.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading6.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading6.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading7.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading7.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading8.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading8.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading9.png" afterPath="$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading9.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/layout/loading_empty_view.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/layout/loading_empty_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/res/values-v14/styles.xml" afterPath="$PROJECT_DIR$/AppStudentClient/res/values-v14/styles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="trunk.iws" />
@@ -101,21 +78,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SubjectFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4671" max-vertical-offset="17388">
-              <caret line="273" column="48" selection-start-line="273" selection-start-column="48" selection-end-line="273" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="fragment_subject.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_subject.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-9.966666" vertical-offset="0" max-vertical-offset="2530">
-              <caret line="13" column="42" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
+              <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -124,42 +91,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="loading_empty_view.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/loading_empty_view.xml">
+      <file leaf-file-name="styles.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AppStudentClient/res/values-v14/styles.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.133333" vertical-offset="0" max-vertical-offset="759">
-              <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.48027843" vertical-offset="0" max-vertical-offset="862">
+              <caret line="18" column="71" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="71" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddwrongtagActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/AddwrongtagActivity.java">
+      <file leaf-file-name="loading.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AppStudentClient/res/anim/loading.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.145161" vertical-offset="401" max-vertical-offset="4117">
-              <caret line="72" column="43" selection-start-line="72" selection-start-column="43" selection-end-line="72" selection-end-column="43" />
-              <folding>
-                <element signature="e#4117#4398#0" expanded="true" />
-                <element signature="e#4387#4388#0" expanded="true" />
-                <element signature="e#6108#7050#0" expanded="true" />
-                <element signature="e#6472#6480#0" expanded="true" />
-                <element signature="e#6753#6761#0" expanded="true" />
-                <element signature="e#7039#7040#0" expanded="true" />
-                <element signature="e#7060#7666#0" expanded="true" />
-                <element signature="e#7655#7656#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="552">
+              <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DetailActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DetailActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39" vertical-offset="7255" max-vertical-offset="9016">
+            <state vertical-scroll-proportion="-5.032258" vertical-offset="7255" max-vertical-offset="9016">
               <caret line="429" column="49" selection-start-line="429" selection-start-column="49" selection-end-line="429" selection-end-column="49" />
               <folding>
                 <element signature="e#17555#18384#0" expanded="true" />
@@ -1704,13 +1659,13 @@
         <option value="$PROJECT_DIR$/AppStudentClient/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/RemarkActivity.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/layout/activity_addwrongtag.xml" />
-        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/loading_empty_view.xml" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/anim/loading.xml" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/values-v14/styles.xml" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/layout/listview_itemprintrecord.xml" />
         <option value="$PROJECT_DIR$/AppStudentClient/res/layout/fragment_home.xml" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/URLs.java" />
         <option value="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java" />
+        <option value="$PROJECT_DIR$/AppStudentClient/res/layout/loading_empty_view.xml" />
       </list>
     </option>
   </component>
@@ -2080,6 +2035,50 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trunk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trunk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AppStudentClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-v14" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trunk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trunk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AppStudentClient" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable-hdpi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="AndroidView">
@@ -2320,7 +2319,11 @@
       <created>1428682735616</created>
       <updated>1428682735616</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="student">
+      <created>1429004509066</created>
+      <updated>1429004509066</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2382,25 +2385,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/SearchActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2757" max-vertical-offset="6302">
-          <caret line="164" column="136" selection-start-line="164" selection-start-column="136" selection-end-line="164" selection-end-column="136" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_printplan.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1242" max-vertical-offset="2231">
-          <caret line="54" column="37" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/AppStudentClient/libs/commons-httpclient-3.1.jar!/org/apache/commons/httpclient/HttpMethodBase.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3434466" vertical-offset="2339" max-vertical-offset="6463">
@@ -2729,39 +2713,12 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/values/attrs.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.5082873" vertical-offset="276" max-vertical-offset="1334">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/android-sdk/platforms/android-21/data/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="9088" max-vertical-offset="31579">
-          <caret line="403" column="17" selection-start-line="403" selection-start-column="17" selection-end-line="403" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/Fragment/SubjectFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4671" max-vertical-offset="17388">
           <caret line="273" column="48" selection-start-line="273" selection-start-column="48" selection-end-line="273" selection-end-column="48" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_subject.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.966666" vertical-offset="0" max-vertical-offset="2530">
-          <caret line="13" column="42" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AppStudentClient/build/generated/source/r/debug/com/fclassroom/appstudentclient/R.java">
@@ -2776,46 +2733,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3080986" vertical-offset="743" max-vertical-offset="1311">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/values-v11/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="543">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/loading_empty_view.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.133333" vertical-offset="0" max-vertical-offset="759">
-          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading6.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/anim/loading.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40699816" vertical-offset="9" max-vertical-offset="552">
-          <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/values-v14/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44935542" vertical-offset="193" max-vertical-offset="736">
-          <caret line="19" column="61" selection-start-line="19" selection-start-column="61" selection-end-line="19" selection-end-column="61" />
           <folding />
         </state>
       </provider>
@@ -2903,12 +2820,89 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/activity/DetailActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39" vertical-offset="7255" max-vertical-offset="9016">
+        <state vertical-scroll-proportion="-5.032258" vertical-offset="7255" max-vertical-offset="9016">
           <caret line="429" column="49" selection-start-line="429" selection-start-column="49" selection-end-line="429" selection-end-column="49" />
           <folding>
             <element signature="e#17555#18384#0" expanded="true" />
             <element signature="e#18365#18366#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/loading_empty_view.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22115384" vertical-offset="0" max-vertical-offset="832">
+          <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/values-v11/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="543">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/values/attrs.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5475638" vertical-offset="472" max-vertical-offset="1334">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/layout/fragment_subject.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.966666" vertical-offset="0" max-vertical-offset="2530">
+          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/anim/loading.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="552">
+          <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/drawable-hdpi/loading_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://D:/android-sdk/platforms/android-21/data/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.4675174" vertical-offset="9258" max-vertical-offset="31579">
+          <caret line="385" column="66" selection-start-line="385" selection-start-column="66" selection-end-line="385" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppStudentClient/res/values-v14/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48027843" vertical-offset="0" max-vertical-offset="862">
+          <caret line="18" column="71" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="71" />
+          <folding />
         </state>
       </provider>
     </entry>
