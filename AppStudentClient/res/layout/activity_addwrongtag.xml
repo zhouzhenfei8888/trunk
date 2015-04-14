@@ -51,6 +51,22 @@
         android:imeOptions="actionSend"
         android:paddingLeft="5dp" />
 
+    <com.fclassroom.app.widget.TagView.TagView
+        android:id="@+id/tagview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:lineMargin="3dp"
+        app:tagMargin="3dp"
+        app:textPaddingBottom="5dp"
+        app:textPaddingLeft="8dp"
+        app:textPaddingRight="8dp"
+        app:textPaddingTop="5dp"></com.fclassroom.app.widget.TagView.TagView>
+
+    <RelativeLayout
+        android:id="@+id/rl_tagview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></RelativeLayout>
+
     <LinearLayout
         android:id="@+id/view1"
         android:layout_width="match_parent"
@@ -58,24 +74,9 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-        <com.fclassroom.app.widget.TagView.TagView
-            android:id="@+id/tagview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:lineMargin="3dp"
-            app:tagMargin="3dp"
-            app:textPaddingBottom="5dp"
-            app:textPaddingLeft="8dp"
-            app:textPaddingRight="8dp"
-            app:textPaddingTop="5dp"></com.fclassroom.app.widget.TagView.TagView>
-
-        <RelativeLayout
-            android:id="@+id/rl_tagview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></RelativeLayout>
-
 
         <TextView
+            android:id="@+id/tv_addKnowledgePoint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_size"
@@ -111,26 +112,29 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
-        android:id="@+id/view2">
+        android:visibility="gone">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/margin_size"
                 android:text="知识点错因"
                 android:textColor="@color/toolbar_color"
-                android:padding="@dimen/margin_size"
-                android:textSize="18sp"/>
-            </RelativeLayout>
+                android:textSize="18sp" />
+        </RelativeLayout>
+
         <ListView
             android:id="@+id/lv_knowledge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></ListView>
-        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

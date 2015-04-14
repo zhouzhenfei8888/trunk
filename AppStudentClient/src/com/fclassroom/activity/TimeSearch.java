@@ -28,11 +28,14 @@ import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.appstudentclient.R;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.SimpleFormatter;
 
 public class TimeSearch extends ActionBarActivity {
     TextView startTimeTv;
@@ -162,7 +165,8 @@ public class TimeSearch extends ActionBarActivity {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppManager.getAppManager().finishActivity();
+//                AppManager.getAppManager().finishActivity();
+                finish();
             }
         });
     }
@@ -186,14 +190,29 @@ public class TimeSearch extends ActionBarActivity {
         ((TextView) v).setText(year + "." + (month + 1) + "." + day);
 //        mController.getExamListFromServer();
 //        new BigDecimal(sinceTime.getTimeInMillis() + "").divide(new BigDecimal("1000")).longValue();
-        Date starttime = sinceTime.getTime();
-        Date endtime = maxTime.getTime();
-        int start = (int) starttime.getTime()/1000;
-        int end = (int) endtime.getTime()/1000;
-        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown,start,end);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String starttime = sdf.format(sinceTime.getTime());
+        String endtime = sdf.format(maxTime.getTime());
+        long start = 0, end = 0;
+        try {
+            start = sdf.parse(starttime).getTime();
+            end = sdf.parse(endtime).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        long l = starttime.getTime() - date.getTime() > 0 ? starttime.getTime()- date.getTime() : date.getTime() - starttime.getTime();
+        System.out.println(starttime);
+        System.out.println(endtime);
+        System.out.println(start);
+        System.out.println(end);
+        start = start / 1000;
+        end = end / 1000;
+//        int start = ((int) starttime.getTime());
+//        int end = ((int) endtime.getTime());
+        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown, start, end);
     }
 
-    private void getSubjectList(final String accessToken, final int gradeId, final int subjectId, final int pageSize, final int pageNo, final int unOrganize, final String orderBy, final String orderUpOrDown, final int startTime, final int endTime) {
+    private void getSubjectList(final String accessToken, final int gradeId, final int subjectId, final int pageSize, final int pageNo, final int unOrganize, final String orderBy, final String orderUpOrDown, final long startTime, final long endTime) {
         final ProgressDialog progressDialog = ProgressDialog.show(this, "", "正在加载。。。");
         final Handler handler = new Handler() {
             @Override
@@ -211,6 +230,7 @@ public class TimeSearch extends ActionBarActivity {
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(TimeSearch.this);
                 }
+                progressDialog.dismiss();
             }
         };
         new Thread() {

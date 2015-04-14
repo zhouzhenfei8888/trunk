@@ -84,6 +84,7 @@ public class DetailActivity extends BaseActivity {
     private List<ErrorBookBean> ErrorBookList;
     private List<String> stringList;
     private int postionInList;
+    private int postionInList2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +102,12 @@ public class DetailActivity extends BaseActivity {
                 break;
             }
         }
-        System.out.println(postionInList);
+        for (int i = 0; i < appContext.myselectlist.size(); i++) {
+            if (subjectItemBean.getId()==appContext.myselectlist.get(i).getId()) {
+                postionInList2 = i+1;
+                break;
+            }
+        }
         initData();
         initToolbar();
         initViews();
@@ -164,7 +170,6 @@ public class DetailActivity extends BaseActivity {
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIHelper.jump2Activity(DetailActivity.this, HomeActivity.class);
                 AppManager.getAppManager().finishActivity();
             }
         });
@@ -217,14 +222,16 @@ public class DetailActivity extends BaseActivity {
         imageLoader.get(URLs.HOST_IMG + subjectItemBean.getAnswerImg(), imageListenerAnswer);
         //错因标签
         String tagnames = subjectItemBean.getTagNames();
-        if (!"".equals(tagnames)) {
+        if (!"".equals(tagnames)&&tagnames != null) {
             String[] tags = null;
             if (tagnames.contains(",")) {
                 tags = tagnames.split(",");
-            }
-            for (String name : tags) {
-                Tag tag = new Tag(name);
-                tagView.add(tag);
+                for (String name : tags) {
+                    Tag tag = new Tag(name);
+                    tagView.add(tag);
+                }
+            }else{
+                tagView.add(new Tag(tagnames));
             }
         }
         //remark
@@ -336,7 +343,6 @@ public class DetailActivity extends BaseActivity {
         if(1 == resultCode){
             String tagNames = data.getExtras().getString("tags");
             List<String> listtags = Arrays.asList(tagNames.split(" "));
-            System.out.println(tagNames + "................");
             for(String tagname:listtags){
                 tagView.add(new Tag(tagname));
                 tagView.drawTags();
@@ -415,15 +421,18 @@ public class DetailActivity extends BaseActivity {
 
     private void showDialogChange(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final StringBuilder stringBuilder = new StringBuilder("");
         builder.setTitle("")
                 .setItems(arr, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         AddErrorQuestionToNoteBook(accessToken, subjectItemBean.getExamQuestionId(), ErrorBookList.get(which).getId());
+                        stringBuilder.append(",").append(ErrorBookList.get(which).getName().toString());
                         if ("".equals(subjectItemBean.getNotebookNames())) {
-                            bookname.setText(ErrorBookList.get(which).getName().toString());
+                            String strbookname = stringBuilder.substring(1,stringBuilder.length());
+                            bookname.setText(strbookname);
                         }else{
-                            bookname.setText(subjectItemBean.getNotebookNames() + "," + ErrorBookList.get(which).getName().toString());
+                            bookname.setText(subjectItemBean.getNotebookNames() + stringBuilder.toString());
                         }
                     }
                 });

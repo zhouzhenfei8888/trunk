@@ -35,6 +35,7 @@ import com.fclassroom.app.adapter.LeftAdapter;
 import com.fclassroom.app.adapter.PopupListAdapter;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.GradeBean;
+import com.fclassroom.app.bean.PageBean;
 import com.fclassroom.app.bean.StudentInfoBean;
 import com.fclassroom.app.bean.SubjectBean;
 import com.fclassroom.app.common.PreferenceUtils;
@@ -228,6 +229,16 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
             PopupListAdapter adapter = null;
             adapter = new PopupListAdapter(this, R.layout.listview_item_tv_alone, getGradeListfromlocal());
             gradeListView.setAdapter(adapter);
+            gradeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    grades.setText(getGradeListfromlocal().get(position));
+                    System.out.println(position);
+                    List<GradeBean> list = getGradeListfromlocalBean();
+                    PreferenceUtils.putInt(appContext, PreferenceUtils.GRADE_ID, list.get(position).getId());
+                    gradePopup.dismiss();
+                }
+            });
             gradeListView.setItemChecked(0, true);
         }
         if (!gradePopup.isShowing()) {
@@ -248,6 +259,16 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
             PopupListAdapter adapter = null;
             adapter = new PopupListAdapter(this, R.layout.listview_item_tv_alone, getSubjectListfromlocal());
             subjectListView.setAdapter(adapter);
+            subjectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    subjects.setText(getSubjectListfromlocal().get(position));
+                    System.out.println(position);
+                    List<SubjectBean> list = getSubjectListfromlocalBean();
+                    PreferenceUtils.putInt(appContext, PreferenceUtils.SUBJECT_ID, list.get(position).getId());
+                    subjectPopup.dismiss();
+                }
+            });
             subjectListView.setItemChecked(0, true);
         }
         if (!subjectPopup.isShowing()) {
@@ -443,6 +464,36 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
         return stringlist;
     }
 
+    private List<SubjectBean> getSubjectListfromlocalBean() {
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        ArrayList<SubjectBean> list = null;
+        List<String> stringlist = new ArrayList<>();
+        try {
+            fis = openFileInput(SUBJECTLISTNAME);
+            ois = new ObjectInputStream(fis);
+            list = (ArrayList<SubjectBean>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ois != null)
+                    ois.close();
+                if (fis != null)
+                    fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
     private void saveGradeBeanList(ArrayList<GradeBean> list, String fileName) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
@@ -499,6 +550,36 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
             }
         }
         return stringlist;
+    }
+
+    private List<GradeBean> getGradeListfromlocalBean() {
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        ArrayList<GradeBean> list = null;
+        List<String> stringlist = new ArrayList<>();
+        try {
+            fis = openFileInput(GRADELISTNAME);
+            ois = new ObjectInputStream(fis);
+            list = (ArrayList<GradeBean>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ois != null)
+                    ois.close();
+                if (fis != null)
+                    fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
     }
 
     @Override

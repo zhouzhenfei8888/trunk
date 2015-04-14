@@ -3,11 +3,12 @@ package com.fclassroom.app.bean;
 import java.io.Serializable;
 
 public class URLs implements Serializable {
-    public final static String HOST = "http://120.131.64.134:9080/student/";
+    public final static String HOST_YH = "http://120.131.64.134:20002/";
+    //马丰的地址
+//    public final static String HOST_YH = "http://192.168.0.108/";
+    public final static String HOST = HOST_YH + "student/";
+    public final static String HOST_NOTE = HOST_YH + "notebook/student/";
     public final static String HOST_IMG = "";
-    public final static String HOST_YH = "http://120.131.64.134:9080/";
-    public final static String HOST_NOTE = "http://120.131.64.134:9080/notebook/student/";
-    //    public final static String HOST_NOTE = "http://192.168.1.102/notebook/student/";
     public final static String HTTP = "http://";
     public final static String HTTPS = "https://";
 
@@ -40,14 +41,15 @@ public class URLs implements Serializable {
     public final static String DelErrorQuestion = HOST_NOTE + "delErrorQuestion.json";
     public final static String AddErrorQuestionToNoteBook = HOST_NOTE + "addErrorQuestionToNoteBook.json";
     public final static String GetPrintHistoryErrorQuestions = HOST_NOTE + "getPrintHistoryErrorQuestions.json";
-    public final static String SendAuthCode = HOST_YH+"sendCode.json";
-    public final static String BindPhone = HOST_YH+"bindPhone.json";
-    public final static String GetNoteBookQuestions = HOST_NOTE+"getErrorQuestionsByNoteBook.json";
-    public final static String PrintSelected = HOST_NOTE+"addMultiErrorQuestionToPrintCart.json";
-    public final static String DeleteSelected = HOST_NOTE+"delErrorQuestions.json";
-    public final static String RecoverErrorQuestions = HOST_NOTE+"recoverErrorQuestions.json";
-    public final static String GetKnowledgePoint = HOST+"getTopLevelKnos.json";
-    public final static String AddErrorQuestionTag = HOST_NOTE+"addErrorQuestionTag.json";
-    public final static String DelPrintCartErrorQuestions = HOST_NOTE+"delPrintCartErrorQuestions.json";
-    public final static String DownloadErrorQuestions = HOST_NOTE+"downloadErrorQuestions.json";
+    public final static String SendAuthCode = HOST_YH + "sendCode.json";
+    public final static String BindPhone = HOST_YH + "bindPhone.json";
+    public final static String GetNoteBookQuestions = HOST_NOTE + "getErrorQuestionsByNoteBook.json";
+    public final static String PrintSelected = HOST_NOTE + "addMultiErrorQuestionToPrintCart.json";
+    public final static String DeleteSelected = HOST_NOTE + "delErrorQuestions.json";
+    public final static String RecoverErrorQuestions = HOST_NOTE + "recoverErrorQuestions.json";
+    public final static String GetKnowledgePoint = HOST + "getTopLevelKnos.json";
+    public final static String AddErrorQuestionTag = HOST_NOTE + "addErrorQuestionTag.json";
+    public final static String DelPrintCartErrorQuestions = HOST_NOTE + "delPrintCartErrorQuestions.json";
+    public final static String DownloadErrorQuestions = HOST_NOTE + "downloadErrorQuestions.json";
+    public final static String GetTopLevelKnos = HOST + "getTopLevelKnos.json";
 }

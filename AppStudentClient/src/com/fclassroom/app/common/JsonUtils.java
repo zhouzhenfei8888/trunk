@@ -24,6 +24,7 @@ import com.fclassroom.app.bean.PrintNumBean;
 import com.fclassroom.app.bean.PrintRecoderBean;
 import com.fclassroom.app.bean.StudentInfoBean;
 import com.fclassroom.app.bean.SubjectBean;
+import com.fclassroom.app.bean.TreeBean;
 import com.fclassroom.app.bean.Update;
 import com.fclassroom.app.bean.User;
 import com.google.gson.Gson;
@@ -330,6 +331,20 @@ public class JsonUtils {
             pojo = mapper.readValue(jsonString, type);
         } catch (Exception e) {
             pojo = new BaseResponseBean<Integer>();
+            pojo.setError_code(-1);
+            e.printStackTrace();
+        }
+        return pojo;
+    }
+
+    public static BaseResponseBean<List<TreeBean>> getTopLevelKnos(String jsonString) {
+        BaseResponseBean<List<TreeBean>> pojo = null;
+        try {
+            JavaType listType = mapper.getTypeFactory().constructParametricType(ArrayList.class, TreeBean.class);
+            JavaType type = mapper.getTypeFactory().constructParametricType(BaseResponseBean.class, listType);
+            pojo = mapper.readValue(jsonString, type);
+        } catch (Exception e) {
+            pojo = new BaseResponseBean<List<TreeBean>>();
             pojo.setError_code(-1);
             e.printStackTrace();
         }

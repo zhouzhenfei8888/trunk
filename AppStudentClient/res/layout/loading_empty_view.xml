@@ -6,7 +6,7 @@
 
     <ProgressBar
         android:id="@+id/loading_view"
-        style="@android:style/Widget.ProgressBar.Inverse"
+        style="@style/loading_my"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

@@ -34,6 +34,7 @@ import com.fclassroom.app.bean.PrintRecoderBean;
 import com.fclassroom.app.bean.Result;
 import com.fclassroom.app.bean.StudentInfoBean;
 import com.fclassroom.app.bean.SubjectBean;
+import com.fclassroom.app.bean.TreeBean;
 import com.fclassroom.app.bean.User;
 import com.fclassroom.app.common.CyptoUtils;
 import com.fclassroom.app.common.FileUtils;
@@ -925,7 +926,7 @@ public class AppContext extends Application {
         return ApiClient.searchQuestions(this, accessToken, gradeId, subjectId, keyword);
     }
 
-    public BaseResponseBean<PageBean> getTimeSearchSubjectDetail(String accessToken, int gradeId, int subjectId, int noteBookId, int unOrganize, String orderBy, String orderUpOrDown, int pageNo, int pageSize, int startTime, int endTime) throws AppException {
+    public BaseResponseBean<PageBean> getTimeSearchSubjectDetail(String accessToken, int gradeId, int subjectId, int noteBookId, int unOrganize, String orderBy, String orderUpOrDown, int pageNo, int pageSize, long startTime, long endTime) throws AppException {
         return ApiClient.getTimeSearchSubjectDetail(this, accessToken, gradeId, subjectId, noteBookId, unOrganize, orderBy, orderUpOrDown, pageNo, pageSize, startTime, endTime);
     }
 
@@ -947,5 +948,9 @@ public class AppContext extends Application {
 
     public void downloadfile(String filename) throws AppException, IOException {
         ApiClient.downloadfile(this,filename);
+    }
+
+    public BaseResponseBean<List<TreeBean>> getTopLevelKnos(String accessToken, int gradeId, int subjectId) throws AppException {
+        return ApiClient.getTopLevelKnos(this,accessToken,gradeId,subjectId);
     }
 }

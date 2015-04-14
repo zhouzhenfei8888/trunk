@@ -92,18 +92,18 @@
 
             <com.fclassroom.app.widget.RoundProgressBar
                 android:id="@+id/roundprogressbar"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_centerInParent="true"
                 circle:max="100"
-                circle:roundColor="#ff79ffb0"
-                circle:roundColor2="#ff22ef8c"
-                circle:roundColor3="#ff20df82"
-                circle:roundColor4="#ff1dc975"
+                circle:roundColor="#6be4be"
+                circle:roundColor2="#4ccda2"
+                circle:roundColor3="#3ab886"
+                circle:roundColor4="#35b378"
                 circle:roundProgressColor="#ffffee54"
-                circle:roundProgressColor2="#ff1dc975"
-                circle:roundProgressColor3="#ff1db867"
-                circle:roundProgressColor4="#ff1ca55b"
+                circle:roundProgressColor2="#4cf1cb"
+                circle:roundProgressColor3="#3ad9ae"
+                circle:roundProgressColor4="#35d39c"
                 circle:roundWidth="8dp"
                 circle:roundWidth2="10dp"
                 circle:roundWidth3="20dp"
@@ -111,6 +111,12 @@
                 circle:textColor="@color/white"
                 circle:textIsDisplayable="true"
                 circle:textSize="30sp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="280dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/round"
+                />
         </RelativeLayout>
     </RelativeLayout>
 

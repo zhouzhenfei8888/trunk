@@ -1,6 +1,7 @@
 package com.fclassroom.activity.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -68,6 +69,7 @@ public class PrintplanFragment extends Fragment {
     private TextView selectAll, print, haveSelected, share, delete;
     int downloadType = 0;
     int printHistoryId = 0;
+    String str;
 
     /**
      * Use this factory method to create a new instance of
@@ -385,6 +387,12 @@ public class PrintplanFragment extends Fragment {
                     downloadErrorQuestions(accessToken, gradeId, subjectId, downloadType, printHistoryId, examQuestionIds2);
                     break;
                 case R.id.tv_share:
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, str);
+                    sendIntent.setType("text/plain");
+                    startActivity(sendIntent);
+                    singleMode();
                     break;
                 case R.id.tv_delete:
                     StringBuilder examQuestionIdsBuilder = new StringBuilder("");
@@ -407,8 +415,9 @@ public class PrintplanFragment extends Fragment {
                 if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 } else if(msg.what == 1){
-                    String str = ((BaseResponseBean<String>)msg.obj).getData();
+                    str = ((BaseResponseBean<String>)msg.obj).getData();
                     downloadfile(str);
+                    UIHelper.ToastMessage(getActivity(),"下载成功！已保存在SD卡JIKE目录下");
                     singleMode();
                 }else if(msg.what == 0){
                     UIHelper.ToastMessage(getActivity(),msg.obj.toString());
@@ -442,7 +451,6 @@ public class PrintplanFragment extends Fragment {
         Handler handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
-                super.handleMessage(msg);
             }
         };
         new Thread(){

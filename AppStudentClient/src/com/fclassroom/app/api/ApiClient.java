@@ -51,6 +51,7 @@ import com.fclassroom.app.bean.PrintNumBean;
 import com.fclassroom.app.bean.PrintRecoderBean;
 import com.fclassroom.app.bean.StudentInfoBean;
 import com.fclassroom.app.bean.SubjectBean;
+import com.fclassroom.app.bean.TreeBean;
 import com.fclassroom.app.bean.URLs;
 import com.fclassroom.app.bean.Update;
 import com.fclassroom.app.common.FileUtils;
@@ -894,7 +895,7 @@ public class ApiClient {
         return responseBean;
     }
 
-    public static BaseResponseBean<PageBean> getTimeSearchSubjectDetail(AppContext appContext, String accessToken, int gradeId, int subjectId, int noteBookId, int unOrganize, String orderBy, String orderUpOrDown, int pageNo, int pageSize, int startTime, int endTime) throws AppException {
+    public static BaseResponseBean<PageBean> getTimeSearchSubjectDetail(AppContext appContext, String accessToken, int gradeId, int subjectId, int noteBookId, int unOrganize, String orderBy, String orderUpOrDown, int pageNo, int pageSize, long startTime, long endTime) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
         params.put("gradeId", gradeId);
@@ -968,20 +969,37 @@ public class ApiClient {
     public static void downloadfile(AppContext appContext, String fileurl) throws AppException, IOException {
 //        getNetFile(url);
 //        downLoadFromUrl(url,"aa.doc", Environment.getExternalStorageDirectory().getAbsolutePath()+"/JK");
+        String fileName = FileUtils.getName(fileurl);
+        String encodeFileName = URLEncoder.encode(fileName,"utf-8");
+        String enfileurl = fileurl.replace(fileName,encodeFileName);
+        System.out.println(enfileurl);
         URL url = null;
         String savePath;
         String FilePath = null;
         InputStream inputStream = null;
         try {
-            url = new URL(fileurl);
+            url = new URL(enfileurl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             if (connection.getResponseCode() == 200) {
                 inputStream = connection.getInputStream();
-                FileUtils.write2SDFromInput("JIKE", "a.doc", inputStream);
+                FileUtils.write2SDFromInput("JIKE", fileName, inputStream);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static BaseResponseBean<List<TreeBean>> getTopLevelKnos(AppContext appContext, String accessToken, int gradeId, int subjectId) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        String url = _MakeURL(URLs.GetTopLevelKnos, params);
+        System.out.println(url);
+        String response = http_get(appContext, url);
+        System.out.println(response);
+        BaseResponseBean<List<TreeBean>> responseBean = JsonUtils.getTopLevelKnos(response);
+        return responseBean;
     }
 }

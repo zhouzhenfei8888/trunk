@@ -14,6 +14,8 @@ import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.os.Environment;
@@ -390,8 +392,8 @@ public class FileUtils {
         File file = null;
         OutputStream output = null;
         try{
-            creatSDDir(path);
-            file = creatSDFile(path + fileName);
+//            creatSDDir(path);
+            file = creatSDFile(path +"/"+ fileName);
             output = new FileOutputStream(file);
             byte buffer [] = new byte[4 * 1024];
             while((input.read(buffer)) != -1){
@@ -430,6 +432,17 @@ public class FileUtils {
 		return status;
 	}
 
+    public static String getName(String url) {
+
+        String fileNameRegexp = "[^/]*$";
+        Pattern pattern = Pattern.compile(fileNameRegexp);
+        Matcher matcher = pattern.matcher(url);
+        String result = "";
+        if (matcher.find()) {
+            result = matcher.group();
+        }
+        return result;
+    }
 	/**
 	 * 检查路径是否存在
 	 * 
