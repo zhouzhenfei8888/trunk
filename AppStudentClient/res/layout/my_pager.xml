@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:circle="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        android:text="详细情况"/>
+
+    <com.fclassroom.app.widget.RoundProgressBar
+        android:id="@+id/roundprogressbar"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        circle:max="100"
+        circle:roundColor="#ff79ffb0"
+        circle:roundColor2="#ffffff"
+        circle:roundColor3="#ffffff"
+        circle:roundColor4="#ffffff"
+        circle:roundProgressColor="#ffffee54"
+        circle:roundProgressColor2="#ffffff"
+        circle:roundProgressColor3="#ffffff"
+        circle:roundProgressColor4="#ffffff"
+        circle:roundWidth="30dp"
+        circle:roundWidth2="1dp"
+        circle:roundWidth3="1dp"
+        circle:roundWidth4="1dp"
+        circle:textColor="@color/black"
+        circle:textIsDisplayable="true"
+        circle:textSize="30sp" />
+</LinearLayout>
