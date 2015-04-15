@@ -580,7 +580,10 @@ public class SubjectFragment extends Fragment {
         topView.setFocusable(false);
         bottomView.setFocusable(false);
         subjectAdapter.setMulMode(false);
-        subjectAdapter.notifyDataSetChanged();
+//        subjectAdapter.notifyDataSetChanged();
+        pageNo1 = 1;
+        unOrganize = 0;
+        getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
         listview.setChoiceMode(ListView.CHOICE_MODE_NONE);
     }
 

@@ -300,7 +300,9 @@ public class RubbishFragment extends Fragment {
         topView.setFocusable(false);
         bottomView.setFocusable(false);
         subjectAdapter.setMulMode(false);
-        subjectAdapter.notifyDataSetChanged();
+//        subjectAdapter.notifyDataSetChanged();
+        pageNo = 1;
+        getRubbishSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo);
         listView.setChoiceMode(ListView.CHOICE_MODE_NONE);
     }
 
@@ -311,7 +313,7 @@ public class RubbishFragment extends Fragment {
 
     public void selectedAll() {
         for (int i = 0; i < subjectAdapter.getCount(); i++) {
-            listView.setItemChecked(i, true);
+            listView.setItemChecked(i+1, true);
         }
         appContext.rubbishlist.clear();
         appContext.rubbishlist = list;
