@@ -4,6 +4,6 @@
     <!-- 设置线样式 -->
     <solid android:color="#ffffff"/>
     <corners
-        android:radius="50dp"/>
+        android:radius="20dp"/>
     <stroke android:color="#8e111111" android:width="1dip"/>
     </shape>

@@ -16,10 +16,10 @@
         <item name="android:layout_gravity">center_vertical</item>
     </style>
 
-    <style name="loading_my" parent="@android:style/Widget.ProgressBar.Small">
+    <style name="loading_my" parent="@android:style/Widget.ProgressBar">
         <item name="android:indeterminateDrawable">@anim/loading</item>
-        <item name="android:layout_width">21dip</item>
-        <item name="android:layout_height">21dip</item>
+        <item name="android:layout_width">80dip</item>
+        <item name="android:layout_height">80dip</item>
         <item name="android:layout_gravity">center_vertical</item>
     </style>
 

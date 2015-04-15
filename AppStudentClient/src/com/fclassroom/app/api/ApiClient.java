@@ -489,6 +489,7 @@ public class ApiClient {
         params.put("password", pwd);
         String url = _MakeURL(URLs.Login, params);
         String response = http_get(appContext, url);
+        System.out.println(response);
 //        System.out.println(response);
         BaseResponseBean<LoginResponseBean> user = JsonUtils.getLoginBean(response);
         return user;

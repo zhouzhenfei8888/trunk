@@ -29,10 +29,10 @@ public class AchievementActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievement);
         initToolbar();
-        initView();
+//        initView();
     }
 
-    private void initView() {
+/*    private void initView() {
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -51,7 +51,7 @@ public class AchievementActivity extends BaseActivity {
             }
         });
 
-    }
+    }*/
 
     private void initToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);

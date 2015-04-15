@@ -10,14 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@color/grey_white">
+        android:background="@color/background_color">
 
         <LinearLayout
             android:id="@+id/linear_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_size"
-            android:layout_marginRight="@dimen/margin_size"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:background="@color/white"
@@ -26,14 +24,16 @@
             android:padding="10dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/add" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_add" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/toolbar_color"
+                android:textSize="20sp"
                 android:text="@string/new_note" />
         </LinearLayout>
     </RelativeLayout>

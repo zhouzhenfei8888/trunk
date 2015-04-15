@@ -16,12 +16,13 @@
         android:paddingLeft="@dimen/margin_size"
         android:paddingRight="@dimen/margin_size">
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:id="@+id/ic_iv"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/icon_enter"/>
+            android:src="@drawable/icon_enter2"/>
 
-        <TextView
+<!--        <TextView
             android:id="@+id/logo_iv"
             android:layout_width="160dp"
             android:layout_height="40dp"
@@ -29,19 +30,19 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/jikestudent"
             android:textColor="@color/white"
-            android:textSize="50dp" />
+            android:textSize="50dp" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/logo_iv"
+            android:layout_below="@id/ic_iv"
             android:layout_marginTop="40dp"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/username_et"
-                android:layout_width="match_parent"
+                android:layout_width="240dp"
                 android:layout_height="40dp"
                 android:background="@color/white"
                 android:ems="10"
@@ -54,7 +55,7 @@
 
             <EditText
                 android:id="@+id/password_et"
-                android:layout_width="match_parent"
+                android:layout_width="240dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="@dimen/margin_size"
                 android:background="@color/white"
@@ -71,15 +72,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:layout_marginRight="25dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/forget_password"
                 android:textColor="@color/grey"
-                android:textSize="10sp" />
+                android:textSize="13sp" />
 
             <Button
                 android:id="@+id/enter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="240dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_select_enter"
@@ -91,14 +93,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:gravity="center_vertical"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <ImageView
+              <!--  <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:layout_weight="1"
-                    android:background="#88ffffff" />
+                    android:background="#88ffffff" />-->
 
                 <LinearLayout
                     android:id="@+id/linear_qq"
@@ -114,8 +116,8 @@
                         android:text="或"
                         android:layout_gravity="center_vertical"/>
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
                         android:src="@drawable/qq"/>
 
                     <TextView
@@ -128,11 +130,11 @@
                 </LinearLayout>
 
 
-                <ImageView
+                <!--<ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
                     android:layout_weight="1"
-                    android:background="#88ffffff" />
+                    android:background="#88ffffff" />-->
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

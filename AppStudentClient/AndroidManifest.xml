@@ -28,7 +28,7 @@
     <application
         android:name="com.fclassroom.AppContext"
         android:allowBackup="true"
-        android:icon="@drawable/pic"
+        android:icon="@drawable/icon_enter"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity android:name="com.fclassroom.activity.StartActivity" />

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class URLs implements Serializable {
     public final static String HOST_YH = "http://120.131.64.134:20002/";
     //马丰的地址
-//    public final static String HOST_YH = "http://192.168.0.108/";
+//    public final static String HOST_YH = "http://192.168.0.107/";
     public final static String HOST = HOST_YH + "student/";
     public final static String HOST_NOTE = HOST_YH + "notebook/student/";
     public final static String HOST_IMG = "";
