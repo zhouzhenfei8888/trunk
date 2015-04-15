@@ -90,10 +90,10 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
             @Override
             public void run() {
                 while (progress <= 60) {
-                    progress += 2;
+                    progress += 1;
                     roundProgressBar.setProgress(progress);
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(40);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -105,10 +105,10 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
             @Override
             public void run() {
                 while (progress2 <= 40) {
-                    progress2 += 2;
+                    progress2 += 1;
                     roundProgressBar.setProgress2(progress2);
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(40);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
