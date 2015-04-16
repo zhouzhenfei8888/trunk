@@ -25,6 +25,7 @@ public class BindtelephoneActivity extends BaseActivity {
     private Button bnSure, bnSendauthCode;
     private EditText etAuthCode, ettelephoneNum;
     private TextView title;
+    private TextView error;
     //bindphoneORfindpassword 0为bindphone,1为findpassword；
     private int bindphoneORfindpassword;
     AppContext appContext;
@@ -52,12 +53,12 @@ public class BindtelephoneActivity extends BaseActivity {
         etAuthCode = (EditText) findViewById(R.id.auth_code);
         ettelephoneNum = (EditText) findViewById(R.id.edit_telephone);
         bnSendauthCode = (Button) findViewById(R.id.bn_send_authcode);
+        error = (TextView) findViewById(R.id.tv_error);
         bnSure = (Button) findViewById(R.id.bn_sure);
         bnSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bindphone(accessToken,etAuthCode.getText().toString(),ettelephoneNum.getText().toString());
-                UIHelper.jump2Activity(BindtelephoneActivity.this, HomeActivity.class);
             }
         });
         bnSendauthCode.setOnClickListener(new View.OnClickListener() {
@@ -72,23 +73,45 @@ public class BindtelephoneActivity extends BaseActivity {
                 }
             }
         });
+        etAuthCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                error.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void bindphone(final String accessToken, final String authCode, final String telephone) {
-        Handler handler = new Handler(){
+        final Handler handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
-                super.handleMessage(msg);
+                if(msg.what == -1){
+                    ((AppException)msg.obj).makeToast(BindtelephoneActivity.this);
+                }else{
+                    BaseResponseBean<Boolean> responseBean = (BaseResponseBean<Boolean>) msg.obj;
+                    boolean is = responseBean.getData();
+                    if(is == true) {
+                        UIHelper.jump2Activity(BindtelephoneActivity.this, HomeActivity.class);
+                    }else {
+                        error.setVisibility(View.VISIBLE);
+                    }
+                }
             }
         };
         new Thread(){
             @Override
             public void run() {
+                Message msg = new Message();
                 try {
-                    appContext.bindphone(accessToken,authCode,telephone);
+                    BaseResponseBean<Boolean> responseBean = appContext.bindphone(accessToken,authCode,telephone);
+                    msg.what =1;
+                    msg.obj = responseBean;
                 } catch (AppException e) {
                     e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
                 }
+                handler.sendMessage(msg);
             }
         }.start();
     }

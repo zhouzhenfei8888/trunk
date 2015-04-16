@@ -11,26 +11,27 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="84dp"
         android:orientation="vertical"
         android:paddingLeft="@dimen/margin_size"
         android:paddingRight="@dimen/margin_size">
+
         <ImageView
             android:id="@+id/ic_iv"
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/icon_enter2"/>
+            android:src="@drawable/icon_enter2" />
 
-<!--        <TextView
-            android:id="@+id/logo_iv"
-            android:layout_width="160dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/jikestudent"
-            android:textColor="@color/white"
-            android:textSize="50dp" />-->
+        <!--        <TextView
+                    android:id="@+id/logo_iv"
+                    android:layout_width="160dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/jikestudent"
+                    android:textColor="@color/white"
+                    android:textSize="50dp" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,43 +41,76 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <EditText
+            <com.fclassroom.app.widget.XEditText
                 android:id="@+id/username_et"
                 android:layout_width="240dp"
                 android:layout_height="40dp"
-                android:background="@color/white"
+                android:background="@drawable/edittext_select"
                 android:ems="10"
                 android:gravity="left|center_vertical"
-                android:paddingLeft="5dp"
                 android:hint="@string/username"
+                android:textColorHint="#a8a8a8"
                 android:inputType="number"
+                android:paddingLeft="5dp"
+                android:drawableRight="@drawable/wenhao"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-            <EditText
+            <com.fclassroom.app.widget.XEditText
                 android:id="@+id/password_et"
                 android:layout_width="240dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="@dimen/margin_size"
-                android:background="@color/white"
+                android:background="@drawable/edittext_select"
                 android:ems="10"
                 android:gravity="left|center_vertical"
-                android:paddingLeft="5dp"
+                android:textColorHint="#a8a8a8"
                 android:hint="@string/password"
                 android:inputType="textPassword"
+                android:paddingLeft="5dp"
+                android:drawableRight="@drawable/eye_close"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/tv_getpassword"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_marginLeft="28dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/forget_password"
-                android:textColor="@color/grey"
-                android:textSize="13sp" />
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/linear_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/error" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="@color/red"
+                        android:text="账号或密码错误"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_getpassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/forget_password"
+                    android:textColor="@color/grey"
+                    android:textSize="13sp" />
+            </RelativeLayout>
 
             <Button
                 android:id="@+id/enter"
@@ -92,15 +126,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="18dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-              <!--  <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:layout_weight="1"
-                    android:background="#88ffffff" />-->
+                <!--  <ImageView
+                      android:layout_width="match_parent"
+                      android:layout_height="1dip"
+                      android:layout_weight="1"
+                      android:background="#88ffffff" />-->
 
                 <LinearLayout
                     android:id="@+id/linear_qq"
@@ -109,16 +143,18 @@
                     android:layout_marginLeft="@dimen/margin_size"
                     android:layout_marginRight="@dimen/margin_size"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
+                        android:layout_gravity="center_vertical"
                         android:text="或"
-                        android:layout_gravity="center_vertical"/>
+                        android:textColor="@color/white" />
+
                     <ImageView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
-                        android:src="@drawable/qq"/>
+                        android:src="@drawable/qq" />
 
                     <TextView
                         android:id="@+id/tv_qq"

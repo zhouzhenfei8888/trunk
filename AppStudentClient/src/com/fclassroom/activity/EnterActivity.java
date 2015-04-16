@@ -1,9 +1,16 @@
 package com.fclassroom.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +29,7 @@ import com.fclassroom.app.common.MD5Util;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.StringUtils;
 import com.fclassroom.app.common.UIHelper;
+import com.fclassroom.app.widget.XEditText;
 import com.fclassroom.appstudentclient.R;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
@@ -32,6 +40,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.fclassroom.appstudentclient.R.layout.fclassroom_infor;
+
 public class EnterActivity extends BaseActivity {
 
     private Button enter;
@@ -40,13 +50,16 @@ public class EnterActivity extends BaseActivity {
     private static final String APP_KEY = "pOno3P7CgPh4KSCr";
     private Tencent mTencent;
     private static boolean fromEnter = true;
-    private EditText username;
-    private EditText password;
+    private XEditText username;
+    private XEditText password;
+    private LinearLayout error;
     private TextView getpassword;
     private BaseResponseBean<LoginResponseBean> user;
     private ProgressDialog dialog;
+    private LayoutInflater inflater;
     AppContext appContext;
     AppManager appManager;
+    boolean eyeclose = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +74,79 @@ public class EnterActivity extends BaseActivity {
         appManager = AppManager.getAppManager();
         enter = (Button) findViewById(R.id.enter);
         qqEnter = (LinearLayout) findViewById(R.id.linear_qq);
-        username = (EditText) findViewById(R.id.username_et);
-        password = (EditText) findViewById(R.id.password_et);
+        username = (XEditText) findViewById(R.id.username_et);
+        password = (XEditText) findViewById(R.id.password_et);
         getpassword = (TextView) findViewById(R.id.tv_getpassword);
+        error = (LinearLayout) findViewById(R.id.linear_error);
+        inflater = LayoutInflater.from(EnterActivity.this);
 //        username.setSelection("1".length());
 //        password.setSelection(4);
+        username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                error.setVisibility(View.GONE);
+            }
+        });
+        username.setDrawableRightListener(new XEditText.DrawableRightListener() {
+            @Override
+            public void onDrawableRightClick(View view) {
+                View viewinfo = inflater.inflate(R.layout.fclassroom_infor, null, false);
+                AlertDialog.Builder builder = new AlertDialog.Builder(EnterActivity.this);
+                builder.setView(viewinfo);
+                builder.create().show();
+            }
+        });
+        username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                checkEditText();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().trim().length() == 0) {
+                    checkEditText();
+                }
+            }
+        });
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                checkEditText();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().trim().length() == 0) {
+                    checkEditText();
+                }
+            }
+        });
+
+        password.setDrawableRightListener(new XEditText.DrawableRightListener() {
+            @Override
+            public void onDrawableRightClick(View view) {
+                if (eyeclose) {
+                    password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.eye_open, 0);
+                    password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    eyeclose = false;
+                } else {
+                    password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.eye_close, 0);
+                    password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    eyeclose = true;
+                }
+            }
+        });
         //如果有token，直接token登入
         if (PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN) != null) {
             loginbyAccesstoken(PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN));
@@ -97,6 +178,16 @@ public class EnterActivity extends BaseActivity {
         });
     }
 
+
+    public void checkEditText() {
+        if (TextUtils.isEmpty(username.getText().toString().trim()) || TextUtils.isEmpty(password.getText().toString().trim())) {
+            enter.setClickable(false);
+            enter.setBackgroundColor(Color.parseColor("#2eb48f"));
+        } else {
+            enter.setClickable(true);
+        }
+    }
+
     private void login(final String account, final String pwd) {
         dialog = ProgressDialog.show(EnterActivity.this, "", "正在登入中");
         final Handler handler = new Handler() {
@@ -111,12 +202,13 @@ public class EnterActivity extends BaseActivity {
                         UIHelper.jump2Activity(EnterActivity.this, CheckinforActivity.class);
                     } else {
                         UIHelper.jump2Activity(EnterActivity.this, HomeActivity.class);
+                        appManager.finishActivity();
                     }
-                    appManager.finishActivity(EnterActivity.this);
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(EnterActivity.this);
                 } else if (msg.what == 0) {
-                    UIHelper.ToastMessage(EnterActivity.this, "登入失败" + msg.obj);
+                    UIHelper.ToastMessage(EnterActivity.this, "登入失败:" + msg.obj);
+                    error.setVisibility(View.VISIBLE);
                 }
             }
         };

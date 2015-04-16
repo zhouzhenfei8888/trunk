@@ -43,12 +43,12 @@
     <EditText
         android:id="@+id/edit_jike_number"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:padding="@dimen/margin_size"
         android:hint="极课号"
-        android:background="@color/white"
+        android:background="@drawable/edittext_select2"
         android:textSize="18sp" />
 
     <TextView
@@ -62,10 +62,10 @@
     <com.fclassroom.app.widget.XEditText
         android:id="@+id/edit_jike_password"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="6dp"
-        android:background="@color/white"
+        android:background="@drawable/edittext_select2"
         android:hint="密码"
         android:drawableRight="@drawable/eye_close"
         android:inputType="textPassword"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_size"
-            android:background="@drawable/button_select"
+            android:background="@drawable/button_select_enter"
             android:textColor="@color/white"
             android:text="绑定"/>
 
@@ -100,6 +100,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
+            android:visibility="gone"
             android:drawableRight="@drawable/icon_right"
             android:text="@string/test_home" />
 

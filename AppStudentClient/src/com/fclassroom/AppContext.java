@@ -898,8 +898,8 @@ public class AppContext extends Application {
         return ApiClient.SendAuthCode(this, accessToken, telephoneNum);
     }
 
-    public void bindphone(String accessToken, String authCode, String telephone) throws AppException {
-        ApiClient.bindphone(this, accessToken, authCode, telephone);
+    public BaseResponseBean<Boolean> bindphone(String accessToken, String authCode, String telephone) throws AppException {
+        return  ApiClient.bindphone(this, accessToken, authCode, telephone);
     }
 
     public BaseResponseBean<PageBean> getNoteBookQuestions(String accessToken, int gradeId, int subjectId, int noteBookId) throws AppException {

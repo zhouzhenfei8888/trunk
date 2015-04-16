@@ -811,7 +811,7 @@ public class ApiClient {
         return responseBean;
     }
 
-    public static void bindphone(AppContext appContext, String accessToken, String authCode, String telephone) throws AppException {
+    public static BaseResponseBean<Boolean> bindphone(AppContext appContext, String accessToken, String authCode, String telephone) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
         params.put("phone", telephone);
@@ -819,7 +819,9 @@ public class ApiClient {
         String url = _MakeURL(URLs.BindPhone, params);
         String response = http_get(appContext, url);
         System.out.println(response);
-        return;
+        BaseResponseBean<Boolean> responseBean = JsonUtils.praseBoolean(response);
+        System.out.println(responseBean.getData());
+        return responseBean;
     }
 
     public static BaseResponseBean<PageBean> getNoteBookQuestions(AppContext appContext, String accessToken, int gradeId, int subjectId, int noteBookId) throws AppException {

@@ -55,7 +55,7 @@ public class CheckinforActivity extends BaseActivity {
                     BaseResponseBean<StudentInfoBean> responseBean = (BaseResponseBean<StudentInfoBean>) msg.obj;
                     appContext.saveStudentInfo(responseBean.getData());
                     tv_name.setText(responseBean.getData().getStudentName());
-                    tv_idnumber.setText(responseBean.getData().getStudentNo());
+                    tv_idnumber.setText(responseBean.getData().getJikeNum());
                     tv_schoolname.setText(responseBean.getData().getSchoolName());
                     tv_gradename.setText(responseBean.getData().getGradeName());
                     tv_classname.setText(responseBean.getData().getClassName());

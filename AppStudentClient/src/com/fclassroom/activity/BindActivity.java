@@ -143,7 +143,7 @@ public class BindActivity extends BaseActivity {
                     BaseResponseBean<LoginResponseBean> account = (BaseResponseBean<LoginResponseBean>) msg.obj;
                    // appContext.saveAccountInfo(account.getData());
                     if (account.getData() != null) {
-                        UIHelper.jump2Activity(BindActivity.this, HomeActivity.class);
+                        UIHelper.jump2Activity(BindActivity.this, CheckinforActivity.class);
                         appManager.finishActivity(BindActivity.this);
                     } else {
                         UIHelper.ToastMessage(BindActivity.this, "该账号还未绑定");
@@ -181,7 +181,7 @@ public class BindActivity extends BaseActivity {
     }
 
     public void checkEditText() {
-        if (!TextUtils.isEmpty(editJikeNumber.getText()) && !TextUtils.isEmpty(editJikepassword.getText())) {
+        if (!TextUtils.isEmpty(editJikeNumber.getText().toString().trim()) && !TextUtils.isEmpty(editJikepassword.getText().toString().trim())) {
             bind.setEnabled(true);
         } else {
             bind.setEnabled(false);

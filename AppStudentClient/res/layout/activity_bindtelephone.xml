@@ -21,7 +21,7 @@
             android:layout_gravity="center"
             android:text="@string/bindtelephone"
             android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:textSize="18sp" />
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
@@ -38,22 +38,27 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="4"
-                android:background="@color/white"
+                android:background="@drawable/edittext_select2"
                 android:gravity="center"
                 android:inputType="number"
                 android:padding="@dimen/margin_size"
+                android:focusable="false"
+                android:textSize="15sp"
                 android:text="+86" />
 
             <EditText
                 android:id="@+id/edit_telephone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginLeft="@dimen/margin_size"
                 android:layout_weight="1"
-                android:background="@color/white"
+                android:background="@drawable/edittext_select2"
                 android:hint="@string/please_enter_telephone"
+                android:textSize="15sp"
+                android:focusable="true"
+                android:textColorHint="@color/hint_text_color"
                 android:inputType="number"
                 android:padding="@dimen/margin_size" />
         </LinearLayout>
@@ -67,32 +72,47 @@
             <EditText
                 android:id="@+id/auth_code"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@color/white"
+                android:background="@drawable/edittext_select2"
                 android:hint="@string/please_enter_authcode"
                 android:inputType="number"
+                android:textSize="15sp"
+                android:textColorHint="@color/hint_text_color"
                 android:padding="@dimen/margin_size" />
 
             <Button
                 android:id="@+id/bn_send_authcode"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginLeft="@dimen/margin_size"
                 android:layout_weight="1"
-                android:background="@drawable/button_select"
+                android:background="@drawable/button_select_enter"
                 android:gravity="center"
                 android:padding="@dimen/margin_size"
+                android:textSize="15sp"
                 android:textColor="@color/white"
                 android:text="@string/send_authcode" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/red"
+            android:drawableLeft="@drawable/error2"
+            android:drawablePadding="8dp"
+            android:visibility="gone"
+            android:text="验证码输入错误！"/>
+
         <Button
             android:id="@+id/bn_sure"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/button_select"
+            android:textSize="15sp"
+            android:background="@drawable/button_select_enter"
             android:textColor="@color/white"
             android:text="@string/sure" />
     </LinearLayout>
