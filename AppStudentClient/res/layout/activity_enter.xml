@@ -52,6 +52,7 @@
                 android:textColorHint="#a8a8a8"
                 android:inputType="number"
                 android:paddingLeft="5dp"
+                android:focusable="true"
                 android:drawableRight="@drawable/wenhao"
                 android:textColor="@color/black"
                 android:textSize="15sp" />

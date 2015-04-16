@@ -73,6 +73,7 @@ public class EnterActivity extends BaseActivity {
         appContext = (AppContext) getApplication();
         appManager = AppManager.getAppManager();
         enter = (Button) findViewById(R.id.enter);
+        enter.setEnabled(false);
         qqEnter = (LinearLayout) findViewById(R.id.linear_qq);
         username = (XEditText) findViewById(R.id.username_et);
         password = (XEditText) findViewById(R.id.password_et);
@@ -99,37 +100,39 @@ public class EnterActivity extends BaseActivity {
         username.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                checkEditText();
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (s.length() == 0 || password.getText().toString() == null) {
+                    enter.setEnabled(false);
+                    enter.setBackgroundColor(Color.parseColor("#2eb48f"));
+                }else{
+                    enter.setEnabled(true);
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().trim().length() == 0) {
-                    checkEditText();
-                }
             }
         });
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                checkEditText();
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (s.length() == 0 || username.getText().toString() == null) {
+                    enter.setEnabled(false);
+                    enter.setBackgroundColor(Color.parseColor("#2eb48f"));
+                }else{
+                    enter.setEnabled(true);
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().trim().length() == 0) {
-                    checkEditText();
-                }
             }
         });
 
@@ -180,11 +183,11 @@ public class EnterActivity extends BaseActivity {
 
 
     public void checkEditText() {
-        if (TextUtils.isEmpty(username.getText().toString().trim()) || TextUtils.isEmpty(password.getText().toString().trim())) {
-            enter.setClickable(false);
-            enter.setBackgroundColor(Color.parseColor("#2eb48f"));
+        if (!TextUtils.isEmpty(username.getText().toString().trim()) && !TextUtils.isEmpty(password.getText().toString().trim())) {
+            enter.setEnabled(true);
         } else {
-            enter.setClickable(true);
+            enter.setEnabled(false);
+            enter.setBackgroundColor(Color.parseColor("#2eb48f"));
         }
     }
 
