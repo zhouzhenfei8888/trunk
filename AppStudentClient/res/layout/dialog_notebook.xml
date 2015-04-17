@@ -3,14 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_tite_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        android:textColor="@color/button_color"
+        android:text="新建整理本"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:src="@color/button_color"/>
 
     <EditText
         android:id="@+id/et_notebookname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_size"
-        android:padding="@dimen/margin_size"
-        android:hint="精题本名字"
+        android:layout_marginTop="30dp"
+        android:paddingTop="@dimen/margin_size"
+        android:background="@null"
+        android:paddingBottom="@dimen/margin_size"
+        android:paddingLeft="10dp"
+        android:hint="整理本名字"
         android:singleLine="true" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@color/hint_text_color"/>
 
 </LinearLayout>

@@ -170,6 +170,9 @@ public class DetailActivity extends BaseActivity {
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
+                setResult(20,intent);
+//                finish();
                 AppManager.getAppManager().finishActivity();
             }
         });

@@ -8,7 +8,7 @@
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="background_color">#f8faf7</color>
     <color name="grey">#FF737373</color>
-    <color name="grey_white">#ffd1d1d1</color>
+    <color name="grey_white">#c7c7c7</color>
     <color name="toolbar_color">#5dc6a2</color>
     <color name="button_color">#08896a</color>
     <color name="text_color_green">#71f0cc</color>
@@ -22,4 +22,5 @@
     <color name="detail_background">#faf9eb</color>
     <color name="hint_text_color">#a8a8a8</color>
     <color name="text_color">#617a71</color>
+    <color name="line_color">#eeeeee</color>
 </resources>

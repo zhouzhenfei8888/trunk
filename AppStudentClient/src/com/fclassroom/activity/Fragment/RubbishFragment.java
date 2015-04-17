@@ -134,8 +134,10 @@ public class RubbishFragment extends Fragment {
                 if (msg.what == 1) {
                     BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
                     List<PageBean.SubjectItemBean> rubbishList = responseBean.getData().getList();
+                    list.clear();
                     list.addAll(rubbishList);
-                    subjectAdapter.notifyDataSetChanged();
+                    subjectAdapter = new SubjectAdapter(getActivity(),list,listView);
+                    listView.setAdapter(subjectAdapter);
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
                 } else if (msg.what == -1) {
@@ -172,6 +174,7 @@ public class RubbishFragment extends Fragment {
             public void handleMessage(Message msg) {
                 if(msg.what == 1){
                     UIHelper.ToastMessage(getActivity(),"删除成功！");
+                    unSelectedAll();
                     singleMode();
                 }else {
                     ((AppException)msg.obj).makeToast(getActivity());
@@ -301,7 +304,7 @@ public class RubbishFragment extends Fragment {
         bottomView.setFocusable(false);
         subjectAdapter.setMulMode(false);
 //        subjectAdapter.notifyDataSetChanged();
-        pageNo = 1;
+        pageNo = 0;
         getRubbishSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo);
         listView.setChoiceMode(ListView.CHOICE_MODE_NONE);
     }
@@ -317,6 +320,7 @@ public class RubbishFragment extends Fragment {
         }
         appContext.rubbishlist.clear();
         appContext.rubbishlist = list;
+        selectAll.setEnabled(false);
         updateSeletedCount();
     }
 

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -73,7 +74,7 @@ public class EnterActivity extends BaseActivity {
         appContext = (AppContext) getApplication();
         appManager = AppManager.getAppManager();
         enter = (Button) findViewById(R.id.enter);
-        enter.setEnabled(false);
+//        enter.setEnabled(false);
         qqEnter = (LinearLayout) findViewById(R.id.linear_qq);
         username = (XEditText) findViewById(R.id.username_et);
         password = (XEditText) findViewById(R.id.password_et);
@@ -97,7 +98,7 @@ public class EnterActivity extends BaseActivity {
                 builder.create().show();
             }
         });
-        username.addTextChangedListener(new TextWatcher() {
+/*        username.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -134,7 +135,7 @@ public class EnterActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
             }
-        });
+        });*/
 
         password.setDrawableRightListener(new XEditText.DrawableRightListener() {
             @Override

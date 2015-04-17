@@ -124,6 +124,7 @@ public class ApiClient {
         httpGet.setRequestHeader("Cookie", cookie);
         httpGet.setRequestHeader("User-Agent", userAgent);
         httpGet.setRequestHeader("jike-client-from", "APP");
+        httpGet.setRequestHeader("locale", "zh");
         return httpGet;
     }
 
@@ -136,6 +137,7 @@ public class ApiClient {
         httpPost.setRequestHeader("Cookie", cookie);
         httpPost.setRequestHeader("User-Agent", userAgent);
         httpPost.setRequestHeader("jike-client-from", "APP");
+        httpPost.setRequestHeader("locale", "zh");
         return httpPost;
     }
 
@@ -557,6 +559,7 @@ public class ApiClient {
         params.put("accessToken", accesstoken);
         String url = _MakeURL(URLs.GetStudentInfo, params);
         String response = http_get(appContext, url);
+        System.out.println(response);
         BaseResponseBean<StudentInfoBean> studentInfo = JsonUtils.getStudentInfo(response);
         return studentInfo;
     }

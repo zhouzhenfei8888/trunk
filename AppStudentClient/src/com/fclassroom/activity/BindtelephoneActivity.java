@@ -1,6 +1,8 @@
 package com.fclassroom.activity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
@@ -26,6 +28,7 @@ public class BindtelephoneActivity extends BaseActivity {
     private EditText etAuthCode, ettelephoneNum;
     private TextView title;
     private TextView error;
+    MyCountDownTimer mc;
     //bindphoneORfindpassword 0为bindphone,1为findpassword；
     private int bindphoneORfindpassword;
     AppContext appContext;
@@ -55,6 +58,7 @@ public class BindtelephoneActivity extends BaseActivity {
         bnSendauthCode = (Button) findViewById(R.id.bn_send_authcode);
         error = (TextView) findViewById(R.id.tv_error);
         bnSure = (Button) findViewById(R.id.bn_sure);
+        mc = new MyCountDownTimer(60000,1000);
         bnSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +74,7 @@ public class BindtelephoneActivity extends BaseActivity {
                     UIHelper.ToastMessage(BindtelephoneActivity.this, "请输入正确的手机号码");
                 } else {
                     SendAuthCode(accessToken, ettelephoneNum.getText().toString().trim());
+                    mc.start();
                 }
             }
         });
@@ -186,5 +191,23 @@ public class BindtelephoneActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    class MyCountDownTimer extends CountDownTimer{
+
+        public MyCountDownTimer(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            bnSendauthCode.setText(millisUntilFinished/1000+"秒后重新发送");
+            bnSendauthCode.setEnabled(false);
+        }
+
+        @Override
+        public void onFinish() {
+            bnSendauthCode.setText("点击重新发送");
+            bnSendauthCode.setEnabled(true);
+        }
     }
 }

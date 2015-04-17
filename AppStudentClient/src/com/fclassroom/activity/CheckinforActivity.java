@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fclassroom.AppContext;
@@ -25,7 +26,8 @@ public class CheckinforActivity extends BaseActivity {
     private static boolean fromenter = false;
     AppContext appContext;
     String accessToken;
-    TextView tv_name, tv_idnumber, tv_schoolname, tv_gradename, tv_classname;
+    ImageView iv_headview;
+    TextView tv_name, tv_idnumber, tv_schoolname, tv_gradename, tv_classname,tv_studentid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,15 @@ public class CheckinforActivity extends BaseActivity {
                     tv_schoolname.setText(responseBean.getData().getSchoolName());
                     tv_gradename.setText(responseBean.getData().getGradeName());
                     tv_classname.setText(responseBean.getData().getClassName());
+                    tv_studentid.setText(""+responseBean.getData().getStudentId());
+
+                    if(!"".equals(responseBean.getData().getSex())){
+                        if("女".equals(responseBean.getData().getSex())){
+                            iv_headview.setImageResource(R.drawable.head_girl);
+                        }else{
+                            iv_headview.setImageResource(R.drawable.head_boy);
+                        }
+                    }
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(CheckinforActivity.this, msg.obj.toString());
                 } else if (msg.what == -1) {
@@ -95,6 +106,8 @@ public class CheckinforActivity extends BaseActivity {
         tv_schoolname = (TextView) findViewById(R.id.tv_schoolname);
         tv_gradename = (TextView) findViewById(R.id.tv_gradename);
         tv_classname = (TextView) findViewById(R.id.tv_classname);
+        tv_studentid = (TextView) findViewById(R.id.tv_student_id);
+        iv_headview = (ImageView) findViewById(R.id.iv_headview);
         yes = (Button) findViewById(R.id.bn_yes);
         no = (Button) findViewById(R.id.bn_no);
         yes.setOnClickListener(new View.OnClickListener() {

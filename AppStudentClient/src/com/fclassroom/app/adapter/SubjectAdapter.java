@@ -87,6 +87,7 @@ public class SubjectAdapter extends BaseAdapter {
             listItemView.ratingBar = (RatingBar) convertView.findViewById(R.id.ratingbar_listviewitem);
             listItemView.subject = (ImageView) convertView.findViewById(R.id.iv_subject);
             listItemView.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox_choice);
+            listItemView.difficult = (TextView) convertView.findViewById(R.id.tv_difficulty);
             convertView.setTag(listItemView);
         } else {
             listItemView = (ListItemView) convertView.getTag();
@@ -95,6 +96,18 @@ public class SubjectAdapter extends BaseAdapter {
         listItemView.subject.setTag(data);
         listItemView.DateTime.setText((String) data.getExamTime());
         listItemView.examname.setText((String) data.getExamName());
+        String diffStr = null;
+        float diffRecord = Float.parseFloat(data.getScoreRate());
+        if (diffRecord <= 0.1) {
+            diffStr = "简单";
+        } else if (diffRecord <= 0.25) {
+            diffStr = "普通";
+        } else if (diffRecord <= 0.4) {
+            diffStr = "一般难";
+        } else if (diffRecord <= 1) {
+            diffStr = "难";
+        }
+        listItemView.difficult.setText("难度："+diffStr);
 //        listItemView.subject.setImageResource((int) data.get("examsrc"));
         //图片处理
         imageLoader = new ImageLoader(mQueue, new BitmapCache());
@@ -104,9 +117,9 @@ public class SubjectAdapter extends BaseAdapter {
         if (MulMode) {
             listItemView.checkBox.setVisibility(VISIBLE);
             listItemView.checkBox.setFocusable(false);
-            if (listView.isItemChecked(position+1)) {
+            if (listView.isItemChecked(position + 1)) {
                 listItemView.checkBox.setChecked(true);
-            }else {
+            } else {
                 listItemView.checkBox.setChecked(false);
             }
         } else {
@@ -132,6 +145,7 @@ public class SubjectAdapter extends BaseAdapter {
     public class ListItemView {
         TextView DateTime;
         TextView examname;
+        TextView difficult;
         RatingBar ratingBar;
         ImageView subject;
         CheckBox checkBox;

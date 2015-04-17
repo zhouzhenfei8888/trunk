@@ -18,6 +18,15 @@ public class StudentInfoBean implements Serializable {
     private String subjectName;
     private String jikeNum;
     private String studentNo;
+    private String sex;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     public int getStudentId() {
         return studentId;

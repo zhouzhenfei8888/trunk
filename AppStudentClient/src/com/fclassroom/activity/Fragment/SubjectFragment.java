@@ -3,6 +3,7 @@ package com.fclassroom.activity.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -494,7 +495,12 @@ public class SubjectFragment extends Fragment {
                         if (subjectItemBean == null) {
                             return;
                         }
-                        UIHelper.jump2Activity(getActivity(), DetailActivity.class, subjectItemBean);
+//                        UIHelper.jump2Activity(getActivity(), DetailActivity.class, subjectItemBean);
+                        Intent intent = new Intent(getActivity(),DetailActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("value", subjectItemBean);
+                        intent.putExtras(bundle);
+                        getActivity().startActivityForResult(intent,1);
                     } else {
                         int examBeanId = 0;
                         String workname = null;
@@ -561,6 +567,19 @@ public class SubjectFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("kkk");
+        if(requestCode == 20){
+            System.out.println("rrr");
+            unOrganize = 0;
+            orderUpOrDown = orderUp;
+            pageNo1 = 1;
+            pageSize = 20;
+            getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
+        }
+    }
+
     private void mulMode() {
         appContext.myselectlist.clear();
         unSelectedAll();
@@ -598,6 +617,7 @@ public class SubjectFragment extends Fragment {
         }
         appContext.myselectlist.clear();
         appContext.myselectlist = listSubject;
+        selectAll.setEnabled(false);
         updateSeletedCount();
     }
 
@@ -629,7 +649,8 @@ public class SubjectFragment extends Fragment {
      * @param orderUpOrDown 升序或降序
      */
     private void getAllExamPaper(final String accessToken, final int gradeId, final int subjectId, final int unOrganize, final String orderUpOrDown) {
-        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
+//        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
+        showLoading(scrollShowHeaderListView, mLoadingView, mEmptyView);
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -644,7 +665,7 @@ public class SubjectFragment extends Fragment {
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 }
-                progressDialog.dismiss();
+                showContent(scrollShowHeaderListView, mLoadingView, mEmptyView);
             }
         };
         new Thread() {

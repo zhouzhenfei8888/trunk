@@ -162,7 +162,6 @@ public class CollateFragment extends Fragment {
         final View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_notebook, null, false);
         final EditText editText = (EditText) view.findViewById(R.id.et_notebookname);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("新建整理本");
         builder.setView(view);
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
@@ -267,6 +266,7 @@ public class CollateFragment extends Fragment {
                 final ErrorBookBean bookBean = list.get(position);
                 holder.bookname.setTag(bookBean);
                 holder.bookname.setText(bookBean.getName().toString().trim());
+                holder.setting.setTag(bookBean.getName());
                 holder.subjectnumber.setText("共" + bookBean.getQuestionCount() + "题");
                 holder.setting.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -288,11 +288,11 @@ public class CollateFragment extends Fragment {
     private void showlistDialog(int position, final ErrorBookBean bookBean) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("");
-        builder.setItems(new String[]{"重命名", "打印精题本", "删除精题本"}, new DialogInterface.OnClickListener() {
+        builder.setItems(new String[]{"重命名", "打印", "删除"}, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == 0) {
-                    editBookNameDialog(accessToken, bookBean.getId());
+                    editBookNameDialog(accessToken, bookBean.getId(),bookBean.getName());
                 } else if (which == 1) {
                     addNoteBookToPrintPlan(accessToken,gradeId,subjectId,bookBean.getId());
                 } else if (which == 2) {
@@ -310,6 +310,7 @@ public class CollateFragment extends Fragment {
             public void handleMessage(Message msg) {
                 if(msg.what == 1){
                     BaseResponseBean<String> responseBean = (BaseResponseBean<String>) msg.obj;
+                    UIHelper.ToastMessage(getActivity(),"已加入到打印计划");
                 }else if(msg.what == 0){
                     UIHelper.ToastMessage(getActivity(),msg.obj.toString());
                 }else if(msg.what == -1){
@@ -391,9 +392,12 @@ public class CollateFragment extends Fragment {
         }.start();
     }
 
-    private void editBookNameDialog(final String accessToken, final int id) {
+    private void editBookNameDialog(final String accessToken, final int id,final String bookname) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_notebook, null, false);
         final EditText etName = (EditText) view.findViewById(R.id.et_notebookname);
+        etName.setHint(bookname);
+        TextView textView = (TextView) view.findViewById(R.id.tv_tite_dialog);
+        textView.setText("重命名");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("");
         builder.setView(view);
