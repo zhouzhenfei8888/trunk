@@ -42,6 +42,7 @@ public class RoundProgressBarSmall extends View {
      * 中间进度百分比的字符串的颜色
      */
     private int textColor;
+    private int textColor2;
 
     /**
      * 中间进度百分比的字符串的字体
@@ -52,7 +53,7 @@ public class RoundProgressBarSmall extends View {
      * 中间文字内容
      */
     private String text;
-//    private String text2;
+    private String text2;
 
     /**
      * 圆环的宽度
@@ -142,9 +143,9 @@ public class RoundProgressBarSmall extends View {
         paint.setTextSize(textSize);
         paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
         int percent = (int) (((float) progress / (float) max) * 100);  //中间的进度百分比，先转换成float在进行除法运算，不然都为0
-        float textWidth = paint.measureText(percent + "%");   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
+        float textWidth = paint.measureText(text);   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
         if (textIsDisplayable && percent != 0 && style == STROKE) {
-            canvas.drawText(text, centre - textWidth / 2, centre + textSize / 2, paint); //画出进度百分比
+            canvas.drawText(text, centre - textWidth / 2, centre, paint); //画出进度百分比
         }
         //右边加分钟
  /*       paint.setStrokeWidth(0);
@@ -158,13 +159,13 @@ public class RoundProgressBarSmall extends View {
         }*/
         //下面加字符串
         paint.setStrokeWidth(0);
-        paint.setColor(textColor);
-        paint.setTextSize(textSize / 2);
+        paint.setColor(textColor2);
+        paint.setTextSize(textSize);
         paint.setTypeface(Typeface.DEFAULT); //设置字体
-        float textWidthDown = paint.measureText("以节约时间");   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
+        float textWidthDown = paint.measureText(text2);   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
 
         if (textIsDisplayable && percent != 0 && style == STROKE) {
-            canvas.drawText("以节约时间", centre - textWidthDown / 2, centre + textSize / 2 + textSize / 2 + textSize / 2, paint); //画出进度百分比
+            canvas.drawText(text2, centre - textWidthDown / 2, centre + textSize / 2 + textSize / 2, paint); //画出进度百分比
         }
 
         /**
@@ -310,6 +311,14 @@ public class RoundProgressBarSmall extends View {
         this.textColor = textColor;
     }
 
+    public int getTextColor2() {
+        return textColor2;
+    }
+
+    public void setTextColor2(int textColor2) {
+        this.textColor2 = textColor2;
+    }
+
     public float getTextSize() {
         return textSize;
     }
@@ -344,11 +353,11 @@ public class RoundProgressBarSmall extends View {
         this.text = text;
     }
 
-//    public String getText2() {
-//        return text2;
-//    }
-//
-//    public void setText2(String text2) {
-//        this.text2 = text2;
-//    }
+    public String getText2() {
+        return text2;
+    }
+
+    public void setText2(String text2) {
+        this.text2 = text2;
+    }
 }

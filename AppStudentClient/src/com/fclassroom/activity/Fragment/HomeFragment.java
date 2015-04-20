@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fclassroom.AppContext;
+import com.fclassroom.activity.AchievementActivity;
 import com.fclassroom.activity.HomeActivity;
 import com.fclassroom.app.adapter.SubjectAdapter;
 import com.fclassroom.app.common.PreferenceUtils;
@@ -100,6 +101,12 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
         roundProgressBar.setProgress(60);
         roundProgressBar.setProgress2(40);
         roundProgressBar.setText("456");
+        roundProgressBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UIHelper.jump2Activity(getActivity(), AchievementActivity.class);
+            }
+        });
         new Thread() {
             @Override
             public void run() {

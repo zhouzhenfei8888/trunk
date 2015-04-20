@@ -1,14 +1,10 @@
 package com.fclassroom.activity;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,12 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.fclassroom.app.widget.RoundProgressBar;
 import com.fclassroom.app.widget.RoundProgressBarSmall;
 import com.fclassroom.appstudentclient.R;
 
-import java.util.zip.Inflater;
 
 public class AchievementActivity extends BaseActivity {
 
@@ -52,10 +47,10 @@ public class AchievementActivity extends BaseActivity {
                         imageView.setImageResource(R.drawable.three_first);
                         break;
                     case 1:
-//                        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.three_second));
+                        imageView.setImageResource(R.drawable.three_second);
                         break;
                     case 2:
-//                        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.three_third));
+                        imageView.setImageResource(R.drawable.three_third);
                         break;
                 }
 
@@ -66,7 +61,7 @@ public class AchievementActivity extends BaseActivity {
 
             }
         });
-        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(AchievementActivity.this);
+        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(this);
         viewPager.setAdapter(myPagerAdapter);
     }
 
@@ -89,21 +84,47 @@ public class AchievementActivity extends BaseActivity {
         private Context context;
         public MyPagerAdapter(Context context) {
             this.context = context;
-            LayoutInflater inflater  = LayoutInflater.from(context);
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View view = View.inflate(context,R.layout.my_pager,null);
-//            RoundProgressBarSmall roundProgressBarSmall = (RoundProgressBarSmall) findViewById(R.id.roundprogressbarsmall);
+            View view = LayoutInflater.from(context).inflate(R.layout.my_pager,container,false);
+            TextView textView = (TextView) view.findViewById(R.id.tv_message);
+            RoundProgressBarSmall roundProgressBarSmall = (RoundProgressBarSmall) view.findViewById(R.id.roundprogressbarsmall);
             switch (position){
                 case 0:
-//                    roundProgressBarSmall.setText("累计");
-//                    roundProgressBarSmall.setText2("2510分钟");
+                    roundProgressBarSmall.setTextColor(Color.parseColor("#c1c0c0"));
+                    roundProgressBarSmall.setTextColor2(Color.parseColor("#5e5e5e"));
+                    roundProgressBarSmall.setTextSize(60);
+                    roundProgressBarSmall.setProgress(100);
+                    roundProgressBarSmall.setText("累计");
+                    roundProgressBarSmall.setText2("2510分钟");
+                    textView.setText("节约抄题时间");
+                    textView.setTextColor(Color.parseColor("#5dc6a2"));
                     break;
                 case 1:
+                    roundProgressBarSmall.setTextColor(Color.parseColor("#c1c0c0"));
+                    roundProgressBarSmall.setTextColor2(Color.parseColor("#5e5e5e"));
+                    roundProgressBarSmall.setTextSize(60);
+                    roundProgressBarSmall.setProgress(60);
+                    roundProgressBarSmall.setCricleColor(Color.parseColor("#ffba43"));
+                    roundProgressBarSmall.setCricleProgressColor(Color.parseColor("#ffcf73"));
+                    roundProgressBarSmall.setText("整理完整度");
+                    roundProgressBarSmall.setText2("60%");
+                    textView.setText("已整理60%的错题");
+                    textView.setTextColor(Color.parseColor("#ffcf73"));
                     break;
                 case 2:
+                    roundProgressBarSmall.setTextColor(Color.parseColor("#c1c0c0"));
+                    roundProgressBarSmall.setTextColor2(Color.parseColor("#5e5e5e"));
+                    roundProgressBarSmall.setTextSize(60);
+                    roundProgressBarSmall.setProgress(60);
+                    roundProgressBarSmall.setCricleColor(Color.parseColor("#3b8dfe"));
+                    roundProgressBarSmall.setCricleProgressColor(Color.parseColor("#73aeff"));
+                    roundProgressBarSmall.setText("超过");
+                    roundProgressBarSmall.setText2("60%的同学");
+                    textView.setText("超过60%的同学");
+                    textView.setTextColor(Color.parseColor("#73aeff"));
                     break;
             }
             container.addView(view);
@@ -118,6 +139,10 @@ public class AchievementActivity extends BaseActivity {
         @Override
         public boolean isViewFromObject(View view, Object o) {
             return view == o;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
         }
     }
 

@@ -1,58 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:circle="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textSize="18sp"
-        android:text="详细情况"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.fclassroom.app.widget.RoundProgressBarSmall
-        android:id="@+id/roundprogressbarsmall"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center_horizontal"
-        circle:max="100"
-        circle:roundColor="#ff79ffb0"
-        circle:roundColor2="#ffffff"
-        circle:roundColor3="#ffffff"
-        circle:roundColor4="#ffffff"
-        circle:roundProgressColor="#ffffee54"
-        circle:roundProgressColor2="#ffffff"
-        circle:roundProgressColor3="#ffffff"
-        circle:roundProgressColor4="#ffffff"
-        circle:roundWidth="30dp"
-        circle:roundWidth2="1dp"
-        circle:roundWidth3="1dp"
-        circle:roundWidth4="1dp"
-        circle:textColor="@color/black"
-        circle:textIsDisplayable="true"
-        circle:textSize="30sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:text="详细情况"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tv_message"
-        android:layout_width="249dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="30dp"
-        android:textSize="18sp"
-        android:padding="20dp"
-        android:gravity="center"
-        android:background="@drawable/tv_background"
-        android:layout_gravity="center_horizontal"
-        android:text="节约抄题时间"/>
+        <com.fclassroom.app.widget.RoundProgressBarSmall
+            android:id="@+id/roundprogressbarsmall"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            circle:max="100"
+            circle:roundColor="#5dc6a2"
+            circle:roundColor2="#13aa84"
+            circle:roundColor3="#ffffff"
+            circle:roundColor4="#ffffff"
+            circle:roundProgressColor="#5dc6a2"
+            circle:roundProgressColor2="#13aa84"
+            circle:roundProgressColor3="#ffffff"
+            circle:roundProgressColor4="#ffffff"
+            circle:roundWidth="40dp"
+            circle:roundWidth2="5dp"
+            circle:roundWidth3="1dp"
+            circle:roundWidth4="1dp"
+            circle:textColor="@color/black"
+            circle:textIsDisplayable="true"
+            circle:textSize="30sp" />
 
-    <ImageView
-        android:id="@+id/iv_number"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="80dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/three_first"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="249dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/tv_background"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="节约抄题时间"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</RelativeLayout>
