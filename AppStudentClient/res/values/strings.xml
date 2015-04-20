@@ -58,7 +58,7 @@
     <string name="new_message">新消息通知</string>
     <string name="find">发现</string>
     <string name="about_jike">关于极课</string>
-    <string name="exit">退出极课</string>
+    <string name="exit">注销</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="back">返回</string>
     <string name="delete">删除</string>

@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,19 +17,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.fclassroom.AppContext;
+import com.fclassroom.AppException;
 import com.fclassroom.AppManager;
+import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.common.FileUtils;
 import com.fclassroom.app.common.ImageUtils;
+import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.StringUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.appstudentclient.R;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *备注页
+ * 备注页
  */
 public class RemarkActivity extends BaseActivity {
 
@@ -46,17 +53,33 @@ public class RemarkActivity extends BaseActivity {
             .getExternalStorageDirectory().getAbsolutePath()
             + "/JIKE/PHOTO/";
     ImageView imageView;
+    AppContext appContext;
+    String accessToken;
+    int gradeId;
+    int subjectId;
+    StringBuilder stringBuilderImagePath = new StringBuilder();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remark);
+        appContext = (AppContext) getApplication();
+        accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
+        gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
+        subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
         initViews();
     }
 
     private void initViews() {
+        String remark = "" + (String) getIntent().getSerializableExtra("value");
+        final int examQuestionId = (int) getIntent().getSerializableExtra("value2");
         cancle = (TextView) findViewById(R.id.tv_cancle);
         sure = (TextView) findViewById(R.id.tv_sure);
         editText = (EditText) findViewById(R.id.editText);
+        editText.setHint("这里添加备注...");
+        if (remark != "") {
+            editText.setText(remark);
+        }
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,23 +89,63 @@ public class RemarkActivity extends BaseActivity {
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String editRemark = editText.getText().toString();
+                String imagePaths = stringBuilderImagePath.toString();
+                EditRemark(accessToken, examQuestionId, editRemark);
+                Intent intent = new Intent();
+                intent.putExtra("remark", editRemark);
+                intent.putExtra("imagePaths",imagePaths);
+                setResult(5, intent);
                 AppManager.getAppManager().finishActivity();
             }
         });
-        linearLayout = (LinearLayout)findViewById(R.id.linear_img);
-        iv_photo = (ImageView)findViewById(R.id.iv_photo);
+        linearLayout = (LinearLayout) findViewById(R.id.linear_img);
+        iv_photo = (ImageView) findViewById(R.id.iv_photo);
         iv_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imageView = new ImageView(RemarkActivity.this);
-                imageView.setPadding(20,20,20,20);
+                imageView.setPadding(20, 20, 20, 20);
                 startActionCamera();
                 linearLayout.addView(imageView);
             }
         });
     }
+
+    private void EditRemark(final String accessToken, final int examQuestionId, final String editRemark) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 1){
+                    UIHelper.ToastMessage(RemarkActivity.this,"添加remark成功！");
+                }else{
+                    UIHelper.ToastMessage(RemarkActivity.this,"添加remark失败！");
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> baseResponseBean = appContext.EditRemark(accessToken, examQuestionId, editRemark);
+                    msg.what = 1;
+                    msg.obj = baseResponseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
     /**
      * 选择图片裁剪
+     *
      * @param
      */
     private void startImagePick() {
@@ -95,6 +158,7 @@ public class RemarkActivity extends BaseActivity {
 
     /**
      * 相机拍照
+     *
      * @param
      */
     private void startActionCamera() {
@@ -154,6 +218,7 @@ public class RemarkActivity extends BaseActivity {
         String cropFileName = "crop_" + timeStamp + "." + ext;
         // 裁剪头像的绝对路径
         protraitPath = FILE_SAVEPATH + cropFileName;
+        stringBuilderImagePath.append(" "+protraitPath);
         protraitFile = new File(protraitPath);
         cropUri = Uri.fromFile(protraitFile);
         return this.cropUri;
@@ -162,8 +227,7 @@ public class RemarkActivity extends BaseActivity {
     /**
      * 拍照后裁剪
      *
-     * @param data
-     *            原始图片
+     * @param data 原始图片
      * @param
      */
     private void startActionCrop(Uri data) {
@@ -208,7 +272,7 @@ public class RemarkActivity extends BaseActivity {
                     200, 200);
             imageView.setImageBitmap(protraitBitmap);
         } else {
-            UIHelper.ToastMessage(RemarkActivity.this,"图像不存在！");
+            UIHelper.ToastMessage(RemarkActivity.this, "图像不存在！");
         }
     }
 

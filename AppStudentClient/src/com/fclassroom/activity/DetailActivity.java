@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
@@ -61,6 +62,7 @@ public class DetailActivity extends BaseActivity {
     private ImageView checkResult;
     private LinearLayout addWrongTag;
     private LinearLayout remark;
+    private LinearLayout imageViews;
     private TextView remarkInfo;
     private ImageView previous;
     private ImageView next;
@@ -92,19 +94,20 @@ public class DetailActivity extends BaseActivity {
         setContentView(R.layout.activity_detail);
         subjectItemBean = (PageBean.SubjectItemBean) getIntent().getSerializableExtra("value");
         System.out.println(subjectItemBean.getContentImage());
+        System.out.println("0000000" + subjectItemBean.getRemark());
         appContext = (AppContext) getApplication();
         accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
         subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
         for (int i = 0; i < appContext.mylist.size(); i++) {
-            if (subjectItemBean.getId()==appContext.mylist.get(i).getId()) {
-                postionInList = i+1;
+            if (subjectItemBean.getId() == appContext.mylist.get(i).getId()) {
+                postionInList = i + 1;
                 break;
             }
         }
         for (int i = 0; i < appContext.myselectlist.size(); i++) {
-            if (subjectItemBean.getId()==appContext.myselectlist.get(i).getId()) {
-                postionInList2 = i+1;
+            if (subjectItemBean.getId() == appContext.myselectlist.get(i).getId()) {
+                postionInList2 = i + 1;
                 break;
             }
         }
@@ -170,10 +173,10 @@ public class DetailActivity extends BaseActivity {
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                setResult(20,intent);
-                finish();
-//                AppManager.getAppManager().finishActivity();
+//                Intent intent = new Intent();
+//                setResult(20, intent);
+//                finish();
+                AppManager.getAppManager().finishActivity();
             }
         });
         iv_rubbish.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +204,12 @@ public class DetailActivity extends BaseActivity {
         next = (ImageView) findViewById(R.id.bn_next);
         tagView = (TagView) findViewById(R.id.tagview);
         checkResult = (ImageView) findViewById(R.id.iv_checkresult);
-        bookname.setText(subjectItemBean.getNotebookNames());
+        imageViews = (LinearLayout) findViewById(R.id.linear_imagepath);
+        if (null == subjectItemBean.getNotebookNames() || "".equals(subjectItemBean.getNotebookNames())) {
+            bookname.setText("暂未加入错题本");
+        } else {
+            bookname.setText(subjectItemBean.getNotebookNames());
+        }
         knowledgePoint.setText("知识点：" + subjectItemBean.getKnoNames());
         examfrom.setText("来源：" + subjectItemBean.getExamName());
         diffRecord = Float.parseFloat(subjectItemBean.getScoreRate());
@@ -225,7 +233,7 @@ public class DetailActivity extends BaseActivity {
         imageLoader.get(URLs.HOST_IMG + subjectItemBean.getAnswerImg(), imageListenerAnswer);
         //错因标签
         String tagnames = subjectItemBean.getTagNames();
-        if (!"".equals(tagnames)&&tagnames != null) {
+        if (!"".equals(tagnames) && tagnames != null) {
             String[] tags = null;
             if (tagnames.contains(",")) {
                 tags = tagnames.split(",");
@@ -233,12 +241,16 @@ public class DetailActivity extends BaseActivity {
                     Tag tag = new Tag(name);
                     tagView.add(tag);
                 }
-            }else{
+            } else {
                 tagView.add(new Tag(tagnames));
             }
         }
         //remark
-        remarkInfo.setText(subjectItemBean.getRemark());
+        if (null == subjectItemBean.getRemark() || "".equals(subjectItemBean.getRemark())) {
+            remarkInfo.setHint("这里添加备注...");
+        } else {
+            remarkInfo.setText(subjectItemBean.getRemark());
+        }
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -292,8 +304,14 @@ public class DetailActivity extends BaseActivity {
         remark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIHelper.jump2Activity(DetailActivity.this, RemarkActivity.class);
-//                overridePendingTransition(R.anim.openfrombottom,R.anim.nomove);
+//               UIHelper.jump2Activity(DetailActivity.this, RemarkActivity.class);
+                overridePendingTransition(R.anim.openfrombottom, R.anim.nomove);
+                Intent intent = new Intent(DetailActivity.this, RemarkActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("value", "" + remarkInfo.getText().toString());
+                bundle.putSerializable("value2", subjectItemBean.getExamQuestionId());
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 50);
             }
         });
     }
@@ -335,20 +353,38 @@ public class DetailActivity extends BaseActivity {
     }
 
     private void showActivityFromBottom() {
-        Intent intent = new Intent(this,AddwrongtagActivity.class);
-        intent.putExtra("examQuestionId",subjectItemBean.getExamQuestionId());
+        Intent intent = new Intent(this, AddwrongtagActivity.class);
+        intent.putExtra("examQuestionId", subjectItemBean.getExamQuestionId());
         startActivityForResult(intent, requestCode);
 //        overridePendingTransition(R.anim.openfrombottom, R.anim.nomove);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(1 == resultCode){
+        if (1 == resultCode) {
             String tagNames = data.getExtras().getString("tags");
             List<String> listtags = Arrays.asList(tagNames.split(" "));
-            for(String tagname:listtags){
+            for (String tagname : listtags) {
                 tagView.add(new Tag(tagname));
                 tagView.drawTags();
+            }
+        } else if (5 == resultCode) {
+            String remarkStr = "" + data.getExtras().getString("remark");
+            remarkInfo.setText(remarkStr);
+            String imagePaths = "" + data.getExtras().getString("imagePaths");
+            String imagePath[] = imagePaths.split(" ");
+            List<String> listImagePath = new ArrayList<String>();
+            for (String imagepath : imagePath) {
+                listImagePath.add(imagepath);
+                ImageView imageView = new ImageView(DetailActivity.this);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(300, 300);
+                imageView.setLayoutParams(layoutParams);
+                imageView.setPadding(20, 20, 20, 20);
+                System.out.println("kkkk:" + imagepath);
+                if (null != imagepath && !"".equals(imagepath)) {
+                    imageView.setImageBitmap(BitmapFactory.decodeFile(imagepath));
+                    imageViews.addView(imageView);
+                }
             }
         }
     }
@@ -432,9 +468,9 @@ public class DetailActivity extends BaseActivity {
                         AddErrorQuestionToNoteBook(accessToken, subjectItemBean.getExamQuestionId(), ErrorBookList.get(which).getId());
                         stringBuilder.append(",").append(ErrorBookList.get(which).getName().toString());
                         if ("".equals(subjectItemBean.getNotebookNames())) {
-                            String strbookname = stringBuilder.substring(1,stringBuilder.length());
+                            String strbookname = stringBuilder.substring(1, stringBuilder.length());
                             bookname.setText(strbookname);
-                        }else{
+                        } else {
                             bookname.setText(subjectItemBean.getNotebookNames() + stringBuilder.toString());
                         }
                     }

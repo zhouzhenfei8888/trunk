@@ -953,4 +953,8 @@ public class AppContext extends Application {
     public BaseResponseBean<List<TreeBean>> getTopLevelKnos(String accessToken, int gradeId, int subjectId) throws AppException {
         return ApiClient.getTopLevelKnos(this,accessToken,gradeId,subjectId);
     }
+
+    public BaseResponseBean<String> EditRemark(String accessToken, int examQuestionId, String editRemark) throws AppException, UnsupportedEncodingException {
+        return ApiClient.EditRemark(this,accessToken,examQuestionId,editRemark);
+    }
 }

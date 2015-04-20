@@ -19,7 +19,11 @@ public class StudentInfoBean implements Serializable {
     private String jikeNum;
     private String studentNo;
     private String sex;
-
+    private String nickname;
+    private String loginPhone;
+    private String headimgurl;
+    private String openIdQQ;
+    private String loginPwd;
     public String getSex() {
         return sex;
     }
@@ -122,6 +126,46 @@ public class StudentInfoBean implements Serializable {
 
     public void setStudentNo(String studentNo) {
         this.studentNo = studentNo;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getLoginPhone() {
+        return loginPhone;
+    }
+
+    public void setLoginPhone(String loginPhone) {
+        this.loginPhone = loginPhone;
+    }
+
+    public String getHeadimgurl() {
+        return headimgurl;
+    }
+
+    public void setHeadimgurl(String headimgurl) {
+        this.headimgurl = headimgurl;
+    }
+
+    public String getOpenIdQQ() {
+        return openIdQQ;
+    }
+
+    public void setOpenIdQQ(String openIdQQ) {
+        this.openIdQQ = openIdQQ;
+    }
+
+    public String getLoginPwd() {
+        return loginPwd;
+    }
+
+    public void setLoginPwd(String loginPwd) {
+        this.loginPwd = loginPwd;
     }
 
     @Override

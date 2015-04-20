@@ -20,7 +20,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/icon_print3" />
 
         <RatingBar
             android:id="@+id/ratingbar"
@@ -37,7 +37,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_rubbish" />
+            android:src="@drawable/icon_print4" />
     </RelativeLayout>
 
     <ScrollView
@@ -62,8 +62,8 @@
                     android:layout_centerVertical="true">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="25dp"
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
                         android:src="@drawable/ic_book" />
 
                     <TextView
@@ -72,7 +72,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/margin_size"
                         android:text="精题本"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <TextView
@@ -83,7 +83,7 @@
                     android:background="@color/toolbar_color"
                     android:paddingBottom="5dp"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingRight="16dp"
                     android:paddingTop="5dp"
                     android:text="加入"
                     android:textColor="@color/white" />
@@ -91,9 +91,18 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textview_linear"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:orientation="vertical">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -113,8 +122,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxEms="15"
-                        android:padding="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:singleLine="true"
+                        android:textSize="14sp"
+                        android:textColor="#d3d3d3"
                         android:text="知识点：ABAA,BBAA,AAAB,AABB" />
 
                     <TextView
@@ -122,8 +136,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxEms="15"
-                        android:padding="5dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:singleLine="true"
+                        android:textColor="#d3d3d3"
                         android:text="来源：江苏省梅村中学高一数学模拟测试" />
                 </LinearLayout>
 
@@ -135,6 +153,8 @@
                     android:layout_marginRight="@dimen/margin_size"
                     android:gravity="center"
                     android:padding="5dp"
+                    android:textSize="16sp"
+                    android:textColor="#bebdbd"
                     android:text="难度：高" />
             </LinearLayout>
 
@@ -142,13 +162,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
                 android:paddingBottom="@dimen/margin_size"
                 android:paddingTop="@dimen/margin_size">
 
                 <ImageView
                     android:id="@+id/iv_note"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/margin_size"
@@ -161,11 +183,11 @@
                     android:layout_marginLeft="@dimen/margin_size"
                     android:layout_toRightOf="@id/iv_note"
                     android:text="题干及作答"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/iv_checkresult"
-                    android:layout_width="60dp"
+                    android:layout_width="74dp"
                     android:layout_height="22dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/margin_size"
@@ -178,9 +200,11 @@
                 android:id="@+id/iv_subject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitStart"
-                android:paddingLeft="@dimen/margin_size"
                 android:background="@color/white"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:paddingLeft="@dimen/margin_size"
+                android:scaleType="fitStart"
                 android:src="@drawable/subject" />
 
             <ImageView
@@ -188,22 +212,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
                 android:padding="@dimen/margin_size"
                 android:src="@drawable/iv_nodata" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linear_addwrongtag"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="43dp"
                 android:layout_marginTop="@dimen/margin_size"
-                android:background="@color/white"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:background="@drawable/textview_linear"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="@dimen/margin_size">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
                     android:src="@drawable/ic_tag" />
 
                 <TextView
@@ -213,12 +242,11 @@
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:text="错因标签"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="5dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:src="@drawable/icon_add" />
             </LinearLayout>
 
@@ -227,7 +255,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
-                android:padding="@dimen/margin_size"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
                 app:lineMargin="5dp"
                 app:tagMargin="3dp"
                 app:textPaddingBottom="5dp"
@@ -240,14 +269,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_size"
-                android:background="@color/white"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
+                android:background="@drawable/textview_linear"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="@dimen/margin_size">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
                     android:src="@drawable/ic_remark" />
 
                 <TextView
@@ -256,12 +287,11 @@
                     android:layout_marginLeft="@dimen/margin_size"
                     android:layout_weight="1"
                     android:text="备注"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="5dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:src="@drawable/icon_remark" />
 
             </LinearLayout>
@@ -270,10 +300,18 @@
                 android:id="@+id/tv_remark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@drawable/textview_linear"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="9dp"
                 android:padding="@dimen/margin_size"
                 android:text="看错了小数点..."
-                android:visibility="gone" />
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/linear_imagepath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"></LinearLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -293,8 +331,8 @@
             android:layout_width="140dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:src="@drawable/button_pre_select"
-            android:gravity="center" />
+            android:gravity="center"
+            android:src="@drawable/button_pre_select" />
 
         <ImageView
             android:id="@+id/bn_next"
@@ -302,7 +340,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="40dp"
             android:layout_weight="1"
-            android:src="@drawable/button_next_select"
-            android:gravity="center" />
+            android:gravity="center"
+            android:src="@drawable/button_next_select" />
     </LinearLayout>
 </RelativeLayout>

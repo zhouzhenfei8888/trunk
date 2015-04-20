@@ -559,7 +559,7 @@ public class ApiClient {
         params.put("accessToken", accesstoken);
         String url = _MakeURL(URLs.GetStudentInfo, params);
         String response = http_get(appContext, url);
-        System.out.println(response);
+        System.out.println("44444"+response);
         BaseResponseBean<StudentInfoBean> studentInfo = JsonUtils.getStudentInfo(response);
         return studentInfo;
     }
@@ -1006,6 +1006,19 @@ public class ApiClient {
         String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<List<TreeBean>> responseBean = JsonUtils.getTopLevelKnos(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<String> EditRemark(AppContext appContext, String accessToken, int examQuestionId, String editRemark) throws AppException, UnsupportedEncodingException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("examQuestionId",examQuestionId);
+        params.put("remark",URLEncoder.encode(editRemark, "utf-8"));
+        String url = _MakeURL(URLs.EditRemark,params);
+        System.out.println(url);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
     }
 }

@@ -14,11 +14,20 @@ public class TreeBean implements Serializable{
     int refId;
     int id;
     int parentId;
+    int node;
     int level;
     int hasNode;
     int subjectId;
     int schoolId;
     String name;
+
+    public int getNode() {
+        return node;
+    }
+
+    public void setNode(int node) {
+        this.node = node;
+    }
 
     public String getCreateTime() {
         return createTime;

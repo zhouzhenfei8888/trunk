@@ -3,6 +3,7 @@ package com.fclassroom.activity;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -14,8 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.fclassroom.app.widget.RoundProgressBar;
+import com.fclassroom.app.widget.RoundProgressBarSmall;
 import com.fclassroom.appstudentclient.R;
 
 import java.util.zip.Inflater;
@@ -24,15 +27,17 @@ public class AchievementActivity extends BaseActivity {
 
     private Toolbar mToolbar;
     private ViewPager viewPager;
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_achievement);
         initToolbar();
-//        initView();
+        initView();
     }
 
-/*    private void initView() {
+    private void initView() {
+        imageView = (ImageView)findViewById(R.id.iv_number);
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -42,6 +47,17 @@ public class AchievementActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int i) {
+                switch (i){
+                    case 0:
+                        imageView.setImageResource(R.drawable.three_first);
+                        break;
+                    case 1:
+//                        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.three_second));
+                        break;
+                    case 2:
+//                        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.three_third));
+                        break;
+                }
 
             }
 
@@ -50,8 +66,9 @@ public class AchievementActivity extends BaseActivity {
 
             }
         });
-
-    }*/
+        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(AchievementActivity.this);
+        viewPager.setAdapter(myPagerAdapter);
+    }
 
     private void initToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -78,10 +95,11 @@ public class AchievementActivity extends BaseActivity {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = View.inflate(context,R.layout.my_pager,null);
-            RoundProgressBar roundProgressBar = (RoundProgressBar) findViewById(R.id.roundprogressbar);
+//            RoundProgressBarSmall roundProgressBarSmall = (RoundProgressBarSmall) findViewById(R.id.roundprogressbarsmall);
             switch (position){
                 case 0:
-                    roundProgressBar.setText("以节约时间");
+//                    roundProgressBarSmall.setText("累计");
+//                    roundProgressBarSmall.setText2("2510分钟");
                     break;
                 case 1:
                     break;

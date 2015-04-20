@@ -52,6 +52,7 @@ public class RoundProgressBarSmall extends View {
      * 中间文字内容
      */
     private String text;
+//    private String text2;
 
     /**
      * 圆环的宽度
@@ -146,7 +147,7 @@ public class RoundProgressBarSmall extends View {
             canvas.drawText(text, centre - textWidth / 2, centre + textSize / 2, paint); //画出进度百分比
         }
         //右边加分钟
-        paint.setStrokeWidth(0);
+ /*       paint.setStrokeWidth(0);
         paint.setColor(Color.parseColor("#ff22ef8c"));
         paint.setTextSize(textSize / 2);
         paint.setTypeface(Typeface.DEFAULT); //设置字体
@@ -154,16 +155,16 @@ public class RoundProgressBarSmall extends View {
 
         if (textIsDisplayable && percent != 0 && style == STROKE) {
             canvas.drawText("分钟", centre + textWidth / 2 + textSize / 4, centre + textSize / 2, paint); //画出进度百分比
-        }
+        }*/
         //下面加字符串
         paint.setStrokeWidth(0);
         paint.setColor(textColor);
         paint.setTextSize(textSize / 2);
         paint.setTypeface(Typeface.DEFAULT); //设置字体
-        float textWidthDown = paint.measureText("已节约时间");   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
+        float textWidthDown = paint.measureText("以节约时间");   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
 
         if (textIsDisplayable && percent != 0 && style == STROKE) {
-            canvas.drawText("已节约时间", centre - textWidthDown / 2, centre + textSize / 2 + textSize / 2 + textSize / 2, paint); //画出进度百分比
+            canvas.drawText("以节约时间", centre - textWidthDown / 2, centre + textSize / 2 + textSize / 2 + textSize / 2, paint); //画出进度百分比
         }
 
         /**
@@ -342,4 +343,12 @@ public class RoundProgressBarSmall extends View {
     public void setText(String text) {
         this.text = text;
     }
+
+//    public String getText2() {
+//        return text2;
+//    }
+//
+//    public void setText2(String text2) {
+//        this.text2 = text2;
+//    }
 }

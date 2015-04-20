@@ -44,7 +44,16 @@ public class PageBean {
         String answerImg;
         String notebookNames;
         String knoNames;
+        String imageHost;
         int examQuestionId;
+
+        public String getImageHost() {
+            return imageHost;
+        }
+
+        public void setImageHost(String imageHost) {
+            this.imageHost = imageHost;
+        }
 
         public int getId() {
             return id;

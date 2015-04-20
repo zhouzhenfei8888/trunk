@@ -135,8 +135,8 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
 //        System.out.println("HomeFragment");
-        int pageSize = 20,pageNo1=0,unOrganize=0;String orderBy ="orderTime",orderUpOrDown="ASC";
-            SubjectFragment.newInstance(0).getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
+//        int pageSize = 20,pageNo1=0,unOrganize=0;String orderBy ="orderTime",orderUpOrDown="ASC";
+//            SubjectFragment.newInstance(0).getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
     }
 
     /**
@@ -217,8 +217,8 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
         }
     }
 
-    public interface Refresh{
+ /*   public interface Refresh{
         public void refreshSubjectListView(SubjectAdapter subjectAdapter);
         public void refreshPagerListView(SubjectFragment.WorkAdapter workAdapter);
-    };
+    };*/
 }

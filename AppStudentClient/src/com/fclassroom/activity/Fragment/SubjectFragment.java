@@ -287,7 +287,6 @@ public class SubjectFragment extends Fragment {
         //dialog显示或隐藏
         mLoadingView = (ProgressBar) view.findViewById(R.id.loading_view);
         mEmptyView = (TextView) view.findViewById(R.id.empty_view);
-
         scrollShowHeaderListView.setUpHeaderViews(headview);
         listview = scrollShowHeaderListView.getListView();
         subjectAdapter = new SubjectAdapter(getActivity(), listSubject, listview);
@@ -491,12 +490,12 @@ public class SubjectFragment extends Fragment {
                         if (subjectItemBean == null) {
                             return;
                         }
-//                        UIHelper.jump2Activity(getActivity(), DetailActivity.class, subjectItemBean);
-                        Intent intent = new Intent(getParentFragment().getActivity(),DetailActivity.class);
+                        UIHelper.jump2Activity(getActivity(), DetailActivity.class, subjectItemBean);
+                       /* Intent intent = new Intent(getParentFragment().getActivity(),DetailActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("value", subjectItemBean);
                         intent.putExtras(bundle);
-                        startActivityForResult(intent,5);
+                        startActivityForResult(intent,5);*/
                     } else {
                         int examBeanId = 0;
                         String workname = null;

@@ -10,11 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:text="详细情况"/>
 
-    <com.fclassroom.app.widget.RoundProgressBar
-        android:id="@+id/roundprogressbar"
+    <com.fclassroom.app.widget.RoundProgressBarSmall
+        android:id="@+id/roundprogressbarsmall"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginTop="40dp"
@@ -35,4 +35,24 @@
         circle:textColor="@color/black"
         circle:textIsDisplayable="true"
         circle:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="249dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="30dp"
+        android:textSize="18sp"
+        android:padding="20dp"
+        android:gravity="center"
+        android:background="@drawable/tv_background"
+        android:layout_gravity="center_horizontal"
+        android:text="节约抄题时间"/>
+
+    <ImageView
+        android:id="@+id/iv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/three_first"/>
 </LinearLayout>
