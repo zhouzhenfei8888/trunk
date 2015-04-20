@@ -172,8 +172,8 @@ public class DetailActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 setResult(20,intent);
-//                finish();
-                AppManager.getAppManager().finishActivity();
+                finish();
+//                AppManager.getAppManager().finishActivity();
             }
         });
         iv_rubbish.setOnClickListener(new View.OnClickListener() {

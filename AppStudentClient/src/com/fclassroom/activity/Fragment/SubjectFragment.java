@@ -15,7 +15,6 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -34,17 +33,12 @@ import com.fclassroom.app.adapter.SubjectAdapter;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.ExamBean;
 import com.fclassroom.app.bean.PageBean;
-import com.fclassroom.app.common.FileUtils;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
-import com.fclassroom.app.widget.PinnedHeaderListView.PinnedHeaderListView;
-import com.fclassroom.app.widget.PullToRefreshListView;
 import com.fclassroom.app.widget.ScrollShowHeaderListView;
 import com.fclassroom.appstudentclient.R;
 
-import java.text.ChoiceFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -75,7 +69,7 @@ public class SubjectFragment extends Fragment {
     private RelativeLayout topView;
     //试题和试卷标记，true时为试题，false为试卷
     private boolean squareChecked = true;
-    private SubjectAdapter subjectAdapter;
+    public SubjectAdapter subjectAdapter;
     private WorkAdapter workAdapter;
     private TextView selectAll, haveSelected, collate, print, delete;
     public static HashSet<Integer> selectIdSet = new HashSet<Integer>();
@@ -158,11 +152,13 @@ public class SubjectFragment extends Fragment {
             //获取全部错题数据，unOrganize为0，查询全部数据
             pageNo1 = 1;
             unOrganize = 0;
+            orderBy = orderTime;
             getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
         } else if (position == 1) {
             //当unorganize为1时为未整理
             pageNo2 = 1;
             unOrganize = 1;
+            orderBy = orderTime;
             getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
         }
     }
@@ -179,7 +175,7 @@ public class SubjectFragment extends Fragment {
      * @param orderBy       根据什么排序，orderTime,orderLevel,orderRate
      * @param orderUpOrDown 升序或降序
      */
-    private void getSubjectList(final String accessToken, final int gradeId, final int subjectId, final int pageSize, final int pageNo, final int unOrganize, final String orderBy, final String orderUpOrDown) {
+    public void getSubjectList(final String accessToken, final int gradeId, final int subjectId, final int pageSize, final int pageNo, final int unOrganize, final String orderBy, final String orderUpOrDown) {
 //        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "", "正在加载。。。");
         showLoading(scrollShowHeaderListView, mLoadingView, mEmptyView);
         final Handler handler = new Handler() {
@@ -496,11 +492,11 @@ public class SubjectFragment extends Fragment {
                             return;
                         }
 //                        UIHelper.jump2Activity(getActivity(), DetailActivity.class, subjectItemBean);
-                        Intent intent = new Intent(getActivity(),DetailActivity.class);
+                        Intent intent = new Intent(getParentFragment().getActivity(),DetailActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("value", subjectItemBean);
                         intent.putExtras(bundle);
-                        getActivity().startActivityForResult(intent,1);
+                        startActivityForResult(intent,5);
                     } else {
                         int examBeanId = 0;
                         String workname = null;
@@ -873,4 +869,5 @@ public class SubjectFragment extends Fragment {
             }
         }.start();
     }
+
 }

@@ -1,6 +1,7 @@
 package com.fclassroom.activity.Fragment;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +20,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.fclassroom.AppContext;
 import com.fclassroom.activity.HomeActivity;
+import com.fclassroom.app.adapter.SubjectAdapter;
+import com.fclassroom.app.common.PreferenceUtils;
+import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.app.widget.PagerSlidingTabStrip;
 import com.fclassroom.app.widget.RoundProgressBar;
 import com.fclassroom.appstudentclient.R;
@@ -39,6 +44,11 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
     private TextView lead;
     private int progress = 0;
     private int progress2 = 0;
+    AppContext appContext;
+    String accessToken;
+    int gradeId;
+    int subjectId;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -56,6 +66,10 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
     }
 
     private void initViews(View view) {
+        appContext = (AppContext) getActivity().getApplication();
+        accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
+        gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
+        subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
         havecollect = (TextView)view.findViewById(R.id.tv_have_collated);
         lead = (TextView)view.findViewById(R.id.tv_lead);
         mRelativeLayoutHead = (RelativeLayout) view.findViewById(R.id.relativelayout_head);
@@ -115,6 +129,14 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
                 }
             }
         }.start();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        System.out.println("HomeFragment");
+        int pageSize = 20,pageNo1=0,unOrganize=0;String orderBy ="orderTime",orderUpOrDown="ASC";
+            SubjectFragment.newInstance(0).getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
     }
 
     /**
@@ -195,4 +217,8 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
         }
     }
 
+    public interface Refresh{
+        public void refreshSubjectListView(SubjectAdapter subjectAdapter);
+        public void refreshPagerListView(SubjectFragment.WorkAdapter workAdapter);
+    };
 }
