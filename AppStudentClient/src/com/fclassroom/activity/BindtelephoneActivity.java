@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.fclassroom.AppException;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
+import com.fclassroom.app.widget.XEditText;
 import com.fclassroom.appstudentclient.R;
 
 public class BindtelephoneActivity extends BaseActivity {
@@ -33,6 +35,9 @@ public class BindtelephoneActivity extends BaseActivity {
     private int bindphoneORfindpassword;
     AppContext appContext;
     String accessToken;
+    XEditText newpassword;
+    boolean eyeclose = true;
+    TextView passwordmessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +45,15 @@ public class BindtelephoneActivity extends BaseActivity {
         setContentView(R.layout.activity_bindtelephone);
         appContext = (AppContext) getApplication();
         accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
+        newpassword = (XEditText)findViewById(R.id.edit_newpassword);
         System.out.println(getIntent().getStringExtra("value"));
         //判断是bindphone或findpassword页面
         if ("findpassword".equals(getIntent().getStringExtra("value"))) {
             bindphoneORfindpassword = 1;
-            System.out.println(bindphoneORfindpassword);
+            newpassword.setVisibility(View.VISIBLE);
         } else {
             bindphoneORfindpassword = 0;
+            newpassword.setVisibility(View.GONE);
         }
         initToolbar();
         initViews();
@@ -58,6 +65,7 @@ public class BindtelephoneActivity extends BaseActivity {
         bnSendauthCode = (Button) findViewById(R.id.bn_send_authcode);
         error = (TextView) findViewById(R.id.tv_error);
         bnSure = (Button) findViewById(R.id.bn_sure);
+        passwordmessage = (TextView) findViewById(R.id.tv_password_message);
         mc = new MyCountDownTimer(60000,1000);
         bnSure.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,14 +76,19 @@ public class BindtelephoneActivity extends BaseActivity {
         bnSendauthCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ("".equals(ettelephoneNum.getText().toString().trim())) {
-                    UIHelper.ToastMessage(BindtelephoneActivity.this, "请输入手机号码");
-                } else if (ettelephoneNum.getText().length() != 11) {
-                    UIHelper.ToastMessage(BindtelephoneActivity.this, "请输入正确的手机号码");
-                } else {
-                    SendAuthCode(accessToken, ettelephoneNum.getText().toString().trim());
-                    mc.start();
-                }
+                    if ("".equals(ettelephoneNum.getText().toString().trim())) {
+                        UIHelper.ToastMessage(BindtelephoneActivity.this, "请输入手机号码");
+                    } else if (ettelephoneNum.getText().length() != 11) {
+                        UIHelper.ToastMessage(BindtelephoneActivity.this, "请输入正确的手机号码");
+                    } else {
+                        if(bindphoneORfindpassword == 1){
+                            //找回密码
+                            checkPhone(ettelephoneNum.getText().toString().trim());
+                        }else{
+                            SendAuthCode(accessToken, ettelephoneNum.getText().toString().trim());
+                        }
+                    }
+
             }
         });
         etAuthCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -84,6 +97,58 @@ public class BindtelephoneActivity extends BaseActivity {
                 error.setVisibility(View.GONE);
             }
         });
+        newpassword.setDrawableRightListener(new XEditText.DrawableRightListener() {
+            @Override
+            public void onDrawableRightClick(View view) {
+                if (eyeclose) {
+                    newpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.eye_open, 0);
+                    newpassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    eyeclose = false;
+                } else {
+                    newpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.eye_close, 0);
+                    newpassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    eyeclose = true;
+                }
+            }
+        });
+        newpassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                passwordmessage.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void checkPhone(final String telephoneNum) {
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 1){
+                    BaseResponseBean<Boolean> responseBean = (BaseResponseBean<Boolean>) msg.obj;
+                    if(responseBean.getData()){
+                        SendAuthCode(accessToken, ettelephoneNum.getText().toString().trim());
+                    }
+                }else if(msg.what == -1){
+                    ((AppException)msg.obj).makeToast(BindtelephoneActivity.this);
+                }
+            }
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<Boolean> responseBean = appContext.checkPhone(telephoneNum);
+                    msg.what =1;
+                    msg.obj = responseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     private void bindphone(final String accessToken, final String authCode, final String telephone) {
@@ -122,6 +187,7 @@ public class BindtelephoneActivity extends BaseActivity {
     }
 
     private void SendAuthCode(final String accessToken, final String telephoneNum) {
+        mc.start();
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {

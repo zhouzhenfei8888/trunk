@@ -45,6 +45,7 @@
         android:layout_marginTop="1dp"
         android:background="@drawable/listviewitem_select"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:padding="@dimen/margin_size">
 
         <TextView

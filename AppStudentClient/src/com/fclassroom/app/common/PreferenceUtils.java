@@ -32,6 +32,9 @@ public class PreferenceUtils {
     public static String JIKE_NUM="jike_num";
     public static String STUDENT_NO="student_no";
     public static String HISTORY="history";
+    public static String SEX="sex";
+    public static String NICKNAME="nickname";
+    public static String LOGINPASSWORD="loginpassword";
     /**
      * put string preferences
      *

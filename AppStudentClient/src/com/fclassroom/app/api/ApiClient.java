@@ -1021,4 +1021,41 @@ public class ApiClient {
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
     }
+
+    public static BaseResponseBean<String> modifiednickname(AppContext appContext, String accessToken, String propName, String propValue) throws AppException, UnsupportedEncodingException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("propValue",URLEncoder.encode(propValue, "utf-8"));
+        params.put("propName",propName);
+        String url = _MakeURL(URLs.SaveSettings,params);
+        System.out.println(url);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<String> changepassword(AppContext appContext, String accessToken, String oldpassword, String newpassword) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("oldPassword",oldpassword);
+        params.put("newPassword",newpassword);
+        String url = _MakeURL(URLs.SavePassword,params);
+        System.out.println(url);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<Boolean> checkPhone(AppContext appContext, String telephoneNum) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("phone",telephoneNum);
+        String url = _MakeURL(URLs.CheckPhone,params);
+        System.out.println(url);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+        BaseResponseBean<Boolean> responseBean = JsonUtils.praseBoolean(response);
+        return responseBean;
+    }
 }

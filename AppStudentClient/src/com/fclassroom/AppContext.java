@@ -803,7 +803,7 @@ public class AppContext extends Application {
         PreferenceUtils.putInt(this, PreferenceUtils.STUDENT_ID, studentInfo.getStudentId());
         PreferenceUtils.putString(this, PreferenceUtils.STUDENT_NAME, studentInfo.getStudentName());
         PreferenceUtils.putInt(this, PreferenceUtils.SCHOOL_ID, studentInfo.getSchoolId());
-        PreferenceUtils.putString(this, PreferenceUtils.SCHOOL_NAME, studentInfo.getStudentName());
+        PreferenceUtils.putString(this, PreferenceUtils.SCHOOL_NAME, studentInfo.getSchoolName());
         PreferenceUtils.putInt(this, PreferenceUtils.GRADE_ID, studentInfo.getGradeId());
         PreferenceUtils.putString(this, PreferenceUtils.GRADE_NAME, studentInfo.getGradeName());
         PreferenceUtils.putInt(this, PreferenceUtils.CLASS_ID, studentInfo.getClassId());
@@ -812,6 +812,11 @@ public class AppContext extends Application {
         PreferenceUtils.putString(this, PreferenceUtils.SUBJECT_NAME, studentInfo.getSubjectName());
         PreferenceUtils.putString(this, PreferenceUtils.JIKE_NUM, studentInfo.getJikeNum());
         PreferenceUtils.putString(this, PreferenceUtils.STUDENT_NO, studentInfo.getStudentNo());
+        PreferenceUtils.putString(this,PreferenceUtils.SEX,studentInfo.getSex());
+        PreferenceUtils.putString(this,PreferenceUtils.NICKNAME,studentInfo.getNickname());
+        PreferenceUtils.putString(this,PreferenceUtils.OPEN_ID,studentInfo.getOpenIdQQ());
+        PreferenceUtils.putString(this,PreferenceUtils.ACCOUNT_LOGINPHONE,studentInfo.getLoginPhone());
+        PreferenceUtils.putString(this,PreferenceUtils.LOGINPASSWORD,studentInfo.getLoginPwd());
     }
 
     public BaseResponseBean<ArrayList<SubjectBean>> getSubjectList(String accessToken, int gradeId) throws AppException {
@@ -956,5 +961,17 @@ public class AppContext extends Application {
 
     public BaseResponseBean<String> EditRemark(String accessToken, int examQuestionId, String editRemark) throws AppException, UnsupportedEncodingException {
         return ApiClient.EditRemark(this,accessToken,examQuestionId,editRemark);
+    }
+
+    public BaseResponseBean<String> modifiednickname(String accessToken, String propName, String propValue) throws AppException, UnsupportedEncodingException {
+        return ApiClient.modifiednickname(this,accessToken,propName,propValue);
+    }
+
+    public BaseResponseBean<String> changepassword(String accessToken, String oldpassword, String newpassword) throws AppException {
+        return ApiClient.changepassword(this,accessToken,oldpassword,newpassword);
+    }
+
+    public BaseResponseBean<Boolean> checkPhone(String telephoneNum) throws AppException {
+        return ApiClient.checkPhone(this,telephoneNum);
     }
 }

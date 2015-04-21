@@ -22,7 +22,7 @@
             android:text="金鑫" />
 
         <TextView
-            android:id="@+id/tv_id"
+            android:id="@+id/tv_jikeid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_name"
@@ -30,10 +30,11 @@
             android:text="极课ID：236554" />
 
         <ImageView
+            android:id="@+id/iv_headview"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/head_boy" />
     </RelativeLayout>
 
     <LinearLayout
@@ -93,8 +94,10 @@
             android:layout_weight="1"
             android:text="昵称：微笑" />
         <TextView
+            android:id="@+id/modified_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ff2087ab"
             android:text="修改"/>
     </LinearLayout>
 
@@ -113,8 +116,10 @@
             android:layout_weight="1"
             android:text="QQ：10324688" />
         <TextView
+            android:id="@+id/modified_qq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ff2087ab"
             android:text="切换"/>
     </LinearLayout>
 
@@ -131,10 +136,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="手机号：18765546837" />
+            android:text="" />
         <TextView
+            android:id="@+id/modified_telephone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ff2087ab"
             android:text="立即绑定"/>
     </LinearLayout>
 
@@ -153,8 +160,10 @@
             android:layout_weight="1"
             android:text="极课同学密码" />
         <TextView
+            android:id="@+id/modified_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ff2087ab"
             android:text="修改"/>
     </LinearLayout>
 
