@@ -1058,4 +1058,20 @@ public class ApiClient {
         BaseResponseBean<Boolean> responseBean = JsonUtils.praseBoolean(response);
         return responseBean;
     }
+
+    public static void getArchivement(AppContext appContext, String accessToken, int gradeId) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId",gradeId);
+        String url = _MakeURL(URLs.GetArchivement,params);
+        String response = http_get(appContext,url);
+    }
+
+    public static void getRank(AppContext appContext, String accessToken, int rankType) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("rankType",rankType);
+        String url = _MakeURL(URLs.GetRank,params);
+        String response = http_get(appContext,url);
+    }
 }

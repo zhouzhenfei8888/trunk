@@ -78,6 +78,8 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
     int image[] = {R.drawable.icon_home, R.drawable.icon_collatebook, R.drawable.icon_tag, R.drawable.icon_wrong_home, R.drawable.icon_print};
     private List<GradeBean> gradeBeanList;
     private List<SubjectBean> subjectBeanList;
+    String accessToken;
+    int gradeId;
 
     public interface HideTopHomeFragment {
         void DoHideTopHomeFragment();
@@ -286,6 +288,28 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
         getStudentInfo();
         getGradeList();
         getSubjectList();
+        accessToken = PreferenceUtils.getString(appContext,PreferenceUtils.ACCESSTOKEN);
+        gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
+        getArchivement();
+    }
+
+    private void getArchivement() {
+        Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+            }
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    appContext.getArchivement(accessToken,gradeId);
+                } catch (AppException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     private void getStudentInfo() {

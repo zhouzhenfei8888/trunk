@@ -3,6 +3,8 @@ package com.fclassroom.activity.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.fclassroom.AppContext;
+import com.fclassroom.AppException;
+import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.appstudentclient.R;
 
@@ -25,6 +30,8 @@ public class TopFragment extends Fragment {
     ListView listView;
     int position;
     ArrayList<HashMap<String, Object>> list;
+    AppContext appContext;
+    String accessToken;
 
     public TopFragment() {
         // Required empty public constructor
@@ -42,6 +49,8 @@ public class TopFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         position = getArguments().getInt(ARG_POSITION);
+        appContext = (AppContext) getActivity().getApplication();
+        accessToken = PreferenceUtils.getString(appContext,PreferenceUtils.ACCESSTOKEN);
         list = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
             HashMap<String, Object> data = new HashMap<>();
@@ -63,6 +72,26 @@ public class TopFragment extends Fragment {
     private void initViews(View view) {
         listView = (ListView) view.findViewById(R.id.listview_rank);
         listView.setAdapter(new topRankAdapter(getActivity(), R.layout.listview_item_toprank, list));
+
+    }
+
+    public void getRank(final int rankType){
+        Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+            }
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    appContext.getRank(accessToken,rankType);
+                } catch (AppException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
 
     }
 

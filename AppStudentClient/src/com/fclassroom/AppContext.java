@@ -974,4 +974,12 @@ public class AppContext extends Application {
     public BaseResponseBean<Boolean> checkPhone(String telephoneNum) throws AppException {
         return ApiClient.checkPhone(this,telephoneNum);
     }
+
+    public void getArchivement(String accessToken, int gradeId) throws AppException {
+        ApiClient.getArchivement(this, accessToken, gradeId);
+    }
+
+    public void getRank(String accessToken, int rankType) throws AppException {
+        ApiClient.getRank(this,accessToken,rankType);
+    }
 }

@@ -20,7 +20,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/icon_print3" />
+            android:src="@drawable/ic_back"/>
+            <!--android:src="@drawable/icon_print3"-->
 
         <RatingBar
             android:id="@+id/ratingbar"

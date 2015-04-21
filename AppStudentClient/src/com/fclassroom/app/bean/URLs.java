@@ -57,4 +57,6 @@ public class URLs implements Serializable {
     public final static String SaveSettings = HOST + "saveSettings.json";
     public final static String SavePassword = HOST + "savePassword.json";
     public final static String CheckPhone = "http://192.168.0.53:8080/Fclassroom-data-central/" + "checkPhone.json";
+    public final static String GetArchivement = HOST+"getArchivement.json";
+    public final static String GetRank = HOST+"getRank.json";
 }
