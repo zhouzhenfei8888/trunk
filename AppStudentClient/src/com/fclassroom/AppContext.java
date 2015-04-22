@@ -20,6 +20,7 @@ import java.util.UUID;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.fclassroom.app.api.ApiClient;
+import com.fclassroom.app.bean.Archivement;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.ErrorBookBean;
 import com.fclassroom.app.bean.ErrorSubjectNumBean;
@@ -34,6 +35,7 @@ import com.fclassroom.app.bean.PrintRecoderBean;
 import com.fclassroom.app.bean.Result;
 import com.fclassroom.app.bean.StudentInfoBean;
 import com.fclassroom.app.bean.SubjectBean;
+import com.fclassroom.app.bean.TopBind;
 import com.fclassroom.app.bean.TreeBean;
 import com.fclassroom.app.bean.User;
 import com.fclassroom.app.common.CyptoUtils;
@@ -899,8 +901,8 @@ public class AppContext extends Application {
         return ApiClient.getPrintHistoryErrorQuestions(this, accessToken, gradeId, subjectId, printHistoryId);
     }
 
-    public BaseResponseBean<Boolean> SendAuthCode(String accessToken, String telephoneNum) throws AppException {
-        return ApiClient.SendAuthCode(this, accessToken, telephoneNum);
+    public BaseResponseBean<Boolean> SendAuthCode(String accessToken, String telephoneNum, int flag) throws AppException {
+        return ApiClient.SendAuthCode(this, accessToken, telephoneNum,flag);
     }
 
     public BaseResponseBean<Boolean> bindphone(String accessToken, String authCode, String telephone) throws AppException {
@@ -975,11 +977,15 @@ public class AppContext extends Application {
         return ApiClient.checkPhone(this,telephoneNum);
     }
 
-    public void getArchivement(String accessToken, int gradeId) throws AppException {
-        ApiClient.getArchivement(this, accessToken, gradeId);
+    public BaseResponseBean<Archivement> getArchivement(String accessToken, int gradeId) throws AppException {
+       return ApiClient.getArchivement(this, accessToken, gradeId);
     }
 
-    public void getRank(String accessToken, int rankType) throws AppException {
-        ApiClient.getRank(this,accessToken,rankType);
+    public BaseResponseBean<List<TopBind>> getRank(String accessToken, int rankType) throws AppException {
+        return ApiClient.getRank(this,accessToken,rankType);
+    }
+
+    public BaseResponseBean<String> updatepassword(String telephone, String authcode, String newpassword) throws AppException {
+        return ApiClient.updatepassword(this,telephone,authcode,newpassword);
     }
 }

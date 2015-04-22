@@ -38,6 +38,7 @@ import android.os.Environment;
 
 import com.fclassroom.AppContext;
 import com.fclassroom.AppException;
+import com.fclassroom.app.bean.Archivement;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.ErrorBookBean;
 import com.fclassroom.app.bean.ErrorSubjectNumBean;
@@ -51,6 +52,7 @@ import com.fclassroom.app.bean.PrintNumBean;
 import com.fclassroom.app.bean.PrintRecoderBean;
 import com.fclassroom.app.bean.StudentInfoBean;
 import com.fclassroom.app.bean.SubjectBean;
+import com.fclassroom.app.bean.TopBind;
 import com.fclassroom.app.bean.TreeBean;
 import com.fclassroom.app.bean.URLs;
 import com.fclassroom.app.bean.Update;
@@ -803,10 +805,11 @@ public class ApiClient {
         return responseBean;
     }
 
-    public static BaseResponseBean<Boolean> SendAuthCode(AppContext appContext, String accessToken, String telephoneNum) throws AppException {
+    public static BaseResponseBean<Boolean> SendAuthCode(AppContext appContext, String accessToken, String telephoneNum, int flag) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
         params.put("phone", telephoneNum);
+        params.put("flag",flag);
         String url = _MakeURL(URLs.SendAuthCode, params);
         String response = http_get(appContext, url);
         System.out.println(response);
@@ -1059,19 +1062,38 @@ public class ApiClient {
         return responseBean;
     }
 
-    public static void getArchivement(AppContext appContext, String accessToken, int gradeId) throws AppException {
+    public static BaseResponseBean<Archivement> getArchivement(AppContext appContext, String accessToken, int gradeId) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
         params.put("gradeId",gradeId);
         String url = _MakeURL(URLs.GetArchivement,params);
         String response = http_get(appContext,url);
+        System.out.println(response);
+        BaseResponseBean<Archivement> responseBean = JsonUtils.getArchivement(response);
+        return responseBean;
     }
 
-    public static void getRank(AppContext appContext, String accessToken, int rankType) throws AppException {
+    public static BaseResponseBean<List<TopBind>> getRank(AppContext appContext, String accessToken, int rankType) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
         params.put("rankType",rankType);
         String url = _MakeURL(URLs.GetRank,params);
         String response = http_get(appContext,url);
+        BaseResponseBean<List<TopBind>> responseBean = JsonUtils.getRank(response);
+        System.out.println(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<String> updatepassword(AppContext appContext, String telephone, String authcode, String newpassword) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("phone",telephone);
+        params.put("validcode",authcode);
+        params.put("newpassword",newpassword);
+        String url = _MakeURL(URLs.UpdatePassword,params);
+        String response = http_get(appContext,url);
+        System.out.println(telephone);
+        System.out.println(response);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
     }
 }

@@ -175,6 +175,7 @@ public class RubbishFragment extends Fragment {
                 if(msg.what == 1){
                     UIHelper.ToastMessage(getActivity(),"删除成功！");
                     unSelectedAll();
+                    getRubbishSubjectNum(accessToken,gradeId,subjectId);
                     singleMode();
                 }else {
                     ((AppException)msg.obj).makeToast(getActivity());
@@ -205,6 +206,8 @@ public class RubbishFragment extends Fragment {
             public void handleMessage(Message msg) {
                 if(msg.what == 1){
                     UIHelper.ToastMessage(getActivity(),"已恢复！");
+                    getRubbishSubjectNum(accessToken,gradeId,subjectId);
+                    unSelectedAll();
                     singleMode();
                 }else {
                     ((AppException)msg.obj).makeToast(getActivity());

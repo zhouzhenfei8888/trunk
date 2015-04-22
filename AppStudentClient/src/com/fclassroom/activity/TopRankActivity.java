@@ -13,9 +13,12 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
+import com.fclassroom.AppContext;
 import com.fclassroom.activity.Fragment.SubjectFragment;
 import com.fclassroom.activity.Fragment.TopFragment;
+import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.widget.PagerSlidingTabStrip;
 import com.fclassroom.appstudentclient.R;
 
@@ -24,6 +27,8 @@ public class TopRankActivity extends BaseActivity {
     private Toolbar mToolbar;
     private PagerSlidingTabStrip mTabs;
     private ViewPager mPagers;
+    private TextView textView;
+    AppContext appContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,9 @@ public class TopRankActivity extends BaseActivity {
     }
 
     private void initViews() {
+        appContext = (AppContext) getApplication();
+        textView = (TextView)findViewById(R.id.tv_schoolname);
+        textView.setText(PreferenceUtils.getString(appContext,PreferenceUtils.SCHOOL_NAME));
         mTabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         mPagers = (ViewPager) findViewById(R.id.pagers);
         mPagers.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));

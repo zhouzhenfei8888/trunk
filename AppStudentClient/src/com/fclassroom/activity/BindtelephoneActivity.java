@@ -17,7 +17,9 @@ import android.widget.TextView;
 
 import com.fclassroom.AppContext;
 import com.fclassroom.AppException;
+import com.fclassroom.AppManager;
 import com.fclassroom.app.bean.BaseResponseBean;
+import com.fclassroom.app.common.MD5Util;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.app.widget.XEditText;
@@ -45,7 +47,7 @@ public class BindtelephoneActivity extends BaseActivity {
         setContentView(R.layout.activity_bindtelephone);
         appContext = (AppContext) getApplication();
         accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
-        newpassword = (XEditText)findViewById(R.id.edit_newpassword);
+        newpassword = (XEditText) findViewById(R.id.edit_newpassword);
         System.out.println(getIntent().getStringExtra("value"));
         //判断是bindphone或findpassword页面
         if ("findpassword".equals(getIntent().getStringExtra("value"))) {
@@ -66,28 +68,33 @@ public class BindtelephoneActivity extends BaseActivity {
         error = (TextView) findViewById(R.id.tv_error);
         bnSure = (Button) findViewById(R.id.bn_sure);
         passwordmessage = (TextView) findViewById(R.id.tv_password_message);
-        mc = new MyCountDownTimer(60000,1000);
+        mc = new MyCountDownTimer(60000, 1000);
         bnSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bindphone(accessToken,etAuthCode.getText().toString(),ettelephoneNum.getText().toString());
+                if (bindphoneORfindpassword == 1) {
+                    updatepassword(ettelephoneNum.getText().toString(), etAuthCode.getText().toString(), MD5Util.encode(newpassword.getText().toString()));
+                    AppManager.getAppManager().finishActivity();
+                } else {
+                    bindphone(accessToken, etAuthCode.getText().toString(), ettelephoneNum.getText().toString());
+                }
             }
         });
         bnSendauthCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    if ("".equals(ettelephoneNum.getText().toString().trim())) {
-                        UIHelper.ToastMessage(BindtelephoneActivity.this, "请输入手机号码");
-                    } else if (ettelephoneNum.getText().length() != 11) {
-                        UIHelper.ToastMessage(BindtelephoneActivity.this, "请输入正确的手机号码");
+                if ("".equals(ettelephoneNum.getText().toString().trim())) {
+                    UIHelper.ToastMessage(BindtelephoneActivity.this, "请输入手机号码");
+                } else if (ettelephoneNum.getText().length() != 11) {
+                    UIHelper.ToastMessage(BindtelephoneActivity.this, "请输入正确的手机号码");
+                } else {
+                    if (bindphoneORfindpassword == 1) {
+                        //找回密码
+                        checkPhone(ettelephoneNum.getText().toString().trim());
                     } else {
-                        if(bindphoneORfindpassword == 1){
-                            //找回密码
-                            checkPhone(ettelephoneNum.getText().toString().trim());
-                        }else{
-                            SendAuthCode(accessToken, ettelephoneNum.getText().toString().trim());
-                        }
+                        SendAuthCode(accessToken, ettelephoneNum.getText().toString().trim(), 1);
                     }
+                }
 
             }
         });
@@ -119,15 +126,12 @@ public class BindtelephoneActivity extends BaseActivity {
         });
     }
 
-    private void checkPhone(final String telephoneNum) {
+    private void updatepassword(final String telephone, final String authcode, final String newpassword) {
         final Handler handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
                 if(msg.what == 1){
-                    BaseResponseBean<Boolean> responseBean = (BaseResponseBean<Boolean>) msg.obj;
-                    if(responseBean.getData()){
-                        SendAuthCode(accessToken, ettelephoneNum.getText().toString().trim());
-                    }
+                    UIHelper.ToastMessage(BindtelephoneActivity.this,"绑定成功！");
                 }else if(msg.what == -1){
                     ((AppException)msg.obj).makeToast(BindtelephoneActivity.this);
                 }
@@ -138,8 +142,40 @@ public class BindtelephoneActivity extends BaseActivity {
             public void run() {
                 Message msg = new Message();
                 try {
-                    BaseResponseBean<Boolean> responseBean = appContext.checkPhone(telephoneNum);
+                    BaseResponseBean<String> responseBean = appContext.updatepassword(telephone,authcode,newpassword);
                     msg.what =1;
+                    msg.obj = responseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    private void checkPhone(final String telephoneNum) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<Boolean> responseBean = (BaseResponseBean<Boolean>) msg.obj;
+                    if (responseBean.getData()) {
+                        SendAuthCode(accessToken, ettelephoneNum.getText().toString().trim(), 0);
+                    }
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(BindtelephoneActivity.this);
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<Boolean> responseBean = appContext.checkPhone(telephoneNum);
+                    msg.what = 1;
                     msg.obj = responseBean;
                 } catch (AppException e) {
                     e.printStackTrace();
@@ -152,29 +188,29 @@ public class BindtelephoneActivity extends BaseActivity {
     }
 
     private void bindphone(final String accessToken, final String authCode, final String telephone) {
-        final Handler handler = new Handler(){
+        final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                if(msg.what == -1){
-                    ((AppException)msg.obj).makeToast(BindtelephoneActivity.this);
-                }else{
+                if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(BindtelephoneActivity.this);
+                } else {
                     BaseResponseBean<Boolean> responseBean = (BaseResponseBean<Boolean>) msg.obj;
                     boolean is = responseBean.getData();
-                    if(is == true) {
+                    if (is == true) {
                         UIHelper.jump2Activity(BindtelephoneActivity.this, HomeActivity.class);
-                    }else {
+                    } else {
                         error.setVisibility(View.VISIBLE);
                     }
                 }
             }
         };
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 Message msg = new Message();
                 try {
-                    BaseResponseBean<Boolean> responseBean = appContext.bindphone(accessToken,authCode,telephone);
-                    msg.what =1;
+                    BaseResponseBean<Boolean> responseBean = appContext.bindphone(accessToken, authCode, telephone);
+                    msg.what = 1;
                     msg.obj = responseBean;
                 } catch (AppException e) {
                     e.printStackTrace();
@@ -186,7 +222,7 @@ public class BindtelephoneActivity extends BaseActivity {
         }.start();
     }
 
-    private void SendAuthCode(final String accessToken, final String telephoneNum) {
+    private void SendAuthCode(final String accessToken, final String telephoneNum, final int flag) {
         mc.start();
         final Handler handler = new Handler() {
             @Override
@@ -203,7 +239,7 @@ public class BindtelephoneActivity extends BaseActivity {
             public void run() {
                 Message message = new Message();
                 try {
-                    BaseResponseBean<Boolean> responseBean = appContext.SendAuthCode(accessToken, telephoneNum);
+                    BaseResponseBean<Boolean> responseBean = appContext.SendAuthCode(accessToken, telephoneNum, flag);
                     message.what = 1;
                     message.obj = responseBean;
                 } catch (AppException e) {
@@ -259,14 +295,15 @@ public class BindtelephoneActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    class MyCountDownTimer extends CountDownTimer{
+    class MyCountDownTimer extends CountDownTimer {
 
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
+
         @Override
         public void onTick(long millisUntilFinished) {
-            bnSendauthCode.setText(millisUntilFinished/1000+"秒后重新发送");
+            bnSendauthCode.setText(millisUntilFinished / 1000 + "秒后重新发送");
             bnSendauthCode.setEnabled(false);
         }
 

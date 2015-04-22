@@ -94,7 +94,6 @@ public class DetailActivity extends BaseActivity {
         setContentView(R.layout.activity_detail);
         subjectItemBean = (PageBean.SubjectItemBean) getIntent().getSerializableExtra("value");
         System.out.println(subjectItemBean.getContentImage());
-        System.out.println("0000000" + subjectItemBean.getRemark());
         appContext = (AppContext) getApplication();
         accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);

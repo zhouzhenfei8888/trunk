@@ -153,8 +153,8 @@ public class PrintplanFragment extends Fragment {
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
                     BaseResponseBean<PrintNumBean> responseBean = (BaseResponseBean<PrintNumBean>) msg.obj;
-                    int printCartQuestionCount = responseBean.getData().getPrintCartQuestionCount();
-                    int downloadCount = responseBean.getData().getDownloadCount();
+                    String printCartQuestionCount = "" + responseBean.getData().getPrintCartQuestionCount();
+                    String downloadCount = "" + responseBean.getData().getDownloadCount();
                     if (mParam1 == 0) {
                         tv.setText("待打印" + printCartQuestionCount + "题");
                     } else if (mParam1 == 1) {
@@ -236,10 +236,13 @@ public class PrintplanFragment extends Fragment {
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
                     BaseResponseBean<PageBean> responseBean = (BaseResponseBean<PageBean>) msg.obj;
-                    List<PageBean.SubjectItemBean> list = responseBean.getData().getList();
-                    PrintPlanList.addAll(list);
-                    printplanAdapter = new SubjectAdapter(getActivity(), PrintPlanList, lv);
-                    lv.setAdapter(printplanAdapter);
+                    if (null != responseBean.getData()) {
+                        List<PageBean.SubjectItemBean> list = responseBean.getData().getList();
+                        PrintPlanList.clear();
+                        PrintPlanList.addAll(list);
+                        printplanAdapter = new SubjectAdapter(getActivity(), PrintPlanList, lv);
+                        lv.setAdapter(printplanAdapter);
+                    }
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
                 } else if (msg.what == -1) {
@@ -387,12 +390,13 @@ public class PrintplanFragment extends Fragment {
                     downloadErrorQuestions(accessToken, gradeId, subjectId, downloadType, printHistoryId, examQuestionIds2);
                     break;
                 case R.id.tv_share:
-                    Intent sendIntent = new Intent();
-                    sendIntent.setAction(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, str);
-                    sendIntent.setType("text/plain");
-                    startActivity(sendIntent);
-                    singleMode();
+                    StringBuilder examQuestionIdsBuilder3 = new StringBuilder("");
+                    for (PageBean.SubjectItemBean subjectItemBean : appContext.printlist) {
+                        examQuestionIdsBuilder3.append(subjectItemBean.getExamQuestionId()).append(",");
+                    }
+                    examQuestionIdsBuilder3.deleteCharAt(examQuestionIdsBuilder3.length() - 1);
+                    String examQuestionIds3 = examQuestionIdsBuilder3.toString();
+                    getStr(accessToken, gradeId, subjectId, downloadType, printHistoryId, examQuestionIds3);
                     break;
                 case R.id.tv_delete:
                     StringBuilder examQuestionIdsBuilder = new StringBuilder("");
@@ -414,13 +418,13 @@ public class PrintplanFragment extends Fragment {
             public void handleMessage(Message msg) {
                 if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
-                } else if(msg.what == 1){
-                    str = ((BaseResponseBean<String>)msg.obj).getData();
+                } else if (msg.what == 1) {
+                    str = ((BaseResponseBean<String>) msg.obj).getData();
                     downloadfile(str);
-                    UIHelper.ToastMessage(getActivity(),"下载成功！已保存在SD卡JIKE目录下");
+                    UIHelper.ToastMessage(getActivity(), "下载成功！已保存在SD卡JIKE目录下");
                     singleMode();
-                }else if(msg.what == 0){
-                    UIHelper.ToastMessage(getActivity(),msg.obj.toString());
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(getActivity(), msg.obj.toString());
                 }
             }
         };
@@ -430,10 +434,52 @@ public class PrintplanFragment extends Fragment {
                 Message msg = new Message();
                 try {
                     BaseResponseBean<String> responseBean = appContext.downloadErrorQuestions(accessToken, gradeId, subjectId, downloadType, printHistoryId, examQuestionIds);
-                    if(responseBean.getError_code() == 0){
+                    if (responseBean.getError_code() == 0) {
                         msg.what = 1;
                         msg.obj = responseBean;
-                    }else {
+                    } else {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    private void getStr(final String accessToken, final int gradeId, final int subjectId, final int downloadType, final int printHistoryId, final String examQuestionIds) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(getActivity());
+                } else if (msg.what == 1) {
+                    str = ((BaseResponseBean<String>) msg.obj).getData();
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, str);
+                    sendIntent.setType("text/plain");
+                    startActivity(sendIntent);
+                    singleMode();
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(getActivity(), msg.obj.toString());
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.downloadErrorQuestions(accessToken, gradeId, subjectId, downloadType, printHistoryId, examQuestionIds);
+                    if (responseBean.getError_code() == 0) {
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    } else {
                         msg.what = 0;
                         msg.obj = responseBean.getError_msg();
                     }
@@ -448,12 +494,12 @@ public class PrintplanFragment extends Fragment {
     }
 
     private void downloadfile(final String filename) {
-        Handler handler = new Handler(){
+        Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
             }
         };
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 try {

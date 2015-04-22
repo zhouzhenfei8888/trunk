@@ -35,6 +35,7 @@ import com.fclassroom.activity.Fragment.SubjectFragment;
 import com.fclassroom.activity.Fragment.WorkFragment;
 import com.fclassroom.app.adapter.LeftAdapter;
 import com.fclassroom.app.adapter.PopupListAdapter;
+import com.fclassroom.app.bean.Archivement;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.GradeBean;
 import com.fclassroom.app.bean.PageBean;
@@ -288,28 +289,8 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
         getStudentInfo();
         getGradeList();
         getSubjectList();
-        accessToken = PreferenceUtils.getString(appContext,PreferenceUtils.ACCESSTOKEN);
+        accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
-        getArchivement();
-    }
-
-    private void getArchivement() {
-        Handler handler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-            }
-        };
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    appContext.getArchivement(accessToken,gradeId);
-                } catch (AppException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
     }
 
     private void getStudentInfo() {
@@ -611,7 +592,7 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

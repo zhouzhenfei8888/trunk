@@ -3,7 +3,7 @@ package com.fclassroom.app.bean;
 import java.io.Serializable;
 
 public class URLs implements Serializable {
-        public final static String HOST_YH = "http://120.131.64.134:20002/";
+    public final static String HOST_YH = "http://120.131.64.134:20002/";
     //马丰的地址
 //    public final static String HOST_YH = "http://192.168.0.107/";
 //    public final static String HOST_YH = "http://192.168.1.102/";
@@ -42,7 +42,8 @@ public class URLs implements Serializable {
     public final static String DelErrorQuestion = HOST_NOTE + "delErrorQuestion.json";
     public final static String AddErrorQuestionToNoteBook = HOST_NOTE + "addErrorQuestionToNoteBook.json";
     public final static String GetPrintHistoryErrorQuestions = HOST_NOTE + "getPrintHistoryErrorQuestions.json";
-    public final static String SendAuthCode = HOST_YH + "sendCode.json";
+    //    public final static String SendAuthCode = HOST_YH + "sendCode.json";
+    public final static String SendAuthCode = "http://192.168.0.53:8080/Fclassroom-data-central/" + "sendCode.json";
     public final static String BindPhone = HOST_YH + "bindPhone.json";
     public final static String GetNoteBookQuestions = HOST_NOTE + "getErrorQuestionsByNoteBook.json";
     public final static String PrintSelected = HOST_NOTE + "addMultiErrorQuestionToPrintCart.json";
@@ -56,7 +57,8 @@ public class URLs implements Serializable {
     public final static String EditRemark = HOST_NOTE + "editRemark.json";
     public final static String SaveSettings = HOST + "saveSettings.json";
     public final static String SavePassword = HOST + "savePassword.json";
-    public final static String CheckPhone = "http://192.168.0.53:8080/Fclassroom-data-central/" + "checkPhone.json";
-    public final static String GetArchivement = HOST+"getArchivement.json";
-    public final static String GetRank = HOST+"getRank.json";
+    public final static String CheckPhone = HOST_IMG + "checkPhone.json";
+    public final static String GetArchivement = HOST + "getArchivement.json";
+    public final static String GetRank = HOST + "getRank.json";
+    public final static String UpdatePassword = HOST_IMG + "findPassword.json";
 }

@@ -3,18 +3,23 @@ package com.fclassroom.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.fclassroom.AppContext;
@@ -26,12 +31,16 @@ import com.fclassroom.app.common.ImageUtils;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.StringUtils;
 import com.fclassroom.app.common.UIHelper;
+import com.fclassroom.app.widget.ZoomImageView;
 import com.fclassroom.appstudentclient.R;
-
+import android.widget.LinearLayout.LayoutParams;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 备注页
@@ -57,7 +66,10 @@ public class RemarkActivity extends BaseActivity {
     String accessToken;
     int gradeId;
     int subjectId;
+    protected PopupWindow answerPopup;
+    protected ZoomImageView answerImage;
     StringBuilder stringBuilderImagePath = new StringBuilder();
+    List<HashMap<Integer,ImageView>> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +106,7 @@ public class RemarkActivity extends BaseActivity {
                 EditRemark(accessToken, examQuestionId, editRemark);
                 Intent intent = new Intent();
                 intent.putExtra("remark", editRemark);
-                intent.putExtra("imagePaths",imagePaths);
+                intent.putExtra("imagePaths", imagePaths);
                 setResult(5, intent);
                 AppManager.getAppManager().finishActivity();
             }
@@ -108,6 +120,56 @@ public class RemarkActivity extends BaseActivity {
                 imageView.setPadding(20, 20, 20, 20);
                 startActionCamera();
                 linearLayout.addView(imageView);
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (answerPopup == null) {
+                            View popupView = getLayoutInflater().inflate(
+                                            R.layout.item_answer_popup,
+                                            null);
+                            ImageView back = (ImageView) popupView.findViewById(R.id.iv_back);
+                            ImageView delete = (ImageView) popupView.findViewById(R.id.iv_delete);
+                            back.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    answerPopup.dismiss();
+                                }
+                            });
+                            delete.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    imageView.setVisibility(View.GONE);
+                                    answerPopup.dismiss();
+                                }
+                            });
+                            answerPopup = new PopupWindow(popupView,
+                                    LayoutParams.MATCH_PARENT,
+                                    LayoutParams.MATCH_PARENT, true);
+                            answerPopup.setTouchable(true);
+                            answerPopup.setOutsideTouchable(true);
+                            answerPopup
+                                    .setBackgroundDrawable(new BitmapDrawable(
+                                            getResources(),
+                                            (Bitmap) null));
+                            answerImage = ((ZoomImageView) popupView
+                                    .findViewById(R.id.zoom_imageview));
+                            answerImage
+                                    .setTapListener(new ZoomImageView.OnTapListener() {
+
+                                        @Override
+                                        public void onTap(MotionEvent e) {
+                                            answerPopup.dismiss();
+                                        }
+                                    });
+                        }
+//                        answerImage.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher));
+                        answerImage.setImageBitmap(BitmapFactory.decodeFile(v.getTag().toString()));
+                        answerPopup.showAtLocation(getWindow().getDecorView(),
+                                Gravity.CENTER, 0, 0);
+
+                    }
+                });
             }
         });
     }
@@ -116,10 +178,10 @@ public class RemarkActivity extends BaseActivity {
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                if(msg.what == 1){
-                    UIHelper.ToastMessage(RemarkActivity.this,"添加remark成功！");
-                }else{
-                    UIHelper.ToastMessage(RemarkActivity.this,"添加remark失败！");
+                if (msg.what == 1) {
+                    UIHelper.ToastMessage(RemarkActivity.this, "添加remark成功！");
+                } else {
+                    UIHelper.ToastMessage(RemarkActivity.this, "添加remark失败！");
                 }
             }
         };
@@ -218,7 +280,7 @@ public class RemarkActivity extends BaseActivity {
         String cropFileName = "crop_" + timeStamp + "." + ext;
         // 裁剪头像的绝对路径
         protraitPath = FILE_SAVEPATH + cropFileName;
-        stringBuilderImagePath.append(" "+protraitPath);
+        stringBuilderImagePath.append(" " + protraitPath);
         protraitFile = new File(protraitPath);
         cropUri = Uri.fromFile(protraitFile);
         return this.cropUri;
@@ -271,6 +333,7 @@ public class RemarkActivity extends BaseActivity {
             protraitBitmap = ImageUtils.loadImgThumbnail(protraitPath,
                     200, 200);
             imageView.setImageBitmap(protraitBitmap);
+            imageView.setTag(protraitPath);
         } else {
             UIHelper.ToastMessage(RemarkActivity.this, "图像不存在！");
         }

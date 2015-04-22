@@ -11,6 +11,7 @@ import org.codehaus.jackson.type.JavaType;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.fclassroom.app.bean.Archivement;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.ErrorBookBean;
 import com.fclassroom.app.bean.ErrorSubjectNumBean;
@@ -24,6 +25,7 @@ import com.fclassroom.app.bean.PrintNumBean;
 import com.fclassroom.app.bean.PrintRecoderBean;
 import com.fclassroom.app.bean.StudentInfoBean;
 import com.fclassroom.app.bean.SubjectBean;
+import com.fclassroom.app.bean.TopBind;
 import com.fclassroom.app.bean.TreeBean;
 import com.fclassroom.app.bean.Update;
 import com.fclassroom.app.bean.User;
@@ -345,6 +347,33 @@ public class JsonUtils {
             pojo = mapper.readValue(jsonString, type);
         } catch (Exception e) {
             pojo = new BaseResponseBean<List<TreeBean>>();
+            pojo.setError_code(-1);
+            e.printStackTrace();
+        }
+        return pojo;
+    }
+
+    public static BaseResponseBean<Archivement> getArchivement(String jsonString) {
+        BaseResponseBean<Archivement> pojo = null;
+        try {
+            JavaType type = mapper.getTypeFactory().constructParametricType(BaseResponseBean.class, Archivement.class);
+            pojo = mapper.readValue(jsonString, type);
+        } catch (Exception e) {
+            pojo = new BaseResponseBean<Archivement>();
+            pojo.setError_code(-1);
+            e.printStackTrace();
+        }
+        return pojo;
+    }
+
+    public static BaseResponseBean<List<TopBind>> getRank(String jsonString) {
+        BaseResponseBean<List<TopBind>> pojo = null;
+        try {
+            JavaType listType = mapper.getTypeFactory().constructParametricType(ArrayList.class, TopBind.class);
+            JavaType type = mapper.getTypeFactory().constructParametricType(BaseResponseBean.class, listType);
+            pojo = mapper.readValue(jsonString, type);
+        } catch (Exception e) {
+            pojo = new BaseResponseBean<List<TopBind>>();
             pojo.setError_code(-1);
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package com.fclassroom.activity.Fragment;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,12 +16,15 @@ import android.widget.TextView;
 
 import com.fclassroom.AppContext;
 import com.fclassroom.AppException;
+import com.fclassroom.app.bean.BaseResponseBean;
+import com.fclassroom.app.bean.TopBind;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.appstudentclient.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,7 +54,7 @@ public class TopFragment extends Fragment {
         super.onCreate(savedInstanceState);
         position = getArguments().getInt(ARG_POSITION);
         appContext = (AppContext) getActivity().getApplication();
-        accessToken = PreferenceUtils.getString(appContext,PreferenceUtils.ACCESSTOKEN);
+        accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         list = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
             HashMap<String, Object> data = new HashMap<>();
@@ -66,30 +70,52 @@ public class TopFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top, container, false);
         initViews(view);
+        getRank(position);
         return view;
     }
 
     private void initViews(View view) {
         listView = (ListView) view.findViewById(R.id.listview_rank);
-        listView.setAdapter(new topRankAdapter(getActivity(), R.layout.listview_item_toprank, list));
+        topRankAdapter topRankAdapter = new topRankAdapter(getActivity(), R.layout.listview_item_toprank, list);
+        listView.setAdapter(topRankAdapter);
 
     }
 
-    public void getRank(final int rankType){
-        Handler handler = new Handler(){
+    public void getRank(final int rankType) {
+        final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                super.handleMessage(msg);
+                if(msg.what == 1){
+                    BaseResponseBean<List<TopBind>> responseBean = (BaseResponseBean<List<TopBind>>) msg.obj;
+                    List<TopBind> list = responseBean.getData();
+                    ArrayList<HashMap<String,Object>> dataList = new ArrayList<HashMap<String, Object>>();
+                    for (int i = 0; i < list.size(); i++) {
+                        HashMap<String, Object> data = new HashMap<>();
+                        data.put("rank", i+1);
+                        data.put("name", list.get(i).getStudentName());
+                        dataList.add(data);
+                    }
+                    topRankAdapter topRankAdapter = new topRankAdapter(getActivity(), R.layout.listview_item_toprank, dataList);
+                    listView.setAdapter(topRankAdapter);
+                }else if(msg.what ==-1){
+                    ((AppException)msg.obj).makeToast(getActivity());
+                }
             }
         };
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
+                Message msg = new Message();
                 try {
-                    appContext.getRank(accessToken,rankType);
+                    BaseResponseBean<List<TopBind>> responseBean = appContext.getRank(accessToken, rankType);
+                    msg.what = 1;
+                    msg.obj = responseBean;
                 } catch (AppException e) {
                     e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
                 }
+                handler.sendMessage(msg);
             }
         }.start();
 
@@ -134,6 +160,10 @@ public class TopFragment extends Fragment {
                 convertView.setTag(holder);
             } else {
                 holder = (Holder) convertView.getTag();
+            }
+            if(position <3){
+                holder.rank.setTextColor(Color.parseColor("#f19149"));
+                holder.name.setTextColor(Color.parseColor("#f19149"));
             }
             HashMap<String, Object> data = list.get(position);
             holder.rank.setText("NO." + data.get("rank"));

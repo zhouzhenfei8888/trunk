@@ -117,7 +117,7 @@ public class UserInfoActivity extends BaseActivity {
         modifiedtelephone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UIHelper.jump2Activity(UserInfoActivity.this,BindtelephoneActivity.class);
+                UIHelper.jump2Activity(UserInfoActivity.this,BindtelephoneActivity.class,"kbv");
             }
         });
         modifiedpassword.setOnClickListener(new View.OnClickListener() {

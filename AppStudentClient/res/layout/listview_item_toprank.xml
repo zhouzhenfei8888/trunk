@@ -10,14 +10,17 @@
         android:id="@+id/tv_rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
         android:text="NO." />
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:textSize="20sp"
-        android:text="凯鹏华盈" />
+        android:textSize="18sp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:text="ccc" />
 </LinearLayout>

@@ -21,9 +21,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fclassroom.AppContext;
+import com.fclassroom.AppException;
 import com.fclassroom.activity.AchievementActivity;
 import com.fclassroom.activity.HomeActivity;
 import com.fclassroom.app.adapter.SubjectAdapter;
+import com.fclassroom.app.bean.Archivement;
+import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.app.widget.PagerSlidingTabStrip;
@@ -60,10 +63,82 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //kbv
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initViews(view);
+        getArchivement();
         return view;
+    }
+
+    private void getArchivement() {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<Archivement> responseBean = (BaseResponseBean<Archivement>) msg.obj;
+                    final int DefeatRate = (int)(responseBean.getData().getDefeatRate());
+                    final int OrgRate = (int)(responseBean.getData().getOrgRate());
+                    int saveTime = responseBean.getData().getSaveTime();
+                    PreferenceUtils.putInt(appContext,PreferenceUtils.DEFEATRATE,DefeatRate);
+                    PreferenceUtils.putInt(appContext,PreferenceUtils.ORGRATE,OrgRate);
+                    PreferenceUtils.putInt(appContext,PreferenceUtils.SAVETIME,saveTime);
+                    String nsaveTime = ""+saveTime;
+                    String nSaveTime = nsaveTime.substring(0,3);
+                    roundProgressBar.setProgress(DefeatRate);
+                    roundProgressBar.setProgress2(OrgRate);
+                    roundProgressBar.setText(nSaveTime);
+                    havecollect.setText(""+DefeatRate);
+                    lead.setText(""+OrgRate);
+                    if(DefeatRate != 0){
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            while (progress <= DefeatRate) {
+                                progress += 1;
+                                roundProgressBar.setProgress(progress);
+                                try {
+                                    Thread.sleep(40);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }.start();}
+                    if(OrgRate != 0){
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            while (progress2 <= OrgRate) {
+                                progress2 += 1;
+                                roundProgressBar.setProgress2(progress2);
+                                try {
+                                    Thread.sleep(40);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }.start();}
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(getActivity());
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<Archivement> responseBean = appContext.getArchivement(accessToken, gradeId);
+                    msg.what = 1;
+                    msg.obj = responseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     private void initViews(View view) {
@@ -98,16 +173,16 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
 
         //环形进度条设置
         roundProgressBar = (RoundProgressBar) view.findViewById(R.id.roundprogressbar);
-        roundProgressBar.setProgress(60);
+       /* roundProgressBar.setProgress(60);
         roundProgressBar.setProgress2(40);
-        roundProgressBar.setText("456");
+        roundProgressBar.setText("456");*/
         roundProgressBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UIHelper.jump2Activity(getActivity(), AchievementActivity.class);
             }
         });
-        new Thread() {
+    /*    new Thread() {
             @Override
             public void run() {
                 while (progress <= 60) {
@@ -135,7 +210,7 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
                     }
                 }
             }
-        }.start();
+        }.start();*/
     }
 
     @Override

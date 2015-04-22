@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fclassroom.AppContext;
+import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.widget.RoundProgressBarSmall;
 import com.fclassroom.appstudentclient.R;
 
@@ -23,6 +25,8 @@ public class AchievementActivity extends BaseActivity {
     private Toolbar mToolbar;
     private ViewPager viewPager;
     ImageView imageView;
+    int saveTime,DefeatRate,OrgRate;
+    AppContext appContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,10 @@ public class AchievementActivity extends BaseActivity {
     }
 
     private void initView() {
+        appContext = (AppContext) getApplicationContext();
+        saveTime = PreferenceUtils.getInt(appContext,PreferenceUtils.SAVETIME);
+        DefeatRate = PreferenceUtils.getInt(appContext,PreferenceUtils.DEFEATRATE);
+        OrgRate = PreferenceUtils.getInt(appContext,PreferenceUtils.ORGRATE);
         imageView = (ImageView)findViewById(R.id.iv_number);
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -98,7 +106,7 @@ public class AchievementActivity extends BaseActivity {
                     roundProgressBarSmall.setTextSize(60);
                     roundProgressBarSmall.setProgress(100);
                     roundProgressBarSmall.setText("累计");
-                    roundProgressBarSmall.setText2("2510分钟");
+                    roundProgressBarSmall.setText2(""+saveTime+"分钟");
                     textView.setText("节约抄题时间");
                     textView.setTextColor(Color.parseColor("#5dc6a2"));
                     break;
@@ -106,24 +114,24 @@ public class AchievementActivity extends BaseActivity {
                     roundProgressBarSmall.setTextColor(Color.parseColor("#c1c0c0"));
                     roundProgressBarSmall.setTextColor2(Color.parseColor("#5e5e5e"));
                     roundProgressBarSmall.setTextSize(60);
-                    roundProgressBarSmall.setProgress(60);
+                    roundProgressBarSmall.setProgress(OrgRate);
                     roundProgressBarSmall.setCricleColor(Color.parseColor("#ffba43"));
                     roundProgressBarSmall.setCricleProgressColor(Color.parseColor("#ffcf73"));
                     roundProgressBarSmall.setText("整理完整度");
-                    roundProgressBarSmall.setText2("60%");
-                    textView.setText("已整理60%的错题");
+                    roundProgressBarSmall.setText2(""+OrgRate+"%");
+                    textView.setText("已整理"+OrgRate+"%的错题");
                     textView.setTextColor(Color.parseColor("#ffcf73"));
                     break;
                 case 2:
                     roundProgressBarSmall.setTextColor(Color.parseColor("#c1c0c0"));
                     roundProgressBarSmall.setTextColor2(Color.parseColor("#5e5e5e"));
                     roundProgressBarSmall.setTextSize(60);
-                    roundProgressBarSmall.setProgress(60);
+                    roundProgressBarSmall.setProgress(DefeatRate);
                     roundProgressBarSmall.setCricleColor(Color.parseColor("#3b8dfe"));
                     roundProgressBarSmall.setCricleProgressColor(Color.parseColor("#73aeff"));
                     roundProgressBarSmall.setText("超过");
-                    roundProgressBarSmall.setText2("60%的同学");
-                    textView.setText("超过60%的同学");
+                    roundProgressBarSmall.setText2(""+DefeatRate+"%的同学");
+                    textView.setText("超过"+DefeatRate+"%的同学");
                     textView.setTextColor(Color.parseColor("#73aeff"));
                     break;
             }
