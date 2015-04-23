@@ -18,8 +18,8 @@ public class Constants {
 	public static final int LAYOUT_WIDTH_OFFSET = 2;
 	
 	//----------------- separator Tag Item-----------------//
-	public static final int DEFAULT_TAG_TEXT_SIZE = 7;
-	public static final int DEFAULT_TAG_DELETE_INDICATOR_SIZE = 7;
+	public static final int DEFAULT_TAG_TEXT_SIZE = 5;
+	public static final int DEFAULT_TAG_DELETE_INDICATOR_SIZE = 5;
 	public static final int DEFAULT_TAG_RADIUS = 100;
 	public static final int DEFAULT_TAG_LAYOUT_COLOR = Color.parseColor("#d6f0e7");
 	public static final int DEFAULT_TAG_LAYOUT_COLOR_PRESS = Color.parseColor("#88363636");

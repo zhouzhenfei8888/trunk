@@ -64,16 +64,46 @@
         android:padding="@dimen/margin_size"
         android:textColor="@color/grey"
         android:textSize="@dimen/text_size" />
+
     <ImageView
         android:id="@+id/iv_photo"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="@dimen/margin_size"
-        android:src="@drawable/ic_photo"/>
+        android:padding="5dp"
+        android:src="@drawable/ic_photo" />
+
     <LinearLayout
         android:id="@+id/linear_img"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"></LinearLayout>
+        android:padding="16dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/iv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/iv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
 
 </LinearLayout>

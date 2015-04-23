@@ -69,6 +69,7 @@ public class PrintplanFragment extends Fragment {
     private TextView selectAll, print, haveSelected, share, delete;
     int downloadType = 0;
     int printHistoryId = 0;
+    String printCartQuestionCount;
     String str;
 
     /**
@@ -153,7 +154,7 @@ public class PrintplanFragment extends Fragment {
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
                     BaseResponseBean<PrintNumBean> responseBean = (BaseResponseBean<PrintNumBean>) msg.obj;
-                    String printCartQuestionCount = "" + responseBean.getData().getPrintCartQuestionCount();
+                    printCartQuestionCount = "" + responseBean.getData().getPrintCartQuestionCount();
                     String downloadCount = "" + responseBean.getData().getDownloadCount();
                     if (mParam1 == 0) {
                         tv.setText("待打印" + printCartQuestionCount + "题");
@@ -361,7 +362,7 @@ public class PrintplanFragment extends Fragment {
 
     public void selectedAll() {
         for (int i = 0; i < printplanAdapter.getCount(); i++) {
-            lv.setItemChecked(i, true);
+            lv.setItemChecked(i + 1, true);
         }
         appContext.printlist.clear();
         appContext.printlist = PrintPlanList;
@@ -387,7 +388,13 @@ public class PrintplanFragment extends Fragment {
                     }
                     examQuestionIdsBuilder2.deleteCharAt(examQuestionIdsBuilder2.length() - 1);
                     String examQuestionIds2 = examQuestionIdsBuilder2.toString();
-                    downloadErrorQuestions(accessToken, gradeId, subjectId, downloadType, printHistoryId, examQuestionIds2);
+                    System.out.println(lv.getCheckedItemCount());
+                    System.out.println(printCartQuestionCount);
+                    if (("" + lv.getCheckedItemCount()).equals(printCartQuestionCount)) {
+                        downloadAllErrorQuestions(accessToken, gradeId, subjectId, downloadType);
+                    } else {
+                        downloadErrorQuestions(accessToken, gradeId, subjectId, downloadType, printHistoryId, examQuestionIds2);
+                    }
                     break;
                 case R.id.tv_share:
                     StringBuilder examQuestionIdsBuilder3 = new StringBuilder("");
@@ -412,6 +419,50 @@ public class PrintplanFragment extends Fragment {
         }
     }
 
+    private void downloadAllErrorQuestions(final String accessToken, final int gradeId, final int subjectId, final int downloadType) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(getActivity());
+                } else if (msg.what == 1) {
+                    str = ((BaseResponseBean<String>) msg.obj).getData();
+                    downloadfile(str);
+                    UIHelper.ToastMessage(getActivity(), "下载成功！已保存在SD卡JIKE目录下");
+                    int pageNo = 1;
+//                    getPrintplanList(accessToken, gradeId, subjectId, pageSize, pageNo);
+                    PrintPlanList.clear();
+                    printplanAdapter.notifyDataSetChanged();
+                    getPrintNum(accessToken, gradeId, subjectId);
+                    singleMode();
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(getActivity(), msg.obj.toString());
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.downloadAllErrorQuestions(accessToken, gradeId, subjectId, downloadType);
+                    if (responseBean.getError_code() == 0) {
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    } else {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
     private void downloadErrorQuestions(final String accessToken, final int gradeId, final int subjectId, final int downloadType, final int printHistoryId, final String examQuestionIds) {
         final Handler handler = new Handler() {
             @Override
@@ -422,6 +473,9 @@ public class PrintplanFragment extends Fragment {
                     str = ((BaseResponseBean<String>) msg.obj).getData();
                     downloadfile(str);
                     UIHelper.ToastMessage(getActivity(), "下载成功！已保存在SD卡JIKE目录下");
+                    int pageNo = 1;
+                    getPrintplanList(accessToken, gradeId, subjectId, pageSize, pageNo);
+                    getPrintNum(accessToken, gradeId, subjectId);
                     singleMode();
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
@@ -464,6 +518,9 @@ public class PrintplanFragment extends Fragment {
                     sendIntent.putExtra(Intent.EXTRA_TEXT, str);
                     sendIntent.setType("text/plain");
                     startActivity(sendIntent);
+                    int pageNo = 1;
+                    getPrintplanList(accessToken, gradeId, subjectId, pageSize, pageNo);
+                    getPrintNum(accessToken, gradeId, subjectId);
                     singleMode();
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());
@@ -520,6 +577,9 @@ public class PrintplanFragment extends Fragment {
                 if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());
                 } else {
+                    int pageNo = 1;
+                    getPrintplanList(accessToken, gradeId, subjectId, pageSize, pageNo);
+                    getPrintNum(accessToken, gradeId, subjectId);
                     singleMode();
                 }
             }

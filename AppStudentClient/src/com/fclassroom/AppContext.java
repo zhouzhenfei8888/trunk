@@ -988,4 +988,8 @@ public class AppContext extends Application {
     public BaseResponseBean<String> updatepassword(String telephone, String authcode, String newpassword) throws AppException {
         return ApiClient.updatepassword(this,telephone,authcode,newpassword);
     }
+
+    public BaseResponseBean<String> downloadAllErrorQuestions(String accessToken, int gradeId, int subjectId, int downloadType) throws AppException {
+        return ApiClient.downloadAllErrorQuestions(this,accessToken,gradeId,subjectId,downloadType);
+    }
 }

@@ -691,7 +691,7 @@ public class SubjectFragment extends Fragment {
 
     public void selectedAll() {
         for (int i = 0; i < subjectAdapter.getCount(); i++) {
-            listview.setItemChecked(i, true);
+            listview.setItemChecked(i+1, true);
         }
         appContext.myselectlist.clear();
         appContext.myselectlist = listSubject;

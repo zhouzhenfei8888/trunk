@@ -58,6 +58,7 @@ public class RemarkActivity extends BaseActivity {
     private final static int CROP = 100;
     private File protraitFile;
     private Bitmap protraitBitmap;
+    ImageView iv1,iv2,iv3;
     private final static String FILE_SAVEPATH = Environment
             .getExternalStorageDirectory().getAbsolutePath()
             + "/JIKE/PHOTO/";
@@ -88,6 +89,9 @@ public class RemarkActivity extends BaseActivity {
         cancle = (TextView) findViewById(R.id.tv_cancle);
         sure = (TextView) findViewById(R.id.tv_sure);
         editText = (EditText) findViewById(R.id.editText);
+        iv1 = (ImageView)findViewById(R.id.iv1);
+        iv2 = (ImageView)findViewById(R.id.iv2);
+        iv3 = (ImageView)findViewById(R.id.iv3);
         editText.setHint("这里添加备注...");
         if (remark != "") {
             editText.setText(remark);

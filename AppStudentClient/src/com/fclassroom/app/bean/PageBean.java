@@ -28,7 +28,7 @@ public class PageBean {
     List<Integer> navigatepageNums;
     List<SubjectItemBean> list;
 
-    public static class SubjectItemBean implements Serializable{
+    public static class SubjectItemBean implements Serializable {
         int id;
         String contentImage;
         String notebookIds;
@@ -46,6 +46,60 @@ public class PageBean {
         String knoNames;
         String imageHost;
         int examQuestionId;
+        String questionTitle;
+        int questionType;
+        int rootId;
+        int parentId;
+        int questionNo;
+        int paperId;
+
+        public String getQuestionTitle() {
+            return questionTitle;
+        }
+
+        public void setQuestionTitle(String questionTitle) {
+            this.questionTitle = questionTitle;
+        }
+
+        public int getQuestionType() {
+            return questionType;
+        }
+
+        public void setQuestionType(int questionType) {
+            this.questionType = questionType;
+        }
+
+        public int getRootId() {
+            return rootId;
+        }
+
+        public void setRootId(int rootId) {
+            this.rootId = rootId;
+        }
+
+        public int getParentId() {
+            return parentId;
+        }
+
+        public void setParentId(int parentId) {
+            this.parentId = parentId;
+        }
+
+        public int getQuestionNo() {
+            return questionNo;
+        }
+
+        public void setQuestionNo(int questionNo) {
+            this.questionNo = questionNo;
+        }
+
+        public int getPaperId() {
+            return paperId;
+        }
+
+        public void setPaperId(int paperId) {
+            this.paperId = paperId;
+        }
 
         public String getImageHost() {
             return imageHost;

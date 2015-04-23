@@ -79,7 +79,7 @@ public class ErrortagFragment extends Fragment {
 
     Bundle savedInstanceState;
 
-    List<ErrorTagBean> errorTagBeanlist;
+    List<ErrorTagBean> errorTagBeanlist = new ArrayList<ErrorTagBean>();
 
     public ErrortagFragment() {
         // Required empty public constructor
@@ -198,7 +198,7 @@ public class ErrortagFragment extends Fragment {
 
     private void setListAdaptor() {
         // create instance of PinnedHeaderAdapter and set adapter to list view
-        mAdaptor = new PinnedHeaderAdapter(getActivity(), mListItems, mListSectionPos);
+        mAdaptor = new PinnedHeaderAdapter(getActivity(), mListItems, mListSectionPos,errorTagBeanlist);
         mListView.setAdapter(mAdaptor);
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());

@@ -632,7 +632,7 @@ public class ApiClient {
         params.put("pageNo", pageNo);
         String url = _MakeURL(URLs.GetSubjectDetail, params);
         String response = http_get(appContext, url);
-        System.out.println(response);
+        System.out.println("kkkkkk"+response);
         BaseResponseBean<PageBean> responseBean = JsonUtils.getSubjectDetail(response);
         return responseBean;
     }
@@ -1093,6 +1093,19 @@ public class ApiClient {
         String response = http_get(appContext,url);
         System.out.println(telephone);
         System.out.println(response);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<String> downloadAllErrorQuestions(AppContext appContext, String accessToken, int gradeId, int subjectId, int downloadType) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("downloadType", downloadType);
+        String url = _MakeURL(URLs.DownloadErrorQuestions, params);
+        System.out.println(url);
+        String response = http_get(appContext, url);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
     }

@@ -20,7 +20,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/ic_back"/>
+            android:src="@drawable/icon_print3"/>
             <!--android:src="@drawable/icon_print3"-->
 
         <RatingBar
@@ -255,6 +255,7 @@
                 android:id="@+id/tagview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="10dp"
                 android:background="@color/white"
                 android:layout_marginLeft="9dp"
                 android:layout_marginRight="9dp"

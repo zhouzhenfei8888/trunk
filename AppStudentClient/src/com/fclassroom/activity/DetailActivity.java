@@ -378,7 +378,7 @@ public class DetailActivity extends BaseActivity {
                 ImageView imageView = new ImageView(DetailActivity.this);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(300, 300);
                 imageView.setLayoutParams(layoutParams);
-                imageView.setPadding(20, 20, 20, 20);
+                imageView.setPadding(20, 0, 20, 20);
                 System.out.println("kkkk:" + imagepath);
                 if (null != imagepath && !"".equals(imagepath)) {
                     imageView.setImageBitmap(BitmapFactory.decodeFile(imagepath));
