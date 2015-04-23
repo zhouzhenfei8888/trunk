@@ -94,13 +94,13 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
 
             switch (type) {
                 case TYPE_ITEM:
-                    convertView = mLayoutInflater.inflate(R.layout.row_view, null);
+                    convertView = mLayoutInflater.inflate(R.layout.listview_itemtag, null);
                     break;
                 case TYPE_SECTION:
                     convertView = mLayoutInflater.inflate(R.layout.section_row_view, null);
                     break;
             }
-            holder.tagName = (TextView) convertView.findViewById(R.id.row_title);
+            holder.tagName = (TextView) convertView.findViewById(R.id.tv_name);
             holder.tagNumber = (TextView) convertView.findViewById(R.id.tv_tagnumber);
             convertView.setTag(holder);
         } else {

@@ -4,6 +4,7 @@ package com.fclassroom.activity.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -281,7 +282,7 @@ public class SubjectFragment extends Fragment {
         inflater = LayoutInflater.from(getParentFragment().getActivity());
         headview = inflater.inflate(R.layout.listview_head_home, null, false);
         final ImageView square = (ImageView) headview.findViewById(R.id.iv_square);
-        TextView time = (TextView) headview.findViewById(R.id.tv_fragment_time);
+        final TextView time = (TextView) headview.findViewById(R.id.tv_fragment_time);
         final TextView difficulty = (TextView) headview.findViewById(R.id.tv_difficulty);
         final TextView importance = (TextView) headview.findViewById(R.id.tv_importance);
         //dialog显示或隐藏
@@ -291,6 +292,12 @@ public class SubjectFragment extends Fragment {
         listview = scrollShowHeaderListView.getListView();
         subjectAdapter = new SubjectAdapter(getActivity(), listSubject, listview);
         listview.setAdapter(subjectAdapter);
+        Drawable drawabledown = getResources().getDrawable(R.drawable.updown_down);
+        drawabledown.setBounds(0, 0, drawabledown.getMinimumWidth(), drawabledown.getMinimumHeight());
+        Drawable drawableup = getResources().getDrawable(R.drawable.updown_up);
+        drawableup.setBounds(0, 0, drawableup.getMinimumWidth(), drawableup.getMinimumHeight());
+        final Drawable drawablenone = getResources().getDrawable(R.drawable.updown_none);
+        drawablenone.setBounds(0, 0, drawablenone.getMinimumWidth(), drawablenone.getMinimumHeight());
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -303,10 +310,20 @@ public class SubjectFragment extends Fragment {
                         if (timeOrder == true) {
                             orderUpOrDown = orderDown;
                             timeOrder = false;
+                            Drawable drawable = getResources().getDrawable(R.drawable.updown_down);
+                            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                            time.setCompoundDrawables(null, null, drawable, null);
+                            difficulty.setCompoundDrawables(null,null,drawablenone,null);
+                            importance.setCompoundDrawables(null,null,drawablenone,null);
                             getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
                         } else if (timeOrder == false) {
                             orderUpOrDown = orderUp;
                             timeOrder = true;
+                            Drawable drawable = getResources().getDrawable(R.drawable.updown_up);
+                            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                            time.setCompoundDrawables(null,null,drawable,null);
+                            difficulty.setCompoundDrawables(null,null,drawablenone,null);
+                            importance.setCompoundDrawables(null,null,drawablenone,null);
                             getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
                         }
                     } else if (squareChecked == false) {
@@ -314,10 +331,20 @@ public class SubjectFragment extends Fragment {
                         if (timeOrder == true) {
                             timeOrder = false;
                             orderUpOrDown = orderDown;
+                            Drawable drawable = getResources().getDrawable(R.drawable.updown_down);
+                            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                            time.setCompoundDrawables(null,null,drawable,null);
+                            difficulty.setCompoundDrawables(null,null,drawablenone,null);
+                            importance.setCompoundDrawables(null,null,drawablenone,null);
                             getAllExamPaper(accessToken, gradeId, subjectId, unOrganize, orderUpOrDown);
                         } else if (timeOrder == false) {
                             timeOrder = true;
                             orderUpOrDown = orderUp;
+                            Drawable drawable = getResources().getDrawable(R.drawable.updown_up);
+                            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                            time.setCompoundDrawables(null,null,drawable,null);
+                            difficulty.setCompoundDrawables(null,null,drawablenone,null);
+                            importance.setCompoundDrawables(null,null,drawablenone,null);
                             getAllExamPaper(accessToken, gradeId, subjectId, unOrganize, orderUpOrDown);
                         }
                     }
@@ -330,10 +357,16 @@ public class SubjectFragment extends Fragment {
                         if (timeOrder == true) {
                             orderUpOrDown = orderDown;
                             timeOrder = false;
+                            Drawable drawable = getResources().getDrawable(R.drawable.updown_down);
+                            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                            time.setCompoundDrawables(null,null,drawable,null);
                             getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
                         } else if (timeOrder == false) {
                             orderUpOrDown = orderUp;
                             timeOrder = true;
+                            Drawable drawable = getResources().getDrawable(R.drawable.updown_up);
+                            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                            time.setCompoundDrawables(null,null,drawable,null);
                             getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
                         }
                     } else if (squareChecked == false) {
@@ -341,10 +374,20 @@ public class SubjectFragment extends Fragment {
                         if (timeOrder == true) {
                             timeOrder = false;
                             orderUpOrDown = orderDown;
+                            Drawable drawable = getResources().getDrawable(R.drawable.updown_down);
+                            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                            time.setCompoundDrawables(null,null,drawable,null);
+                            difficulty.setCompoundDrawables(null,null,drawablenone,null);
+                            importance.setCompoundDrawables(null,null,drawablenone,null);
                             getAllExamPaper(accessToken, gradeId, subjectId, unOrganize, orderUpOrDown);
                         } else if (timeOrder == false) {
                             timeOrder = true;
                             orderUpOrDown = orderUp;
+                            Drawable drawable = getResources().getDrawable(R.drawable.updown_up);
+                            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                            time.setCompoundDrawables(null,null,drawable,null);
+                            difficulty.setCompoundDrawables(null,null,drawablenone,null);
+                            importance.setCompoundDrawables(null,null,drawablenone,null);
                             getAllExamPaper(accessToken, gradeId, subjectId, unOrganize, orderUpOrDown);
                         }
                     }
@@ -360,11 +403,21 @@ public class SubjectFragment extends Fragment {
                         difficultOrder = false;
                         orderBy = orderRate;
                         orderUpOrDown = orderDown;
+                        Drawable drawable = getResources().getDrawable(R.drawable.updown_down);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                        difficulty.setCompoundDrawables(null,null,drawable,null);
+                        time.setCompoundDrawables(null,null,drawablenone,null);
+                        importance.setCompoundDrawables(null,null,drawablenone,null);
                         getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
                     } else if (difficultOrder == false) {
                         difficultOrder = true;
                         orderBy = orderRate;
                         orderUpOrDown = orderUp;
+                        Drawable drawable = getResources().getDrawable(R.drawable.updown_up);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                        difficulty.setCompoundDrawables(null,null,drawable,null);
+                        time.setCompoundDrawables(null,null,drawablenone,null);
+                        importance.setCompoundDrawables(null,null,drawablenone,null);
                         getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
                     }
                 } else if (position == 1) {
@@ -373,11 +426,21 @@ public class SubjectFragment extends Fragment {
                         difficultOrder = false;
                         orderBy = orderRate;
                         orderUpOrDown = orderDown;
+                        Drawable drawable = getResources().getDrawable(R.drawable.updown_down);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                        difficulty.setCompoundDrawables(null,null,drawable,null);
+                        time.setCompoundDrawables(null,null,drawablenone,null);
+                        importance.setCompoundDrawables(null,null,drawablenone,null);
                         getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
                     } else if (difficultOrder == false) {
                         difficultOrder = true;
                         orderBy = orderRate;
                         orderUpOrDown = orderUp;
+                        Drawable drawable = getResources().getDrawable(R.drawable.updown_up);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                        difficulty.setCompoundDrawables(null,null,drawable,null);
+                        time.setCompoundDrawables(null,null,drawablenone,null);
+                        importance.setCompoundDrawables(null,null,drawablenone,null);
                         getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
                     }
                 }
@@ -392,11 +455,21 @@ public class SubjectFragment extends Fragment {
                         importantOrder = false;
                         orderUpOrDown = orderDown;
                         orderBy = orderLevel;
+                        Drawable drawable = getResources().getDrawable(R.drawable.updown_down);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                        importance.setCompoundDrawables(null,null,drawable,null);
+                        time.setCompoundDrawables(null,null,drawablenone,null);
+                        difficulty.setCompoundDrawables(null,null,drawablenone,null);
                         getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
                     } else if (importantOrder == false) {
                         importantOrder = true;
                         orderUpOrDown = orderUp;
                         orderBy = orderLevel;
+                        Drawable drawable = getResources().getDrawable(R.drawable.updown_up);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                        importance.setCompoundDrawables(null,null,drawable,null);
+                        time.setCompoundDrawables(null,null,drawablenone,null);
+                        difficulty.setCompoundDrawables(null,null,drawablenone,null);
                         getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo1, unOrganize, orderBy, orderUpOrDown);
                     }
                 } else if (position == 1) {
@@ -405,11 +478,21 @@ public class SubjectFragment extends Fragment {
                         importantOrder = false;
                         orderUpOrDown = orderDown;
                         orderBy = orderLevel;
+                        Drawable drawable = getResources().getDrawable(R.drawable.updown_down);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                        importance.setCompoundDrawables(null,null,drawable,null);
+                        time.setCompoundDrawables(null,null,drawablenone,null);
+                        difficulty.setCompoundDrawables(null,null,drawablenone,null);
                         getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
                     } else if (importantOrder == false) {
                         importantOrder = true;
                         orderUpOrDown = orderUp;
                         orderBy = orderLevel;
+                        Drawable drawable = getResources().getDrawable(R.drawable.updown_up);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                        importance.setCompoundDrawables(null,null,drawable,null);
+                        time.setCompoundDrawables(null,null,drawablenone,null);
+                        difficulty.setCompoundDrawables(null,null,drawablenone,null);
                         getSubjectList(accessToken, gradeId, subjectId, pageSize, pageNo2, unOrganize, orderBy, orderUpOrDown);
                     }
                 }

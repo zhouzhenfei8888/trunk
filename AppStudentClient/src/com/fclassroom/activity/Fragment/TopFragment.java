@@ -19,7 +19,6 @@ import com.fclassroom.AppException;
 import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.TopBind;
 import com.fclassroom.app.common.PreferenceUtils;
-import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.appstudentclient.R;
 
 import java.util.ArrayList;
