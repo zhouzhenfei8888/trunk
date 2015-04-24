@@ -25,8 +25,9 @@ public class AchievementActivity extends BaseActivity {
     private Toolbar mToolbar;
     private ViewPager viewPager;
     ImageView imageView;
-    int saveTime,DefeatRate,OrgRate;
+    int saveTime, DefeatRate, OrgRate;
     AppContext appContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +38,11 @@ public class AchievementActivity extends BaseActivity {
 
     private void initView() {
         appContext = (AppContext) getApplicationContext();
-        saveTime = PreferenceUtils.getInt(appContext,PreferenceUtils.SAVETIME);
-        DefeatRate = PreferenceUtils.getInt(appContext,PreferenceUtils.DEFEATRATE);
-        OrgRate = PreferenceUtils.getInt(appContext,PreferenceUtils.ORGRATE);
-        imageView = (ImageView)findViewById(R.id.iv_number);
-        viewPager = (ViewPager)findViewById(R.id.viewpager);
+        saveTime = PreferenceUtils.getInt(appContext, PreferenceUtils.SAVETIME);
+        DefeatRate = PreferenceUtils.getInt(appContext, PreferenceUtils.DEFEATRATE);
+        OrgRate = PreferenceUtils.getInt(appContext, PreferenceUtils.ORGRATE);
+        imageView = (ImageView) findViewById(R.id.iv_number);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i2) {
@@ -50,7 +51,7 @@ public class AchievementActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int i) {
-                switch (i){
+                switch (i) {
                     case 0:
                         imageView.setImageResource(R.drawable.three_first);
                         break;
@@ -90,23 +91,28 @@ public class AchievementActivity extends BaseActivity {
     class MyPagerAdapter extends PagerAdapter {
 
         private Context context;
+
         public MyPagerAdapter(Context context) {
             this.context = context;
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View view = LayoutInflater.from(context).inflate(R.layout.my_pager,container,false);
+            View view = LayoutInflater.from(context).inflate(R.layout.my_pager, container, false);
             TextView textView = (TextView) view.findViewById(R.id.tv_message);
             RoundProgressBarSmall roundProgressBarSmall = (RoundProgressBarSmall) view.findViewById(R.id.roundprogressbarsmall);
-            switch (position){
+            switch (position) {
                 case 0:
                     roundProgressBarSmall.setTextColor(Color.parseColor("#c1c0c0"));
                     roundProgressBarSmall.setTextColor2(Color.parseColor("#5e5e5e"));
                     roundProgressBarSmall.setTextSize(60);
                     roundProgressBarSmall.setProgress(100);
                     roundProgressBarSmall.setText("累计");
-                    roundProgressBarSmall.setText2(""+saveTime+"分钟");
+                    String SaveTime = "" + saveTime;
+                    if (SaveTime.length() < 4) {
+                        SaveTime = SaveTime.substring(0, 3);
+                    }
+                    roundProgressBarSmall.setText2(SaveTime + "分钟");
                     textView.setText("节约抄题时间");
                     textView.setTextColor(Color.parseColor("#5dc6a2"));
                     break;
@@ -118,8 +124,8 @@ public class AchievementActivity extends BaseActivity {
                     roundProgressBarSmall.setCricleColor(Color.parseColor("#ffba43"));
                     roundProgressBarSmall.setCricleProgressColor(Color.parseColor("#ffcf73"));
                     roundProgressBarSmall.setText("整理完整度");
-                    roundProgressBarSmall.setText2(""+OrgRate+"%");
-                    textView.setText("已整理"+OrgRate+"%的错题");
+                    roundProgressBarSmall.setText2("" + OrgRate + "%");
+                    textView.setText("已整理" + OrgRate + "%的错题");
                     textView.setTextColor(Color.parseColor("#ffcf73"));
                     break;
                 case 2:
@@ -130,8 +136,8 @@ public class AchievementActivity extends BaseActivity {
                     roundProgressBarSmall.setCricleColor(Color.parseColor("#3b8dfe"));
                     roundProgressBarSmall.setCricleProgressColor(Color.parseColor("#73aeff"));
                     roundProgressBarSmall.setText("超过");
-                    roundProgressBarSmall.setText2(""+DefeatRate+"%的同学");
-                    textView.setText("超过"+DefeatRate+"%的同学");
+                    roundProgressBarSmall.setText2("" + DefeatRate + "%的同学");
+                    textView.setText("超过" + DefeatRate + "%的同学");
                     textView.setTextColor(Color.parseColor("#73aeff"));
                     break;
             }

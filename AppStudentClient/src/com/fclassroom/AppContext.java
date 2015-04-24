@@ -873,8 +873,8 @@ public class AppContext extends Application {
         return ApiClient.getPrintNum(this, accessToken, gradeId, subjectId);
     }
 
-    public BaseResponseBean sendFeedBack(String accessToken, String msg) throws AppException {
-        return ApiClient.sendFeedBack(this, accessToken, msg);
+    public void sendFeedBack(String accessToken, String msg) throws AppException {
+         ApiClient.sendFeedBack(this, accessToken, msg);
     }
 
     public BaseResponseBean<String> addNoteBookToPrintPlan(String accessToken, int gradeId, int subjectId, int id) throws AppException {

@@ -67,23 +67,11 @@ public class FeedbackActivity extends BaseActivity {
         new Thread() {
             @Override
             public void run() {
-                Message msg = new Message();
-                BaseResponseBean responseBean = null;
                 try {
-                    responseBean = appContext.sendFeedBack(accessToken, content);
-                    if (responseBean.getError_code() == 0) {
-                        msg.what = 1;
-                        msg.obj = responseBean.getData();
-                    } else {
-                        msg.what = 0;
-                        msg.obj = responseBean.getError_msg();
-                    }
+                    appContext.sendFeedBack(accessToken, content);
                 } catch (AppException e) {
                     e.printStackTrace();
-                    msg.what = -1;
-                    msg.obj = e;
                 }
-                handler.sendMessage(msg);
             }
         }.start();
     }

@@ -82,10 +82,12 @@ public class HomeFragment extends Fragment implements HomeActivity.HideTopHomeFr
                     PreferenceUtils.putInt(appContext,PreferenceUtils.ORGRATE,OrgRate);
                     PreferenceUtils.putInt(appContext,PreferenceUtils.SAVETIME,saveTime);
                     String nsaveTime = ""+saveTime;
-                    String nSaveTime = nsaveTime.substring(0,3);
+                    if(nsaveTime.length() >4){
+                       nsaveTime = nsaveTime.substring(0,3);
+                    }
                     roundProgressBar.setProgress(DefeatRate);
                     roundProgressBar.setProgress2(OrgRate);
-                    roundProgressBar.setText(nSaveTime);
+                    roundProgressBar.setText(nsaveTime);
                     havecollect.setText(""+DefeatRate);
                     lead.setText(""+OrgRate);
                     if(DefeatRate != 0){

@@ -216,7 +216,7 @@
                 android:layout_marginLeft="9dp"
                 android:layout_marginRight="9dp"
                 android:padding="@dimen/margin_size"
-                android:src="@drawable/iv_nodata" />
+                android:src="@drawable/no_answer" />
             </LinearLayout>
 
             <LinearLayout

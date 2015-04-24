@@ -726,14 +726,13 @@ public class ApiClient {
         return responseBean;
     }
 
-    public static BaseResponseBean sendFeedBack(AppContext appContext, String accessToken, String msg) throws AppException {
+    public static void sendFeedBack(AppContext appContext, String accessToken, String msg) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
         params.put("message", msg);
         String url = _MakeURL(URLs.SendFeedBack, params);
         String response = http_get(appContext, url);
-        BaseResponseBean responseBean = JsonUtils.getFeedBack(response);
-        return responseBean;
+        System.out.println(response);
     }
 
     public static BaseResponseBean<String> addNoteBookToPrintPlan(AppContext appContext, String accessToken, int gradeId, int subjectId, int id) throws AppException {
