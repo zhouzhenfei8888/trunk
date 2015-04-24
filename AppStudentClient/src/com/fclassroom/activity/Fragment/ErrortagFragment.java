@@ -100,7 +100,7 @@ public class ErrortagFragment extends Fragment {
         getTags();
     }
 
-    private void getTags() {
+    public void getTags() {
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -198,7 +198,7 @@ public class ErrortagFragment extends Fragment {
 
     private void setListAdaptor() {
         // create instance of PinnedHeaderAdapter and set adapter to list view
-        mAdaptor = new PinnedHeaderAdapter(getActivity(), mListItems, mListSectionPos,errorTagBeanlist);
+        mAdaptor = new PinnedHeaderAdapter(this,accessToken,appContext,getActivity(), mListItems, mListSectionPos,errorTagBeanlist);
         mListView.setAdapter(mAdaptor);
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -269,7 +269,7 @@ public class ErrortagFragment extends Fragment {
         }
     }
 
-    private class Poplulate extends AsyncTask<ArrayList<String>, Void, Void> {
+    public class Poplulate extends AsyncTask<ArrayList<String>, Void, Void> {
 
         private void showLoading(View contentView, View loadingView, View emptyView) {
             contentView.setVisibility(View.GONE);
@@ -314,6 +314,11 @@ public class ErrortagFragment extends Fragment {
                     if (!prev_section.equals(current_section)) {
                         mListItems.add(current_section);
                         mListItems.add(current_item);
+                        ErrorTagBean errorTagBean = new ErrorTagBean();
+                        errorTagBean.setId(0);
+                        errorTagBean.setName("");
+                        errorTagBean.setErrorQuestionCount(0);
+                        errorTagBeanlist.add(errorTagBean);
                         // array list of section positions
                         mListSectionPos.add(mListItems.indexOf(current_section));
                         prev_section = current_section;

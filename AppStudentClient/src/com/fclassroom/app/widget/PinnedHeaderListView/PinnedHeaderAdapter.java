@@ -7,6 +7,8 @@ import java.util.Locale;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,16 +17,24 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fclassroom.AppContext;
+import com.fclassroom.AppException;
 import com.fclassroom.activity.Fragment.ErrortagFragment;
 import com.fclassroom.activity.HomeActivity;
+import com.fclassroom.app.bean.BaseResponseBean;
 import com.fclassroom.app.bean.ErrorTagBean;
+import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.Trans2PinYin;
+import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.appstudentclient.R;
+
+import static com.fclassroom.activity.Fragment.ErrortagFragment.*;
 
 // Customized adaptor to populate data in PinnedHeaderListView
 public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener, IPinnedHeader, Filterable {
@@ -45,12 +55,27 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
 
     // context object
     Context mContext;
+    ErrorTagBean merrorTagBean = null;
 
-    public PinnedHeaderAdapter(Context context, ArrayList<String> listItems, ArrayList<Integer> listSectionPos, List<ErrorTagBean> errorTagBeans) {
+    String accessToken;
+    AppContext appContext;
+    ViewHolder holder;
+    ErrortagFragment errortagFragment;
+    int subjectId;
+    int gradeId;
+    List<ErrorTagBean> errorTagBeanlist = new ArrayList<ErrorTagBean>();
+    private ArrayList<String> TagNameList = new ArrayList<String>();
+
+    public PinnedHeaderAdapter(ErrortagFragment errortagFragment,String accessToken, AppContext appContext, Context context, ArrayList<String> listItems, ArrayList<Integer> listSectionPos, List<ErrorTagBean> errorTagBeans) {
         this.mContext = context;
         this.mListItems = listItems;
         this.mListSectionPos = listSectionPos;
         this.errorTagBeans = errorTagBeans;
+        this.accessToken = accessToken;
+        this.appContext = appContext;
+        this.errortagFragment = errortagFragment;
+        subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
+        gradeId = PreferenceUtils.getInt(appContext,PreferenceUtils.GRADE_ID);
         mLayoutInflater = LayoutInflater.from(context);
     }
 
@@ -91,7 +116,7 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
+        holder = null;
 
         if (convertView == null) {
             holder = new ViewHolder();
@@ -102,7 +127,7 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
                     convertView = mLayoutInflater.inflate(R.layout.listview_itemtag, null);
 //                    convertView = mLayoutInflater.inflate(R.layout.row_view, null);
                     holder.tagNumber = (TextView) convertView.findViewById(R.id.tv_tagnumber);
-                    holder.setting = (ImageView)convertView.findViewById(R.id.iv_setting);
+                    holder.setting = (ImageView) convertView.findViewById(R.id.iv_setting);
                     break;
                 case TYPE_SECTION:
                     convertView = mLayoutInflater.inflate(R.layout.section_row_view, null);
@@ -114,41 +139,196 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-/*        if(getItemViewType(position)==TYPE_ITEM){
-//            ErrorTagBean merrorTagBean = null;
-//            for(ErrorTagBean errorTagBean:errorTagBeans){
-//                if(mListItems.get(position).equals(errorTagBean.getName())){
-//                    merrorTagBean = errorTagBean;
-//                    break;
-//                };
-//            }
-            holder.tagNumber.setText(0);
-        }*/
- /*       if (null != convertView.findViewById(R.id.tv_tagnumber)) {
-            holder.tagNumber.setText(0);
+        if (getItemViewType(position) == TYPE_ITEM) {
+            for (ErrorTagBean errorTagBean : errorTagBeans) {
+                if (mListItems.get(position).equals(errorTagBean.getName())) {
+                    merrorTagBean = errorTagBean;
+                    holder.tagNumber.setText("" + merrorTagBean.getErrorQuestionCount());
+                    holder.setting.setTag(errorTagBean.getId());
+                    break;
+                }
+                ;
+            }
             holder.setting.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
+                    final int id = (int) v.getTag();
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                     builder.setTitle("");
                     builder.setItems(new String[]{"重命名", "打印", "删除"}, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if (which == 0) {
-//                                editErrorTagDialog(accessToken, bookBean.getId(),bookBean.getName());
+                                editTagNameDialog(accessToken, id, merrorTagBean.getName());
                             } else if (which == 1) {
-//                                addNoteBookToPrintPlan(accessToken,gradeId,subjectId,bookBean.getId());
+                                printTag(accessToken, gradeId, subjectId, id);
                             } else if (which == 2) {
-//                                deleteNoteBookDialog(accessToken, bookBean.getId());
+                                deleteTagDialog(accessToken, id);
                             }
                         }
                     });
                     builder.create().show();
                 }
             });
-        }*/
+        }
         holder.tagName.setText(mListItems.get(position).toString());
         return convertView;
+    }
+
+    private void printTag(final String accessToken, final int gradeId, final int subjectId, final int id) {
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 1){
+                    BaseResponseBean<String> responseBean = (BaseResponseBean<String>) msg.obj;
+                }else if(msg.what == -1){
+                    ((AppException)msg.obj).makeToast(mContext);
+                }
+            }
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.printTag(accessToken,gradeId,subjectId,id);
+                    msg.what = 1;
+                    msg.obj = responseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    private void deleteTagDialog(final String accessToken, final int id) {
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 1){
+                    BaseResponseBean<String> responseBean = (BaseResponseBean<String>) msg.obj;
+                    UIHelper.ToastMessage(mContext,responseBean.getData().toString());
+                }else if(msg.what == -1){
+                    ((AppException)msg.obj).makeToast(mContext);
+                }
+            }
+        };
+        new Thread(){
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.delTag(accessToken,id);
+                    msg.what = 1;
+                    msg.obj = responseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    private void editTagNameDialog(final String accessToken, final int id, String name) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_notebook, null, false);
+        final EditText etName = (EditText) view.findViewById(R.id.et_notebookname);
+        etName.setHint("请输入错因标签");
+        TextView textView = (TextView) view.findViewById(R.id.tv_tite_dialog);
+        textView.setText("重命名");
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("");
+        builder.setView(view);
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                editTagName(errortagFragment,accessToken, id, etName.getText().toString().trim());
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    private void editTagName(final ErrortagFragment errortagFragment, final String accessToken, final int tagId, final String name) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<String> baseResponseBean = (BaseResponseBean<String>) msg.obj;
+//                    getTags();
+                    UIHelper.ToastMessage(mContext, "修改成功！");
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(mContext);
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> baseResponseBean = appContext.editTagNameDialog(accessToken, tagId, name);
+                    msg.what = 1;
+                    msg.obj = baseResponseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    public void getTags() {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<List<ErrorTagBean>> responseBean = (BaseResponseBean<List<ErrorTagBean>>) msg.obj;
+                    errorTagBeanlist = responseBean.getData();
+                    for (ErrorTagBean errorTagBean : errorTagBeanlist) {
+                        TagNameList.add(errorTagBean.getName());
+                    }
+                    notifyDataSetChanged();
+                } else if (msg.what == 0) {
+                    UIHelper.ToastMessage(mContext, msg.obj.toString());
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(mContext);
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<List<ErrorTagBean>> responseBean = appContext.getErrorTagList(accessToken, subjectId);
+                    if (responseBean.getError_code() == 0) {
+                        msg.what = 1;
+                        msg.obj = responseBean;
+                    } else {
+                        msg.what = 0;
+                        msg.obj = responseBean.getError_msg();
+                    }
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     @Override

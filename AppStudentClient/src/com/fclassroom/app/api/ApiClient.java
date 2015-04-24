@@ -940,7 +940,7 @@ public class ApiClient {
         params.put("accessToken", accessToken);
         params.put("subjectId", subjectId);
         params.put("examQuestionId", examQuestionId);
-        params.put("tagname", URLEncoder.encode(tagname, "utf-8"));
+        params.put("tagName", URLEncoder.encode(tagname, "utf-8"));
         String url = _MakeURL(URLs.AddErrorQuestionTag, params);
         System.out.println(url);
         String response = http_get(appContext, url);
@@ -1105,6 +1105,41 @@ public class ApiClient {
         String url = _MakeURL(URLs.DownloadErrorQuestions, params);
         System.out.println(url);
         String response = http_get(appContext, url);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<String> editTagNameDialog(AppContext appContext, String accessToken, int tagId, String name) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("id",tagId);
+        params.put("name",name);
+        String url = _MakeURL(URLs.EditTag,params);
+        String response  = http_get(appContext,url);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<String> delTag(AppContext appContext, String accessToken, int id) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("tagId",id);
+        String url = _MakeURL(URLs.DelTag,params);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<String> printTag(AppContext appContext,String accessToken, int gradeId, int subjectId, int id) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("gradeId", gradeId);
+        params.put("subjectId", subjectId);
+        params.put("tagIds",id);
+        String url = _MakeURL(URLs.PrintTag,params);
+        String response = http_get(appContext,url);
+        System.out.println("mmmmmm"+response);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
     }

@@ -992,4 +992,16 @@ public class AppContext extends Application {
     public BaseResponseBean<String> downloadAllErrorQuestions(String accessToken, int gradeId, int subjectId, int downloadType) throws AppException {
         return ApiClient.downloadAllErrorQuestions(this,accessToken,gradeId,subjectId,downloadType);
     }
+
+    public BaseResponseBean<String> editTagNameDialog(String accessToken, int tagId, String name) throws AppException {
+        return ApiClient.editTagNameDialog(this,accessToken,tagId,name);
+    }
+
+    public BaseResponseBean<String> delTag(String accessToken, int id) throws AppException {
+        return ApiClient.delTag(this,accessToken,id);
+    }
+
+    public BaseResponseBean<String> printTag(String accessToken, int gradeId, int subjectId, int id) throws AppException {
+        return ApiClient.printTag(this,accessToken,gradeId,subjectId,id);
+    }
 }

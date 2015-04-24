@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="@dimen/margin_size">
 
     <ImageView
         android:id="@+id/iv_setting"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:src="@drawable/setting" />
@@ -19,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_size"
+        android:layout_centerVertical="true"
         android:text="函数曲线"
         android:textSize="14sp" />
 
@@ -28,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/iv_setting"
         android:text="共20题"
+        android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
         android:textColor="@color/grey_white"
         android:textSize="14sp" />
