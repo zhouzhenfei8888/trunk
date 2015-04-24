@@ -39,7 +39,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="944a4e64-5715-4376-84bf-9dcf08e5bb13" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/URLs.java" afterPath="$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/bean/URLs.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="trunk.iws" />
@@ -81,8 +80,8 @@
       <file leaf-file-name="ApiClient.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/api/ApiClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70200235" vertical-offset="24267" max-vertical-offset="25116">
-              <caret line="1141" column="36" selection-start-line="1141" selection-start-column="36" selection-end-line="1141" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.6749117" vertical-offset="24267" max-vertical-offset="25116">
+              <caret line="1140" column="51" selection-start-line="1140" selection-start-column="51" selection-end-line="1140" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -2133,7 +2132,11 @@
       <created>1429868268263</created>
       <updated>1429868268263</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="student">
+      <created>1429869129649</created>
+      <updated>1429869129649</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2663,8 +2666,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AppStudentClient/src/com/fclassroom/app/api/ApiClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70200235" vertical-offset="24267" max-vertical-offset="25116">
-          <caret line="1141" column="36" selection-start-line="1141" selection-start-column="36" selection-end-line="1141" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.6749117" vertical-offset="24267" max-vertical-offset="25116">
+          <caret line="1140" column="51" selection-start-line="1140" selection-start-column="51" selection-end-line="1140" selection-end-column="51" />
           <folding />
         </state>
       </provider>
