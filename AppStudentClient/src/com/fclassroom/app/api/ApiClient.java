@@ -1109,11 +1109,11 @@ public class ApiClient {
         return responseBean;
     }
 
-    public static BaseResponseBean<String> editTagNameDialog(AppContext appContext, String accessToken, int tagId, String name) throws AppException {
+    public static BaseResponseBean<String> editTagNameDialog(AppContext appContext, String accessToken, int tagId, String name) throws AppException, UnsupportedEncodingException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
         params.put("id",tagId);
-        params.put("name",name);
+        params.put("name",URLEncoder.encode(name, "utf-8"));
         String url = _MakeURL(URLs.EditTag,params);
         String response  = http_get(appContext,url);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);

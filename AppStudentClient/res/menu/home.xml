@@ -8,12 +8,13 @@
         android:orderInCategory="90"
         android:icon="@drawable/icon_search2"
         android:title="action_search"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item android:id="@+id/action_print"
         android:orderInCategory="80"
-        android:icon="@drawable/icon_print2"
-        android:title="action_share"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/shape_notification"
+        android:actionLayout="@layout/print_count"
+        android:title="action_print"
+        app:showAsAction="always"/>
 
 </menu>

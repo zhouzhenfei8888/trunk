@@ -1,7 +1,10 @@
 // @author Bhavya Mehta
 package com.fclassroom.app.widget.PinnedHeaderListView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -181,6 +184,8 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
             public void handleMessage(Message msg) {
                 if(msg.what == 1){
                     BaseResponseBean<String> responseBean = (BaseResponseBean<String>) msg.obj;
+                    getTags();
+                    UIHelper.ToastMessage(mContext,"打印成功！");
                 }else if(msg.what == -1){
                     ((AppException)msg.obj).makeToast(mContext);
                 }
@@ -210,6 +215,7 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
             public void handleMessage(Message msg) {
                 if(msg.what == 1){
                     BaseResponseBean<String> responseBean = (BaseResponseBean<String>) msg.obj;
+                    getTags();
                     UIHelper.ToastMessage(mContext,responseBean.getData().toString());
                 }else if(msg.what == -1){
                     ((AppException)msg.obj).makeToast(mContext);
@@ -265,7 +271,7 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
                     BaseResponseBean<String> baseResponseBean = (BaseResponseBean<String>) msg.obj;
-//                    getTags();
+                    getTags();
                     UIHelper.ToastMessage(mContext, "修改成功！");
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(mContext);
@@ -284,6 +290,8 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
                     e.printStackTrace();
                     msg.what = -1;
                     msg.obj = e;
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
                 }
                 handler.sendMessage(msg);
             }
@@ -297,9 +305,35 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
                 if (msg.what == 1) {
                     BaseResponseBean<List<ErrorTagBean>> responseBean = (BaseResponseBean<List<ErrorTagBean>>) msg.obj;
                     errorTagBeanlist = responseBean.getData();
+                    TagNameList.clear();
                     for (ErrorTagBean errorTagBean : errorTagBeanlist) {
                         TagNameList.add(errorTagBean.getName());
                     }
+                    mListItems.clear();
+                    mListSectionPos.clear();
+                    ArrayList<String> items = TagNameList;
+                    if (TagNameList.size() > 0) {
+
+                        // NOT forget to sort array
+                        Collections.sort(items, new SortIgnoreCase());
+
+                        String prev_section = "";
+                        for (String current_item : items) {
+                            String item2PinYin = Trans2PinYin.getInstance().convert(current_item.substring(0, 1));
+                            String current_section = item2PinYin.substring(0, 1).toUpperCase(Locale.getDefault());
+
+                            if (!prev_section.equals(current_section)) {
+                                mListItems.add(current_section);
+                                mListItems.add(current_item);
+                                // array list of section positions
+                                mListSectionPos.add(mListItems.indexOf(current_section));
+                                prev_section = current_section;
+                            } else {
+                                mListItems.add(current_item);
+                            }
+                        }
+                    }
+//                    mListItems = TagNameList;
                     notifyDataSetChanged();
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(mContext, msg.obj.toString());
@@ -329,6 +363,14 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
                 handler.sendMessage(msg);
             }
         }.start();
+    }
+
+    public class SortIgnoreCase implements Comparator<String> {
+        public int compare(String s1, String s2) {
+            s1 = Trans2PinYin.getInstance().convertAll(s1);
+            s2 = Trans2PinYin.getInstance().convertAll(s2);
+            return s1.compareToIgnoreCase(s2);
+        }
     }
 
     @Override

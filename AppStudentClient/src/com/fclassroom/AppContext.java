@@ -993,7 +993,7 @@ public class AppContext extends Application {
         return ApiClient.downloadAllErrorQuestions(this,accessToken,gradeId,subjectId,downloadType);
     }
 
-    public BaseResponseBean<String> editTagNameDialog(String accessToken, int tagId, String name) throws AppException {
+    public BaseResponseBean<String> editTagNameDialog(String accessToken, int tagId, String name) throws AppException, UnsupportedEncodingException {
         return ApiClient.editTagNameDialog(this,accessToken,tagId,name);
     }
 
