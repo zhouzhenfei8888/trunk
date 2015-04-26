@@ -57,7 +57,7 @@ import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+//no see
 public class HomeActivity extends BaseActivity implements SubjectFragment.HideTop {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                             private String TAG = "HomeActivity";
                                                                                                                                                                                                                                                                                                                                                                                                                                                                             private Toolbar mToolbar;
