@@ -49,4 +49,15 @@
         <attr name="textPaddingTop" format="dimension" />
         <attr name="textPaddingBottom" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="PrintView">
+        <!-- Icon. -->
+        <attr name="iconText" format="string"/>
+        <!-- Icon color. -->
+        <attr name="iconColor" format="color"/>
+        <!-- Size of the icon. -->
+        <attr name="iconSize" format="dimension"/>
+        <!-- File name of the font in the assets directory. -->
+        <attr name="iconFont" format="string"/>
+    </declare-styleable>
 </resources>

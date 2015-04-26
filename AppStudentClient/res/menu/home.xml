@@ -12,9 +12,8 @@
 
     <item android:id="@+id/action_print"
         android:orderInCategory="80"
-        android:icon="@drawable/shape_notification"
+        android:icon="@drawable/icon_print2"
         android:actionLayout="@layout/print_count"
-        android:title="action_print"
         app:showAsAction="always"/>
 
 </menu>

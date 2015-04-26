@@ -34,6 +34,8 @@ import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.app.widget.TagView.Tag;
 import com.fclassroom.app.widget.TagView.TagView;
+import com.fclassroom.app.widget.TreeView.IconTreeItemHolder;
+import com.fclassroom.app.widget.TreeView.TreeNode;
 import com.fclassroom.appstudentclient.R;
 
 import java.io.UnsupportedEncodingException;
@@ -165,9 +167,11 @@ public class AddwrongtagActivity extends BaseActivity {
                     BaseResponseBean<List<TreeBean>> responseBean = (BaseResponseBean<List<TreeBean>>) msg.obj;
                     List<TreeBean> listTreeBean = responseBean.getData();
                     List<String> list = new ArrayList<String>();
+                    TreeNode root = TreeNode.root();
                     for(TreeBean treeBean:listTreeBean){
-                        list.add(treeBean.getName());
-                        System.out.println(treeBean.getName());
+//                        list.add(treeBean.getName());
+//                        System.out.println(treeBean.getName());
+                        TreeNode treeNode = new TreeNode(new IconTreeItemHolder.IconTreeItem(R.string.ic_drive_file, treeBean.getName()));
                     }
                     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AddwrongtagActivity.this,android.R.layout.simple_list_item_1,list);
                     knowledge.setAdapter(arrayAdapter);
