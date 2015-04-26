@@ -34,6 +34,7 @@ import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.app.widget.TagView.Tag;
 import com.fclassroom.app.widget.TagView.TagView;
+import com.fclassroom.app.widget.TreeView.AndroidTreeView;
 import com.fclassroom.app.widget.TreeView.IconTreeItemHolder;
 import com.fclassroom.app.widget.TreeView.TreeNode;
 import com.fclassroom.appstudentclient.R;
@@ -67,6 +68,7 @@ public class AddwrongtagActivity extends BaseActivity {
     static final String[] arr = {
             "abc", "good", "baidu", "ni ku", "mitu", "sldf", "android", "apk"
     };
+    AndroidTreeView androidTreeView;
     List<String> stringList = new ArrayList<>();
 
     @Override
@@ -172,7 +174,14 @@ public class AddwrongtagActivity extends BaseActivity {
 //                        list.add(treeBean.getName());
 //                        System.out.println(treeBean.getName());
                         TreeNode treeNode = new TreeNode(new IconTreeItemHolder.IconTreeItem(R.string.ic_drive_file, treeBean.getName()));
+                        root.addChildren(treeNode);
                     }
+                    androidTreeView = new AndroidTreeView(AddwrongtagActivity.this,root);
+                    androidTreeView.setDefaultAnimation(true);
+//                    androidTreeView.setDefaultContainerStyle(R.style.TreeNodeStyleCustom);
+//                    androidTreeView.setDefaultViewHolder(IconTreeItemHolder.class);
+//                    androidTreeView.setDefaultNodeClickListener(nodeClickListener);
+
                     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AddwrongtagActivity.this,android.R.layout.simple_list_item_1,list);
                     knowledge.setAdapter(arrayAdapter);
                 }else if(msg.what == -1){

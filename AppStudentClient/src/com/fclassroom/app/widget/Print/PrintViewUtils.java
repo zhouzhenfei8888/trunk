@@ -22,6 +22,8 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 
+import com.fclassroom.appstudentclient.R;
+
 class PrintViewUtils {
 
     /**
