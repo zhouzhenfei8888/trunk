@@ -621,6 +621,7 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
                 mToolbar.setTitle(arr[4]);
             }
         });
+        accessToken = PreferenceUtils.getString(appContext,PreferenceUtils.ACCESSTOKEN);
         updateprintnum();
         return super.onCreateOptionsMenu(menu);
     }

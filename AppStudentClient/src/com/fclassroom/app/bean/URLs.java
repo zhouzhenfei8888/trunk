@@ -3,13 +3,14 @@ package com.fclassroom.app.bean;
 import java.io.Serializable;
 
 public class URLs implements Serializable {
-    public final static String HOST_YH = "http://120.131.64.134:20002/";
+//    public final static String HOST_YH = "http://120.131.64.134:20002/";
     //马丰的地址
-//    public final static String HOST_YH = "http://192.168.0.91:8090/";
+    public final static String HOST_YH = "http://192.168.1.125:8090/";
 //    public final static String HOST_YH = "http://192.168.1.102/";
     public final static String HOST = HOST_YH + "student/";
     public final static String HOST_NOTE = HOST_YH + "notebook/student/";
-    public final static String HOST_IMG = "http://120.131.64.134:60002";
+    //    public final static String HOST_IMG = "http://120.131.64.134:60002";
+    public final static String HOST_IMG = "http://img.fclassroom.com";
     public final static String HTTP = "http://";
     public final static String HTTPS = "https://";
 
@@ -63,5 +64,5 @@ public class URLs implements Serializable {
     public final static String UpdatePassword = HOST_YH + "findPassword.json";
     public final static String EditTag = HOST_NOTE + "editTag.json";
     public final static String DelTag = HOST_NOTE + "delTag.json";
-    public final static String PrintTag = HOST_NOTE + "downloadTagErrorQuestions.json";
+    public final static String PrintTag = HOST_NOTE + "addTagQuestionToPrintCar.json";
 }

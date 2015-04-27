@@ -68,6 +68,7 @@ public class AddwrongtagActivity extends BaseActivity {
     static final String[] arr = {
             "abc", "good", "baidu", "ni ku", "mitu", "sldf", "android", "apk"
     };
+    ViewGroup contentview;
     AndroidTreeView androidTreeView;
     List<String> stringList = new ArrayList<>();
 
@@ -170,20 +171,24 @@ public class AddwrongtagActivity extends BaseActivity {
                     List<TreeBean> listTreeBean = responseBean.getData();
                     List<String> list = new ArrayList<String>();
                     TreeNode root = TreeNode.root();
-                    for(TreeBean treeBean:listTreeBean){
+                    contentview = (ViewGroup)findViewById(R.id.relativelayout);
+                    TreeNode parent = new TreeNode(new IconTreeItemHolder.IconTreeItem(R.drawable.ic_launcher, "My Computer"));
+                    TreeNode child1 = new TreeNode(new IconTreeItemHolder.IconTreeItem(R.drawable.ic_launcher, "My Computer1"));
+                    TreeNode child2 = new TreeNode(new IconTreeItemHolder.IconTreeItem(R.drawable.ic_launcher, "My Computer2"));
+                    parent.addChildren(child1,child2);
+//                    for(TreeBean treeBean:listTreeBean){
 //                        list.add(treeBean.getName());
 //                        System.out.println(treeBean.getName());
-                        TreeNode treeNode = new TreeNode(new IconTreeItemHolder.IconTreeItem(R.string.ic_drive_file, treeBean.getName()));
-                        root.addChildren(treeNode);
-                    }
+                        root.addChildren(parent);
+//                    }
                     androidTreeView = new AndroidTreeView(AddwrongtagActivity.this,root);
                     androidTreeView.setDefaultAnimation(true);
-//                    androidTreeView.setDefaultContainerStyle(R.style.TreeNodeStyleCustom);
-//                    androidTreeView.setDefaultViewHolder(IconTreeItemHolder.class);
+                    androidTreeView.setDefaultContainerStyle(R.style.TreeNodeStyleCustom);
+                    androidTreeView.setDefaultViewHolder(IconTreeItemHolder.class);
 //                    androidTreeView.setDefaultNodeClickListener(nodeClickListener);
-
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AddwrongtagActivity.this,android.R.layout.simple_list_item_1,list);
-                    knowledge.setAdapter(arrayAdapter);
+                    contentview.addView(androidTreeView.getView());
+//                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AddwrongtagActivity.this,android.R.layout.simple_list_item_1,list);
+//                    knowledge.setAdapter(arrayAdapter);
                 }else if(msg.what == -1){
                     ((AppException)msg.obj).makeToast(AddwrongtagActivity.this);
                 }

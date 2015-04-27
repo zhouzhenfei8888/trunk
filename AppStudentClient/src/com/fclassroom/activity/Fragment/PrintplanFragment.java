@@ -434,6 +434,7 @@ public class PrintplanFragment extends Fragment {
                     PrintPlanList.clear();
                     printplanAdapter.notifyDataSetChanged();
                     getPrintNum(accessToken, gradeId, subjectId);
+//                    getPrintRecoderList(accessToken,gradeId,subjectId,orderTime);
                     singleMode();
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(getActivity(), msg.obj.toString());

@@ -720,6 +720,7 @@ public class ApiClient {
         params.put("gradeId", gradeId);
         params.put("subjectId", subjectId);
         String url = _MakeURL(URLs.GetPrintNum, params);
+        System.out.println(url);
         String response = http_get(appContext, url);
         System.out.println("ccc" + response);
         BaseResponseBean<PrintNumBean> responseBean = JsonUtils.getPrintNum(response);
@@ -1136,7 +1137,8 @@ public class ApiClient {
         params.put("accessToken", accessToken);
         params.put("gradeId", gradeId);
         params.put("subjectId", subjectId);
-        params.put("tagIds",id);
+        params.put("tagId",id);
+        System.out.println(id);
         String url = _MakeURL(URLs.PrintTag,params);
         String response = http_get(appContext,url);
         System.out.println("mmmmmm"+response);

@@ -185,7 +185,7 @@ public class PinnedHeaderAdapter extends BaseAdapter implements OnScrollListener
                 if(msg.what == 1){
                     BaseResponseBean<String> responseBean = (BaseResponseBean<String>) msg.obj;
                     getTags();
-                    UIHelper.ToastMessage(mContext,"打印成功！");
+                    UIHelper.ToastMessage(mContext,"已加入打印车");
                 }else if(msg.what == -1){
                     ((AppException)msg.obj).makeToast(mContext);
                 }

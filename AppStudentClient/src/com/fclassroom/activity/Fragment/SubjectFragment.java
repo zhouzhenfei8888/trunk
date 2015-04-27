@@ -927,7 +927,7 @@ public class SubjectFragment extends Fragment {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
-                    UIHelper.ToastMessage(getActivity(), "打印成功！");
+                    UIHelper.ToastMessage(getActivity(), "已加入打印车！");
                     singleMode();
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(getActivity());

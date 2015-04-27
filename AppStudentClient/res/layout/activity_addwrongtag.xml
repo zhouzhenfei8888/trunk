@@ -131,6 +131,11 @@
                 android:textSize="18sp" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/relativelayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></RelativeLayout>
+
         <ListView
             android:id="@+id/lv_knowledge"
             android:layout_width="match_parent"
