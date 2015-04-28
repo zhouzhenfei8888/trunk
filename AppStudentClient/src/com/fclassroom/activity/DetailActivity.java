@@ -205,7 +205,7 @@ public class DetailActivity extends BaseActivity {
         checkResult = (ImageView) findViewById(R.id.iv_checkresult);
         imageViews = (LinearLayout) findViewById(R.id.linear_imagepath);
         if (null == subjectItemBean.getNotebookNames() || "".equals(subjectItemBean.getNotebookNames())) {
-            bookname.setText("暂未加入错题本");
+            bookname.setHint("暂未加入错题本");
         } else {
             bookname.setText(subjectItemBean.getNotebookNames());
         }
@@ -466,11 +466,11 @@ public class DetailActivity extends BaseActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         AddErrorQuestionToNoteBook(accessToken, subjectItemBean.getExamQuestionId(), ErrorBookList.get(which).getId());
                         stringBuilder.append(",").append(ErrorBookList.get(which).getName().toString());
-                        if ("".equals(subjectItemBean.getNotebookNames())) {
+                        if ("".equals(bookname.getText().toString().trim())){
                             String strbookname = stringBuilder.substring(1, stringBuilder.length());
                             bookname.setText(strbookname);
                         } else {
-                            bookname.setText(subjectItemBean.getNotebookNames() + stringBuilder.toString());
+                            bookname.setText(bookname.getText().toString().trim() + stringBuilder.toString());
                         }
                     }
                 });
