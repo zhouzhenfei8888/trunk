@@ -52,6 +52,15 @@ public class PageBean {
         int parentId;
         int questionNo;
         int paperId;
+        String studentAnswer;
+
+        public String getStudentAnswer() {
+            return studentAnswer;
+        }
+
+        public void setStudentAnswer(String studentAnswer) {
+            this.studentAnswer = studentAnswer;
+        }
 
         public String getQuestionTitle() {
             return questionTitle;

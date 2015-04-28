@@ -627,11 +627,11 @@ public class ApiClient {
         params.put("noteBookId", noteBookId);
         params.put("unOrganize", unOrganize);
         params.put(orderBy, orderUpOrDown);
-        System.out.println(orderBy + " " + orderUpOrDown);
         params.put("pageSize", pageSize);
         params.put("pageNo", pageNo);
         String url = _MakeURL(URLs.GetSubjectDetail, params);
         String response = http_get(appContext, url);
+        System.out.println(url);
         System.out.println("kkkkkk"+response);
         BaseResponseBean<PageBean> responseBean = JsonUtils.getSubjectDetail(response);
         return responseBean;
@@ -720,9 +720,7 @@ public class ApiClient {
         params.put("gradeId", gradeId);
         params.put("subjectId", subjectId);
         String url = _MakeURL(URLs.GetPrintNum, params);
-        System.out.println(url);
         String response = http_get(appContext, url);
-        System.out.println("ccc" + response);
         BaseResponseBean<PrintNumBean> responseBean = JsonUtils.getPrintNum(response);
         return responseBean;
     }
@@ -1143,6 +1141,18 @@ public class ApiClient {
         String response = http_get(appContext,url);
         System.out.println("mmmmmm"+response);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
+    }
+
+    public static BaseResponseBean<List<TreeBean>> getKnosByParent(AppContext appContext,String accessToken, int parentId) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("parentId",parentId);
+        String url = _MakeURL(URLs.GetKnosByParent,params);
+        System.out.println(url);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+        BaseResponseBean<List<TreeBean>> responseBean = JsonUtils.getTopLevelKnos(response);
         return responseBean;
     }
 }

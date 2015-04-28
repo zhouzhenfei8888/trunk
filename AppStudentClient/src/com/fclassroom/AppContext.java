@@ -821,6 +821,32 @@ public class AppContext extends Application {
         PreferenceUtils.putString(this,PreferenceUtils.LOGINPASSWORD,studentInfo.getLoginPwd());
     }
 
+    public void initStudentInfo(){
+        PreferenceUtils.putInt(this, PreferenceUtils.STUDENT_ID, 0);
+        PreferenceUtils.putString(this, PreferenceUtils.STUDENT_NAME, "");
+        PreferenceUtils.putInt(this, PreferenceUtils.SCHOOL_ID, 0);
+        PreferenceUtils.putString(this, PreferenceUtils.SCHOOL_NAME, "");
+        PreferenceUtils.putInt(this, PreferenceUtils.GRADE_ID, 0);
+        PreferenceUtils.putString(this, PreferenceUtils.GRADE_NAME, "");
+        PreferenceUtils.putInt(this, PreferenceUtils.CLASS_ID, 0);
+        PreferenceUtils.putString(this, PreferenceUtils.CLASS_NAME, "");
+        PreferenceUtils.putInt(this, PreferenceUtils.SUBJECT_ID, 0);
+        PreferenceUtils.putString(this, PreferenceUtils.SUBJECT_NAME, "");
+        PreferenceUtils.putString(this, PreferenceUtils.JIKE_NUM, "");
+        PreferenceUtils.putString(this, PreferenceUtils.STUDENT_NO,"");
+        PreferenceUtils.putString(this,PreferenceUtils.SEX,"");
+        PreferenceUtils.putString(this,PreferenceUtils.NICKNAME,"");
+        PreferenceUtils.putString(this,PreferenceUtils.OPEN_ID,"");
+        PreferenceUtils.putString(this,PreferenceUtils.ACCOUNT_LOGINPHONE,"");
+        PreferenceUtils.putString(this,PreferenceUtils.LOGINPASSWORD,"");
+        PreferenceUtils.putInt(this, PreferenceUtils.ACCOUNT_ID, 0);
+        PreferenceUtils.putString(this, PreferenceUtils.ACCOUNT_JIKENUM, "");
+        PreferenceUtils.putString(this, PreferenceUtils.ACCOUNT_NAME,"");
+        PreferenceUtils.putString(this, PreferenceUtils.ACCOUNT_SEX, "");
+        PreferenceUtils.putString(this, PreferenceUtils.ACCOUNT_LOGINPHONE, "");
+        PreferenceUtils.putString(this, PreferenceUtils.ACCESSTOKEN, "");
+    }
+
     public BaseResponseBean<ArrayList<SubjectBean>> getSubjectList(String accessToken, int gradeId) throws AppException {
         return ApiClient.getSubjectList(this, accessToken, gradeId);
     }
@@ -1003,5 +1029,9 @@ public class AppContext extends Application {
 
     public BaseResponseBean<String> printTag(String accessToken, int gradeId, int subjectId, int id) throws AppException {
         return ApiClient.printTag(this,accessToken,gradeId,subjectId,id);
+    }
+
+    public BaseResponseBean<List<TreeBean>> getKnosByParent(String accessToken, int parentId) throws AppException {
+        return ApiClient.getKnosByParent(this,accessToken,parentId);
     }
 }

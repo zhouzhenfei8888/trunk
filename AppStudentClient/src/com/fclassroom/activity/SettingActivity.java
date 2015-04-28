@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.fclassroom.AppContext;
 import com.fclassroom.AppManager;
+import com.fclassroom.app.common.FileUtils;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.appstudentclient.R;
@@ -61,7 +62,7 @@ public class SettingActivity extends BaseActivity {
         linear_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PreferenceUtils.putString(appContext,PreferenceUtils.ACCESSTOKEN,"");
+                appContext.initStudentInfo();
                 AppManager.getAppManager().finishAllActivity();
             }
         });

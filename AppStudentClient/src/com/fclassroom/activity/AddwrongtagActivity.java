@@ -24,16 +24,21 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fclassroom.AppContext;
 import com.fclassroom.AppException;
 import com.fclassroom.AppManager;
+import com.fclassroom.app.adapter.SimpleTreeAdapter;
 import com.fclassroom.app.bean.BaseResponseBean;
+import com.fclassroom.app.bean.FileBean;
 import com.fclassroom.app.bean.TreeBean;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.app.widget.TagView.Tag;
 import com.fclassroom.app.widget.TagView.TagView;
+import com.fclassroom.app.widget.Tree.Node;
+import com.fclassroom.app.widget.Tree.TreeListViewAdapter;
 import com.fclassroom.app.widget.TreeView.AndroidTreeView;
 import com.fclassroom.app.widget.TreeView.IconTreeItemHolder;
 import com.fclassroom.app.widget.TreeView.TreeNode;
@@ -45,6 +50,7 @@ import java.util.List;
 
 /**
  * 标签搜索、增加页
+ * http://blog.csdn.net/lmj623565791/article/details/40212367
  */
 public class AddwrongtagActivity extends BaseActivity {
 
@@ -71,6 +77,13 @@ public class AddwrongtagActivity extends BaseActivity {
     ViewGroup contentview;
     AndroidTreeView androidTreeView;
     List<String> stringList = new ArrayList<>();
+    List<TreeBean> listTreeBean;
+    List<TreeBean> faterTreeBeanlist;
+    List<TreeBean> childTreeBeanlist;
+    int nodeId;
+    TreeNode root;
+    private List<FileBean> mDatas2 = new ArrayList<FileBean>();
+    private TreeListViewAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,12 +132,37 @@ public class AddwrongtagActivity extends BaseActivity {
         addKnowledgePoint = (TextView) findViewById(R.id.tv_addKnowledgePoint);
         view1 = (LinearLayout) findViewById(R.id.view1);
         view2 = (LinearLayout) findViewById(R.id.view2);
+        faterTreeBeanlist = new ArrayList<TreeBean>();
+        childTreeBeanlist = new ArrayList<TreeBean>();
         addKnowledgePoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 view1.setVisibility(View.GONE);
                 view2.setVisibility(View.VISIBLE);
-                getTopLevelKnos(accessToken, gradeId, subjectId);
+//                getTopLevelKnos(accessToken, gradeId, subjectId);
+                initDatas();
+                try
+                {
+                    mAdapter = new SimpleTreeAdapter<FileBean>(knowledge, AddwrongtagActivity.this, mDatas2, 10);
+                    mAdapter.setOnTreeNodeClickListener(new TreeListViewAdapter.OnTreeNodeClickListener()
+                    {
+                        @Override
+                        public void onClick(Node node, int position)
+                        {
+                            if (node.isLeaf())
+                            {
+                                Toast.makeText(getApplicationContext(), node.getName(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    });
+
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                knowledge.setAdapter(mAdapter);
             }
         });
         cancle.setOnClickListener(new View.OnClickListener() {
@@ -162,28 +200,54 @@ public class AddwrongtagActivity extends BaseActivity {
         });
     }
 
+    private void initDatas()
+    {
+        mDatas2.add(new FileBean(1, 0, "文件管理系统"));
+        mDatas2.add(new FileBean(2, 1, "游戏"));
+        mDatas2.add(new FileBean(3, 1, "文档"));
+        mDatas2.add(new FileBean(4, 1, "程序"));
+        mDatas2.add(new FileBean(5, 2, "war3"));
+        mDatas2.add(new FileBean(6, 2, "刀塔传奇"));
+
+        mDatas2.add(new FileBean(7, 4, "面向对象"));
+        mDatas2.add(new FileBean(8, 4, "非面向对象"));
+
+        mDatas2.add(new FileBean(9, 7, "C++"));
+        mDatas2.add(new FileBean(10, 7, "JAVA"));
+        mDatas2.add(new FileBean(11, 7, "Javascript"));
+        mDatas2.add(new FileBean(12, 8, "C"));
+
+    }
+
     private void getTopLevelKnos(final String accessToken, final int gradeId, final int subjectId) {
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
                     BaseResponseBean<List<TreeBean>> responseBean = (BaseResponseBean<List<TreeBean>>) msg.obj;
-                    List<TreeBean> listTreeBean = responseBean.getData();
+                    listTreeBean = responseBean.getData();
                     List<String> list = new ArrayList<String>();
-                    TreeNode root = TreeNode.root();
+                    root = TreeNode.root();
                     contentview = (ViewGroup) findViewById(R.id.relativelayout);
                     TreeNode child;
-//                    parent.addChildren(child1,child2);
                     for (TreeBean treeBean : listTreeBean) {
 //                        list.add(treeBean.getName());
-                        child = new TreeNode(new IconTreeItemHolder.IconTreeItem(R.drawable.ic_launcher, treeBean.getName()));
+                        if (treeBean.getHasNode() == 1) {
+                            int parentId = treeBean.getId();
+                            childTreeBeanlist.add(treeBean);
+                            child = new TreeNode(new IconTreeItemHolder.IconTreeItem(R.string.ic_laptop, treeBean.getName()));
+                            getKnosByParent(parentId);
+                        } else {
+                            child = new TreeNode(new IconTreeItemHolder.IconTreeItem(R.string.ic_laptop, treeBean.getName()));
+                            childTreeBeanlist.add(treeBean);
+                        }
                         root.addChildren(child);
                     }
                     androidTreeView = new AndroidTreeView(AddwrongtagActivity.this, root);
                     androidTreeView.setDefaultAnimation(true);
                     androidTreeView.setDefaultContainerStyle(R.style.TreeNodeStyleCustom);
                     androidTreeView.setDefaultViewHolder(IconTreeItemHolder.class);
-//                    androidTreeView.setDefaultNodeClickListener(nodeClickListener);
+                    androidTreeView.setDefaultNodeClickListener(nodeClickListener);
                     contentview.addView(androidTreeView.getView());
 //                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AddwrongtagActivity.this,android.R.layout.simple_list_item_1,list);
 //                    knowledge.setAdapter(arrayAdapter);
@@ -199,6 +263,47 @@ public class AddwrongtagActivity extends BaseActivity {
                 try {
                     BaseResponseBean<List<TreeBean>> responseBean =
                             appContext.getTopLevelKnos(accessToken, gradeId, subjectId);
+                    msg.what = 1;
+                    msg.obj = responseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    private void getKnosByParent(final int parentId) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    BaseResponseBean<List<TreeBean>> responseBean = (BaseResponseBean<List<TreeBean>>) msg.obj;
+                    List<TreeBean> list = responseBean.getData();
+                    for (TreeBean treeBean : list) {
+                        if (treeBean.getHasNode() == 1) {
+                            childTreeBeanlist.add(treeBean);
+                            int parentId = treeBean.getId();
+//                            System.out.println(treeBean.getName()+".....父节点");
+                            getKnosByParent(parentId);
+                        } else {
+                            childTreeBeanlist.add(treeBean);
+//                            System.out.println(treeBean.getName()+".....根节点");
+                        }
+                    }
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(appContext);
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<List<TreeBean>> responseBean = appContext.getKnosByParent(accessToken, parentId);
                     msg.what = 1;
                     msg.obj = responseBean;
                 } catch (AppException e) {
@@ -231,6 +336,23 @@ public class AddwrongtagActivity extends BaseActivity {
             }
         }.start();
     }
+
+    private TreeNode.TreeNodeClickListener nodeClickListener = new TreeNode.TreeNodeClickListener() {
+        @Override
+        public void onClick(TreeNode node, Object value) {
+            IconTreeItemHolder.IconTreeItem item = (IconTreeItemHolder.IconTreeItem) value;
+            TreeNode treeNode1;
+            System.out.println(childTreeBeanlist.size());
+ /*           for(TreeBean treeBean:listTreeBean){
+                if(treeBean.getName() == item.text){
+                    nodeId = treeBean.getId();
+                    break;
+                }
+            }
+            getKnosByParent(nodeId,node);*/
+            UIHelper.ToastMessage(AddwrongtagActivity.this, item.text);
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

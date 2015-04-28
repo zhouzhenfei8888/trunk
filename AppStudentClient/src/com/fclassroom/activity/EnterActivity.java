@@ -193,7 +193,7 @@ public class EnterActivity extends BaseActivity {
     }
 
     private void login(final String account, final String pwd) {
-        dialog = ProgressDialog.show(EnterActivity.this, "", "正在登入中");
+        dialog = ProgressDialog.show(EnterActivity.this, "", "正在登录中");
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -211,7 +211,7 @@ public class EnterActivity extends BaseActivity {
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(EnterActivity.this);
                 } else if (msg.what == 0) {
-                    UIHelper.ToastMessage(EnterActivity.this, "登入失败:" + msg.obj);
+                    UIHelper.ToastMessage(EnterActivity.this, "登录失败:" + msg.obj);
                     error.setVisibility(View.VISIBLE);
                 }
             }
@@ -240,16 +240,16 @@ public class EnterActivity extends BaseActivity {
     }
 
     private void loginbyAccesstoken(final String accessToken) {
-        dialog = ProgressDialog.show(EnterActivity.this, "", "正在登入中");
+        dialog = ProgressDialog.show(EnterActivity.this, "", "正在登录中");
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
-                    UIHelper.ToastMessage(EnterActivity.this, "登入成功");
+                    UIHelper.ToastMessage(EnterActivity.this, "登录成功");
                     UIHelper.jump2Activity(EnterActivity.this, HomeActivity.class);
                     appManager.finishActivity(EnterActivity.this);
                 } else if (msg.what == 0) {
-                    UIHelper.ToastMessage(EnterActivity.this, "登入失败" + msg.obj);
+                    UIHelper.ToastMessage(EnterActivity.this, "登录失败" + msg.obj);
                 } else if (msg.what == -1) {
                     ((AppException) msg.obj).makeToast(EnterActivity.this);
                 }
@@ -281,7 +281,7 @@ public class EnterActivity extends BaseActivity {
     }
 
     private void loginbyQQ(final String openid) {
-        final ProgressDialog progressDialog = ProgressDialog.show(EnterActivity.this, "", "QQ登入。。");
+        final ProgressDialog progressDialog = ProgressDialog.show(EnterActivity.this, "", "QQ登录。。");
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -338,7 +338,7 @@ public class EnterActivity extends BaseActivity {
 
             @Override
             public void onError(UiError uiError) {
-                UIHelper.ToastMessage(EnterActivity.this, "登入失败");
+                UIHelper.ToastMessage(EnterActivity.this, "登录失败");
             }
 
             @Override
