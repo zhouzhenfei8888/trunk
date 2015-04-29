@@ -34,5 +34,6 @@
         android:paddingBottom="1dp"
         android:paddingRight="4dp"
         android:paddingLeft="4dp"
+        android:visibility="gone"
         android:background="@drawable/shape_notification"/>
 </RelativeLayout>

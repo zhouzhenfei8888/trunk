@@ -88,6 +88,7 @@ public class AppContext extends Application {
     //打印时数据
     public List<PageBean.SubjectItemBean> printlist;
     public List<PageBean.SubjectItemBean> rubbishlist;
+    public int printNum;
     private Handler unLoginHandler = new Handler() {
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
@@ -899,8 +900,8 @@ public class AppContext extends Application {
         return ApiClient.getPrintNum(this, accessToken, gradeId, subjectId);
     }
 
-    public void sendFeedBack(String accessToken, String msg) throws AppException {
-         ApiClient.sendFeedBack(this, accessToken, msg);
+    public BaseResponseBean<String> sendFeedBack(String accessToken, String msg) throws AppException {
+        return ApiClient.sendFeedBack(this, accessToken, msg);
     }
 
     public BaseResponseBean<String> addNoteBookToPrintPlan(String accessToken, int gradeId, int subjectId, int id) throws AppException {
@@ -1033,5 +1034,9 @@ public class AppContext extends Application {
 
     public BaseResponseBean<List<TreeBean>> getKnosByParent(String accessToken, int parentId) throws AppException {
         return ApiClient.getKnosByParent(this,accessToken,parentId);
+    }
+
+    public BaseResponseBean<String> updatePortrait(String accessToken,File protraitFile) throws AppException {
+        return ApiClient.updatePortrait(this,accessToken,protraitFile);
     }
 }

@@ -1,6 +1,7 @@
 package com.fclassroom.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,13 +32,18 @@ import com.fclassroom.app.common.ImageUtils;
 import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.StringUtils;
 import com.fclassroom.app.common.UIHelper;
+import com.fclassroom.app.common.ZipUtils;
 import com.fclassroom.app.widget.ZoomImageView;
 import com.fclassroom.appstudentclient.R;
+
 import android.widget.LinearLayout.LayoutParams;
+
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -57,8 +63,13 @@ public class RemarkActivity extends BaseActivity {
     private Uri cropUri;
     private final static int CROP = 100;
     private File protraitFile;
+    private File savedirFile;
+    private File UserFile;
     private Bitmap protraitBitmap;
-    ImageView iv1,iv2,iv3;
+    ImageView iv1, iv2, iv3;
+    private final static String JIKE = Environment
+            .getExternalStorageDirectory().getAbsolutePath()
+            + "/JIKE/";
     private final static String FILE_SAVEPATH = Environment
             .getExternalStorageDirectory().getAbsolutePath()
             + "/JIKE/PHOTO/";
@@ -69,8 +80,11 @@ public class RemarkActivity extends BaseActivity {
     int subjectId;
     protected PopupWindow answerPopup;
     protected ZoomImageView answerImage;
+    int examQuestionId, studentId, schoolId;
+    String savedirstr;
+    File outZip;
     StringBuilder stringBuilderImagePath = new StringBuilder();
-    List<HashMap<Integer,ImageView>> list = new ArrayList<>();
+    List<HashMap<Integer, ImageView>> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,18 +94,20 @@ public class RemarkActivity extends BaseActivity {
         accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         gradeId = PreferenceUtils.getInt(appContext, PreferenceUtils.GRADE_ID);
         subjectId = PreferenceUtils.getInt(appContext, PreferenceUtils.SUBJECT_ID);
+        studentId = PreferenceUtils.getInt(appContext, PreferenceUtils.STUDENT_ID);
+        schoolId = PreferenceUtils.getInt(appContext, PreferenceUtils.SCHOOL_ID);
         initViews();
     }
 
     private void initViews() {
         String remark = "" + (String) getIntent().getSerializableExtra("value");
-        final int examQuestionId = (int) getIntent().getSerializableExtra("value2");
+        examQuestionId = (int) getIntent().getSerializableExtra("value2");
         cancle = (TextView) findViewById(R.id.tv_cancle);
         sure = (TextView) findViewById(R.id.tv_sure);
         editText = (EditText) findViewById(R.id.editText);
-        iv1 = (ImageView)findViewById(R.id.iv1);
-        iv2 = (ImageView)findViewById(R.id.iv2);
-        iv3 = (ImageView)findViewById(R.id.iv3);
+        iv1 = (ImageView) findViewById(R.id.iv1);
+        iv2 = (ImageView) findViewById(R.id.iv2);
+        iv3 = (ImageView) findViewById(R.id.iv3);
         editText.setHint("这里添加备注...");
         if (remark != "") {
             editText.setText(remark);
@@ -130,8 +146,8 @@ public class RemarkActivity extends BaseActivity {
 
                         if (answerPopup == null) {
                             View popupView = getLayoutInflater().inflate(
-                                            R.layout.item_answer_popup,
-                                            null);
+                                    R.layout.item_answer_popup,
+                                    null);
                             ImageView back = (ImageView) popupView.findViewById(R.id.iv_back);
                             ImageView delete = (ImageView) popupView.findViewById(R.id.iv_delete);
                             back.setOnClickListener(new View.OnClickListener() {
@@ -258,7 +274,6 @@ public class RemarkActivity extends BaseActivity {
         return this.cropUri;
     }
 
-    // 裁剪头像的绝对路径
     private Uri getUploadTempFile(Uri uri) {
         String storageState = Environment.getExternalStorageState();
         if (storageState.equals(Environment.MEDIA_MOUNTED)) {
@@ -272,6 +287,10 @@ public class RemarkActivity extends BaseActivity {
         }
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss")
                 .format(new Date());
+        String year = new SimpleDateFormat("yyyy")
+                .format(new Date());
+        String month = new SimpleDateFormat("MM")
+                .format(new Date());
         String thePath = ImageUtils.getAbsolutePathFromNoStandardUri(uri);
 
         // 如果是标准Uri
@@ -281,12 +300,18 @@ public class RemarkActivity extends BaseActivity {
         String ext = FileUtils.getFileFormat(thePath);
         ext = StringUtils.isEmpty(ext) ? "jpg" : ext;
         // 照片命名
-        String cropFileName = "crop_" + timeStamp + "." + ext;
+        String cropFileName = timeStamp + "_200*200" + "." + ext;
         // 裁剪头像的绝对路径
-        protraitPath = FILE_SAVEPATH + cropFileName;
+        savedirstr = FILE_SAVEPATH + schoolId + "/" + year + "/" + month + "/"+ studentId + "/" + examQuestionId + "/";
+        protraitPath = savedirstr + cropFileName;
         stringBuilderImagePath.append(" " + protraitPath);
-        protraitFile = new File(protraitPath);
-        cropUri = Uri.fromFile(protraitFile);
+//        protraitFile = new File(protraitPath);
+        File savedir = new File(savedirstr);
+        if (!savedir.exists()) {
+            savedir.mkdirs();
+        }
+        savedirFile = new File(savedir, cropFileName);
+        cropUri = Uri.fromFile(savedirFile);
         return this.cropUri;
     }
 
@@ -322,20 +347,31 @@ public class RemarkActivity extends BaseActivity {
                 startActionCrop(origUri);// 拍照后裁剪
                 break;
             case ImageUtils.REQUEST_CODE_GETIMAGE_BYCROP:
-//                startActionCrop(data.getData());// 选图后裁剪
+                startActionCrop(data.getData());// 选图后裁剪
                 break;
             case ImageUtils.REQUEST_CODE_GETIMAGE_BYSDCARD:
-//                uploadNewPhoto();// 上传新照片
                 setImageView();
+                uploadNewPhoto();// 上传新照片
                 break;
         }
     }
 
     private void setImageView() {
         // 获取头像缩略图
-        if (!StringUtils.isEmpty(protraitPath) && protraitFile.exists()) {
+        if (!StringUtils.isEmpty(savedirstr) && savedirFile.exists()) {
             protraitBitmap = ImageUtils.loadImgThumbnail(protraitPath,
                     200, 200);
+            String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss")
+                    .format(new Date());
+            File file = new File(FILE_SAVEPATH + schoolId + "/");
+            List<File> files = new ArrayList<File>();
+            files.add(file);
+             outZip= new File(FILE_SAVEPATH + "examResult_" + accessToken + "_" + schoolId + "_" + examQuestionId + "_" + timeStamp + ".zip");
+            try {
+                ZipUtils.zipFiles(files, outZip);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             imageView.setImageBitmap(protraitBitmap);
             imageView.setTag(protraitPath);
         } else {
@@ -343,6 +379,50 @@ public class RemarkActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 上传新照片
+     */
+    private void uploadNewPhoto() {
+        final ProgressDialog loading = new ProgressDialog(RemarkActivity.this);
+        final Handler handler = new Handler() {
+            public void handleMessage(Message msg) {
+                loading.dismiss();
+                if (msg.what == 1 && msg.obj != null) {
+                    // 提示信息
+                    UIHelper.ToastMessage(RemarkActivity.this,"上传成功");
+                } else if (msg.what == -1 && msg.obj != null) {
+                    ((AppException) msg.obj).makeToast(RemarkActivity.this);
+                }
+            }
+        };
+
+        new Thread() {
+            public void run() {
+                System.out.println("okk");
+                // 获取头像缩略图
+                if (!StringUtils.isEmpty(protraitPath) && protraitFile.exists()) {
+                    protraitBitmap = ImageUtils.loadImgThumbnail(protraitPath,
+                            200, 200);
+                }
+                if (protraitBitmap != null) {
+                    Message msg = new Message();
+                    try {
+                        BaseResponseBean<String> res = appContext
+                                .updatePortrait(accessToken,outZip);
+                        msg.what = 1;
+                        msg.obj = res;
+                    } catch (AppException e) {
+                        UIHelper.ToastMessage(RemarkActivity.this,"上传出错·");
+                        msg.what = -1;
+                        msg.obj = e;
+                    }
+                    handler.sendMessage(msg);
+                } else {
+                    UIHelper.ToastMessage(RemarkActivity.this,"图像不存在，上传失败·");
+                }
+            }
+        }.start();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

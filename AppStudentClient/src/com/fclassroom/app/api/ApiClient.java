@@ -720,20 +720,20 @@ public class ApiClient {
         params.put("gradeId", gradeId);
         params.put("subjectId", subjectId);
         String url = _MakeURL(URLs.GetPrintNum, params);
-        System.out.println(url);
         String response = http_get(appContext, url);
-        System.out.println("ccc" + response);
         BaseResponseBean<PrintNumBean> responseBean = JsonUtils.getPrintNum(response);
         return responseBean;
     }
 
-    public static void sendFeedBack(AppContext appContext, String accessToken, String msg) throws AppException {
+    public static BaseResponseBean<String> sendFeedBack(AppContext appContext, String accessToken, String msg) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
         params.put("message", msg);
         String url = _MakeURL(URLs.SendFeedBack, params);
         String response = http_get(appContext, url);
         System.out.println(response);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
     }
 
     public static BaseResponseBean<String> addNoteBookToPrintPlan(AppContext appContext, String accessToken, int gradeId, int subjectId, int id) throws AppException {
@@ -1154,5 +1154,15 @@ public class ApiClient {
         System.out.println(response);
         BaseResponseBean<List<TreeBean>> responseBean = JsonUtils.getTopLevelKnos(response);
         return responseBean;
+    }
+
+    public static BaseResponseBean<String> updatePortrait(AppContext appContext, String accessToken,File protraitFile) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        Map<String, File> files = new HashMap<String, File>();
+        files.put("dbFile", protraitFile);
+        String response = http_post(appContext,URLs.Upload,params, files);
+        System.out.println("vvvvvvvvvvvvvvvvvvvvvvvvvvv"+response);
+        return JsonUtils.praseString(response);
     }
 }

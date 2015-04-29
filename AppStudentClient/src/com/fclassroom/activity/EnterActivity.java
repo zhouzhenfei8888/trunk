@@ -202,7 +202,7 @@ public class EnterActivity extends BaseActivity {
                     user = (BaseResponseBean<LoginResponseBean>) msg.obj;
                     appContext.saveLoginInfo(user.getData());
                     System.out.println("telephone:" + user.getData().getLoginPhone());
-                    if (user.getData().getLoginPhone() == null) {
+                    if (user.getData().getLoginPhone() == null && user.getData().getOpenIdQQ() == null) {
                         UIHelper.jump2Activity(EnterActivity.this, CheckinforActivity.class);
                     } else {
                         UIHelper.jump2Activity(EnterActivity.this, HomeActivity.class);

@@ -621,7 +621,7 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
                 mToolbar.setTitle(arr[4]);
             }
         });
-        accessToken = PreferenceUtils.getString(appContext,PreferenceUtils.ACCESSTOKEN);
+        accessToken = PreferenceUtils.getString(appContext, PreferenceUtils.ACCESSTOKEN);
         updateprintnum();
         return super.onCreateOptionsMenu(menu);
     }
@@ -633,7 +633,12 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
                 if (msg.what == 1) {
                     BaseResponseBean<PrintNumBean> responseBean = (BaseResponseBean<PrintNumBean>) msg.obj;
                     printCartQuestionCount = "" + responseBean.getData().getPrintCartQuestionCount();
-                    notifCount.setText(printCartQuestionCount);
+                    if ("0".equals(printCartQuestionCount) || "".equals(printCartQuestionCount)) {
+                        notifCount.setVisibility(View.GONE);
+                    } else {
+                        notifCount.setVisibility(View.VISIBLE);
+                        notifCount.setText(printCartQuestionCount);
+                    }
                     updateprintnum();
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(HomeActivity.this, msg.obj.toString());
@@ -647,7 +652,7 @@ public class HomeActivity extends BaseActivity implements SubjectFragment.HideTo
             public void run() {
                 Message msg = new Message();
                 try {
-                    sleep(10*1000);
+                    sleep(10 * 1000);
                     BaseResponseBean<PrintNumBean> responseBean = appContext.getPrintNum(accessToken, gradeId, subjectId);
                     if (responseBean.getError_code() == 0) {
                         msg.what = 1;

@@ -55,7 +55,7 @@ public class FeedbackActivity extends BaseActivity {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
-                    BaseResponseBean responseBean = (BaseResponseBean) msg.obj;
+                    BaseResponseBean<String> responseBean = (BaseResponseBean) msg.obj;
                     UIHelper.ToastMessage(FeedbackActivity.this, "发送成功！");
                 } else if (msg.what == 0) {
                     UIHelper.ToastMessage(FeedbackActivity.this, msg.obj.toString());
@@ -67,11 +67,17 @@ public class FeedbackActivity extends BaseActivity {
         new Thread() {
             @Override
             public void run() {
+                Message msg= new Message();
                 try {
-                    appContext.sendFeedBack(accessToken, content);
+                    BaseResponseBean<String> responseBean =  appContext.sendFeedBack(accessToken, content);
+                    msg.what =1;
+                    msg.obj = responseBean;
                 } catch (AppException e) {
                     e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
                 }
+                handler.sendMessage(msg);
             }
         }.start();
     }
