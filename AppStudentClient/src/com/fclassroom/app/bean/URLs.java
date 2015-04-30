@@ -67,4 +67,5 @@ public class URLs implements Serializable {
     public final static String PrintTag = HOST_NOTE + "addTagQuestionToPrintCar.json";
     public final static String GetKnosByParent = HOST + "getKnosByParent.json";
     public final static String Upload = HOST_YH + "upload.json";
+    public final static String SaveRemarkImages = HOST_NOTE + "saveRemarkImages.json";
 }

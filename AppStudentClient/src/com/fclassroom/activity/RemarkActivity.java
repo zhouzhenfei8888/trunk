@@ -1,10 +1,13 @@
 package com.fclassroom.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,14 +16,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fclassroom.AppContext;
@@ -33,6 +39,7 @@ import com.fclassroom.app.common.PreferenceUtils;
 import com.fclassroom.app.common.StringUtils;
 import com.fclassroom.app.common.UIHelper;
 import com.fclassroom.app.common.ZipUtils;
+import com.fclassroom.app.widget.DelImage;
 import com.fclassroom.app.widget.ZoomImageView;
 import com.fclassroom.appstudentclient.R;
 
@@ -56,7 +63,7 @@ public class RemarkActivity extends BaseActivity {
     private TextView cancle;
     private TextView sure;
     private EditText editText;
-    private LinearLayout linearLayout;
+    private LinearLayout linearLayout, linearTakePhoto;
     private ImageView iv_photo;
     private String protraitPath;
     private Uri origUri;
@@ -66,6 +73,7 @@ public class RemarkActivity extends BaseActivity {
     private File savedirFile;
     private File UserFile;
     private Bitmap protraitBitmap;
+    private RelativeLayout delphoto1, delphoto2, delphoto3;
     ImageView iv1, iv2, iv3;
     private final static String JIKE = Environment
             .getExternalStorageDirectory().getAbsolutePath()
@@ -83,8 +91,17 @@ public class RemarkActivity extends BaseActivity {
     int examQuestionId, studentId, schoolId;
     String savedirstr;
     File outZip;
+    int i = 0;
+    ImageView[] imageViews, imagedels;
+    RelativeLayout[] relativeLayouts;
+    ImageView imageView1, imageView2, imageView3;
+    ImageView imagedel1, imagedel2, imagedel3;
+    DelImage[] delImages;
+    LinearLayout linears;
     StringBuilder stringBuilderImagePath = new StringBuilder();
     List<HashMap<Integer, ImageView>> list = new ArrayList<>();
+    private String deleteFile;
+    private String translatepath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +122,11 @@ public class RemarkActivity extends BaseActivity {
         cancle = (TextView) findViewById(R.id.tv_cancle);
         sure = (TextView) findViewById(R.id.tv_sure);
         editText = (EditText) findViewById(R.id.editText);
+        linearTakePhoto = (LinearLayout) findViewById(R.id.linear_takephoto);
+        delImages = new DelImage[3];
+        imagedels = new ImageView[3];
+        linears = (LinearLayout) findViewById(R.id.linears);
+        imageView = (ImageView) findViewById(R.id.imageview_takephoto);
         iv1 = (ImageView) findViewById(R.id.iv1);
         iv2 = (ImageView) findViewById(R.id.iv2);
         iv3 = (ImageView) findViewById(R.id.iv3);
@@ -121,6 +143,16 @@ public class RemarkActivity extends BaseActivity {
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+              /*  int count = linears.getChildCount();
+                StringBuilder stringBuilder = new StringBuilder("");
+                if (count != 0) {
+                    for (int i = 0; i < count; i++) {
+                        String address = (String) ((RelativeLayout) linears.getChildAt(i + 1)).getTag();
+                        stringBuilder.append(address);
+                    }
+//                    System.out.println(stringBuilder.toString()+"yyyy");
+                    saveRemarkImages(stringBuilder.toString());
+                }*/
                 String editRemark = editText.getText().toString();
                 String imagePaths = stringBuilderImagePath.toString();
                 EditRemark(accessToken, examQuestionId, editRemark);
@@ -133,63 +165,99 @@ public class RemarkActivity extends BaseActivity {
         });
         linearLayout = (LinearLayout) findViewById(R.id.linear_img);
         iv_photo = (ImageView) findViewById(R.id.iv_photo);
-        iv_photo.setOnClickListener(new View.OnClickListener() {
+//        iv_photo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                imageView = new ImageView(RemarkActivity.this);
+//                imageView.setPadding(20, 20, 20, 20);
+//                startActionCamera();
+//                linearLayout.addView(imageView);
+////                imageView.setOnClickListener(new View.OnClickListener() {
+////                    @Override
+////                    public void onClick(View v) {
+////
+////                        if (answerPopup == null) {
+////                            View popupView = getLayoutInflater().inflate(
+////                                    R.layout.item_answer_popup,
+////                                    null);
+////                            ImageView back = (ImageView) popupView.findViewById(R.id.iv_back);
+////                            ImageView delete = (ImageView) popupView.findViewById(R.id.iv_delete);
+////                            back.setOnClickListener(new View.OnClickListener() {
+////                                @Override
+////                                public void onClick(View v) {
+////                                    answerPopup.dismiss();
+////                                }
+////                            });
+////                            delete.setOnClickListener(new View.OnClickListener() {
+////                                @Override
+////                                public void onClick(View view) {
+////                                    imageView.setVisibility(View.GONE);
+////                                    answerPopup.dismiss();
+////                                }
+////                            });
+////                            answerPopup = new PopupWindow(popupView,
+////                                    LayoutParams.MATCH_PARENT,
+////                                    LayoutParams.MATCH_PARENT, true);
+////                            answerPopup.setTouchable(true);
+////                            answerPopup.setOutsideTouchable(true);
+////                            answerPopup
+////                                    .setBackgroundDrawable(new BitmapDrawable(
+////                                            getResources(),
+////                                            (Bitmap) null));
+////                            answerImage = ((ZoomImageView) popupView
+////                                    .findViewById(R.id.zoom_imageview));
+////                            answerImage
+////                                    .setTapListener(new ZoomImageView.OnTapListener() {
+////
+////                                        @Override
+////                                        public void onTap(MotionEvent e) {
+////                                            answerPopup.dismiss();
+////                                        }
+////                                    });
+////                        }
+//////                        answerImage.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher));
+////                        answerImage.setImageBitmap(BitmapFactory.decodeFile(v.getTag().toString()));
+////                        answerPopup.showAtLocation(getWindow().getDecorView(),
+////                                Gravity.CENTER, 0, 0);
+////
+////                    }
+////                });
+//            }
+//        });
+        linearTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView = new ImageView(RemarkActivity.this);
-                imageView.setPadding(20, 20, 20, 20);
-                startActionCamera();
-                linearLayout.addView(imageView);
-                imageView.setOnClickListener(new View.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(RemarkActivity.this);
+                builder.setTitle("");
+                builder.setItems(new String[]{"拍照", "从相册中选择"}, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-
-                        if (answerPopup == null) {
-                            View popupView = getLayoutInflater().inflate(
-                                    R.layout.item_answer_popup,
-                                    null);
-                            ImageView back = (ImageView) popupView.findViewById(R.id.iv_back);
-                            ImageView delete = (ImageView) popupView.findViewById(R.id.iv_delete);
-                            back.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    answerPopup.dismiss();
-                                }
-                            });
-                            delete.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    imageView.setVisibility(View.GONE);
-                                    answerPopup.dismiss();
-                                }
-                            });
-                            answerPopup = new PopupWindow(popupView,
-                                    LayoutParams.MATCH_PARENT,
-                                    LayoutParams.MATCH_PARENT, true);
-                            answerPopup.setTouchable(true);
-                            answerPopup.setOutsideTouchable(true);
-                            answerPopup
-                                    .setBackgroundDrawable(new BitmapDrawable(
-                                            getResources(),
-                                            (Bitmap) null));
-                            answerImage = ((ZoomImageView) popupView
-                                    .findViewById(R.id.zoom_imageview));
-                            answerImage
-                                    .setTapListener(new ZoomImageView.OnTapListener() {
-
-                                        @Override
-                                        public void onTap(MotionEvent e) {
-                                            answerPopup.dismiss();
-                                        }
-                                    });
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) {
+                            startActionCamera();
+                        } else if (which == 1) {
+                            startImagePick();
                         }
-//                        answerImage.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher));
-                        answerImage.setImageBitmap(BitmapFactory.decodeFile(v.getTag().toString()));
-                        answerPopup.showAtLocation(getWindow().getDecorView(),
-                                Gravity.CENTER, 0, 0);
-
                     }
                 });
+                builder.create().show();
+            }
+        });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(RemarkActivity.this);
+                builder.setTitle("");
+                builder.setItems(new String[]{"拍照", "从相册中选择"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) {
+                            startActionCamera();
+                        } else if (which == 1) {
+                            startImagePick();
+                        }
+                    }
+                });
+                builder.create().show();
             }
         });
     }
@@ -300,9 +368,10 @@ public class RemarkActivity extends BaseActivity {
         String ext = FileUtils.getFileFormat(thePath);
         ext = StringUtils.isEmpty(ext) ? "jpg" : ext;
         // 照片命名
-        String cropFileName = timeStamp + "_200*200" + "." + ext;
+        String cropFileName = timeStamp + "_200x200" + "." + ext;
         // 裁剪头像的绝对路径
-        savedirstr = FILE_SAVEPATH + schoolId + "/" + year + "/" + month + "/"+ studentId + "/" + examQuestionId + "/";
+        savedirstr = FILE_SAVEPATH + schoolId + "/" + year + "/" + month + "/" + studentId + "/" + examQuestionId + "/";
+        translatepath = schoolId + "/" + year + "/" + month + "/" + studentId + "/" + examQuestionId + "/" + cropFileName;
         protraitPath = savedirstr + cropFileName;
         stringBuilderImagePath.append(" " + protraitPath);
 //        protraitFile = new File(protraitPath);
@@ -351,9 +420,41 @@ public class RemarkActivity extends BaseActivity {
                 break;
             case ImageUtils.REQUEST_CODE_GETIMAGE_BYSDCARD:
                 setImageView();
-                uploadNewPhoto();// 上传新照片
+                if (i < 3) {
+                    uploadNewPhoto();// 上传新照片,判断是否是三张内
+                    saveRemarkImages(translatepath);
+                }
                 break;
         }
+    }
+
+    private void saveRemarkImages(final String protraitPath) {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    UIHelper.ToastMessage(RemarkActivity.this, "路径保存成功");
+                } else if (msg.what == -1) {
+                    ((AppException) msg.obj).makeToast(RemarkActivity.this);
+                }
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    BaseResponseBean<String> responseBean = appContext.saveRemarkImages(accessToken, examQuestionId, protraitPath);
+                    msg.what = 1;
+                    msg.obj = responseBean;
+                } catch (AppException e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                    msg.obj = e;
+                }
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 
     private void setImageView() {
@@ -366,14 +467,35 @@ public class RemarkActivity extends BaseActivity {
             File file = new File(FILE_SAVEPATH + schoolId + "/");
             List<File> files = new ArrayList<File>();
             files.add(file);
-             outZip= new File(FILE_SAVEPATH + "examResult_" + accessToken + "_" + schoolId + "_" + examQuestionId + "_" + timeStamp + ".zip");
+            outZip = new File(FILE_SAVEPATH + "studentImages_" + accessToken + "_" + schoolId + "_" + examQuestionId + "_" + timeStamp + ".zip");
             try {
                 ZipUtils.zipFiles(files, outZip);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            imageView.setImageBitmap(protraitBitmap);
-            imageView.setTag(protraitPath);
+            linearTakePhoto.setBackgroundResource(R.drawable.remark_white);
+            linearTakePhoto.setEnabled(false);
+            imageView.setVisibility(View.VISIBLE);
+            imageView.setEnabled(true);
+            if (i >= 3) {
+                UIHelper.ToastMessage(RemarkActivity.this, "最多只能上传三张图片");
+            } else {
+                System.out.println("ok1");
+                delImages[i] = new DelImage(RemarkActivity.this);
+                delImages[i].setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                imagedels[i] = (ImageView) delImages[i].findViewById(R.id.image_del);
+                imagedels[i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        linears.removeView(delImages[i - 1]);
+                        i--;
+                    }
+                });
+                delImages[i].setImageBitmap(protraitBitmap);
+                delImages[i].setTag(translatepath);
+                linears.addView(delImages[i]);
+                i++;
+            }
         } else {
             UIHelper.ToastMessage(RemarkActivity.this, "图像不存在！");
         }
@@ -389,7 +511,10 @@ public class RemarkActivity extends BaseActivity {
                 loading.dismiss();
                 if (msg.what == 1 && msg.obj != null) {
                     // 提示信息
-                    UIHelper.ToastMessage(RemarkActivity.this,"上传成功");
+                    UIHelper.ToastMessage(RemarkActivity.this, "上传成功");
+                    if (savedirFile.exists()) {
+                        savedirFile.delete();
+                    }
                 } else if (msg.what == -1 && msg.obj != null) {
                     ((AppException) msg.obj).makeToast(RemarkActivity.this);
                 }
@@ -398,7 +523,6 @@ public class RemarkActivity extends BaseActivity {
 
         new Thread() {
             public void run() {
-                System.out.println("okk");
                 // 获取头像缩略图
                 if (!StringUtils.isEmpty(protraitPath) && protraitFile.exists()) {
                     protraitBitmap = ImageUtils.loadImgThumbnail(protraitPath,
@@ -408,21 +532,22 @@ public class RemarkActivity extends BaseActivity {
                     Message msg = new Message();
                     try {
                         BaseResponseBean<String> res = appContext
-                                .updatePortrait(accessToken,outZip);
+                                .updatePortrait(accessToken, outZip);
                         msg.what = 1;
                         msg.obj = res;
                     } catch (AppException e) {
-                        UIHelper.ToastMessage(RemarkActivity.this,"上传出错·");
+                        UIHelper.ToastMessage(RemarkActivity.this, "上传出错·");
                         msg.what = -1;
                         msg.obj = e;
                     }
                     handler.sendMessage(msg);
                 } else {
-                    UIHelper.ToastMessage(RemarkActivity.this,"图像不存在，上传失败·");
+                    UIHelper.ToastMessage(RemarkActivity.this, "图像不存在，上传失败·");
                 }
             }
         }.start();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

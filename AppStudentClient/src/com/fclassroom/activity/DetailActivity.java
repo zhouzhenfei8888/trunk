@@ -368,23 +368,23 @@ public class DetailActivity extends BaseActivity {
                 tagView.drawTags();
             }
         } else if (5 == resultCode) {
-            String remarkStr = "" + data.getExtras().getString("remark");
-            remarkInfo.setText(remarkStr);
-            String imagePaths = "" + data.getExtras().getString("imagePaths");
-            String imagePath[] = imagePaths.split(" ");
-            List<String> listImagePath = new ArrayList<String>();
-            for (String imagepath : imagePath) {
-                listImagePath.add(imagepath);
-                ImageView imageView = new ImageView(DetailActivity.this);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(300, 300);
-                imageView.setLayoutParams(layoutParams);
-                imageView.setPadding(20, 0, 20, 20);
-                System.out.println("kkkk:" + imagepath);
-                if (null != imagepath && !"".equals(imagepath)) {
-                    imageView.setImageBitmap(BitmapFactory.decodeFile(imagepath));
-                    imageViews.addView(imageView);
-                }
-            }
+//            String remarkStr = "" + data.getExtras().getString("remark");
+//            remarkInfo.setText(remarkStr);
+//            String imagePaths = "" + data.getExtras().getString("imagePaths");
+//            String imagePath[] = imagePaths.split(" ");
+//            List<String> listImagePath = new ArrayList<String>();
+//            for (String imagepath : imagePath) {
+//                listImagePath.add(imagepath);
+//                ImageView imageView = new ImageView(DetailActivity.this);
+//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(300, 300);
+//                imageView.setLayoutParams(layoutParams);
+//                imageView.setPadding(20, 0, 20, 20);
+//                System.out.println("kkkk:" + imagepath);
+//                if (null != imagepath && !"".equals(imagepath)) {
+//                    imageView.setImageBitmap(BitmapFactory.decodeFile(imagepath));
+//                    imageViews.addView(imageView);
+//                }
+//            }
         }
     }
 

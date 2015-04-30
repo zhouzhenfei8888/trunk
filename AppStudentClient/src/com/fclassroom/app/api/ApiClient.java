@@ -561,7 +561,7 @@ public class ApiClient {
         params.put("accessToken", accesstoken);
         String url = _MakeURL(URLs.GetStudentInfo, params);
         String response = http_get(appContext, url);
-        System.out.println("44444"+response);
+        System.out.println("44444" + response);
         BaseResponseBean<StudentInfoBean> studentInfo = JsonUtils.getStudentInfo(response);
         return studentInfo;
     }
@@ -632,7 +632,7 @@ public class ApiClient {
         params.put("pageNo", pageNo);
         String url = _MakeURL(URLs.GetSubjectDetail, params);
         String response = http_get(appContext, url);
-        System.out.println("kkkkkk"+response);
+        System.out.println("kkkkkk" + response);
         BaseResponseBean<PageBean> responseBean = JsonUtils.getSubjectDetail(response);
         return responseBean;
     }
@@ -809,7 +809,7 @@ public class ApiClient {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
         params.put("phone", telephoneNum);
-        params.put("flag",flag);
+        params.put("flag", flag);
         String url = _MakeURL(URLs.SendAuthCode, params);
         String response = http_get(appContext, url);
         System.out.println(response);
@@ -979,8 +979,8 @@ public class ApiClient {
 //        getNetFile(url);
 //        downLoadFromUrl(url,"aa.doc", Environment.getExternalStorageDirectory().getAbsolutePath()+"/JK");
         String fileName = FileUtils.getName(fileurl);
-        String encodeFileName = URLEncoder.encode(fileName,"utf-8");
-        String enfileurl = fileurl.replace(fileName,encodeFileName);
+        String encodeFileName = URLEncoder.encode(fileName, "utf-8");
+        String enfileurl = fileurl.replace(fileName, encodeFileName);
         System.out.println(enfileurl);
         URL url = null;
         String savePath;
@@ -1015,11 +1015,11 @@ public class ApiClient {
     public static BaseResponseBean<String> EditRemark(AppContext appContext, String accessToken, int examQuestionId, String editRemark) throws AppException, UnsupportedEncodingException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("examQuestionId",examQuestionId);
-        params.put("remark",URLEncoder.encode(editRemark, "utf-8"));
-        String url = _MakeURL(URLs.EditRemark,params);
+        params.put("examQuestionId", examQuestionId);
+        params.put("remark", URLEncoder.encode(editRemark, "utf-8"));
+        String url = _MakeURL(URLs.EditRemark, params);
         System.out.println(url);
-        String response = http_get(appContext,url);
+        String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
@@ -1028,11 +1028,11 @@ public class ApiClient {
     public static BaseResponseBean<String> modifiednickname(AppContext appContext, String accessToken, String propName, String propValue) throws AppException, UnsupportedEncodingException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("propValue",URLEncoder.encode(propValue, "utf-8"));
-        params.put("propName",propName);
-        String url = _MakeURL(URLs.SaveSettings,params);
+        params.put("propValue", URLEncoder.encode(propValue, "utf-8"));
+        params.put("propName", propName);
+        String url = _MakeURL(URLs.SaveSettings, params);
         System.out.println(url);
-        String response = http_get(appContext,url);
+        String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
@@ -1041,11 +1041,11 @@ public class ApiClient {
     public static BaseResponseBean<String> changepassword(AppContext appContext, String accessToken, String oldpassword, String newpassword) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("oldPassword",oldpassword);
-        params.put("newPassword",newpassword);
-        String url = _MakeURL(URLs.SavePassword,params);
+        params.put("oldPassword", oldpassword);
+        params.put("newPassword", newpassword);
+        String url = _MakeURL(URLs.SavePassword, params);
         System.out.println(url);
-        String response = http_get(appContext,url);
+        String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
@@ -1053,10 +1053,10 @@ public class ApiClient {
 
     public static BaseResponseBean<Boolean> checkPhone(AppContext appContext, String telephoneNum) throws AppException {
         Map<String, Object> params = new HashMap<>();
-        params.put("phone",telephoneNum);
-        String url = _MakeURL(URLs.CheckPhone,params);
+        params.put("phone", telephoneNum);
+        String url = _MakeURL(URLs.CheckPhone, params);
         System.out.println(url);
-        String response = http_get(appContext,url);
+        String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<Boolean> responseBean = JsonUtils.praseBoolean(response);
         return responseBean;
@@ -1065,9 +1065,9 @@ public class ApiClient {
     public static BaseResponseBean<Archivement> getArchivement(AppContext appContext, String accessToken, int gradeId) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("gradeId",gradeId);
-        String url = _MakeURL(URLs.GetArchivement,params);
-        String response = http_get(appContext,url);
+        params.put("gradeId", gradeId);
+        String url = _MakeURL(URLs.GetArchivement, params);
+        String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<Archivement> responseBean = JsonUtils.getArchivement(response);
         return responseBean;
@@ -1076,9 +1076,9 @@ public class ApiClient {
     public static BaseResponseBean<List<TopBind>> getRank(AppContext appContext, String accessToken, int rankType) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("rankType",rankType);
-        String url = _MakeURL(URLs.GetRank,params);
-        String response = http_get(appContext,url);
+        params.put("rankType", rankType);
+        String url = _MakeURL(URLs.GetRank, params);
+        String response = http_get(appContext, url);
         BaseResponseBean<List<TopBind>> responseBean = JsonUtils.getRank(response);
         System.out.println(response);
         return responseBean;
@@ -1086,11 +1086,11 @@ public class ApiClient {
 
     public static BaseResponseBean<String> updatepassword(AppContext appContext, String telephone, String authcode, String newpassword) throws AppException {
         Map<String, Object> params = new HashMap<>();
-        params.put("phone",telephone);
-        params.put("validcode",authcode);
-        params.put("newpassword",newpassword);
-        String url = _MakeURL(URLs.UpdatePassword,params);
-        String response = http_get(appContext,url);
+        params.put("phone", telephone);
+        params.put("validcode", authcode);
+        params.put("newpassword", newpassword);
+        String url = _MakeURL(URLs.UpdatePassword, params);
+        String response = http_get(appContext, url);
         System.out.println(telephone);
         System.out.println(response);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
@@ -1113,10 +1113,10 @@ public class ApiClient {
     public static BaseResponseBean<String> editTagNameDialog(AppContext appContext, String accessToken, int tagId, String name) throws AppException, UnsupportedEncodingException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("id",tagId);
-        params.put("name",URLEncoder.encode(name, "utf-8"));
-        String url = _MakeURL(URLs.EditTag,params);
-        String response  = http_get(appContext,url);
+        params.put("id", tagId);
+        params.put("name", URLEncoder.encode(name, "utf-8"));
+        String url = _MakeURL(URLs.EditTag, params);
+        String response = http_get(appContext, url);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
     }
@@ -1124,23 +1124,23 @@ public class ApiClient {
     public static BaseResponseBean<String> delTag(AppContext appContext, String accessToken, int id) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("tagId",id);
-        String url = _MakeURL(URLs.DelTag,params);
-        String response = http_get(appContext,url);
+        params.put("tagId", id);
+        String url = _MakeURL(URLs.DelTag, params);
+        String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
     }
 
-    public static BaseResponseBean<String> printTag(AppContext appContext,String accessToken, int gradeId, int subjectId, int id) throws AppException {
+    public static BaseResponseBean<String> printTag(AppContext appContext, String accessToken, int gradeId, int subjectId, int id) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
         params.put("gradeId", gradeId);
         params.put("subjectId", subjectId);
         params.put("tagId", id);
-        String url = _MakeURL(URLs.PrintTag,params);
-        String response = http_get(appContext,url);
-        System.out.println("mmmmmm"+response);
+        String url = _MakeURL(URLs.PrintTag, params);
+        String response = http_get(appContext, url);
+        System.out.println("mmmmmm" + response);
         BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
         return responseBean;
     }
@@ -1148,21 +1148,34 @@ public class ApiClient {
     public static BaseResponseBean<List<TreeBean>> getKnosByParent(AppContext appContext, String accessToken, int parentId) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
-        params.put("parentId",parentId);
-        String url = _MakeURL(URLs.GetKnosByParent,params);
-        String response = http_get(appContext,url);
+        params.put("parentId", parentId);
+        String url = _MakeURL(URLs.GetKnosByParent, params);
+        String response = http_get(appContext, url);
         System.out.println(response);
         BaseResponseBean<List<TreeBean>> responseBean = JsonUtils.getTopLevelKnos(response);
         return responseBean;
     }
 
-    public static BaseResponseBean<String> updatePortrait(AppContext appContext, String accessToken,File protraitFile) throws AppException {
+    public static BaseResponseBean<String> updatePortrait(AppContext appContext, String accessToken, File protraitFile) throws AppException {
         Map<String, Object> params = new HashMap<>();
         params.put("accessToken", accessToken);
         Map<String, File> files = new HashMap<String, File>();
         files.put("dbFile", protraitFile);
-        String response = http_post(appContext,URLs.Upload,params, files);
-        System.out.println("vvvvvvvvvvvvvvvvvvvvvvvvvvv"+response);
+        String response = http_post(appContext, URLs.Upload, params, files);
+        System.out.println("vvvvvvvvvvvvvvvvvvvvvvvvvvv" + response);
         return JsonUtils.praseString(response);
+    }
+
+    public static BaseResponseBean<String> saveRemarkImages(AppContext appContext, String accessToken, int examQuestionId, String remarkImages) throws AppException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+        params.put("examQuestionId",examQuestionId);
+        params.put("remarkImages",remarkImages);
+        System.out.println(examQuestionId+"..."+remarkImages);
+        String url = _MakeURL(URLs.SaveRemarkImages,params);
+        String response = http_get(appContext,url);
+        System.out.println(response);
+        BaseResponseBean<String> responseBean = JsonUtils.praseString(response);
+        return responseBean;
     }
 }

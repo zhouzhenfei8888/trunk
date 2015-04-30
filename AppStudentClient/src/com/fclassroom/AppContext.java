@@ -1039,4 +1039,8 @@ public class AppContext extends Application {
     public BaseResponseBean<String> updatePortrait(String accessToken,File protraitFile) throws AppException {
         return ApiClient.updatePortrait(this,accessToken,protraitFile);
     }
+
+    public BaseResponseBean<String> saveRemarkImages(String accessToken,int examQuestionId,String protraitPath) throws AppException {
+        return ApiClient.saveRemarkImages(this,accessToken,examQuestionId,protraitPath);
+    }
 }
